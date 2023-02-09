@@ -1,43 +1,35 @@
-const express = require("express");
-const cors = require("cors");
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import { PaprikaApi } from 'paprika-api';
 
 const app = express();
+dotenv.config({ path: '.env' });
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(cors(corsOptions));
+let paprika = new PaprikaApi(process.env.PAPRIKA_USER, process.env.PAPRIKA_PASS);
 
-// parse requests of content-type - application/json
-app.use(express.json());
+const getRecipes = paprika
+	.recipes()
+	.then((recipes) => recipes)
+	.then((recipes) => console.log(recipes))
+	.catch((err) => console.error(err));
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
-
-const db = require("./app/models");
-db.mongoose
-  .connect(db.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("Connected to the database!");
-  })
-  .catch(err => {
-    console.log("Cannot connect to the database!", err);
-    process.exit();
-  });
-
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+const getRecipe = paprika.recipes().then((recipes) => {
+	paprika.recipe(recipes[0].uid).then((recipe) => {
+		console.log(recipe);
+	});
 });
 
-require("./app/routes/turorial.routes")(app);
+app.post('/getRecipes', async (req, res) => res.send(await getRecipes()));
 
-// set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+	console.log(`Server is running on port ${PORT}.`);
 });
+
+// '06E4036A-C81F-4CC6-B1B7-F39AD9ACF816';

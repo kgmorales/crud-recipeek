@@ -3,21 +3,33 @@
 	"version": "1.0.0",
 	"description": "Node.js Restful CRUD API with Node.js, Express and MongoDB",
 	"main": "server.js",
+	"type": "module",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"prepublishOnly": "npm run build",
+		"build": "tsc"
 	},
 	"keywords": [
 		"nodejs",
 		"express",
 		"rest",
 		"api",
-		"mongodb"
+		"mongodb",
+		"paprika",
+		"recipe"
 	],
-	"author": "bezkoder",
-	"license": "ISC",
+	"author": "Kevin Morales",
+	"license": "MIT",
 	"dependencies": {
 		"cors": "^2.8.5",
 		"express": "^4.18.2",
 		"mongoose": "^6.8.1"
+	},
+	"devDependencies": {
+		"@types/request-promise-native": "^1.0.18",
+		"paprika-api": "^1.0.3",
+		"request": "^2.88.2",
+		"request-promise-native": "^1.0.9",
+		"typescript": "^4.9.5"
 	}
 }
