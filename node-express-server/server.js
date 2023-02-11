@@ -5,28 +5,23 @@ import bodyParser from 'body-parser';
 import { PaprikaApi } from 'paprika-api';
 
 const app = express();
-dotenv.config({ path: '.env' });
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+dotenv.config({ path: '.env' });
 
-let paprika = new PaprikaApi(process.env.PAPRIKA_USER, process.env.PAPRIKA_PASS);
+const paprika = new PaprikaApi(process.env.PAPRIKA_USER, process.env.PAPRIKA_PASS);
 
-const getRecipeItems = () =>
-	paprika
-		.recipes()
-		.then((recipes) => recipes)
-		.catch((err) => console.error(err));
+const getAllRecipes = async () => {
+	const getRecipe = (uid) => paprika.recipe(uid).catch((err) => console.error(err));
+	const recipeItems = await paprika.recipes();
+	console.log(recipeItems);
+	const allRecipes = await Promise.all(recipeItems.map(async (item) => await getRecipe(item.uid)));
+	console.log(allRecipes);
+	return allRecipes;
+};
 
-const recipeIds = await getRecipeItems().then((ids) => ids.map((ids) => ids.uid));
-const getRecipe = async (uid) => await paprika.recipe(uid).then((recipe) => console.log(recipe));
-
-const allRecipes = recipeIds.map(async (id) => await getRecipe(id));
-
-
-
-app.post('/getRecipes', async (req, res) => res.send(allRecipes));
+app.get('/getRecipes', async (req, res) => res.send({ recipes: await getAllRecipes() }));
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
