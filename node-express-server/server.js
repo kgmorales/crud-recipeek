@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { PaprikaApi } from 'paprika-api';
+import Butter from 'buttercms';
 
 const app = express();
 app.use(cors());
@@ -10,6 +11,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 dotenv.config({ path: '.env' });
 
+const butter = Butter(process.env.BUTTERCMS_TOKEN);
+
+butter.page.retrieve('*', 'simple-page').then((response) => console.log(response.data));
 const paprika = new PaprikaApi(process.env.PAPRIKA_USER, process.env.PAPRIKA_PASS);
 
 const getAllRecipes = async () => {
