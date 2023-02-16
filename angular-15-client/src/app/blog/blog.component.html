@@ -1,0 +1,45 @@
+<h1>Posts</h1>
+<div *ngIf="postsData | async as postsListData; else loading">
+  <ng-container *ngIf="postsListData.data.length; else noData">
+    <div fxLayout="row wrap" fxLayoutGap.gt-xs="10px grid">
+      <div fxFlex="1 1 100%" fxFlex.gt-xs="1 1 50%" *ngFor="let post of postsListData.data">
+        <mat-card>
+          <div class="image-wrapper">
+            <img *ngIf="post.featured_image" class="image-wrapper__featured-image" [src]="post.featured_image"
+              alt="featured image" />
+          </div>
+          <div class="post__content">
+            <div *ngIf="post.categories">
+              <div class="post__category" *ngFor="let category of post.categories">
+                {{ category.name }}
+              </div>
+            </div>
+            <mat-card-title>
+              <a [routerLink]="[post.slug]" class="post__title">{{
+                post.title
+                }}</a>
+            </mat-card-title>
+            <mat-card-content>
+              <div class="container">
+                <div fxLayout="column" class="summary">
+                  <div [innerHTML]="post.summary"></div>
+                </div>
+              </div>
+            </mat-card-content>
+            <div *ngIf="post.tags">
+              <span class="post__tag" *ngFor="let tag of post.tags">
+                #{{ tag.name }}
+              </span>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <mat-paginator [length]="postsListData.meta.count" [pageSize]="pageSize" (page)="onPageChanged($event)">
+    </mat-paginator>
+  </ng-container>
+</div>
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>
+<ng-template #noData>No posts yet</ng-template>

@@ -1,0 +1,35 @@
+<ng-container *ngIf="postData$ | async as postData; else loading">
+  <h1>
+    {{ postData.data.title }}
+  </h1>
+  <div class="post-body" [innerHTML]="postData.data.body"></div>
+  <div *ngIf="postData.data.tags">
+    <div *ngFor="let tag of postData.data.tags">{{ tag.name }}</div>
+  </div>
+
+  <div *ngIf="postData.meta?.previous_post || postData.meta?.next_post">
+    <h2>Keep reading</h2>
+    <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap="0px grid" fxLayoutGap.gt-xs="10px grid">
+      <div class="post__preview" *ngIf="postData.meta?.previous_post">
+        <a routerLink="../{{ postData.meta.previous_post.slug }}">
+          <div class="image-wrapper">
+            <img class="image-wrapper__image" [src]="postData.meta.previous_post.featured_image" />
+          </div>
+          <h4>
+            < {{ postData.meta.previous_post.title }}</h4>
+        </a>
+      </div>
+      <div class="post__preview" *ngIf="postData.meta?.next_post">
+        <a routerLink="../{{ postData.meta.next_post.slug }}">
+          <div class="image-wrapper">
+            <img class="image-wrapper__image" [src]="postData.meta.next_post.featured_image" />
+          </div>
+          <h4>{{ postData.meta.next_post.title }} ></h4>
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>
