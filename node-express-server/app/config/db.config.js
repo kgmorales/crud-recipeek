@@ -1,3 +1,3 @@
-// module.exports = {
-// 	url: MONGODB_URL
-// };
+module.exports = {
+	url: MONGODB_URL
+};
