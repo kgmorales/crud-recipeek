@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
+
 module.exports = {
-	url: MONGODB_URL
+	url: process.env.MONGODB_URL,
 };

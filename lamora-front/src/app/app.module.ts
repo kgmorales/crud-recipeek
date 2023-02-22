@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgBottomNavigationModule } from 'ng-bottom-navigation';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
     HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    NgBottomNavigationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

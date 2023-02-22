@@ -20,13 +20,11 @@ const paprika = new PaprikaApi(process.env.PAPRIKA_USER, process.env.PAPRIKA_PAS
 const getAllRecipes = async () => {
 	const getRecipe = (uid) => paprika.recipe(uid).catch((err) => console.error(err));
 	const recipeItems = await paprika.recipes();
-	console.log(recipeItems);
 	const allRecipes = await Promise.all(recipeItems.map(async (item) => await getRecipe(item.uid)));
-	console.log(allRecipes);
 	return allRecipes;
 };
 
-app.get('/getRecipes', async (req, res) => res.send({ recipes: await getAllRecipes() }));
+app.get('/getRecipes', async (req, res) => res.send({ allRecipes: await getAllRecipes() }));
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
