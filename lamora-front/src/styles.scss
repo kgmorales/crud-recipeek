@@ -16,6 +16,7 @@ body {
 a {
   text-decoration: none;
 }
+<<<<<<< HEAD
 
 // @import '~@angular/material/theming';
 // @import '~@angular/material/divider/divider-theme';
@@ -141,3 +142,5 @@ bottom-nav-wrapper * {
   $divider: map-get($foreground, divider);
   @return $divider;
 }
+=======
+>>>>>>> 69ff2951deee28571f032e58361c0c37ffaa76ad
