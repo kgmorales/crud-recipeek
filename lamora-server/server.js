@@ -4,6 +4,15 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { PaprikaApi } from 'paprika-api';
 import Butter from 'buttercms';
+import http from 'http';
+
+const hostname = '192.168.1.20';
+const port = 8080;
+
+const server = http.createServer((req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Content-Type', 'text/plain');
+});
 
 const app = express();
 app.use(cors());
@@ -22,11 +31,15 @@ const getAllRecipes = async () => {
 	const recipeItems = await paprika.recipes();
 	const allRecipes = await Promise.all(recipeItems.map(async (item) => await getRecipe(item.uid)));
 	return allRecipes;
-};
+};Hi S
 
 app.get('/getRecipes', async (req, res) => res.send({ allRecipes: await getAllRecipes() }));
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-	console.log(`Server is running on port ${PORT}.`);
+// const PORT = process.env.PORT || 8080;
+// app.listen(PORT, () => {
+// 	console.log(`Server is running on port ${PORT}.`);
+// });
+
+app.listen(port, hostname, () => {
+	console.log(`Server running at http://${hostname}:${port}`);
 });

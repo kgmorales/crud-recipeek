@@ -1,27 +1,27 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { FormControl, NgModel } from '@angular/forms';
+import { Observable, take } from 'rxjs';
 
 import { Recipe, Tutorial } from '@core/models';
 import { PaprikaService } from '@core/services';
 // import { TutorialService } from 'src/app/services/tutorial.service';
 
 @Component({
-  selector: 'app-add-tutorial',
-  templateUrl: './add-tutorial.component.html',
-  styleUrls: ['./add-tutorial.component.css'],
+  selector: 'app-search-recipe',
+  templateUrl: './search-recipe.component.html',
+  styleUrls: ['./search-recipe.component.css'],
 })
-export class AddTutorialComponent {
+export class SearchRecipeComponent {
   recipes$ = this.paprikaService.getAll();
-  submitted = false;
+
   searchText: string;
-  name = new FormControl('');
-  category = new FormControl('');
 
   constructor(
     // private tutorialService: TutorialService,
     private paprikaService: PaprikaService
-  ) {}
+  ) {
+    // this.recipes$.pipe(take(1)).subscribe(recipes => console.log(recipes));
+  }
 
   // saveTutorial(): void {
   //   const data = {

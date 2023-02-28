@@ -8,17 +8,20 @@ import { NgBottomNavigationModule } from 'ng-bottom-navigation';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddTutorialComponent } from './features/recipes/components/add-tutorial/add-tutorial.component';
-import { TutorialDetailsComponent } from './features/recipes/components/tutorial-details/tutorial-details.component';
-import { TutorialsListComponent } from './features/recipes/components/tutorials-list/tutorials-list.component';
+// import { AddTutorialComponent } from './features/recipes/components/search-recipe/search-recipe.component';
+// import { TutorialDetailsComponent } from './features/recipes/components/tutorial-details/tutorial-details.component';
+// import { TutorialsListComponent } from './features/recipes/components/tutorials-list/tutorials-list.component';
+// import { SearchPipe } from './shared/pipes/search.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddTutorialComponent,
-    TutorialDetailsComponent,
-    TutorialsListComponent,
+    // AddTutorialComponent,
+    // TutorialDetailsComponent,
+    // TutorialsListComponent,
   ],
+  providers: [],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,8 +30,7 @@ import { TutorialsListComponent } from './features/recipes/components/tutorials-
     BrowserAnimationsModule,
     MatToolbarModule,
     NgBottomNavigationModule,
+    // SearchPipe,
   ],
-  providers: [],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

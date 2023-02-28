@@ -176,6 +176,10 @@ export interface Recipe {
   nutritional_info: string;
 }
 
+export interface AllRecipes {
+  allRecipes: Recipe[];
+}
+
 /*
 Example:
 {
