@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Tutorial } from 'src/app/models/tutorial.model';
-import { PaprikaService } from 'src/app/services/paprika.service';
+
+import { Tutorial } from '@core/models';
+import { PaprikaService } from '@core/services';
 // import { TutorialService } from 'src/app/services/tutorial.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class TutorialsListComponent {
     // private tutorialService: TutorialService,
     private paprikaService: PaprikaService
   ) {
-    this.paprikaService.getAll().subscribe((recipes) => console.log(recipes));
+    this.paprikaService.getAll().subscribe(recipes => console.log(recipes));
   }
 
   // ngOnInit(): void {
