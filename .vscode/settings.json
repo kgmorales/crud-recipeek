@@ -1,6 +1,8 @@
 {
 	"material-icon-theme.folders.associations": {
-		"features": "Middleware"
+		"features": "Middleware",
+		"lamora-front": "Client",
+		"lamora-server": "Server"
 	},
 	"workbench.colorCustomizations": {
 		"activityBar.activeBackground": "#4231c6",
