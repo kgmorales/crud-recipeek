@@ -1,9 +1,10 @@
 {
 	"material-icon-theme.folders.associations": {
 		"features": "Middleware",
-		"lamora-front": "Client",
+		"lamora-client": "Redux-actions",
 		"lamora-server": "Server"
 	},
+	"material-icon-theme.folders.color": "#90a4ae",
 	"workbench.colorCustomizations": {
 		"activityBar.activeBackground": "#4231c6",
 		"activityBar.background": "#4231c6",
