@@ -49,3 +49,12 @@ export interface BlogPostMeta {
   next_post: BlogPostShortMeta;
   previous_post: BlogPostShortMeta;
 }
+
+export interface PostsData {
+  data: BlogPost[];
+  meta: {
+    count: number;
+    next_page: number | null;
+    previous_page: number | null;
+  };
+}

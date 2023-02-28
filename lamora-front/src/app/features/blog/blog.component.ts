@@ -1,7 +1,12 @@
+//* NG
 import { Component, OnInit } from '@angular/core';
-import { ButterCMSService } from './core/butter-cms.service';
 import { Observable } from 'rxjs';
-import { BlogPost } from './types';
+
+//* Core
+import { BlogPost, PostsData } from '@core/models';
+import { ButterCMSService } from '@core/services';
+
+//* 3rd Party
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -20,6 +25,7 @@ export class BlogComponent implements OnInit {
       previous_page: number | null;
     };
   }>;
+
   pageSize = 10;
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 <ng-container *ngIf="postData$ | async as postData; else loading">
   <h1>
-    {{ postData.data.title }}
+    {{ postData.data.title}}
   </h1>
   <div class="post-body" [innerHTML]="postData.data.body"></div>
   <div *ngIf="postData.data.tags">

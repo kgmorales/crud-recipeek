@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { BlogPost, BlogPostMeta } from '../types';
-import { ButterCMSService } from './butter-cms.service';
+
+import { BlogPost, BlogPostMeta } from '@core/models';
+import { ButterCMSService } from '@core/services';
 
 @Injectable({
   providedIn: 'root',

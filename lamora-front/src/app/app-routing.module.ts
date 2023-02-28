@@ -2,15 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: 'blog',
-    loadChildren: () => import('./features/blog/blog.module').then((m) => m.BlogModule),
-  },
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: '/',
-  },
+  { path: '', pathMatch: 'full', redirectTo: '/' },
+  { path: 'blog', loadChildren: () => import('@blog/blog.module').then(m => m.BlogModule) },
 ];
 
 @NgModule({

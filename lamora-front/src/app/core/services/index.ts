@@ -1,2 +1,3 @@
-export * from './paprika.service';
+export * from './blog';
+export * from './recipe';
 // export * from './tutorial.service';

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, from } from 'rxjs';
-import Butter from 'buttercms';
-import { map, catchError } from 'rxjs/operators';
+import { catchError, Observable, from, map } from 'rxjs';
 
-import { BlogPost, BlogPostMeta } from '../types';
+import Butter from 'buttercms';
+
+import { BlogPost, BlogPostMeta } from '@core/models';
 
 @Injectable({
   providedIn: 'root',

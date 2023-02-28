@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { BlogComponent } from './blog.component';
 import { PostComponent } from './post/post.component';
-import { SlugResolverService } from './core/slug-resolver.service';
+import { SlugResolverService } from '../../core/services/blog/slug-resolver.service';
 
 const routes: Routes = [
   { path: '', component: BlogComponent },

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, take } from 'rxjs';
-import { Recipe } from '../models/recipe.model';
+
+import { Recipe } from '@core/models';
 
 const baseUrl = 'http://localhost:8080';
 

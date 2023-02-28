@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 import { ActivatedRoute } from '@angular/router';
-import { BlogPost, BlogPostMeta } from '../types';
-import { map } from 'rxjs/operators';
+import { Observable, map } from 'rxjs';
+
+//* Core
+import { BlogPost, BlogPostMeta } from '@core/models';
 
 @Component({
   selector: 'app-post',
