@@ -4,7 +4,8 @@ import { map, Observable } from 'rxjs';
 
 import { AllRecipes, Recipe } from '@core/models';
 
-const baseUrl = 'http://192.168.1.20:8080';
+const baseUrl = 'http://localhost:8080';
+// const showWifi = 'http://192.168.1.20:8080';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ const baseUrl = 'http://192.168.1.20:8080';
 export class PaprikaService {
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Recipe[]> {
+  getAllRecipes(): Observable<Recipe[]> {
     return this.http.get<AllRecipes>(`${baseUrl}/getRecipes`).pipe(
       map(allRecipes => {
         return Object.values(allRecipes)[0];

@@ -1,8 +1,8 @@
-const db = require('../models');
-const Tutorial = db.tutorials;
+import { tutorials } from '../models';
+const Tutorial = tutorials;
 
 // Create and Save a new Tutorial
-exports.create = (req, res) => {
+export function create(req, res) {
 	// Validate request
 	if (!req.body.title) {
 		res.status(400).send({ message: 'Content can not be empty!' });
@@ -27,10 +27,10 @@ exports.create = (req, res) => {
 				message: err.message || 'Some error occurred while creating the Tutorial.',
 			});
 		});
-};
+}
 
 // Retrieve all Tutorials from the database.
-exports.findAll = (req, res) => {
+export function findAll(req, res) {
 	const title = req.query.title;
 	var condition = title ? { title: { $regex: new RegExp(title), $options: 'i' } } : {};
 
@@ -43,10 +43,10 @@ exports.findAll = (req, res) => {
 				message: err.message || 'Some error occurred while retrieving tutorials.',
 			});
 		});
-};
+}
 
 // Find a single Tutorial with an id
-exports.findOne = (req, res) => {
+export function findOne(req, res) {
 	const id = req.params.id;
 
 	Tutorial.findById(id)
@@ -57,10 +57,10 @@ exports.findOne = (req, res) => {
 		.catch((err) => {
 			res.status(500).send({ message: 'Error retrieving Tutorial with id=' + id });
 		});
-};
+}
 
 // Update a Tutorial by the id in the request
-exports.update = (req, res) => {
+export function update(req, res) {
 	if (!req.body) {
 		return res.status(400).send({
 			message: 'Data to update can not be empty!',
@@ -82,10 +82,10 @@ exports.update = (req, res) => {
 				message: 'Error updating Tutorial with id=' + id,
 			});
 		});
-};
+}
 
 // Delete a Tutorial with the specified id in the request
-exports.delete = (req, res) => {
+const _delete = (req, res) => {
 	const id = req.params.id;
 
 	Tutorial.findByIdAndRemove(id, { useFindAndModify: false })
@@ -106,9 +106,10 @@ exports.delete = (req, res) => {
 			});
 		});
 };
+export { _delete as delete };
 
 // Delete all Tutorials from the database.
-exports.deleteAll = (req, res) => {
+export function deleteAll(req, res) {
 	Tutorial.deleteMany({})
 		.then((data) => {
 			res.send({
@@ -120,10 +121,10 @@ exports.deleteAll = (req, res) => {
 				message: err.message || 'Some error occurred while removing all tutorials.',
 			});
 		});
-};
+}
 
 // Find all published Tutorials
-exports.findAllPublished = (req, res) => {
+export function findAllPublished(req, res) {
 	Tutorial.find({ published: true })
 		.then((data) => {
 			res.send(data);
@@ -133,4 +134,4 @@ exports.findAllPublished = (req, res) => {
 				message: err.message || 'Some error occurred while retrieving tutorials.',
 			});
 		});
-};
+}

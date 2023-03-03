@@ -1,3 +1,48 @@
+export default (mongoose) => {
+	var schema = mongoose.Schema(
+		{
+			rating: Number,
+			photo_hash: String,
+			on_favorites: Boolean,
+			photo: String,
+			uid: String,
+			scale: String,
+			ingredients: String,
+			is_pinned: Boolean,
+			source: String,
+			total_time: String,
+			hash: String,
+			description: String,
+			source_url: String,
+			difficulty: String,
+			on_grocery_list: Boolean,
+			in_trash: Boolean,
+			directions: String,
+			categories: Array,
+			photo_url: String,
+			cook_time: String,
+			name: String,
+			created: Date,
+			notes: String,
+			photo_large: String,
+			image_url: String,
+			prep_time: String,
+			servings: String,
+			nutritional_info: String,
+		},
+		{ timestamps: true }
+	);
+
+	schema.method('toJSON', () => {
+		const { __v, _id, ...object } = this.toObject();
+		object.id = _id;
+		return object;
+	});
+
+	const Recipe = mongoose.model('recipe', schema);
+	return Recipe;
+};
+
 import * as rp from 'request-promise-native';
 import {Options} from "request-promise-native";
 
@@ -5,7 +50,8 @@ export class PaprikaApi {
 	private email: string;
 	private password: string;
 
-	private baseUrl: string = 'https://www.paprikaapp.com/api/v1/sync/';
+	private baseUrl: string = "https://www.paprikaapp.com/api/v1/sync/";
+
 	constructor(email: string, password: string) {
 		this.email = email;
 		this.password = password;
@@ -15,20 +61,20 @@ export class PaprikaApi {
 		let options: Options = {
 			auth: {
 				user: this.email,
-				pass: this.password,
+				pass: this.password
 			},
 			method: 'GET',
 			baseUrl: this.baseUrl,
 			uri: endpoint,
 			json: true,
 			headers: {
-				'User-Agent': 'PaprikaApi NodeJS library',
+				'User-Agent': 'PaprikaApi NodeJS library'
 			},
 			transform(body: any) {
 				return body.result;
-			},
+			}
 		};
-		return rp(options);
+		return rp(options)
 	}
 
 	public bookmarks(): Promise<Bookmark[]> {

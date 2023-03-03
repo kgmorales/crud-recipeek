@@ -27,7 +27,7 @@ export class TutorialDetailsComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.paprikaService.getAll().subscribe(recipes => console.log(recipes));
+    this.paprikaService.getAllRecipes().subscribe(recipes => console.log(recipes));
   }
 
   // ngOnInit(): void {

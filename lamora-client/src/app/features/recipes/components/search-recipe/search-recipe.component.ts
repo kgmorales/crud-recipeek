@@ -12,7 +12,7 @@ import { PaprikaService } from '@core/services';
   styleUrls: ['./search-recipe.component.css'],
 })
 export class SearchRecipeComponent {
-  recipes$ = this.paprikaService.getAll();
+  recipes$ = this.paprikaService.getAllRecipes();
 
   searchText: string;
 

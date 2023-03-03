@@ -19,7 +19,7 @@ export class TutorialsListComponent {
     // private tutorialService: TutorialService,
     private paprikaService: PaprikaService
   ) {
-    this.paprikaService.getAll().subscribe(recipes => console.log(recipes));
+    this.paprikaService.getAllRecipes().subscribe(recipes => console.log(recipes));
   }
 
   // ngOnInit(): void {
