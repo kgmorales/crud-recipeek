@@ -1,0 +1,42 @@
+<!-- A wrapper for the hole page -->
+<!-- Specify the height of the bottom nav, the top nav and the breakpoint between the two of them. If you don't intend  -->
+<!-- If you don't intend to use a top nav for desktop devices ignore the topNavHeight and the bottomNavBreakpoint parameter -->
+<!-- <bottom-nav-wrapper bottomNavHeight="60px" topNavHeight="60px" bottomNavBreakpoint="600px"> -->
+
+<!-- Top nav content. Optional and only use it if you want a nav bar for desktop devices -->
+<!-- <top-nav-wrapper> -->
+<!-- Your nav -->
+<!-- </top-nav-wrapper> -->
+
+<!-- The main content has to be inside here -->
+<!-- You can add a nav, ... It is recommended to put the router in here -->
+<!-- <application-content> -->
+<!-- <router-outlet></router-outlet> -->
+<!-- </application-content> -->
+
+<!-- The bottom nav bar -->
+<!-- <bottom-nav> -->
+
+<!-- Add a bottom-nav-item for every  icon in the bottom nav. -->
+<!-- The name in the bottom-nav-icon (home) is the name of the material icon -->
+<!-- Use the link input like a [routerLink] -->
+<!-- <bottom-nav-item link="">
+      restaurant_menu
+    </bottom-nav-item> -->
+
+<!-- Do you want to match the provided path exactly, -->
+<!-- or do you want to include paths which extend the path into the path matching (default not exact) -->
+<!-- /like/me would be matched if exact is false -->
+<!-- <bottom-nav-item link="/" [exact]="true">
+      home
+    </bottom-nav-item> -->
+
+<!-- The label is optional and adds a ... label to the icon -->
+<!-- <bottom-nav-item link="blog" [exact]="true" label="blog">
+      articlerounded
+    </bottom-nav-item>
+
+  </bottom-nav>
+
+</bottom-nav-wrapper> -->
+<router-outlet #page="outlet"></router-outlet>

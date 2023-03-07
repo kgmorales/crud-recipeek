@@ -1,0 +1,75 @@
+<!-- <div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" required [(ngModel)]="tutorial.title" name="title" />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input class="form-control" id="description" required [(ngModel)]="tutorial.description" name="description" />
+      </div>
+
+      <button (click)="saveTutorial()" class="btn btn-success">Submit</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Tutorial was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newTutorial()">Add</button>
+    </div>
+  </div>
+</div> -->
+<!-- <div>
+  <label for="name">Recipe </label>
+  <input type="text" id="listSearch" class="form-control" placeholder="Search" #search />
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+    </tr>
+    <ng-container *ngIf="recipes$ | async as recipes">
+      <tr *ngFor="let recipe of recipes | search:'name': search.value">
+        <td>{{recipe.name}}</td>
+      </tr>
+    </ng-container>
+  </table>
+</div> -->
+<ng-container *ngIf="recipes$ | async as recipes">
+  <div class="container">
+    <h2 class="py-4">Recipes</h2>
+
+    <div class="form-group mb-4">
+      <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search">
+    </div>
+
+    <table class="table" *ngIf="(recipes | filter: searchText).length > 0; else noResults">
+      <colgroup>
+        <col width="5%">
+        <col width="*">
+        <col width="35%">
+        <col width="15%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Ingredients</th>
+          <th scope="col">Favorite?</th>
+          <th scope="col">Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let recipe of recipes | filter: searchText; let i = index">
+          <td>{{recipe.name}}</td>
+          <td>{{recipe.ingredients}}</td>
+          <td>{{recipe.on_favorites}}</td>
+          <td>{{recipe.rating}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noResults>
+      <p>No results found for "{{searchText}}".</p>
+    </ng-template>
+  </div>
+  <ng-container>
