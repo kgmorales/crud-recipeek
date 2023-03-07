@@ -17,14 +17,7 @@ export class ButterCMSService {
   getPosts(
     page: number,
     pageSize: number
-  ): Observable<{
-    data: BlogPost[];
-    meta: {
-      count: number;
-      next_page: number | null;
-      previous_page: number | null;
-    };
-  }> {
+  ): Observable<any> {
     return from(
       this.butter.post.list({
         page,

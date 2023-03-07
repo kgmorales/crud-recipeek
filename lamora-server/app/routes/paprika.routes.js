@@ -1,10 +1,10 @@
 import express from 'express';
 
-import { getAllRecipes } from '../controllers/paprika.controller.js';
+import * as paprika from '../controllers/paprika.controller.js';
 
 const router = express.Router();
 
-router.get('/getRecipes', getAllRecipes);
+router.get('/recipes', paprika.getRecipes);
 
 // // Retrieve all Tutorials
 // router.get('/', paprika.findAll);

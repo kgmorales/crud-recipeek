@@ -14,7 +14,7 @@ export class PaprikaService {
   constructor(private http: HttpClient) {}
 
   getAllRecipes(): Observable<Recipe[]> {
-    return this.http.get<AllRecipes>(`${baseUrl}/getRecipes`).pipe(
+    return this.http.get<AllRecipes>(`${baseUrl}/recipes`).pipe(
       map(allRecipes => {
         return Object.values(allRecipes)[0];
       })
