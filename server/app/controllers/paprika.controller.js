@@ -15,12 +15,23 @@ import * as middleware from '../middleware/paprika.middleware.js';
 //* this will most likely be async when you finish with actual paprika api call.
 // 	//Create a Recipe
 export const getRecipes = (req, res) => {
-	// return middleware.allRecipes().map((recipe) => new Recipe(recipe).save());
-	Recipe.insertMany(middleware.allRecipes()).then((data) => {
-		res.send({
-			message: `${data.length} were added to db`,
-		});
+	// return middleware.allRecipes().map((recipe) => new Recipe(recipe).save());\
+	const allRecipes = middleware.allRecipes();
+	Recipe.insertMany(allRecipes).then((data) => {
+		res.send({ recipes: allRecipes });
 	});
+};
+
+export const showAllRecipes = (req, res) => {
+	Recipe.find()
+		.then((recipes) => {
+			res.send({ recipes: recipes });
+		})
+		.catch((err) => {
+			res.status(500).send({
+				message: err.message || 'Some error occurred while retrieving tutorials.',
+			});
+		});
 };
 
 export const deleteAll = (req, res) => {
@@ -32,9 +43,13 @@ export const deleteAll = (req, res) => {
 		})
 		.catch((err) => {
 			res.status(500).send({
-				message: err.message || 'Some error occurred while removing all tutorials.',
+				message: err.message || 'Some error occurred while removing all recipes.',
 			});
 		});
+};
+
+export const findRecipeAndUpdate = (req, res) => {
+	// let
 };
 
 // return middleware.allRecipes.map((recipe) => {

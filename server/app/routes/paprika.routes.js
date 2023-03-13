@@ -6,7 +6,9 @@ const router = express.Router();
 
 router.get('/', (req, res) => res.status(200).json({ message: 'Serving paprika' }));
 
-router.get('/recipes', paprika.getRecipes);
+router.get('/saveRecipes', paprika.getRecipes);
+
+router.get('/recipes', paprika.showAllRecipes);
 
 router.get('/deleteAll', paprika.deleteAll);
 
