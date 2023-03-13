@@ -4,7 +4,13 @@ import * as paprika from '../controllers/paprika.controller.js';
 
 const router = express.Router();
 
+router.get('/', (req, res) => res.status(200).json({ message: 'Serving paprika' }));
+
 router.get('/recipes', paprika.getRecipes);
+
+router.get('/deleteAll', paprika.deleteAll);
+
+// router.get('/categories', paprika.getCategories);
 
 // // Retrieve all Tutorials
 // router.get('/', paprika.findAll);

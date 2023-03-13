@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-
-import { PaprikaService } from '@core/services';
+import { RecipeService } from '@recipes/recipe.service';
 
 @Component({
   selector: 'app-search-recipe',
@@ -8,9 +7,10 @@ import { PaprikaService } from '@core/services';
   styleUrls: ['./search-recipe.component.scss'],
 })
 export class SearchRecipeComponent {
-  recipes$ = this.paprikaService.getAllRecipes();
-
+  _recipes$ = this.recipeService.recipes$;
   searchText: string;
 
-  constructor(private paprikaService: PaprikaService) {}
+  constructor(private recipeService: RecipeService) {
+    this.recipeService.recipes$.subscribe(data => console.log(data));
+  }
 }

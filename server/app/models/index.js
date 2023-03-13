@@ -1,12 +1,14 @@
-const dbConfig = require('../config/db.config.js');
+import mongoose from 'mongoose';
+import Recipe from './model/Recipe';
+import url from '../config/db.config';
 
-const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-
-const db = {};
+const db = connect(url, { useNewUrlParser: true });
 db.mongoose = mongoose;
-db.url = dbConfig.url;
-db.tutorials = require('./tutorial.model.js')(mongoose);
-db.recipes = require('./paprika.model.js')(mongoose);
+db.recipes = await import('./paprika.model.js');
+// // const db = {};
+// // db.mongoose = mongoose;
+// // db.url = dbConfig.url;
+// db.tutorials = await import('./tutorial.model.js')(mongoose);
+// db.recipes = await import('./paprika.model.js')(mongoose);
 
-module.exports = db;
+// export default db;

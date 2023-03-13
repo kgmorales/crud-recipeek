@@ -3,10 +3,11 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import paprikaRouter from './app/routes/paprika.routes.js';
-// import { PaprikaApi } from 'paprika-api';
-// import Butter from 'buttercms';
+import compression from 'compression';
+import mongoose from 'mongoose';
+import { url } from './app/config/db.config.js';
+//#region //? wifi display
 // import http from 'http';
-
 // const hostname = '192.168.1.20';
 // const port = 8080;
 
@@ -14,29 +15,31 @@ import paprikaRouter from './app/routes/paprika.routes.js';
 // 	res.statusCode = 200;
 // 	res.setHeader('Content-Type', 'text/plain');
 // });
+//#endregion
+
+// import Butter from 'buttercms';
 
 const app = express();
 app.use(cors());
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-dotenv.config({ path: '.env' });
+mongoose.set('strictQuery', false);
 
-// const paprika = new PaprikaApi(process.env.PAPRIKA_USER, process.env.PAPRIKA_PASS);
+mongoose
+	.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then((e) => console.log('MongoDB ready'))
+	.catch(console.error);
 
-// const getAllRecipes = async () => {
-// 	const getRecipe = (uid) => paprikaRouter.recipe(uid).catch((err) => console.error(err));
-// 	const recipeItems = await paprikaRouter.recipes();
-// 	const allRecipes = await Promise.all(recipeItems.map(async (item) => await getRecipe(item.uid)));
-// 	return allRecipes;
-// };
 app.use('/', paprikaRouter);
-// app.get('/getRecipes', async (req, res) => res.send({ allRecipes: await getAllRecipes() }));
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}.`);
 });
 
-//*? To Show on wifi
+//#region //? wifi display
 // app.listen(port, hostname, () => {
 // 	console.log(`Server running at http://${hostname}:${port}`);
 // });
+//#endregion

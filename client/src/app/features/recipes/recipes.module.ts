@@ -11,6 +11,8 @@ import { RecipesRoutingModule } from './recipes-routing.module';
 import { SearchRecipeComponent } from './components/search-recipe/search-recipe.component';
 import { SearchPipe } from '@shared/pipes';
 
+import { RecipeService } from './recipe.service';
+
 @NgModule({
   declarations: [SearchRecipeComponent],
   imports: [
@@ -24,5 +26,6 @@ import { SearchPipe } from '@shared/pipes';
     MatCommonModule,
     SearchPipe,
   ],
+  providers: [RecipeService],
 })
 export class RecipesModule {}
