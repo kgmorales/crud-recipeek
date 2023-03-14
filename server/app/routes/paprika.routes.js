@@ -1,17 +1,18 @@
 import express from 'express';
 
-import * as paprika from '../controllers/paprika.controller.js';
+import * as recipeController from '../controllers/recipe.controller.js';
 
 const router = express.Router();
 
 router.get('/', (req, res) => res.status(200).json({ message: 'Serving paprika' }));
 
-router.get('/saveRecipes', paprika.getRecipes);
+router.get('/deleteAll', recipeController.deleteAll);
 
-router.get('/recipes', paprika.showAllRecipes);
+router.get('/recipes', recipeController.updateRecipes);
 
-router.get('/deleteAll', paprika.deleteAll);
+router.get('/storeRecipes', recipeController.storeRecipes);
 
+router.get('/updateRecipes', recipeController.updateRecipes);
 // router.get('/categories', paprika.getCategories);
 
 // // Retrieve all Tutorials

@@ -2,21 +2,42 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
 
 import { PaprikaApi } from 'paprika-api';
-import { recipes } from '../fakeData/recipes.js';
+// import { recipes } from '../fakeData/recipes.js';
 
 const paprika = new PaprikaApi(process.env.PAPRIKA_USER, process.env.PAPRIKA_PASS);
 
-//? Real Paprika Recipes
-// export const allRecipes = async () => {
-// 	const getRecipe = (uid) => paprika.recipe(uid).catch((err) => console.error(err));
-// 	const recipeItems = await paprika.recipes();
-// 	const allRecipes = await Promise.all(recipeItems.map(async (item) => await getRecipe(item.uid)));
-// 	return allRecipes;
-// };
+//? FROM Paprika Recipes
+export async function paprikaRecipesIds() {
+	return await paprika.recipes();
+}
 
-//* Fake data
-export const allRecipes = () => recipes;
+export async function paprikaNewRecipes(uids) {
+	console.log({ uids });
+	const getRecipe = (uid) => paprika.recipe(uid).catch((err) => console.error(err));
 
-export const getCategories = async () => await paprika.categories();
+	return await Promise.all(uids.map(async (uid) => await getRecipe(uid)));
+}
 
-export const getRecipe = async () => await paprika.recipe();
+export async function paprikaAllRecipes() {
+	const getRecipe = (uid) => paprika.recipe(uid).catch((err) => console.error(err));
+	const recipeItems = await paprikaRecipeIds();
+
+	return await Promise.all(recipeItems.map(async (recipe) => await getRecipe(recipe.uid)));
+}
+
+export async function paprikaCategories() {
+	return await paprika.categories();
+}
+
+export async function paprikaRecipe(uid) {
+	await paprika.recipe(uid);
+}
+
+export async function paprikaRecipeIds() {
+	return await paprika.recipes();
+}
+
+//? Fake data
+// export function allRecipes() {
+//  return recipes;
+//}
