@@ -1,21 +1,8 @@
-import Recipe from '../models/paprika.model.js';
+import Recipe from '../models/recipe.model.js';
 import RecipeIds from '../models/recipeIds.model.js';
+import Category from '../models/categories.model.js';
 import * as middleware from '../middleware/paprika.middleware.js';
 import mongoose from 'mongoose';
-
-// export const getCategories = async (req, res) => res.send({ categories: await middleware.getCategories() });
-
-// export const getRecipes = async (req, res) => ;
-
-// export async function create() {
-// 	const allRecipes = await middleware.allRecipes();
-// 	// if (!recipe.uid) {
-// 	// 	res.status(400).send({ message: 'Content can not be empty! ' });
-// 	// 	return;
-// 	// }
-
-//* this will most likely be async when you finish with actual paprika api call.
-// 	//Create a Recipe
 
 export async function deleteAll(req, res) {
 	const collections = mongoose.connection.collections;
@@ -25,18 +12,6 @@ export async function deleteAll(req, res) {
 			await collection.deleteMany({}); // an empty mongodb selector object ({}) must be passed as the filter argument
 		})
 	);
-}
-
-export async function sendAllRecipes(req, res) {
-	Recipe.find()
-		.then((recipes) => {
-			res.send({ recipes: recipes });
-		})
-		.catch((err) => {
-			res.status(500).send({
-				message: err.message || 'Some error occurred while retrieving tutorials.',
-			});
-		});
 }
 
 export async function storeRecipes(req, res) {
@@ -58,16 +33,13 @@ export async function storeRecipe(req, res) {
 
 export async function updateRecipes(req, res) {
 	const paprikaIds = await middleware.paprikaRecipeIds();
-	const dbCount = await Recipe.count();
+	const dbRecipeCount = await Recipe.count();
 	const dbIds = await RecipeIds.find().lean();
-
-	const isEqualLength = paprikaIds.length === dbCount;
-	console.log(paprikaIds);
 
 	const sendAllRecipes = () =>
 		Recipe.find()
 			.then((recipes) => {
-				res.send({ recipes: recipes });
+				res.send({ recipes });
 			})
 			.catch((err) => {
 				res.status(500).send({
@@ -75,16 +47,43 @@ export async function updateRecipes(req, res) {
 				});
 			});
 
-	if (!isEqualLength) {
+	if (paprikaIds.length !== dbRecipeCount) {
 		const newRecipeIds = paprikaIds.filter((paprikaId) => !dbIds.find((dbId) => paprikaId.uid === dbId.uid));
 		const newUIds = newRecipeIds.map((ids) => ids.uid);
 		const newRecipes = await middleware.paprikaNewRecipes(newUIds);
 
-		await RecipeIds.collection.insertMany(newRecipeIds);
-		await Recipe.collection.insertMany(newRecipes);
-
-		await sendAllRecipes();
-	} else {
-		await sendAllRecipes();
+		RecipeIds.collection.insertMany(newRecipeIds);
+		Recipe.collection.insertMany(newRecipes);
 	}
+
+	await sendAllRecipes();
+}
+
+export async function updateCategories(req, res) {
+	const paprikaCategories = await middleware.paprikaCategories();
+	const dbCategoriesCount = await Category.count();
+
+	// console.log({ paprika: paprikaCategories.length, dbCat: dbCategoriesCount });
+
+	const sendAllCategories = () =>
+		Category.find()
+			.then((categories) => {
+				res.send({ categories });
+			})
+			.catch((err) => {
+				res.status(500).send({
+					message: err.message || 'Some error occurred while retrieving tutorials.',
+				});
+			});
+
+	if (paprikaCategories.length !== dbCategoriesCount) {
+		const dbCategories = await Category.find().lean();
+		console.log(dbCategories);
+		const newCategories = paprikaCategories.filter((paprikaId) => !dbCategories.find((dbId) => paprikaId.uid === dbId.uid));
+
+		console.log(newCategories);
+
+		Category.collection.insertMany(newCategories);
+	}
+	await sendAllCategories();
 }

@@ -13,7 +13,8 @@ router.get('/recipes', recipeController.updateRecipes);
 router.get('/storeRecipes', recipeController.storeRecipes);
 
 router.get('/updateRecipes', recipeController.updateRecipes);
-// router.get('/categories', paprika.getCategories);
+
+router.get('/categories', recipeController.updateCategories);
 
 // // Retrieve all Tutorials
 // router.get('/', paprika.findAll);
