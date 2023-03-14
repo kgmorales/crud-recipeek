@@ -12,7 +12,6 @@ export async function paprikaRecipesIds() {
 }
 
 export async function paprikaNewRecipes(uids) {
-	console.log({ uids });
 	const getRecipe = (uid) => paprika.recipe(uid).catch((err) => console.error(err));
 
 	return await Promise.all(uids.map(async (uid) => await getRecipe(uid)));

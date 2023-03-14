@@ -58,9 +58,11 @@ export async function storeRecipe(req, res) {
 
 export async function updateRecipes(req, res) {
 	const paprikaIds = await middleware.paprikaRecipeIds();
+	const dbCount = await Recipe.count();
 	const dbIds = await RecipeIds.find().lean();
 
-	const isEqualLength = paprikaIds.length === dbIds.length;
+	const isEqualLength = paprikaIds.length === dbCount;
+	console.log(paprikaIds);
 
 	const sendAllRecipes = () =>
 		Recipe.find()
@@ -75,11 +77,11 @@ export async function updateRecipes(req, res) {
 
 	if (!isEqualLength) {
 		const newRecipeIds = paprikaIds.filter((paprikaId) => !dbIds.find((dbId) => paprikaId.uid === dbId.uid));
-		const newUIds = newRecipeIds.filter((ids) => ids.uid);
+		const newUIds = newRecipeIds.map((ids) => ids.uid);
+		const newRecipes = await middleware.paprikaNewRecipes(newUIds);
 
-		Recipe.collection.insertMany(await middleware.paprikaNewRecipes(newUIds));
-
-		RecipeIds.collection.insertMany(newUIds);
+		await RecipeIds.collection.insertMany(newRecipeIds);
+		await Recipe.collection.insertMany(newRecipes);
 
 		await sendAllRecipes();
 	} else {

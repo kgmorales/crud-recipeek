@@ -1,11 +1,11 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import paprikaRouter from './app/routes/paprika.routes.js';
+import recipeRouter from './app/routes/recipe.routes.js';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import { url } from './app/config/db.config.js';
+
 //#region //? wifi display
 // import http from 'http';
 // const hostname = '192.168.1.20';
@@ -31,7 +31,7 @@ mongoose
 	.then((e) => console.log('MongoDB ready'))
 	.catch(console.error);
 
-app.use('/', paprikaRouter);
+app.use('/', recipeRouter);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
