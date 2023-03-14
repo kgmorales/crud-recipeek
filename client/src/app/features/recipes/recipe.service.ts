@@ -4,7 +4,7 @@ import { map, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeService {
-  recipes$ = this.paprikaService.getAllRecipes();
+  recipes$ = this.paprikaService.getRecipes();
 
   constructor(private paprikaService: PaprikaService) {}
 }

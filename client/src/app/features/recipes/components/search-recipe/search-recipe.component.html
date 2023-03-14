@@ -55,7 +55,8 @@
           <th scope="col">Name</th>
           <th scope="col">Ingredients</th>
           <th scope="col">Favorite?</th>
-          <th scope="col">Year</th>
+          <th scope="col">rating</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -64,6 +65,7 @@
           <td>{{recipe.ingredients}}</td>
           <td>{{recipe.on_favorites}}</td>
           <td>{{recipe.rating}}</td>
+          <td><img [src]="recipe.image_url" loading="lazy"></td>
         </tr>
       </tbody>
     </table>

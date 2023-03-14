@@ -4,18 +4,22 @@ import { map, Observable } from 'rxjs';
 
 //? Core
 import * as core from '@core/constants';
-import { AllRecipes, Recipe } from '@core/models';
+import { AllRecipes, Category, Recipe } from '@core/models';
 @Injectable({
   providedIn: 'root',
 })
 export class PaprikaService {
   constructor(private http: HttpClient) {}
 
-  getAllRecipes(): Observable<Recipe[]> {
+  getRecipes(): Observable<Recipe[]> {
     return this.http.get<AllRecipes>(`${core.url.localHost}/recipes`).pipe(
       map(allRecipes => {
         return Object.values(allRecipes)[0];
       })
     );
+  }
+
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${core.url.localHost}/categories`);
   }
 }

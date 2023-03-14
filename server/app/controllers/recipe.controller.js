@@ -34,7 +34,6 @@ export async function storeRecipe(req, res) {
 export async function updateRecipes(req, res) {
 	const paprikaIds = await middleware.paprikaRecipeIds();
 	const dbRecipeCount = await Recipe.count();
-	const dbIds = await RecipeIds.find().lean();
 
 	const sendAllRecipes = () =>
 		Recipe.find()
@@ -48,6 +47,7 @@ export async function updateRecipes(req, res) {
 			});
 
 	if (paprikaIds.length !== dbRecipeCount) {
+		const dbIds = await RecipeIds.find().lean();
 		const newRecipeIds = paprikaIds.filter((paprikaId) => !dbIds.find((dbId) => paprikaId.uid === dbId.uid));
 		const newUIds = newRecipeIds.map((ids) => ids.uid);
 		const newRecipes = await middleware.paprikaNewRecipes(newUIds);
@@ -63,8 +63,6 @@ export async function updateCategories(req, res) {
 	const paprikaCategories = await middleware.paprikaCategories();
 	const dbCategoriesCount = await Category.count();
 
-	// console.log({ paprika: paprikaCategories.length, dbCat: dbCategoriesCount });
-
 	const sendAllCategories = () =>
 		Category.find()
 			.then((categories) => {
@@ -78,10 +76,7 @@ export async function updateCategories(req, res) {
 
 	if (paprikaCategories.length !== dbCategoriesCount) {
 		const dbCategories = await Category.find().lean();
-		console.log(dbCategories);
 		const newCategories = paprikaCategories.filter((paprikaId) => !dbCategories.find((dbId) => paprikaId.uid === dbId.uid));
-
-		console.log(newCategories);
 
 		Category.collection.insertMany(newCategories);
 	}
