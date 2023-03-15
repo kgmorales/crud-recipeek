@@ -3,6 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "src",
+    "rootDirs": ["src", "../shared"],
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -25,7 +26,8 @@
       "@blog/*": ["app/features/blog/*"],
       "@core/*": ["app/core/*"],
       "@recipes/*": ["app/features/recipes/*"],
-      "@shared/*": ["app/shared/*"]
+      "@shared/*": ["app/shared/*"],
+      "@sharedGlobal/*": ["../shared/*"]
     }
   },
   "angularCompilerOptions": {

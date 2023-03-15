@@ -4,7 +4,8 @@ import { map, Observable } from 'rxjs';
 
 //? Core
 import * as core from '@core/constants';
-import { AllRecipes, Category, Recipe } from '@core/models';
+import { AllRecipes } from '@core/models';
+import { Category, Recipe } from '../.././../../../../shared/types';
 @Injectable({
   providedIn: 'root',
 })
