@@ -23,7 +23,6 @@ const recipeSchema = new Schema({
 	categories: Array,
 	photo_url: String,
 	cook_time: String,
-	name: String,
 	created: Date,
 	notes: String,
 	photo_large: String,

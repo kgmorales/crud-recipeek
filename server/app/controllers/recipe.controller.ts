@@ -1,20 +1,23 @@
-import Recipe from '../models/recipe.model.js';
-import RecipeIds from '../models/recipeIds.model.js';
-import Category from '../models/categories.model.js';
-import * as middleware from '../middleware/paprika.middleware.js';
+import Recipe from '../models/recipe.model';
+import RecipeIds from '../models/recipeIds.model';
+import Category from '../models/categories.model';
+import * as middleware from '../middleware/paprika.middleware';
 import mongoose from 'mongoose';
+import { RequestHandler } from 'express';
 
-export async function deleteAll(req, res) {
+import * as sharedTypes from '../../../shared/types';
+
+export const deleteAll: RequestHandler = (req, res) => {
 	const collections = mongoose.connection.collections;
 
-	await Promise.all(
+	Promise.all(
 		Object.values(collections).map(async (collection) => {
 			await collection.deleteMany({}); // an empty mongodb selector object ({}) must be passed as the filter argument
 		})
 	);
-}
+};
 
-export async function storeRecipes(req, res) {
+export const storeRecipes: RequestHandler = async (req, res) => {
 	const recipeIds = await middleware.paprikaRecipesIds();
 	const recipes = await middleware.paprikaAllRecipes();
 
@@ -23,15 +26,9 @@ export async function storeRecipes(req, res) {
 	});
 
 	RecipeIds.insertMany(recipeIds);
-}
+};
 
-export async function storeRecipe(req, res) {
-	const recipe = await middleware.paprikaRecipe();
-
-	Recipe.save(recipe);
-}
-
-export async function updateRecipes(req, res) {
+export const updateRecipes: RequestHandler = async (req, res) => {
 	const paprikaIds = await middleware.paprikaRecipeIds();
 	const dbRecipeCount = await Recipe.count();
 
@@ -53,13 +50,13 @@ export async function updateRecipes(req, res) {
 		const newRecipes = await middleware.paprikaNewRecipes(newUIds);
 
 		RecipeIds.collection.insertMany(newRecipeIds);
-		Recipe.collection.insertMany(newRecipes);
+		Recipe.collection.insertMany(newRecipes as sharedTypes.Recipe[]);
 	}
 
 	await sendAllRecipes();
-}
+};
 
-export async function updateCategories(req, res) {
+export const updateCategories: RequestHandler = async (req, res) => {
 	const paprikaCategories = await middleware.paprikaCategories();
 	const dbCategoriesCount = await Category.count();
 
@@ -81,4 +78,4 @@ export async function updateCategories(req, res) {
 		Category.collection.insertMany(newCategories);
 	}
 	await sendAllCategories();
-}
+};

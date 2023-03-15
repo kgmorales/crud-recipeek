@@ -3,7 +3,11 @@
 		"target": "es5",
 		"module": "commonjs",
 		"declaration": true,
-		"outDir": "server.js",
-		"strict": true
-	}
+		"outDir": "server.ts",
+		"strict": true,
+		"esModuleInterop": true,
+		"moduleResolution": "node"
+	},
+	"include": ["/**/*.ts"],
+	"exclude": ["node_modules"]
 }
