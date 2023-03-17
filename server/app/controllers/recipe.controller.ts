@@ -7,6 +7,9 @@ import { RequestHandler } from 'express';
 
 import * as sharedTypes from '../../../shared/types';
 
+// @ts-ignore
+import { recipeScraper } from 'recipe-scraper';
+
 export const deleteAll: RequestHandler = (req, res) => {
 	const collections = mongoose.connection.collections;
 
@@ -78,4 +81,9 @@ export const updateCategories: RequestHandler = async (req, res) => {
 		Category.collection.insertMany(newCategories);
 	}
 	await sendAllCategories();
+};
+
+export const scrapeRecipe: RequestHandler = async (req, res) => {
+	let recipe = await recipeScraper(req.url);
+	console.log(recipe);
 };
