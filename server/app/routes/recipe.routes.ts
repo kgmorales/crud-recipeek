@@ -16,6 +16,8 @@ router.get('/updateRecipes', recipeController.updateRecipes);
 
 router.get('/categories', recipeController.updateCategories);
 
+router.get('/scrape/url', recipeController.scrapeRecipe);
+
 // // Retrieve all Tutorials
 // router.get('/', paprika.findAll);
 

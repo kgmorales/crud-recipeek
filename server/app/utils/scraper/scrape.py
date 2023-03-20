@@ -8,6 +8,7 @@ import html
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route('/api/parse', methods=["GET"])
 def parse_recipe():
     try:
@@ -28,11 +29,14 @@ def parse_recipe():
                         for item in ins:
                             for k, v in item.items():
                                 if k == 'text':
-                                    recipe['recipeInstructions'].append(html.escape(v))
+                                    recipe['recipeInstructions'].append(
+                                        html.escape(v))
                     else:
-                        recipe['recipeInstructions'] = [html.escape(i) for i in recipe['recipeInstructions']]
+                        recipe['recipeInstructions'] = [html.escape(
+                            i) for i in recipe['recipeInstructions']]
             if 'keywords' in recipe:
-                recipe['keywords'] = [html.escape(i.strip()) for i in recipe['keywords'].split(',')]
+                recipe['keywords'] = [html.escape(
+                    i.strip()) for i in recipe['keywords'].split(',')]
             if 'image' in recipe:
                 if type(recipe['image']) == dict:
                     if 'url' in recipe['image']:
@@ -46,7 +50,8 @@ def parse_recipe():
             if 'recipeYield' in recipe:
                 rYield = recipe['recipeYield']
                 if type(rYield) == str:
-                    recipe['recipeYield'] = [i.strip() for i in rYield.split(',')][0]
+                    recipe['recipeYield'] = [i.strip()
+                                             for i in rYield.split(',')][0]
                 if type(rYield) == list and len(rYield) > 0:
                     recipe['recipeYield'] = rYield[0]
             if 'cookTime' in recipe:
@@ -59,7 +64,7 @@ def parse_recipe():
     except Exception as e:
         print(e.args)
         pass
-    
+
     try:
         recipe = scrape_me(recipe_url)
         to_return = {
@@ -78,6 +83,7 @@ def parse_recipe():
     except Exception as e:
         return make_response(f'Error processing request. That domain might not be in the list\
              See <a href="/api">/api</a> for more info. Error: {e.args}', 500)
+
 
 @app.route('/api', methods=['GET'])
 def about_api():
@@ -181,6 +187,11 @@ def about_api():
 <p>I format the <code>recipeIngredients</code> and <code>author</code> so just strings are returned.</p>
     """
 
+
 @app.errorhandler(404)
 def not_found(error):
     return make_response('Path not found. See <a href="/api">/api</a> for more info', 404)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
