@@ -9,7 +9,11 @@ app = Flask(__name__)
 CORS(app)
 
 
+<<<<<<< HEAD
 @app.route('/api/parse', methods=["GET"])
+=======
+# @app.route('/api/parse', methods=["GET"])
+>>>>>>> f77d4a5ed6bbc19db8a6229f8b227388c8afdd51
 def parse_recipe():
     try:
         recipe_url = request.args.get('url')
@@ -85,6 +89,7 @@ def parse_recipe():
              See <a href="/api">/api</a> for more info. Error: {e.args}', 500)
 
 
+<<<<<<< HEAD
 @app.route('/api', methods=['GET'])
 def about_api():
     return """
@@ -188,10 +193,17 @@ def about_api():
     """
 
 
+=======
+>>>>>>> f77d4a5ed6bbc19db8a6229f8b227388c8afdd51
 @app.errorhandler(404)
 def not_found(error):
     return make_response('Path not found. See <a href="/api">/api</a> for more info', 404)
 
 
+<<<<<<< HEAD
 if __name__ == "__main__":
     app.run(debug=True)
+=======
+# if __name__ == "__main__":
+#     app.run(host="127.0.0.1", port=8080, debug=True)
+>>>>>>> f77d4a5ed6bbc19db8a6229f8b227388c8afdd51
