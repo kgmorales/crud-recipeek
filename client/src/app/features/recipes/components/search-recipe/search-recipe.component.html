@@ -36,7 +36,10 @@
   </table>
 </div> -->
 <ng-container *ngIf="_recipes$ | async as recipes">
-  <div class="container">
+  <div class="grid">
+    <app-recipe-card *ngFor="let recipe of recipes" [recipe]=recipe></app-recipe-card>
+  </div>
+  <!-- <div class="container">
     <h2 class="py-4">Recipes</h2>
 
     <div class="form-group mb-4">
@@ -73,5 +76,5 @@
     <ng-template #noResults>
       <p>No results found for "{{searchText}}".</p>
     </ng-template>
-  </div>
+  </div> -->
   <ng-container>

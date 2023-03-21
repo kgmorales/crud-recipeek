@@ -153,6 +153,8 @@ Example:
 }
  */
 export interface Recipe {
+  directions: string;
+  directionsList: string[] | null;
   rating: number;
   photo_hash: string;
   on_favorites: boolean;
@@ -160,6 +162,7 @@ export interface Recipe {
   uid: string;
   scale: number;
   ingredients: string;
+  ingredientsList: string[] | null;
   source: string;
   hash: string;
   source_url: string;
