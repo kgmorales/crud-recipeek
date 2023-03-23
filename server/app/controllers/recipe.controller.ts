@@ -1,10 +1,11 @@
+import mongoose from 'mongoose';
 import Recipe from '../models/recipe.model';
 import RecipeIds from '../models/recipeIds.model';
 import Category from '../models/categories.model';
-import * as middleware from '../middleware/paprika.middleware';
-import mongoose from 'mongoose';
+import * as paprika from '../middleware/recipes/paprika.middleware';
 import { RequestHandler } from 'express';
 
+import * as scraper from '../middleware/recipes/scraper.middleware';
 import * as sharedTypes from '../../../shared/types';
 
 export const deleteAll: RequestHandler = (req, res) => {
@@ -18,8 +19,8 @@ export const deleteAll: RequestHandler = (req, res) => {
 };
 
 export const storeRecipes: RequestHandler = async (req, res) => {
-	const recipeIds = await middleware.paprikaRecipesIds();
-	const recipes = await middleware.paprikaAllRecipes();
+	const recipeIds = await paprika.paprikaRecipesIds();
+	const recipes = await paprika.paprikaAllRecipes();
 
 	Recipe.insertMany(recipes).then(() => {
 		res.send({ recipes });
@@ -29,7 +30,7 @@ export const storeRecipes: RequestHandler = async (req, res) => {
 };
 
 export const updateRecipes: RequestHandler = async (req, res) => {
-	const paprikaIds = await middleware.paprikaRecipeIds();
+	const paprikaIds = await paprika.paprikaRecipeIds();
 	const dbRecipeCount = await Recipe.count();
 
 	const sendAllRecipes = () =>
@@ -47,7 +48,7 @@ export const updateRecipes: RequestHandler = async (req, res) => {
 		const dbIds = await RecipeIds.find().lean();
 		const newRecipeIds = paprikaIds.filter((paprikaId) => !dbIds.find((dbId) => paprikaId.uid === dbId.uid));
 		const newUIds = newRecipeIds.map((ids) => ids.uid);
-		const newRecipes = await middleware.paprikaNewRecipes(newUIds);
+		const newRecipes = await paprika.paprikaNewRecipes(newUIds);
 
 		RecipeIds.collection.insertMany(newRecipeIds);
 		Recipe.collection.insertMany(newRecipes as sharedTypes.Recipe[]);
@@ -57,7 +58,7 @@ export const updateRecipes: RequestHandler = async (req, res) => {
 };
 
 export const updateCategories: RequestHandler = async (req, res) => {
-	const paprikaCategories = await middleware.paprikaCategories();
+	const paprikaCategories = await paprika.paprikaCategories();
 	const dbCategoriesCount = await Category.count();
 
 	const sendAllCategories = () =>
@@ -78,4 +79,10 @@ export const updateCategories: RequestHandler = async (req, res) => {
 		Category.collection.insertMany(newCategories);
 	}
 	await sendAllCategories();
+};
+
+export const getScrapedRecipe: RequestHandler = async (req, res) => {
+	const recipeUrl: string = req.query.url as string;
+
+	await scraper.scrapeRecipe(recipeUrl);
 };

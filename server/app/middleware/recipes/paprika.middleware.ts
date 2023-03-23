@@ -1,5 +1,5 @@
 import { PaprikaApi } from 'paprika-api';
-import config from '../config/config';
+import config from '../../config/config';
 
 const paprika = new PaprikaApi(config.PAPRIKA_USER as string, config.PAPRIKA_PASS as string);
 

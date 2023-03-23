@@ -27,11 +27,6 @@ const app = express();
 app.use(cors());
 app.use(compression());
 app.use(express.json());
-// app.use(express.static('build'));
-
-PythonShell.runString('x=1+1;print(x)', undefined).then((messages) => {
-	console.log('finished');
-});
 
 mongoose.set('strictQuery', false);
 mongoose
