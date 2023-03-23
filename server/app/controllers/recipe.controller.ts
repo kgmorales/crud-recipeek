@@ -84,5 +84,5 @@ export const updateCategories: RequestHandler = async (req, res) => {
 export const getScrapedRecipe: RequestHandler = async (req, res) => {
 	const recipeUrl: string = req.query.url as string;
 
-	await scraper.scrapeRecipe(recipeUrl);
+	scraper.scrapeRecipe(recipeUrl);
 };

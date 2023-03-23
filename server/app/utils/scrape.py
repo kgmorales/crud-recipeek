@@ -5,6 +5,7 @@ import html
 import json
 import sys
 
+
 def parse_recipe(recipe_url):
     try:
         recipes = scrape_schema_recipe.scrape_url(recipe_url)
@@ -57,23 +58,22 @@ def parse_recipe(recipe_url):
         pass
 
     try:
-        recipe = scrape_me(recipe_url)
+        scraper = scrape_me(recipe_url)
         to_return = {
             "@type": "noSchema",
-            "name": recipe.title(),
-            "url": recipe.url(),
-            "recipeIngredients": recipe.ingredients(),
-            "recipeInstructions": [i for i in recipe.instructions().split('\n') if i != ""],
-            "review": recipe.reviews(),
-            "aggregateRating": recipe.ratings(),
-            "totalTime": recipe.total_time(),
-            "recipeYield": recipe.yields(),
-            "image": recipe.image()
+            "name": scraper.title(),
+            "url": scraper.canonical_url(),
+            "recipeIngredients": scraper.ingredients(),
+            "recipeInstructions": [i for i in scraper.instructions().split('\n') if i != ""],
+            "aggregateRating": scraper.ratings(),
+            "totalTime": scraper.total_time(),
+            "recipeYield": scraper.yields(),
+            "image": scraper.image(),
+            "category": scraper.category()
         }
         return to_return
     except Exception as e:
-        return print(f'Error processing request. That domain might not be in the list\
-             See <a href="/api">/api</a> for more info. Error: {e.args}', 500)
+        print(f'Error processing request. That domain might not be in the list.')
 
 
 if __name__ == '__main__':
