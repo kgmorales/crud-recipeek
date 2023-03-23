@@ -1,9 +1,11 @@
 from recipe_scrapers import scrape_me
 import scrape_schema_recipe
 from recipe_scrapers._utils import get_minutes
-import html
+from recipe_scrapers import scrape_html
 import json
+import requests
 import sys
+
 
 def parse_recipe(recipe_url):
     try:
@@ -57,23 +59,43 @@ def parse_recipe(recipe_url):
         pass
 
     try:
-        recipe = scrape_me(recipe_url)
+        scraper = scrape_me(recipe_url)
         to_return = {
             "@type": "noSchema",
-            "name": recipe.title(),
-            "url": recipe.url(),
-            "recipeIngredients": recipe.ingredients(),
-            "recipeInstructions": [i for i in recipe.instructions().split('\n') if i != ""],
-            "review": recipe.reviews(),
-            "aggregateRating": recipe.ratings(),
-            "totalTime": recipe.total_time(),
-            "recipeYield": recipe.yields(),
-            "image": recipe.image()
+            "name": scraper.title(),
+            "url": scraper.canonical_url(),
+            "recipeIngredients": scraper.ingredients(),
+            "recipeInstructions": [i for i in scraper.instructions().split('\n') if i != ""],
+            "aggregateRating": scraper.ratings(),
+            "totalTime": scraper.total_time(),
+            "recipeYield": scraper.yields(),
+            "image": scraper.image(),
+            "category": scraper.category()
         }
         return to_return
     except Exception as e:
-        return print(f'Error processing request. That domain might not be in the list\
-             See <a href="/api">/api</a> for more info. Error: {e.args}', 500)
+        print(f'Error processing request. That domain might not be in the list.')
+
+    try:
+        html = requests.get(recipe_url).content
+
+        scraper = scrape_html(html=html, org_url=recipe_url)
+        print('html fired')
+        to_return = {
+            "@type": "noSchema",
+            "name": scraper.title(),
+            "url": scraper.canonical_url(),
+            "recipeIngredients": scraper.ingredients(),
+            "recipeInstructions": [i for i in scraper.instructions().split('\n') if i != ""],
+            "aggregateRating": scraper.ratings(),
+            "totalTime": scraper.total_time(),
+            "recipeYield": scraper.yields(),
+            "image": scraper.image(),
+            "category": scraper.category()
+        }
+        return to_return
+    except Exception as e:
+        print(f'Error processing request. That domain might not be in the list.')
 
 
 if __name__ == '__main__':
