@@ -59,7 +59,7 @@ def parse_recipe(recipe_url):
         pass
 
     try:
-        scraper = scrape_me(recipe_url)
+        scraper = scrape_me(recipe_url, wild_mode=True)
         to_return = {
             "@type": "noSchema",
             "name": scraper.title(),
