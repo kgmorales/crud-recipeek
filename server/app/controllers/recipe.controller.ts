@@ -84,5 +84,8 @@ export const updateCategories: RequestHandler = async (req, res) => {
 export const getScrapedRecipe: RequestHandler = async (req, res) => {
 	const recipeUrl: string = req.query.url as string;
 
-	scraper.scrapeRecipe(recipeUrl);
+	const scrapedRecipe = await scraper.scrapeRecipe(recipeUrl);
+	const cleanRecipe = JSON.parse(scrapedRecipe);
+
+	res.send(await scraper.setScrapeToRecipeModel(cleanRecipe));
 };

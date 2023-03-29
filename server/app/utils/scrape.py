@@ -12,21 +12,6 @@ def parse_recipe(recipe_url):
         recipes = scrape_schema_recipe.scrape_url(recipe_url)
         if len(recipes) == 1 and recipes[0] is not None:
             recipe = recipes[0]
-            if 'recipeInstructions' in recipe:
-                ins = recipe['recipeInstructions']
-                if type(ins) == str:
-                    recipe['recipeInstructions'] = [html.escape(ins)]
-                elif type(ins) == list and len(ins) > 0:
-                    if type(ins[0]) == dict:
-                        recipe['recipeInstructions'] = []
-                        for item in ins:
-                            for k, v in item.items():
-                                if k == 'text':
-                                    recipe['recipeInstructions'].append(
-                                        html.escape(v))
-                    else:
-                        recipe['recipeInstructions'] = [html.escape(
-                            i) for i in recipe['recipeInstructions']]
             if 'keywords' in recipe:
                 recipe['keywords'] = [html.escape(
                     i.strip()) for i in recipe['keywords'].split(',')]
@@ -55,22 +40,22 @@ def parse_recipe(recipe_url):
                 recipe['totalTime'] = get_minutes(recipe['totalTime'])
             return recipe
     except Exception as e:
-        print(e.args)
         pass
 
     try:
         scraper = scrape_me(recipe_url, wild_mode=True)
         to_return = {
-            "@type": "noSchema",
+            "cook_time": scraper.cook_time(),
+            "directions": scraper.instructions(),
+            "ingredients": '\n'.join(scraper.ingredients()),
+            "image_url": scraper.image(),
             "name": scraper.title(),
-            "url": scraper.canonical_url(),
-            "recipeIngredients": scraper.ingredients(),
-            "recipeInstructions": [i for i in scraper.instructions().split('\n') if i != ""],
-            "aggregateRating": scraper.ratings(),
+            "nutritional_info": scraper.nutrients(),
+            "prep_time": scraper.prep_time(),
+            "rating": scraper.ratings(),
+            "servings": scraper.yields(),
+            "source_url": scraper.canonical_url(),
             "totalTime": scraper.total_time(),
-            "recipeYield": scraper.yields(),
-            "image": scraper.image(),
-            "category": scraper.category()
         }
         return to_return
     except Exception as e:
@@ -80,18 +65,19 @@ def parse_recipe(recipe_url):
         html = requests.get(recipe_url).content
 
         scraper = scrape_html(html=html, org_url=recipe_url)
-        print('html fired')
+
         to_return = {
-            "@type": "noSchema",
+            "cook_time": scraper.cook_time(),
+            "directions": scraper.instructions(),
+            "ingredients": '\n'.join(scraper.ingredients()),
+            "image_url": scraper.image(),
             "name": scraper.title(),
-            "url": scraper.canonical_url(),
-            "recipeIngredients": scraper.ingredients(),
-            "recipeInstructions": [i for i in scraper.instructions().split('\n') if i != ""],
-            "aggregateRating": scraper.ratings(),
+            "nutritional_info": scraper.nutrients(),
+            "prep_time": scraper.prep_time(),
+            "rating": scraper.ratings(),
+            "servings": scraper.yields(),
+            "source_url": scraper.canonical_url(),
             "totalTime": scraper.total_time(),
-            "recipeYield": scraper.yields(),
-            "image": scraper.image(),
-            "category": scraper.category()
         }
         return to_return
     except Exception as e:

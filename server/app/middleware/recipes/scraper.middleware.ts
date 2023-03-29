@@ -1,40 +1,28 @@
 import { spawn } from 'child_process';
+import { Recipe } from '../../../../shared/types';
 
-export async function scrapeRecipe(recipeUrl: string) {
+import { emptyRecipe } from '../../constants/recipe';
+
+export async function scrapeRecipe(recipeUrl: string): Promise<string> {
 	return new Promise((resolve, reject) => {
 		const python = spawn('python3', ['app/utils/scrape.py', recipeUrl]);
+
 		python.stdout.on('data', (data) => {
-			const result = data.toString();
-			console.log(result);
+			resolve(data.toString());
 		});
 
 		python.stderr.on('data', (data) => {
-			console.error(`stderr: ${data}`);
-		});
-
-		python.on('close', (code) => {
-			console.log(`child process exited with code ${code}`);
+			reject(`stderr: ${data}`);
 		});
 	});
-	// const process = spawn('python3', ['app/utils/scrape.py', recipeUrl]);
-	// let recipe = '';
+}
 
-	// process.stdout.on('data', (_data) => {
-	// 	try {
-	// 		const data = _data.toString();
-	// 		recipe += data;
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// });
-	// process.stdout.on('exit', function (_) {
-	// 	console.log('EXIT:', recipe);
-	// });
-	// // process.stdout.on('end', () => console.log('END:', recipe));
-	// process.on('error', (error: Error) => console.error(error));
-	// process.stdin.end();
+export async function setScrapeToRecipeModel(scrapedRecipe: Partial<Recipe>): Promise<Recipe> {
+	const newRecipe = { ...emptyRecipe, ...scrapedRecipe };
 
-	// console.log(recipe);
+	const { nutritional_info, ...rest } = newRecipe;
 
-	// return recipe;
+	console.log(Object.entries(nutritional_info));
+
+	return newRecipe;
 }

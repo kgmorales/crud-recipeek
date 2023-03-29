@@ -47,27 +47,27 @@ export interface PantryItem {
 	ingredient: string;
 }
 export interface Recipe {
-	rating: number;
-	photo_hash: string;
+	categories: string[];
+	cook_time: string;
+	created: string;
+	difficulty: string;
+	hash: string;
+	ingredients: string;
+	image_url: string;
+	name: string;
+	notes: string;
+	nutritional_info: string;
 	on_favorites: boolean;
 	photo: string;
-	uid: string;
-	scale: number;
-	ingredients: string;
-	source: string;
-	hash: string;
-	source_url: string;
-	difficulty: string;
-	categories: string[];
 	photo_url: string;
-	cook_time: string;
-	name: string;
-	created: string;
-	notes: string;
-	image_url: string;
+	photo_hash: string;
 	prep_time: string;
+	rating: number;
+	scale: number;
 	servings: string;
-	nutritional_info: string;
+	source: string;
+	source_url: string;
+	uid: string;
 }
 export interface RecipeItem {
 	hash: string;
