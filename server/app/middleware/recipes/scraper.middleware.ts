@@ -20,9 +20,9 @@ export async function scrapeRecipe(recipeUrl: string): Promise<string> {
 export async function setScrapeToRecipeModel(scrapedRecipe: Partial<Recipe>): Promise<Recipe> {
 	const newRecipe = { ...emptyRecipe, ...scrapedRecipe };
 
-	const { nutritional_info, ...rest } = newRecipe;
+	const { nutritional_info } = newRecipe;
 
-	console.log(Object.entries(nutritional_info));
+	const cleanNutritionInfo = Object.entries(nutritional_info).join('\n');
 
-	return newRecipe;
+	return { ...newRecipe, nutritional_info: cleanNutritionInfo };
 }
