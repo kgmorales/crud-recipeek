@@ -1,5 +1,8 @@
 import { spawn } from 'child_process';
 import { Recipe } from '../../../../shared/types';
+import { ScrapedRecipe } from './types/scraped';
+import { cleanScrapedRecipe } from '../../utils/scrapeCleaner';
+import { cleanScrapedKeys } from '../../constants/scrapeToRecipe';
 
 import { emptyRecipe } from '../../constants/recipe';
 
@@ -17,12 +20,19 @@ export async function scrapeRecipe(recipeUrl: string): Promise<string> {
 	});
 }
 
-export async function setScrapeToRecipeModel(scrapedRecipe: Partial<Recipe>): Promise<Recipe> {
-	const newRecipe = { ...emptyRecipe, ...scrapedRecipe };
+export async function setScrapeToRecipeModel(scrapedRecipe: ScrapedRecipe): Promise<Recipe> {
+	const cleanScraped = cleanScrapedRecipe(cleanScrapedKeys, scrapedRecipe);
 
-	const { nutritional_info } = newRecipe;
+	const ingredients = Object.entries(cleanScraped.ingredients).join('\n');
+	const nutritional_info = Object.entries(cleanScraped.nutritional_info).join('\n');
+	const servings = Number(cleanScraped.servings.replace(/\D/g, ''));
+	const categories: string[] = [];
 
-	const cleanNutritionInfo = Object.entries(nutritional_info).join('\n');
+	const prettyRecipeData = { ...cleanScraped, categories, ingredients, nutritional_info, servings };
 
-	return { ...newRecipe, nutritional_info: cleanNutritionInfo };
+	const newRecipe = { ...emptyRecipe, ...prettyRecipeData };
+
+	const { author, host, instructions_list, language, ...recipe } = newRecipe;
+
+	return recipe;
 }

@@ -88,4 +88,5 @@ export const getScrapedRecipe: RequestHandler = async (req, res) => {
 	const cleanRecipe = JSON.parse(scrapedRecipe);
 
 	res.send(await scraper.setScrapeToRecipeModel(cleanRecipe));
+	// res.send(scrapedRecipe);
 };

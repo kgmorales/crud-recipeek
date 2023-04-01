@@ -51,6 +51,7 @@ export interface Recipe {
 	cook_time: string;
 	created: string;
 	difficulty: string;
+	directions: string;
 	hash: string;
 	ingredients: string;
 	image_url: string;
