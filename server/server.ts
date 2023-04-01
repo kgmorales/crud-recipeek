@@ -7,8 +7,6 @@ import compression from 'compression';
 import mongoose from 'mongoose';
 require('express-async-errors');
 
-import { PythonShell } from 'python-shell';
-
 import config from './app/config/config';
 import logger from './app/utils/logger';
 

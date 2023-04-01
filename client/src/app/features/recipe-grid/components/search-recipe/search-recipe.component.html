@@ -35,46 +35,32 @@
     </ng-container>
   </table>
 </div> -->
+
+
 <ng-container *ngIf="_recipes$ | async as recipes">
-  <div class="grid">
-    <app-recipe-card *ngFor="let recipe of recipes" [recipe]=recipe></app-recipe-card>
-  </div>
-  <!-- <div class="container">
+  <div class="container">
     <h2 class="py-4">Recipes</h2>
 
     <div class="form-group mb-4">
       <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search">
     </div>
 
-    <table class="table" *ngIf="(recipes | filter: searchText).length > 0; else noResults">
-      <colgroup>
-        <col width="5%">
-        <col width="*">
-        <col width="35%">
-        <col width="15%">
-      </colgroup>
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Ingredients</th>
-          <th scope="col">Favorite?</th>
-          <th scope="col">rating</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let recipe of recipes | filter: searchText; let i = index">
-          <td>{{recipe.name}}</td>
-          <td>{{recipe.ingredients}}</td>
-          <td>{{recipe.on_favorites}}</td>
-          <td>{{recipe.rating}}</td>
-          <td><img [src]="recipe.image_url" loading="lazy"></td>
-        </tr>
-      </tbody>
-    </table>
+    <app-scrape-form></app-scrape-form>
+
+    <div class="grid">
+      <ng-container *ngIf="(recipes | filter: searchText).length > 0; else noResults">
+        <app-recipe-card *ngFor="let recipe of recipes | filter: searchText;" [recipe]=recipe></app-recipe-card>
+
+        <ng-template #noResults>
+          <p>No results found for "{{searchText}}".</p>
+        </ng-template>
+      </ng-container>
+    </div>
 
     <ng-template #noResults>
       <p>No results found for "{{searchText}}".</p>
     </ng-template>
-  </div> -->
+  </div>
+
+
   <ng-container>

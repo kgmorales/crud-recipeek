@@ -9,10 +9,10 @@ import * as coreUtils from '@core/utils';
 @Injectable({
   providedIn: 'root',
 })
-export class PaprikaService {
+export class RecipeService {
   constructor(private http: HttpClient) {}
 
-  getRecipes(): Observable<Recipe[]> {
+  getAllRecipes(): Observable<Recipe[]> {
     return this.http.get<AllRecipes>(`${coreConst.url.localHost}/recipes`).pipe(
       map(allRecipes => {
         return Object.values(allRecipes)[0].map((recipe: Recipe) => {
@@ -27,5 +27,9 @@ export class PaprikaService {
 
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${coreConst.url.localHost}/categories`);
+  }
+
+  getScrapedRecipe(url: string): Observable<Recipe> {
+    return this.http.get<Recipe>(`${coreConst.url.localHost}/scrapeRecipe?url=${url}`);
   }
 }

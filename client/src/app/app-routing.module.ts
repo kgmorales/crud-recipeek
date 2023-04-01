@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/' },
+  { path: '', pathMatch: 'full', redirectTo: '/recipes' },
   {
     path: 'recipes',
-    loadChildren: () => import('@recipes/recipes.module').then(m => m.RecipesModule),
+    loadChildren: () =>
+      import('app/features/recipe-grid/recipe-grid.module').then(m => m.RecipesModule),
   },
   { path: 'blog', loadChildren: () => import('@blog/blog.module').then(m => m.BlogModule) },
 ];
