@@ -21,12 +21,14 @@ export async function scrapeRecipe(recipeUrl: string): Promise<string> {
 }
 
 export async function setScrapeToRecipeModel(scrapedRecipe: ScrapedRecipe): Promise<Recipe> {
+	const isEmpty = (obj: Record<string, string>) => Object.keys(obj).length === 0;
+	const joinObjectToString = (data: Record<string, string>) => Object.entries(data).join('\n');
 	const cleanScraped = cleanScrapedRecipe(cleanScrapedKeys, scrapedRecipe);
 
-	const ingredients = Object.entries(cleanScraped.ingredients).join('\n');
-	const nutritional_info = Object.entries(cleanScraped.nutritional_info).join('\n');
-	const servings = Number(cleanScraped.servings.replace(/\D/g, ''));
 	const categories: string[] = [];
+	const ingredients = cleanScraped.instructions_list.length === 0 ? '' : cleanScraped.instructions_list.join('\n');
+	const nutritional_info = isEmpty(cleanScraped.nutritional_info) && joinObjectToString(cleanScraped.nutritional_info);
+	const servings = Number(cleanScraped.servings.replace(/\D/g, ''));
 
 	const prettyRecipeData = { ...cleanScraped, categories, ingredients, nutritional_info, servings };
 

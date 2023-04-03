@@ -85,8 +85,11 @@ export const getScrapedRecipe: RequestHandler = async (req, res) => {
 	const recipeUrl: string = req.query.url as string;
 
 	const scrapedRecipe = await scraper.scrapeRecipe(recipeUrl);
-	const cleanRecipe = JSON.parse(scrapedRecipe);
 
-	res.send(await scraper.setScrapeToRecipeModel(cleanRecipe));
-	// res.send(scrapedRecipe);
+	try {
+		const cleanRecipe = JSON.parse(scrapedRecipe);
+		res.send(await scraper.setScrapeToRecipeModel(cleanRecipe));
+	} catch {
+		res.status(500).send({ Error: 'Problem scraping Recipe' });
+	}
 };

@@ -11,6 +11,7 @@ export class ScrapeRecipeFormComponent {
   form = {
     url: '',
   };
+
   constructor(private recipeService: RecipeService) {}
 
   onReset(form: NgForm): void {
@@ -21,6 +22,6 @@ export class ScrapeRecipeFormComponent {
     this.recipeService
       .getScrapedRecipe(this.form.url)
       .pipe(take(1))
-      .subscribe(recipe => console.log(recipe));
+      .subscribe(recipe => this.recipeService.storeScrapedRecipe(recipe));
   }
 }

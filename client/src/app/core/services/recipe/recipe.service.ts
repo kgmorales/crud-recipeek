@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, ReplaySubject } from 'rxjs';
 
 //? Core
 import * as coreConst from '@core/constants';
@@ -10,6 +10,9 @@ import * as coreUtils from '@core/utils';
   providedIn: 'root',
 })
 export class RecipeService {
+  readonly scrapedRecipeSubject$ = new ReplaySubject<Recipe>(1);
+  scrapedRecipe$ = this.scrapedRecipeSubject$.asObservable();
+
   constructor(private http: HttpClient) {}
 
   getAllRecipes(): Observable<Recipe[]> {
@@ -31,5 +34,9 @@ export class RecipeService {
 
   getScrapedRecipe(url: string): Observable<Recipe> {
     return this.http.get<Recipe>(`${coreConst.url.localHost}/scrapeRecipe?url=${url}`);
+  }
+
+  storeScrapedRecipe(recipe: Recipe): void {
+    this.scrapedRecipeSubject$.next(recipe);
   }
 }
