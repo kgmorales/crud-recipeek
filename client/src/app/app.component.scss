@@ -14,3 +14,14 @@
   -webkit-backdrop-filter: blur(20px);
   position: relative;
 }
+.main-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px 30px;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.anim {
+  animation: bottom 0.8s var(--delay) both;
+}

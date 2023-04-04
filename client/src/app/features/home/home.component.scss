@@ -1,0 +1,173 @@
+@import 'mixins';
+
+.main-header {
+  font-size: 30px;
+  color: #fff;
+  font-weight: 700;
+  padding-bottom: 20px;
+  z-index: 11;
+  --delay: 0s;
+}
+
+.small-header {
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+  margin: 30px 0 20px;
+  --delay: 0.3s;
+}
+
+.main {
+  &-blogs {
+    display: flex;
+    align-items: center;
+  }
+
+  &-blog__author {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+
+    &.tips {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+    }
+  }
+
+  &-blog__title {
+    font-size: 25px;
+    max-width: 12ch;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+
+  &-blog {
+    background-image: url("https://assets.codepen.io/3364143/skate-removebg-preview.png");
+    background-size: 80%;
+    background-position-x: 150px;
+    background-color: #31abbd;
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    padding: 30px;
+    border-radius: 20px;
+    align-self: stretch;
+    overflow: hidden;
+    position: relative;
+    transition: background 0.3s;
+    background-repeat: no-repeat;
+
+    &+& {
+      margin-left: 20px;
+      width: 35%;
+      background-image: url(https://c0.anyrgb.com/images/1020/945/venice-beach-2018-outdoors-sport-men-jumping-desert-sunset-extreme-sports-one-person-action.jpg);
+      background-color: unset;
+      background-position-x: 0;
+      background-size: 139%;
+      filter: saturate(1.4);
+
+      .author-img {
+        border-color: rgb(255 255 255 / 75%);
+        margin-top: 14px;
+      }
+
+      .author-img__wrapper svg {
+        border-color: #ffe6b2;
+        color: #e7bb7d;
+      }
+
+      .author-detail {
+        margin-left: 0;
+      }
+    }
+
+    @include tablet-sm {
+
+      &,
+      &+.main-blog {
+        width: 50%;
+        padding: 30px;
+      }
+
+      & {
+        background-size: cover;
+        background-position-x: center;
+        background-blend-mode: overlay;
+      }
+    }
+
+    &__time {
+      background: rgba(21, 13, 13, 0.44);
+      color: #fff;
+      padding: 3px 8px;
+      font-size: 12px;
+      border-radius: 6px;
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+    }
+
+    @include animation-delay(1, 5);
+  }
+}
+
+.author {
+  &-img {
+    width: 52px;
+    height: 52px;
+    border: 1px solid rgb(255 255 255 / 75%);
+    padding: 4px;
+    border-radius: 50%;
+    object-fit: cover;
+
+    &__wrapper {
+      position: relative;
+      flex-shrink: 0;
+
+      svg {
+        width: 16px;
+        padding: 2px;
+        background-color: #fff;
+        color: #0daabc;
+        border-radius: 50%;
+        border: 2px solid #0daabc;
+        position: absolute;
+        bottom: 5px;
+        right: 0;
+      }
+    }
+  }
+
+  &-name {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  &-info {
+    font-size: 13px;
+    font-weight: 400;
+    color: #fff;
+  }
+
+  &-detail {
+    margin-left: 16px;
+  }
+}
+
+.seperate {
+  width: 3px;
+  height: 3px;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  background-color: #fff;
+  margin: 0 6px;
+
+  &.video-seperate {
+    background-color: var(--body-color);
+  }
+}
