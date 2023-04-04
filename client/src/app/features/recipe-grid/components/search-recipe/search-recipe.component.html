@@ -40,18 +40,19 @@
 <ng-container *ngIf="_recipes$ | async as recipes">
   <div class="container">
     <h2 class="py-4">Scrape Recipe Data</h2>
+    <!-- //! THIS IS THE SCRAPE SEARCH URL COMPONENT WITH FORM -->
+    <!-- <app-scrape-form></app-scrape-form>
 
-    <!-- <div class="form-group mb-4">
+        <div *ngIf="scrapedRecipe$ | async as recipe" class="container">
+          <app-recipe-card [recipe]="recipe"></app-recipe-card>
+        </div> -->
+    <!-- //! END -->
+
+    <div class="form-group mb-4">
       <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search">
-    </div> -->
-
-    <app-scrape-form></app-scrape-form>
-
-    <div *ngIf="scrapedRecipe$ | async as recipe" class="container">
-      <app-recipe-card [recipe]="recipe"></app-recipe-card>
     </div>
 
-    <!-- <div class="grid">
+    <div class="grid">
       <ng-container *ngIf="(recipes | filter: searchText).length > 0; else noResults">
         <app-recipe-card *ngFor="let recipe of recipes | filter: searchText;" [recipe]=recipe></app-recipe-card>
 
@@ -64,7 +65,5 @@
     <ng-template #noResults>
       <p>No results found for "{{searchText}}".</p>
     </ng-template>
-  </div> -->
-
-
-    <ng-container>
+  </div>
+  <ng-container>

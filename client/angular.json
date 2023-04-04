@@ -27,10 +27,10 @@
             "outputPath": "dist/lamora",
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/app/styles/styles.scss"
+              "src/styles/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/app/styles/base"]
+              "includePaths": ["src/styles"]
             },
             "scripts": [],
             "tsConfig": "tsconfig.app.json"
@@ -90,7 +90,13 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            },
             "scripts": []
           }
         }

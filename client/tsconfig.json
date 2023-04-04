@@ -26,7 +26,8 @@
       "@blog/*": ["app/features/blog/*"],
       "@core/*": ["app/core/*"],
       "@recipes/*": ["app/features/recipes/*"],
-      "@shared/*": ["app/shared/*"]
+      "@shared/*": ["app/shared/*"],
+      "@styles/*": ["app/styles/*"]
     }
   },
   "angularCompilerOptions": {

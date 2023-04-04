@@ -28,6 +28,7 @@
     "buttercms": "^1.2.9",
     "ng-bottom-navigation": "^0.3.0",
     "node": "^19.6.0",
+    "node-sass": "^8.0.0",
     "nvm": "^0.0.4",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
