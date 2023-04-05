@@ -16,7 +16,7 @@ import { ScrapeRecipeFormComponent } from './components/recipe-card/scrape-recip
 import { SearchPipe } from '@shared/pipes';
 
 import { RecipeGridService } from './recipe-grid.service';
-import { ListComponent } from '../../shared/components/list.component';
+import { ListComponent } from '../../shared/components/list/list.component';
 
 @NgModule({
   declarations: [SearchRecipeComponent, RecipeCardComponent, ScrapeRecipeFormComponent],

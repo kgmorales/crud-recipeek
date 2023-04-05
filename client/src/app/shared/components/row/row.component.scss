@@ -1,0 +1,124 @@
+@import 'mixins';
+
+.videos {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+
+  @include tablet-md {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.video {
+  position: relative;
+  background-color: var(--theme-bg-color);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.4s;
+  @include animation-delay(3, 15);
+
+  &-wrapper {
+    position: relative;
+  }
+
+  &-name {
+    color: #fff;
+    font-size: 16px;
+    line-height: 1.4em;
+    padding: 12px 20px 0;
+    overflow: hidden;
+    z-index: 9;
+    position: relative;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &-view {
+    font-size: 12px;
+    padding: 12px 20px 20px;
+    position: relative;
+  }
+
+  &-created-by {
+    transition: 0.3s;
+    padding: 20px 20px 0px;
+    position: relative;
+    transform-origin: bottom;
+  }
+
+  &-by {
+    transition: 0.3s;
+    display: inline-flex;
+    position: relative;
+
+    &:before {
+      content: "";
+      background-color: #22b07d;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: -12px;
+    }
+
+    &.offline:before {
+      background-color: #ff7551;
+    }
+  }
+
+  &-time {
+    position: absolute;
+    background-color: var(--theme-bg-color);
+    color: rgb(255 255 255 / 85%);
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 8px;
+    top: 10px;
+    z-index: 1;
+    right: 8px;
+    transition: .3s ease-in-out;
+  }
+
+  &-author {
+    position: absolute;
+    right: 10px;
+    transition: 0.4s;
+    bottom: -25px;
+
+    svg {
+      background-color: #0aa0f7;
+      color: #fff;
+      border-color: var(--video-bg);
+    }
+  }
+
+  &:hover {
+    video {
+      transform: scale(1.5);
+      transform-origin: center;
+    }
+
+    .video-time {
+      transform: translateY(-50%);
+      opacity: 0;
+    }
+
+    .video-author {
+      bottom: -65px;
+      transform: scale(0.6);
+      right: -3px;
+      z-index: 10;
+    }
+
+    .video-created-by {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+  }
+}

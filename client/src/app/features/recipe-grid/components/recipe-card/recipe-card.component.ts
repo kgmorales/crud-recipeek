@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Recipe } from '@core/models';
-import { ListComponent } from '@shared/components/list.component';
+import { ListComponent } from '@shared/components/list/list.component';
 
 @Component({
   selector: 'app-recipe-card',

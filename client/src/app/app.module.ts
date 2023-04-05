@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListComponent } from '@shared/components/list.component';
+import { ListComponent } from '@shared/components/list/list.component';
 import { HeaderComponent } from '@core/components/header/header.component';
 import { SideNavComponent } from '@core/components/side-nav/side-nav.component';
 
