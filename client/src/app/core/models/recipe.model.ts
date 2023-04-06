@@ -152,7 +152,7 @@ Example:
 	"nutritional_info": ""
 }
  */
-export interface Recipe {
+export class Recipe {
   directions: string;
   directionsList: string[] | null;
   rating: number;
@@ -217,4 +217,9 @@ export interface Status {
   bookmarks: number;
   menuitems: number;
   categories: number;
+}
+
+export interface RecipeCache {
+  recipes: Recipe[];
+  categories: Category[];
 }

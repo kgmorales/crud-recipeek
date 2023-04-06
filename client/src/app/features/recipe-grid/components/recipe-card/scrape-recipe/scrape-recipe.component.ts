@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { RecipeService } from '@core/services';
+import { RecipesStateService } from '@core/services';
 import { take } from 'rxjs';
 
 @Component({
@@ -12,16 +12,16 @@ export class ScrapeRecipeFormComponent {
     url: '',
   };
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipesStateService: RecipesStateService) {}
 
   onReset(form: NgForm): void {
     form.reset();
   }
 
   onSubmit() {
-    this.recipeService
-      .getScrapedRecipe(this.form.url)
-      .pipe(take(1))
-      .subscribe(recipe => this.recipeService.storeScrapedRecipe(recipe));
+    // this.recipesStateService
+    //   .getScrapedRecipe(this.form.url)
+    //   .pipe(take(1))
+    //   .subscribe(recipe => this.recipeService.storeScrapedRecipe(recipe));
   }
 }

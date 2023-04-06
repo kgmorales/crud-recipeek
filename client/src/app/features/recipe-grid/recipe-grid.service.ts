@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { RecipeService } from '@core/services';
+import { RecipesStateService } from '@core/services';
 import { map, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeGridService {
-  recipes$ = this.recipeService.getAllRecipes();
+  favoriteRecipes$ = this.recipeStateService.favoriteRecipes$;
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeStateService: RecipesStateService) {
+    this.favoriteRecipes$.subscribe(x => console.log(x));
+  }
 }

@@ -1,118 +1,117 @@
-// import { Injectable } from '@angular/core';
-// import { StateService } from '../state.service';
-// import { Recipe } from '../../models/recipe.model';
-// import { Filter } from '../models/filter';
-// import { Observable } from 'rxjs';
-// import { map, shareReplay } from 'rxjs/operators';
-// import { TodosApiService } from './api/todos-api.service';
+import { Injectable } from '@angular/core';
+import { StateService } from '../state.service';
+import { Filter, Recipe } from '../../models';
 
-// interface TodoState {
-//   todos: Todo[];
-//   selectedTodoId: number;
-//   filter: Filter;
-// }
+import { Observable, map, shareReplay } from 'rxjs';
+import { RecipesApiService } from './recipe-api.service';
 
-// const initialState: TodoState = {
-//   todos: [],
-//   selectedTodoId: undefined,
-//   filter: {
-//     search: '',
-//     category: {
-//       isBusiness: false,
-//       isPrivate: false,
-//     },
-//   },
-// };
+interface RecipeState {
+  recipes: Recipe[];
+  selectedUID: string;
+  filter: Filter;
+}
 
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class TodosStateService extends StateService<TodoState> {
-//   private todosFiltered$: Observable<Todo[]> = this.select(state => {
-//     return getTodosFiltered(state.todos, state.filter);
-//   });
-//   todosDone$: Observable<Todo[]> = this.todosFiltered$.pipe(
-//     map(todos => todos.filter(todo => todo.isDone))
-//   );
-//   todosNotDone$: Observable<Todo[]> = this.todosFiltered$.pipe(
-//     map(todos => todos.filter(todo => !todo.isDone))
-//   );
-//   filter$: Observable<Filter> = this.select(state => state.filter);
-//   selectedTodo$: Observable<Todo> = this.select(state => {
-//     if (state.selectedTodoId === 0) {
-//       return new Todo();
-//     }
-//     return state.todos.find(item => item.id === state.selectedTodoId);
-//   }).pipe(
-//     // Multicast to prevent multiple executions due to multiple subscribers
-//     shareReplay({ refCount: true, bufferSize: 1 })
-//   );
+const initialState: RecipeState = {
+  recipes: [],
+  selectedUID: undefined ?? '',
+  filter: {
+    search: '',
+    category: {
+      isFastCookTime: false,
+      isFavorite: false,
+    },
+  },
+};
 
-//   constructor(private apiService: TodosApiService) {
-//     super(initialState);
+@Injectable({
+  providedIn: 'root',
+})
+export class RecipesStateService extends StateService<RecipeState> {
+  private recipesFiltered$ = this.select(state => {
+    return getRecipesFiltered(state.recipes, state.filter);
+  });
+  favoriteRecipes$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
+    map(recipes => recipes.filter(recipe => recipe.on_favorites))
+  );
+  notFavoriteRecipes$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
+    map(recipes => recipes.filter(recipe => !recipe.on_favorites))
+  );
+  filter$: Observable<Filter> = this.select(state => state.filter);
 
-//     this.load();
-//   }
+  selectedRecipe$ = this.select(state => {
+    if (state.selectedUID === '') return new Recipe();
 
-//   selectTodo(todo: Todo) {
-//     this.setState({ selectedTodoId: todo.id });
-//   }
+    return state.recipes.find(item => item.uid === state.selectedUID);
+  }).pipe(
+    // Multicast to prevent multiple executions due to multiple subscribers
+    shareReplay({ bufferSize: 1, refCount: true })
+  );
 
-//   initNewTodo() {
-//     this.setState({ selectedTodoId: 0 });
-//   }
+  constructor(private apiService: RecipesApiService) {
+    super(initialState);
 
-//   clearSelectedTodo() {
-//     this.setState({ selectedTodoId: undefined });
-//   }
+    this.load();
+  }
 
-//   updateFilter(filter: Filter) {
-//     this.setState({
-//       filter: {
-//         ...this.state.filter,
-//         ...filter,
-//       },
-//     });
-//   }
+  selectRecipe(recipe: Recipe) {
+    this.setState({ selectedUID: recipe.uid });
+  }
 
-//   // API CALLS
-//   load() {
-//     this.apiService.getTodos().subscribe(todos => this.setState({ todos }));
-//   }
+  initNewRecipe() {
+    this.setState({ selectedUID: '' });
+  }
 
-//   create(todo: Todo) {
-//     this.apiService.createTodo(todo).subscribe(newTodo => {
-//       this.setState({
-//         todos: [...this.state.todos, newTodo],
-//         selectedTodoId: newTodo.id,
-//       });
-//     });
-//   }
+  clearSelectedRecipe() {
+    this.setState({ selectedUID: undefined });
+  }
 
-//   update(todo: Todo) {
-//     this.apiService.updateTodo(todo).subscribe(updatedTodo => {
-//       this.setState({
-//         todos: this.state.todos.map(item => (item.id === todo.id ? updatedTodo : item)),
-//       });
-//     });
-//   }
+  updateFilter(filter: Filter) {
+    this.setState({
+      filter: {
+        ...this.state.filter,
+        ...filter,
+      },
+    });
+  }
 
-//   delete(todo: Todo) {
-//     this.apiService.deleteTodo(todo).subscribe(() => {
-//       this.setState({
-//         selectedTodoId: undefined,
-//         todos: this.state.todos.filter(item => item.id !== todo.id),
-//       });
-//     });
-//   }
-// }
+  // API CALLS
+  load() {
+    this.apiService.getRecipes().subscribe(recipes => this.setState({ recipes }));
+  }
 
-// function getTodosFiltered(todos, filter): Todo[] {
-//   return todos.filter(item => {
-//     return (
-//       item.title.toUpperCase().indexOf(filter.search.toUpperCase()) > -1 &&
-//       (filter.category.isBusiness ? item.isBusiness : true) &&
-//       (filter.category.isPrivate ? item.isPrivate : true)
-//     );
-//   });
-// }
+  create(recipe: Recipe) {
+    this.apiService.createRecipe(recipe).subscribe(newRecipe => {
+      this.setState({
+        recipes: [...this.state.recipes, newRecipe],
+        selectedUID: newRecipe.uid,
+      });
+    });
+  }
+
+  update(recipe: Recipe) {
+    this.apiService.updateRecipe(recipe).subscribe(updatedRecipe => {
+      this.setState({
+        recipes: this.state.recipes.map(item => (item.uid === recipe.uid ? updatedRecipe : item)),
+      });
+    });
+  }
+
+  delete(recipe: Recipe) {
+    this.apiService.deleteRecipe(recipe).subscribe(() => {
+      this.setState({
+        selectedUID: '',
+        recipes: this.state.recipes.filter(item => item.uid !== recipe.uid),
+      });
+    });
+  }
+}
+
+function getRecipesFiltered(recipes: Recipe[], filter: Filter) {
+  return recipes.filter((item: Recipe) => {
+    return (
+      item.name.toUpperCase().indexOf(filter.search.toUpperCase()) > -1 &&
+      (filter.category.isFastCookTime ? Number(item.cook_time.replace(/regExp/g, '')) : true) &&
+      (filter.category.isFavorite ? item.on_favorites : true)
+    );
+  });
+}

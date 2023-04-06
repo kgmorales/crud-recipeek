@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RecipeService } from '@core/services';
+import { RecipesStateService } from '@core/services';
 import { RecipeGridService } from 'app/features/recipe-grid/recipe-grid.service';
 
 @Component({
@@ -8,10 +8,13 @@ import { RecipeGridService } from 'app/features/recipe-grid/recipe-grid.service'
   styleUrls: ['./search-recipe.component.scss'],
 })
 export class SearchRecipeComponent {
-  _recipes$ = this.recipeGridService.recipes$;
-  scrapedRecipe$ = this.recipeService.scrapedRecipe$;
+  _recipes$ = this.recipeGridService.favoriteRecipes$;
+  // scrapedRecipe$ = this.recipesStateService.scrapedRecipe$;
 
   searchText: string;
 
-  constructor(private recipeService: RecipeService, private recipeGridService: RecipeGridService) {}
+  constructor(
+    // private recipesStateService: RecipesStateService,
+    private recipeGridService: RecipeGridService
+  ) {}
 }
