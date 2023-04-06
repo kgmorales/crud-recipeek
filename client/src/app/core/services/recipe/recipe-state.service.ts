@@ -30,12 +30,16 @@ export class RecipesStateService extends StateService<RecipeState> {
   private recipesFiltered$ = this.select(state => {
     return getRecipesFiltered(state.recipes, state.filter);
   });
+
   favoriteRecipes$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
     map(recipes => recipes.filter(recipe => recipe.on_favorites))
   );
   notFavoriteRecipes$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
     map(recipes => recipes.filter(recipe => !recipe.on_favorites))
   );
+
+  allRecipes$: Observable<Recipe[]> = this.select(state => state.recipes);
+
   filter$: Observable<Filter> = this.select(state => state.filter);
 
   selectedRecipe$ = this.select(state => {

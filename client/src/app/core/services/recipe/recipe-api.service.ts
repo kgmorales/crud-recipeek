@@ -6,31 +6,17 @@ import { BehaviorSubject, map, Observable, ReplaySubject } from 'rxjs';
 import * as coreConst from '@core/constants';
 import { AllRecipes, Category, Recipe } from '@core/models';
 import * as coreUtils from '@core/utils';
+import { buildRecipesModel } from '@core/utils/service';
 @Injectable({
   providedIn: 'root',
 })
 export class RecipesApiService {
-  // readonly recipeCacheSubject$ = new BehaviorSubject<RecipeCache>({} as RecipeCache);
-  // readonly recipeCache$ = this.recipeCacheSubject$.asObservable();
-  // readonly scrapedRecipeSubject$ = new ReplaySubject<Recipe>(1);
-  // readonly allRecipesSubject$ = new ReplaySubject<Recipe[]>(1);
-
-  // allRecipes$ = this.allRecipesSubject$.asObservable();
-  // scrapedRecipe$ = this.scrapedRecipeSubject$.asObservable();
-
   constructor(private http: HttpClient) {}
 
   getRecipes(): Observable<Recipe[]> {
-    return this.http.get<AllRecipes>(`${coreConst.url.localHost}/recipes`).pipe(
-      map(allRecipes => {
-        return Object.values(allRecipes)[0].map((recipe: Recipe) => {
-          const directionsList = recipe.directions.split(/\r?\n/);
-          const ingredientsList = recipe.ingredients.split(/\r?\n/);
-
-          return { ...recipe, directionsList, ingredientsList };
-        });
-      })
-    );
+    return this.http
+      .get<AllRecipes>(`${coreConst.url.localHost}/recipes`)
+      .pipe(map(allRecipes => buildRecipesModel(allRecipes)));
   }
 
   getCategories(): Observable<Category[]> {
@@ -48,35 +34,4 @@ export class RecipesApiService {
   deleteRecipe(recipe: Recipe): Observable<void> {
     return this.http.delete<void>(`${coreConst.url.localHost}/deleteRecipe` + recipe.uid);
   }
-  //   this.getAllRecipes();
-  //   this.recipeCacheSubject$.subscribe(x => console.log(x));
-  // }
-
-  // getAllRecipes(): void {
-  //   this.http
-  //     .get<AllRecipes>(`${coreConst.url.localHost}/recipes`)
-  //     .pipe(
-  //       map(allRecipes => {
-  //         return Object.values(allRecipes)[0].map((recipe: Recipe) => {
-  //           const directionsList = recipe.directions.split(/\r?\n/);
-  //           const ingredientsList = recipe.ingredients.split(/\r?\n/);
-
-  //           return { ...recipe, directionsList, ingredientsList };
-  //         });
-  //       })
-  //     )
-  //     .subscribe(recipes => this.recipeCacheSubject$.next({ ...recipes }));
-  // }
-
-  // getCategories(): Observable<Category[]> {
-  //   return this.http.get<Category[]>(`${coreConst.url.localHost}/categories`);
-  // }
-
-  // getScrapedRecipe(url: string): Observable<Recipe> {
-  //   return this.http.get<Recipe>(`${coreConst.url.localHost}/scrapeRecipe?url=${url}`);
-  // }
-
-  // storeScrapedRecipe(recipe: Recipe): void {
-  //   this.scrapedRecipeSubject$.next(recipe);
-  // }
 }
