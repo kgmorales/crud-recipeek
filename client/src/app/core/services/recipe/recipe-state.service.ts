@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { StateService } from '../state.service';
-import { Filter, Recipe } from '../../models';
+import { Category, Filter, Recipe } from '../../models';
 
-import { Observable, map, shareReplay } from 'rxjs';
+import { Observable, combineLatest, filter, map, shareReplay } from 'rxjs';
 import { RecipesApiService } from './recipe-api.service';
 
 interface RecipeState {
+  categories: Category[];
   recipes: Recipe[];
-  selectedUID: string;
   filter: Filter;
+  selectedUID: string;
 }
 
 const initialState: RecipeState = {
+  categories: [],
   recipes: [],
   selectedUID: undefined ?? '',
   filter: {
@@ -31,14 +33,16 @@ export class RecipesStateService extends StateService<RecipeState> {
     return getRecipesFiltered(state.recipes, state.filter);
   });
 
+  recipes$: Observable<Recipe[]> = this.select(state => state.recipes);
+
+  categories$: Observable<Category[]> = this.select(state => state.categories);
+
   favoriteRecipes$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
     map(recipes => recipes.filter(recipe => recipe.on_favorites))
   );
   notFavoriteRecipes$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
     map(recipes => recipes.filter(recipe => !recipe.on_favorites))
   );
-
-  allRecipes$: Observable<Recipe[]> = this.select(state => state.recipes);
 
   filter$: Observable<Filter> = this.select(state => state.filter);
 
@@ -80,7 +84,14 @@ export class RecipesStateService extends StateService<RecipeState> {
 
   // API CALLS
   load() {
-    this.apiService.getRecipes().subscribe(recipes => this.setState({ recipes }));
+    combineLatest([this.apiService.getCategories(), this.apiService.getRecipes()])
+      .pipe(
+        filter(calls => !!calls),
+        map(([categories, recipes]) => ({ categories, recipes }))
+      )
+      .subscribe(recipeRawState => {
+        this.setState({ categories: recipeRawState.categories, recipes: recipeRawState.recipes });
+      });
   }
 
   create(recipe: Recipe) {

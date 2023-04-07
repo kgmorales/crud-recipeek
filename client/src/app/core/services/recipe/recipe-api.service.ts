@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, Observable, ReplaySubject } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 //? Core
 import * as coreConst from '@core/constants';
@@ -15,7 +15,7 @@ export class RecipesApiService {
 
   getRecipes(): Observable<Recipe[]> {
     return this.http
-      .get<AllRecipes>(`${coreConst.url.localHost}/recipes`)
+      .get<AllRecipes>(`${coreConst.url.localHost}/home`)
       .pipe(map(allRecipes => buildRecipesModel(allRecipes)));
   }
 

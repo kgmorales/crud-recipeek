@@ -4,11 +4,9 @@ import * as recipeController from '../controllers/recipe.controller';
 
 const router = express.Router();
 
-router.get('/', (req, res) => res.status(200).json({ message: 'Serving paprika' }));
+router.get('/home', recipeController.updateRecipes);
 
 router.get('/deleteAll', recipeController.deleteAll);
-
-router.get('/recipes', recipeController.updateRecipes);
 
 router.get('/storeRecipes', recipeController.storeRecipes);
 

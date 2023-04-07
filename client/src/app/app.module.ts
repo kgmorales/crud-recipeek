@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { CoreModule } from '@core/core.module';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgBottomNavigationModule } from 'ng-bottom-navigation';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -11,8 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListComponent } from '@shared/components/list/list.component';
-import { HeaderComponent } from '@core/components/header/header.component';
-import { SideNavComponent } from '@core/components/side-nav/side-nav.component';
 
 // import { AddTutorialComponent } from './features/recipes/components/search-recipe/search-recipe.component';
 // import { TutorialDetailsComponent } from './features/recipes/components/tutorial-details/tutorial-details.component';
@@ -20,7 +21,7 @@ import { SideNavComponent } from '@core/components/side-nav/side-nav.component';
 // import { SearchPipe } from './shared/pipes/search.pipe';
 
 @NgModule({
-  declarations: [AppComponent, SideNavComponent, HeaderComponent],
+  declarations: [AppComponent],
   providers: [],
   bootstrap: [AppComponent],
   imports: [
@@ -29,6 +30,7 @@ import { SideNavComponent } from '@core/components/side-nav/side-nav.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    CoreModule,
     MatToolbarModule,
     NgBottomNavigationModule,
     ReactiveFormsModule,

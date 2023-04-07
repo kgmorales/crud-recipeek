@@ -1,14 +1,11 @@
-// import { Injectable } from '@angular/core';
-// import { Observable, filter, map } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, filter, map } from 'rxjs';
 
-// import { Recipe } from '@core/models';
-// import { RecipeService } from '@core/services';
+import { Recipe } from '@core/models';
+import { RecipesStateService } from '@core/services/';
 
-// @Injectable({ providedIn: 'root' })
-// export class HomeService {
-//   favorites$ = this.recipeService.allRecipes$.pipe(
-//     map(allRecipes => allRecipes.filter(recipe => recipe.on_favorites))
-//   );
-
-//   constructor(private recipeService: RecipeService) {}
-// }
+@Injectable({ providedIn: 'root' })
+export class HomeService {
+  categories$ = this.recipesStateService.categories$;
+  constructor(private recipesStateService: RecipesStateService) {}
+}

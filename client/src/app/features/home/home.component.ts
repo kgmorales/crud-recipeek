@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-// import { RecipeService } from '@core/services';
-// import { HomeService } from './home.service';
+import { Component } from '@angular/core';
 
-// @Component({
-//   selector: 'app-home',
-//   templateUrl: './home.component.html',
-//   styleUrls: ['./home.component.scss'],
-// })
-// export class HomeComponent implements OnInit {
-//   favorites$ = this.homeService.favorites$;
+import { HomeService } from './home.service';
+import { LoadingService } from '@core/services';
+import { filter, take } from 'rxjs';
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+  // host: { class: 'd-flex' },
+})
+export class HomeComponent {
+  categories$ = this.homeService.categories$;
+  loading$ = this.loadingService.isLoading$;
 
-//   constructor(private homeService: HomeService) {
-//     this.favorites$.subscribe(favs => console.log(favs));
-//   }
-
-//   ngOnInit() {}
-// }
+  constructor(private homeService: HomeService, private loadingService: LoadingService) {}
+}
