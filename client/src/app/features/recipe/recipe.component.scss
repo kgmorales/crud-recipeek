@@ -1,5 +1,9 @@
 @import 'mixin';
 
+.full-width {
+  min-width:100%;
+}
+
 .stream-area {
   display: none;
 

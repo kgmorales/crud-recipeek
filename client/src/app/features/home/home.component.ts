@@ -7,11 +7,11 @@ import { filter, take } from 'rxjs';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  // host: { class: 'd-flex' },
+  host: { class: 'full-width' },
 })
 export class HomeComponent {
   categories$ = this.homeService.categories$;
   loading$ = this.loadingService.isLoading$;
 
-  constructor(private homeService: HomeService, private loadingService: LoadingService) {}
+  constructor(private loadingService: LoadingService, private homeService: HomeService) {}
 }

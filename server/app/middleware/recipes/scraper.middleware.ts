@@ -2,7 +2,7 @@ import { spawn } from 'child_process';
 import { Recipe } from '../../../../shared/types';
 import { ScrapedRecipe } from './types/scraped';
 import { cleanScrapedRecipe } from '../../utils/scrapeCleaner';
-import { cleanScrapedKeys } from '../../constants/scrapeToRecipe';
+import { matchPaprikaKeys } from '../../constants/scrapeToRecipe';
 
 import { emptyRecipe } from '../../constants/recipe';
 
@@ -23,7 +23,7 @@ export async function scrapeRecipe(recipeUrl: string): Promise<string> {
 export async function setScrapeToRecipeModel(scrapedRecipe: ScrapedRecipe): Promise<Recipe> {
 	const isEmpty = (obj: Record<string, string>) => Object.keys(obj).length === 0;
 	const joinObjectToString = (data: Record<string, string>) => Object.entries(data).join('\n');
-	const cleanScraped = cleanScrapedRecipe(cleanScrapedKeys, scrapedRecipe);
+	const cleanScraped = cleanScrapedRecipe(matchPaprikaKeys, scrapedRecipe);
 
 	const categories: string[] = [];
 	const ingredients = cleanScraped.instructions_list.length === 0 ? '' : cleanScraped.instructions_list.join('\n');

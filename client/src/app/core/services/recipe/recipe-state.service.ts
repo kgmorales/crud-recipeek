@@ -54,6 +54,7 @@ export class RecipesStateService extends StateService<RecipeState> {
     // Multicast to prevent multiple executions due to multiple subscribers
     shareReplay({ bufferSize: 1, refCount: true })
   );
+  scrapedRecipe$: any;
 
   constructor(private apiService: RecipesApiService) {
     super(initialState);

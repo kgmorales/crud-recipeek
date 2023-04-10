@@ -11,7 +11,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RecipesRoutingModule } from './recipe-grid-routing.module';
 import { SearchRecipeComponent } from './components/search-recipe/search-recipe.component';
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
-import { ScrapeRecipeFormComponent } from './components/recipe-card/scrape-recipe/scrape-recipe.component';
 
 import { SearchPipe } from '@shared/pipes';
 
@@ -19,7 +18,7 @@ import { RecipeGridService } from './recipe-grid.service';
 import { ListComponent } from '../../shared/components/list/list.component';
 
 @NgModule({
-  declarations: [SearchRecipeComponent, RecipeCardComponent, ScrapeRecipeFormComponent],
+  declarations: [SearchRecipeComponent, RecipeCardComponent],
   providers: [RecipeGridService],
   imports: [
     CommonModule,

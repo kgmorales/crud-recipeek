@@ -34,4 +34,8 @@ export class RecipesApiService {
   deleteRecipe(recipe: Recipe): Observable<void> {
     return this.http.delete<void>(`${coreConst.url.localHost}/deleteRecipe` + recipe.uid);
   }
+
+  scrapedRecipe(url: string): Observable<Recipe> {
+    return this.http.get<Recipe>(`${coreConst.url.localHost}/scrapeRecipe?url=${url}`);
+  }
 }

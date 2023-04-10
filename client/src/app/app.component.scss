@@ -1,8 +1,15 @@
+:host {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .app {
   background-color: var(--theme-bg-color);
   max-width: 1250px;
   max-height: 900px;
   height: 90vh;
+  width:100%;
   display: flex;
   overflow: hidden;
   width: 100%;
@@ -17,6 +24,7 @@
 .main-container {
   display: flex;
   flex-direction: column;
+  width:100%;
   padding: 0 30px 30px;
   flex-grow: 1;
   overflow: auto;

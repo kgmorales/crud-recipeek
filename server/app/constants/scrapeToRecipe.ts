@@ -1,4 +1,4 @@
-export const cleanScrapedKeys: Record<string, string> = {
+export const matchPaprikaKeys: Record<string, string> = {
 	// author: 'author',
 	canonical_url: 'source_url',
 	// category: 'categories',

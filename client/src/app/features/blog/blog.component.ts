@@ -13,6 +13,7 @@ import { PageEvent } from '@angular/material/paginator';
   selector: 'app-blog',
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.scss'],
+  host: { class: 'full-width' },
 })
 export class BlogComponent implements OnInit {
   constructor(private butterCMSService: ButterCMSService) {}
