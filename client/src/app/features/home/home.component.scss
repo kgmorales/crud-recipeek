@@ -17,7 +17,20 @@
   --delay: 0.3s;
 }
 
-.main-blogs {
-  display: flex;
-  align-items: center;
+.row {
+display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+
+  @include tablet-md {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
+
+// .main-blogs {
+//   display: flex;
+//   align-items: center;
+//   flex-direction: row;
+// }

@@ -44,7 +44,7 @@ module.exports = {
         '@angular-eslint/component-selector': [
           'error',
           {
-            prefix: 'sp',
+            prefix: 'la',
             type: 'element',
             style: 'kebab-case',
           },
@@ -52,7 +52,7 @@ module.exports = {
         '@angular-eslint/directive-selector': [
           'error',
           {
-            prefix: 'sp',
+            prefix: 'la',
             type: 'attribute',
             style: 'camelCase',
           },

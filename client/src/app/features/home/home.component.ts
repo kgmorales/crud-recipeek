@@ -1,17 +1,29 @@
 import { Component } from '@angular/core';
 
-import { HomeService } from './home.service';
-import { LoadingService } from '@core/services';
 import { filter, take } from 'rxjs';
+
+import { LoadingService } from '@core/services';
+
+import { HomeService } from './home.service';
+
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
+  template: `
+    <ng-container *ngIf="favorites$ | async as favorites">
+      <div class=" main-header anim">Recipes</div>
+      <div class="main-blogs">
+        <div class="row">
+          <app-recipe-preview *ngFor="let favorite of favorites" [preview]="favorite" />
+        </div>
+      </div>
+    </ng-container>
+  `,
   styleUrls: ['./home.component.scss'],
-  host: { class: 'full-width' },
 })
 export class HomeComponent {
   categories$ = this.homeService.categories$;
   loading$ = this.loadingService.isLoading$;
+  favorites$ = this.homeService.favoritesPreview$;
 
   constructor(private loadingService: LoadingService, private homeService: HomeService) {}
 }

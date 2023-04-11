@@ -4,11 +4,18 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 
 import { HomeComponent } from './home.component';
-import { RowComponent } from '@shared/components/row/row.component';
-import { FavoriteComponent } from './components/favorite/favorite.component';
+import { RecipePreviewComponent } from '@shared/components/recipe-preview/recipe-preview.component';
+import { PreviewComponent } from '@shared/components/preview/preview.component';
+import { ListComponent } from '@shared/components/list/list.component';
 
 @NgModule({
-  declarations: [HomeComponent, FavoriteComponent],
-  imports: [CommonModule, HomeRoutingModule, RowComponent],
+  declarations: [HomeComponent],
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    RecipePreviewComponent,
+    PreviewComponent,
+    ListComponent,
+  ],
 })
 export class HomeModule {}

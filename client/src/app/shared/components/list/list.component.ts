@@ -1,6 +1,10 @@
+//? NG
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+//? CORE
+import { Component, Input } from '@angular/core';
 import { Recipe } from '@core/models';
+
+//? 3RD PARTY
 
 @Component({
   selector: 'app-list',

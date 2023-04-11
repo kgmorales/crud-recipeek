@@ -1,24 +1,28 @@
 @import 'mixins';
 
-.videos {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-
-  @include tablet-md {
-    grid-template-columns: repeat(2, 1fr);
-  }
+:host {
+  display: flex;
+  flex-direction: column;
 }
 
-.video {
+.recipe {
   position: relative;
   background-color: var(--theme-bg-color);
   border-radius: 20px;
   overflow: hidden;
   transition: 0.4s;
   @include animation-delay(3, 15);
+
+  &-image {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    display: block;
+    cursor: pointer;
+    transition: 0.4s;
+    height: auto;
+    max-width: 100%;
+  }
 
   &-wrapper {
     position: relative;
@@ -56,7 +60,7 @@
     position: relative;
 
     &:before {
-      content: "";
+      content: '';
       background-color: #22b07d;
       width: 6px;
       height: 6px;
@@ -82,7 +86,7 @@
     top: 10px;
     z-index: 1;
     right: 8px;
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
 
   &-author {
@@ -94,29 +98,29 @@
     svg {
       background-color: #0aa0f7;
       color: #fff;
-      border-color: var(--video-bg);
+      border-color: var(--recipe-bg);
     }
   }
 
   &:hover {
-    video {
+    recipe {
       transform: scale(1.5);
       transform-origin: center;
     }
 
-    .video-time {
+    .recipe-time {
       transform: translateY(-50%);
       opacity: 0;
     }
 
-    .video-author {
+    .recipe-author {
       bottom: -65px;
       transform: scale(0.6);
       right: -3px;
       z-index: 10;
     }
 
-    .video-created-by {
+    .recipe-created-by {
       transform: scaleY(0);
       opacity: 0;
     }
