@@ -1,23 +1,16 @@
 import { Injectable } from '@angular/core';
 import { StateService } from '../state.service';
-import { Category, Filter, Recipe } from '../../models';
+import { Category, Filter, Recipe, RecipeState } from '../../models';
 
 import { Observable, combineLatest, filter, map, shareReplay } from 'rxjs';
 import { RecipesApiService } from './recipe-api.service';
 
-interface RecipeState {
-  categories: Category[];
-  recipes: Recipe[];
-  filter: Filter;
-  selectedUID: string;
-}
-
 const initialState: RecipeState = {
-  categories: [],
-  recipes: [],
-  selectedUID: undefined ?? '',
+  categories: [] as Category[],
+  recipes: [] as Recipe[],
+  selectedUID: undefined ?? ('' as string),
   filter: {
-    search: '',
+    search: '' as string,
     category: {
       isFastCookTime: false,
       isFavorite: false,
@@ -33,19 +26,22 @@ export class RecipesStateService extends StateService<RecipeState> {
     return getRecipesFiltered(state.recipes, state.filter);
   });
 
+  categories$ = this.select(state => state.categories);
+
   recipes$: Observable<Recipe[]> = this.select(state => state.recipes);
 
-  categories$: Observable<Category[]> = this.select(state => state.categories);
-
-  favoriteRecipes$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
+  favorites$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
     map(recipes => recipes.filter(recipe => recipe.on_favorites))
   );
-  notFavoriteRecipes$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
+
+  notFavorites$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
     map(recipes => recipes.filter(recipe => !recipe.on_favorites))
   );
 
   filter$: Observable<Filter> = this.select(state => state.filter);
-
+  /**
+   * Observable of a selected Recipe by uid.
+   */
   selectedRecipe$ = this.select(state => {
     if (state.selectedUID === '') return new Recipe();
 
@@ -54,6 +50,7 @@ export class RecipesStateService extends StateService<RecipeState> {
     // Multicast to prevent multiple executions due to multiple subscribers
     shareReplay({ bufferSize: 1, refCount: true })
   );
+
   scrapedRecipe$: any;
 
   constructor(private apiService: RecipesApiService) {
@@ -62,19 +59,19 @@ export class RecipesStateService extends StateService<RecipeState> {
     this.load();
   }
 
-  selectRecipe(recipe: Recipe) {
+  selectRecipe(recipe: Recipe): void {
     this.setState({ selectedUID: recipe.uid });
   }
 
-  initNewRecipe() {
+  initNewRecipe(): void {
     this.setState({ selectedUID: '' });
   }
 
-  clearSelectedRecipe() {
+  clearSelectedRecipe(): void {
     this.setState({ selectedUID: undefined });
   }
 
-  updateFilter(filter: Filter) {
+  updateFilter(filter: Filter): void {
     this.setState({
       filter: {
         ...this.state.filter,
@@ -84,7 +81,7 @@ export class RecipesStateService extends StateService<RecipeState> {
   }
 
   // API CALLS
-  load() {
+  load(): void {
     combineLatest([this.apiService.getCategories(), this.apiService.getRecipes()])
       .pipe(
         filter(calls => !!calls),
@@ -95,7 +92,7 @@ export class RecipesStateService extends StateService<RecipeState> {
       });
   }
 
-  create(recipe: Recipe) {
+  create(recipe: Recipe): void {
     this.apiService.createRecipe(recipe).subscribe(newRecipe => {
       this.setState({
         recipes: [...this.state.recipes, newRecipe],
@@ -104,7 +101,7 @@ export class RecipesStateService extends StateService<RecipeState> {
     });
   }
 
-  update(recipe: Recipe) {
+  update(recipe: Recipe): void {
     this.apiService.updateRecipe(recipe).subscribe(updatedRecipe => {
       this.setState({
         recipes: this.state.recipes.map(item => (item.uid === recipe.uid ? updatedRecipe : item)),
@@ -112,7 +109,7 @@ export class RecipesStateService extends StateService<RecipeState> {
     });
   }
 
-  delete(recipe: Recipe) {
+  delete(recipe: Recipe): void {
     this.apiService.deleteRecipe(recipe).subscribe(() => {
       this.setState({
         selectedUID: '',
@@ -122,7 +119,7 @@ export class RecipesStateService extends StateService<RecipeState> {
   }
 }
 
-function getRecipesFiltered(recipes: Recipe[], filter: Filter) {
+function getRecipesFiltered(recipes: Recipe[], filter: Filter): Recipe[] {
   return recipes.filter((item: Recipe) => {
     return (
       item.name.toUpperCase().indexOf(filter.search.toUpperCase()) > -1 &&

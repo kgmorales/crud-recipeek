@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Recipe } from '@core/models';
+import { Component, Input } from '@angular/core';
+import { NgFor } from '@angular/common';
 
+import { Preview } from 'app/features/home/models';
 @Component({
   selector: 'app-recipe-preview',
   templateUrl: './recipe-preview.component.html',
   styleUrls: ['./recipe-preview.component.scss'],
+  imports: [NgFor],
   standalone: true,
 })
-export class RecipePreviewComponent implements OnInit {
-  @Input() preview: Partial<Recipe>;
+export class RecipePreviewComponent {
+  @Input() preview: Preview;
   constructor() {}
-
-  ngOnInit() {}
 }

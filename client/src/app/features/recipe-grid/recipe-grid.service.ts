@@ -4,7 +4,7 @@ import { take } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeGridService {
-  favoriteRecipes$ = this.recipeStateService.favoriteRecipes$;
+  favoriteRecipes$ = this.recipeStateService.favorites$;
   categories$ = this.recipeStateService.categories$;
 
   constructor(private recipeStateService: RecipesStateService) {}

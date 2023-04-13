@@ -18,19 +18,25 @@
 }
 
 .row {
-display: grid;
+  display: grid;
+  grid-auto-flow: row dense;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1.5em 1.5em;
+  grid-template-areas:
+    ". . . ."
+    ". . . ."
+    ". . . .";
   width: 100%;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
+  height: 70%; 
 
   @include tablet-md {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-// .main-blogs {
-//   display: flex;
-//   align-items: center;
-//   flex-direction: row;
-// }
+.main-blogs {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}

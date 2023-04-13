@@ -25,10 +25,7 @@
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "outputPath": "dist/lamora",
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles/styles.scss"
-            ],
+            "styles": ["src/styles/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles/base"]
             },
@@ -90,10 +87,7 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles/styles.scss"
-            ],
+            "styles": ["src/styles/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]
             },

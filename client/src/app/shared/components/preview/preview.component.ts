@@ -5,8 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: 'preview.component.html',
   standalone: true,
 })
-export class PreviewComponent implements OnInit {
+export class PreviewComponent {
   constructor() {}
-
-  ngOnInit() {}
 }

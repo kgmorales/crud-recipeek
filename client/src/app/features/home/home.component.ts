@@ -9,11 +9,11 @@ import { HomeService } from './home.service';
 @Component({
   selector: 'app-home',
   template: `
-    <ng-container *ngIf="favorites$ | async as favorites">
+    <ng-container *ngIf="homePreview$ | async as previews">
       <div class=" main-header anim">Recipes</div>
       <div class="main-blogs">
         <div class="row">
-          <app-recipe-preview *ngFor="let favorite of favorites" [preview]="favorite" />
+          <app-recipe-preview *ngFor="let preview of previews" [preview]="preview" />
         </div>
       </div>
     </ng-container>
@@ -21,9 +21,8 @@ import { HomeService } from './home.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  categories$ = this.homeService.categories$;
   loading$ = this.loadingService.isLoading$;
-  favorites$ = this.homeService.favoritesPreview$;
+  homePreview$ = this.homeService.homePreviews$;
 
   constructor(private loadingService: LoadingService, private homeService: HomeService) {}
 }

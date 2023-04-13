@@ -1,3 +1,5 @@
+import { Filter } from './filter.model';
+
 /*
 Example:
 {
@@ -183,6 +185,10 @@ export interface AllRecipes {
   allRecipes: Recipe[];
 }
 
+export interface AllCategories {
+  categories: Category[];
+}
+
 /*
 Example:
 {
@@ -219,7 +225,9 @@ export interface Status {
   categories: number;
 }
 
-export interface RecipeCache {
-  recipes: Recipe[];
+export interface RecipeState {
   categories: Category[];
+  recipes: Recipe[];
+  filter: Filter;
+  selectedUID: string;
 }

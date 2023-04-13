@@ -14,7 +14,7 @@ img {
 }
 
 :root {
-  --theme-bg-color: rgba(16 18 27 / 40%);
+  --theme-bg-color: rgba(28, 22, 99, 0.519);
   --body-font: "Poppins", sans-serif;
   --body-color: #f9fafb;
   --button-bg: rgb(146 151 179 / 13%);
@@ -31,10 +31,6 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // flex-direction: column;
   padding: 1em 2em;
   width: 100%;
   height: 100vh;
@@ -44,9 +40,6 @@ body {
 .wrapper {
   display: flex;
   flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-  // flex-direction: column;
   flex-grow: 1;
   background-color: var(--theme-bg-color);
 }
@@ -178,7 +171,7 @@ body {
       flex-shrink: 0;
 
       svg {
-        width: 16px;
+        width: 18px;
         padding: 2px;
         background-color: #fff;
         color: #0daabc;

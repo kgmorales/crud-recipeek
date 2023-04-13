@@ -1,4 +1,4 @@
-import { AllRecipes, Recipe } from '@core/models';
+import { AllCategories, AllRecipes, Recipe } from '@core/models';
 
 export const buildRecipesModel = (allRecipes: AllRecipes) => {
   return Object.values(allRecipes)[0].map((recipe: Recipe) => {
@@ -7,4 +7,8 @@ export const buildRecipesModel = (allRecipes: AllRecipes) => {
 
     return { ...recipe, directionsList, ingredientsList };
   });
+};
+
+export const buildCategoryModel = (allCategories: AllCategories) => {
+  return Object.values(allCategories)[0];
 };
