@@ -14,5 +14,5 @@ export const components = [HeaderComponent, ScrapeRecipeFormComponent, SideNavCo
 
 //* Export Components
 export * from './header/header.component';
-export * from './/scrape-recipe/scrape-recipe.component';
+export * from './scrape-recipe/scrape-recipe.component';
 export * from './side-nav/side-nav.component';

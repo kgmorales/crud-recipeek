@@ -30,7 +30,13 @@ export async function setScrapeToRecipeModel(scrapedRecipe: ScrapedRecipe): Prom
 	const nutritional_info = isEmpty(cleanScraped.nutritional_info) && joinObjectToString(cleanScraped.nutritional_info);
 	const servings = Number(cleanScraped.servings.replace(/\D/g, ''));
 
-	const prettyRecipeData = { ...cleanScraped, categories, ingredients, nutritional_info, servings };
+	const prettyRecipeData = {
+		...cleanScraped,
+		categories,
+		ingredients,
+		nutritional_info,
+		servings,
+	};
 
 	const newRecipe = { ...emptyRecipe, ...prettyRecipeData };
 
