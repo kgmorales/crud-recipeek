@@ -17,7 +17,7 @@ export class HomeService {
   constructor(private recipesStateService: RecipesStateService) {}
 
   buildPreview(recipes: Recipe[], categoryTypes: Category[]): Preview[] {
-    const previewRecipes: Recipe[] = utils.getMultipleRandom(recipes, 3);
+    const previewRecipes: Recipe[] = utils.getMultipleRandom(recipes, 4);
 
     return previewRecipes.map(recipe => {
       const { image_url, name } = recipe;
