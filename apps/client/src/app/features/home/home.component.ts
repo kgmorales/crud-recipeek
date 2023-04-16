@@ -10,9 +10,9 @@ import { HomeService } from './home.service';
     <ng-container *ngIf="homePreview$ | async as previews">
       <!-- <div class=" main-header anim">Recipes</div> -->
       <div *ngIf="previews" class="main-blogs">
-        <app-preview-row title="Favorites" [previews]="previews" />
-        <app-preview-row title="Dinner" [previews]="previews" />
-        <app-preview-row title="Desserts" [previews]="previews" />
+        <la-preview-row title="Favorites" [previews]="previews" />
+        <la-preview-row title="Dinner" [previews]="previews" />
+        <la-preview-row title="Desserts" [previews]="previews" />
       </div>
     </ng-container>
   `,
@@ -22,5 +22,8 @@ export class HomeComponent {
   loading$ = this.loadingService.isLoading$;
   homePreview$ = this.homeService.homePreviews$;
 
-  constructor(private loadingService: LoadingService, private homeService: HomeService) {}
+  constructor(
+    private loadingService: LoadingService,
+    private homeService: HomeService
+  ) {}
 }

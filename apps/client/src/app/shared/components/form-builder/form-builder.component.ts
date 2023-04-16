@@ -31,10 +31,10 @@ import {
   `,
 })
 export class FormBuilderComponent implements OnInit {
-  @Output() onSubmit = new EventEmitter();
+  @Output() Submit = new EventEmitter();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() fields: any[] = [];
   @Input() formGroup: FormGroup;
-  constructor() {}
 
   ngOnInit() {
     const fieldsCtrls: Record<string, unknown> = {};

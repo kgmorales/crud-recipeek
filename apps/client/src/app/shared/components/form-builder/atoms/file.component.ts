@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 // text,email,tel,textarea,password,
 @Component({
-  selector: 'file',
+  selector: 'la-file',
   template: `
     <div [formGroup]="form">
       <div *ngIf="!field.value" class="drop-container dropzone" dropZone>
@@ -80,7 +80,6 @@ export class FileComponent {
     return this.form.controls[this.field.name].dirty;
   }
 
-  constructor() {}
 
   ngOnChange() {
     console.log(this.field.value);

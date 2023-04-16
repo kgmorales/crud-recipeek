@@ -54,7 +54,7 @@
 
     <div class="grid">
       <ng-container *ngIf="(recipes | filter: searchText).length > 0; else noResults">
-        <app-recipe-card *ngFor="let recipe of recipes | filter: searchText;" [recipe]="recipe" />
+        <la-recipe-card *ngFor="let recipe of recipes | filter: searchText;" [recipe]="recipe" />
 
         <ng-template #noResults>
           <p>No results found for "{{searchText}}".</p>

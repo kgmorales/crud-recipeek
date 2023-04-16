@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'radio',
+  selector: 'la-radio',
   template: `
     <div class="form-check" *ngFor="let opt of field.options">
       <input [formControl]="form" class="form-check-input" type="radio" [value]="opt.key" />
