@@ -1,2 +1,9 @@
-<lamora-project-nx-welcome></lamora-project-nx-welcome>
-<router-outlet></router-outlet>
+<div class="app">
+  <la-side-nav />
+  <div class="wrapper">
+    <la-header />
+    <div class="main-container">
+      <router-outlet #page="outlet"></router-outlet>
+    </div>
+  </div>
+</div>

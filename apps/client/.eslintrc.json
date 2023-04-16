@@ -9,7 +9,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "lamoraProject",
+            "prefix": "la",
             "style": "camelCase"
           }
         ],
@@ -17,7 +17,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "lamora-project",
+            "prefix": "la",
             "style": "kebab-case"
           }
         ]

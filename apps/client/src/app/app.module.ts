@@ -1,17 +1,31 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { CoreModule } from '../app/core/core.module';
+import { SharedModule } from '../app/shared/shared.module';
+
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { appRoutes } from './app.routes';
-import { NxWelcomeComponent } from './nx-welcome.component';
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    CoreModule,
+    SharedModule,
+    ReactiveFormsModule,
+    // FontAwesomeModule,
   ],
-  providers: [],
   bootstrap: [AppComponent],
+  providers: [],
 })
 export class AppModule {}

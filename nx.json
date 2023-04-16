@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "lamora-project",
+  "npmScope": "lamora",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
@@ -10,6 +10,7 @@
       }
     }
   },
+  "extends": "nx/presets/npm.json",
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],

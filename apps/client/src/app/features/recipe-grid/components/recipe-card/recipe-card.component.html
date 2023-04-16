@@ -1,0 +1,43 @@
+<div class="recipe-card">
+  <div id="recipe-card__cover" class="recipe-card__cover">
+    <div class="recipe-card__img">
+      <img [src]="recipe.image_url" loading="lazy" [alt]="recipe.created">
+    </div>
+    <div class="recipe-card__cover-details">
+      <div id="recipe-card__duration" class="recipe-card__duration">
+        <p><span>30</span>mins</p>
+      </div>
+      <div id="recipe-card__servings" class="recipe-card__servings">
+        <p><span>8</span>servings</p>
+      </div>
+      <div id="recipe-card__info" class="recipe-card__info">
+        <div class="recipe-card__title">
+          <h1>{{recipe.name}}</h1>
+        </div>
+        <div class="recipe-card__description">
+          <p>{{recipe.difficulty}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="recipe-card__content-container" class="recipe-card__content-container">
+    <div class="recipe-card__actions">
+      <ul>
+        <li><a id="ingredientsTab" href="#" class="active">Ingredients</a></li>
+        <li><a id="preparationsTab" href="#">Preparation</a></li>
+      </ul>
+    </div>
+    <div id="recipe-card__content--ingredients" class="recipe-card__content recipe-card__content--active">
+      <ul>
+        <span>MAIN:</span>
+        <la-list [ingredients]="recipe.ingredientsList"></la-list>
+        <!-- <li *ngFor="let ingredient of recipe.ingredientsList; let i = index;">{{i + 1}} {{ingredient}}.</li> -->
+      </ul>
+    </div>
+    <div id="recipe-card__content--preparations" class="recipe-card__content">
+      <ul class="preparation-steps">
+        <li *ngFor="let direction of recipe.directionsList; let i = index;">{{i + 1}} {{direction}}.</li>
+      </ul>
+    </div>
+  </div>
+</div>
