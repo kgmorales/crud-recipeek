@@ -25,12 +25,12 @@
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "outputPath": "dist/lamora",
-            "styles": ["apps/client/src/styles/styles.scss"],
+            "styles": ["src/styles/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": ["apps/client/src/styles/base"]
+              "includePaths": ["src/styles/base"]
             },
             "scripts": [],
-            "tsConfig": "tsconfig.base.json"
+            "tsConfig": "tsconfig.app.json"
           },
           "configurations": {
             "production": {

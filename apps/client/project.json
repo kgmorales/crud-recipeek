@@ -16,9 +16,9 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/client/tsconfig.app.json",
         "assets": ["apps/client/src/favicon.ico", "apps/client/src/assets"],
-        "styles": ["apps/client/src/styles.scss"],
+        "styles": ["src/styles/styles.scss"],
         "stylePreprocessorOptions": {
-          "includePaths": ["apps/client/src/styles/base"]
+          "includePaths": ["src/styles/styles.scss"]
         },
         "scripts": []
       },
