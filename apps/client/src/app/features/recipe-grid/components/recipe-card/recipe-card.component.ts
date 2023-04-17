@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Recipe } from '@core/models';
-import { ListComponent } from '@shared/components/list/list.component';
+// import { ListComponent } from '@shared/components/list/list.component';
 
 @Component({
   selector: 'la-recipe-card',
