@@ -26,11 +26,11 @@
   },
 
   "material-icon-theme.folders.associations": {
-    "features": "Middleware",
-    "lamora-client": "Redux-actions",
-    "lamora-server": "Server",
     "directives": "functions",
-    "enums": "content"
+    "dtos": "interface",
+    "enums": "content",
+    "features": "middleware",
+    "schemas": "meta"
   },
   "material-icon-theme.folders.color": "#90a4ae",
   "workbench.colorCustomizations": {
