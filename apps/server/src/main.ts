@@ -3,7 +3,7 @@ import { AppModule } from './app/app.module';
 // import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.setGlobalPrefix('api');
 
   // const options = new DocumentBuilder()
@@ -14,12 +14,12 @@ async function bootstrap() {
   //   .build();
 
   // const appDocument = SwaggerModule.createDocument(app, options, {
-  //   include: [RecipeModule],
+  //   include: [],
   // });
 
   // SwaggerModule.setup('api', app, appDocument);
 
-  await app.listen(8080);
+  await app.listen(process.env.PORT || 8080);
 }
 
 bootstrap();

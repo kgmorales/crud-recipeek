@@ -5,6 +5,11 @@ dist
 tmp
 /out-tsc
 
+# dotenv environment variables file
+**/*.env
+!config/env/development.env
+.env
+
 # dependencies
 node_modules
 

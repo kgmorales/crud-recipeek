@@ -1,14 +1,24 @@
 import { Module } from '@nestjs/common';
+// import { ConfigModule, ConfigService } from '@nestjs/config';
+// import { MongooseModule } from '@nestjs/mongoose';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { ConfigModule } from '@nestjs/config';
-
-// import { MongooseModule } from '@nestjs/mongoose';
-
 @Module({
-  imports: [ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true })],
+  imports: [
+    // ConfigModule.forRoot({
+    //   isGlobal: true,
+    //   envFilePath: ['../../.env'],
+    //   cache: true,
+    // }),
+    // MongooseModule.forRoot(process.env['MONGO_URI'] as string, {
+    //   useNewUrlParser: true,
+    //   useUnifiedTopology: true,
+    //   useCreateIndex: true,
+    //   useFindAndModify: false,
+    // }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

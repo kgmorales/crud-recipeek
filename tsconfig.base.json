@@ -9,7 +9,7 @@
     "preserveWhitespaces": false,
     "noImplicitAny": false
   },
-  "compileOnSave": true,
+  "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": ".",
     "declaration": false,
@@ -25,12 +25,12 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noPropertyAccessFromIndexSignature": true,
+    "typeRoots": ["node_modules/@types"],
     "paths": {
       "@client/*": ["apps/client/src/*"],
       "@core/*": ["apps/client/src/app/core/*"],
       "@features/*": ["apps/client/src/app/features/*"],
       "@shared/*": ["apps/client/src/app/shared/*"]
-      // "@styles/*": ["apps/client/src/styles/*"]
     },
     "rootDir": ".",
     "sourceMap": true,
