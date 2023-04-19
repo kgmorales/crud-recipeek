@@ -17,6 +17,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
+
     "importHelpers": true,
     "lib": ["ES2022", "dom"],
     "module": "ES2022",
@@ -24,7 +25,7 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noPropertyAccessFromIndexSignature": true,
+    "noPropertyAccessFromIndexSignature": false,
     "typeRoots": ["node_modules/@types"],
     "paths": {
       "@client/*": ["apps/client/src/*"],

@@ -6,9 +6,7 @@ export default () => ({
       useUnifiedTopology: true,
     },
   },
-  pakrika: {
-    user: process.env.PAPRIKA_USER,
-    pass: process.env.PAPRIKA_PASS,
-  },
-  port: parseInt(`${process.env.PORT}`) || 3000,
+  pakrikaUser: process.env.PAPRIKA_USER,
+  paprikaPass: process.env.PAPRIKA_PASS,
+  port: process.env.PORT || 3000,
 });
