@@ -21,13 +21,13 @@ export class RecipesController {
   }
 
   @Get('update')
-  updateRecipes() {
-    return this.recipeService.updateRecipes();
+  async updateRecipes() {
+    return await this.recipeService.updateRecipes();
   }
 
   @Get('find/:uid')
-  find(@Param('uid') uid: Pick<IRecipe, 'uid'>): Promise<IRecipe | null> {
-    return this.recipeService.findById(uid);
+  async find(@Param('uid') uid: Pick<IRecipe, 'uid'>): Promise<IRecipe | null> {
+    return await this.recipeService.findById(uid);
   }
 
   // @Get('scraped-recipe')

@@ -39,7 +39,7 @@ export class RecipesService {
     await this.categoryModel.insertMany(allCategories);
   }
 
-  async updateRecipes() {
+  async updateRecipes(): Promise<IRecipe[]> {
     const paprikaIds = await this.paprikaService.recipeIds();
     const dbRecipeCount = await this.recipeModel.countDocuments();
 
