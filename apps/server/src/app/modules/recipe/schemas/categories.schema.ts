@@ -1,13 +1,21 @@
-import mongoose from 'mongoose';
-const { Schema, model } = mongoose;
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-const categorySchema = new Schema({
-	name: String,
-	uid: String,
-	parent_uid: String,
-	order_flag: Number,
-});
+export type CategoryDocument = Category & Document;
 
-const Category = model('category', categorySchema);
+@Schema()
+export class Category {
+  @Prop()
+  name: string;
 
-export default Category;
+  @Prop()
+  uid: string;
+
+  @Prop()
+  parent_uid: string;
+
+  @Prop()
+  order_flag: number;
+}
+
+export const CategorySchema = SchemaFactory.createForClass(Category);

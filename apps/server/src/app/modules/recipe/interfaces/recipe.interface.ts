@@ -1,16 +1,16 @@
-export interface Bookmark {
+export interface IBookmark {
   url: string;
   title: string;
   uid: string;
   order_flag: number;
 }
-export interface Category {
+export interface ICategory {
   name: string;
   uid: string;
   parent_uid: string;
   order_flag: number;
 }
-export interface GroceryItem {
+export interface IGroceryItem {
   aisle: string;
   uid: string;
   order_flag: number;
@@ -20,7 +20,7 @@ export interface GroceryItem {
   recipe_uid: string;
   ingredient: string;
 }
-export interface Meal {
+export interface IMeal {
   uid: string;
   order_flag: number;
   recipe_uid: string;
@@ -28,25 +28,25 @@ export interface Meal {
   type: number;
   name: string;
 }
-export interface Menu {
+export interface IMenu {
   notes: string;
   uid: string;
   name: string;
   order_flag: number;
 }
-export interface MenuItem {
+export interface IMenuItem {
   name: string;
   recipe_uid: string;
   uid: string;
   menu_uid: string;
   order_flag: number;
 }
-export interface PantryItem {
+export interface IPantryItem {
   aisle: string;
   uid: string;
   ingredient: string;
 }
-export interface Recipe {
+export interface IRecipe {
   categories: string[];
   cook_time: string;
   created: string;
@@ -70,11 +70,11 @@ export interface Recipe {
   source_url: string;
   uid: string;
 }
-export interface RecipeItem {
+export interface IRecipeItem {
   hash: string;
   uid: string;
 }
-export interface Status {
+export interface IStatus {
   recipes: number;
   pantry: number;
   meals: number;

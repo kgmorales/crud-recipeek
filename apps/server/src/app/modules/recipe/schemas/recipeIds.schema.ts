@@ -1,11 +1,13 @@
-import mongoose from 'mongoose';
-const { Schema, model } = mongoose;
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-const recipeIdsSchema = new Schema({
-  uid: String,
-  hash: String,
-});
+@Schema({ collection: 'recipe_ids' })
+export class RecipeIds extends Document {
+  @Prop({ required: true })
+  uid: string;
 
-const RecipeIds = model('recipe_ids', recipeIdsSchema);
+  @Prop({ required: true })
+  hash: string;
+}
 
-export default RecipeIds;
+export const RecipeIdsSchema = SchemaFactory.createForClass(RecipeIds);
