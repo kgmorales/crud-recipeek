@@ -7,10 +7,10 @@ import {
   Query,
   UsePipes,
 } from '@nestjs/common';
-import { RecipesService } from '../services/recipe.service';
+import { RecipesService } from '../services/recipe._service';
 import { IRecipe } from '../interfaces/recipe.interface';
-import { ScrapeService } from '../services/scrape.service';
-import { ValidateUrlMiddleware } from '../middleware/validate-url.middleware';
+import { ScrapeService } from '../services/providers/scrape._service';
+import { ValidateUrlMiddleware } from '../middleware/validate-url._middleware';
 import { RecipeDto } from '../dtos/recipe.dto';
 
 interface SuccessMessage {
@@ -23,12 +23,6 @@ export class RecipesController {
     private recipeService: RecipesService,
     private scrapeService: ScrapeService
   ) {}
-
-  // @Post('create')
-  // async create(@Body() recipeDto: RecipeDto): Promise<SuccessMessage> {
-  //   await this.recipeService.create(recipeDto);
-  //   return { message: 'Success' };
-  // }
 
   @Get('refreshDB')
   async refreshDB(): Promise<SuccessMessage> {

@@ -1,2 +1,2 @@
-export * from './paprika.controller';
-export * from './recipe.controller';
+export * from './paprika._controller';
+export * from './recipe._controller';

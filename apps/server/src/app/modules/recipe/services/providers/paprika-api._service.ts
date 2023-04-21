@@ -13,7 +13,7 @@ import {
   IRecipe,
   IRecipeItem,
   IStatus,
-} from '../interfaces/recipe.interface';
+} from '../../interfaces/recipe.interface';
 
 @Injectable()
 export class PaprikaApiService {

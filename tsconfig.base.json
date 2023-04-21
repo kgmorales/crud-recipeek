@@ -17,7 +17,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-
     "importHelpers": true,
     "lib": ["ES2022", "dom"],
     "module": "ES2022",
@@ -31,6 +30,7 @@
       "@client/*": ["apps/client/src/*"],
       "@core/*": ["apps/client/src/app/core/*"],
       "@features/*": ["apps/client/src/app/features/*"],
+      "@modules/*": ["apps/server/src/app/modules/*"],
       "@shared/*": ["apps/client/src/app/shared/*"]
     },
     "rootDir": ".",

@@ -2,7 +2,7 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 //? CORE
 import { Component, Input } from '@angular/core';
-import { Recipe } from '@core/models';
+import { Recipe } from '@client/app/core/interfaces';
 
 //? 3RD PARTY
 
@@ -19,7 +19,8 @@ import { Recipe } from '@core/models';
           (click)="highlightStatus[i] = !highlightStatus[i]"
           class="list-item"
           [class.is-checked]="highlightStatus[i]"
-          *ngFor="let ingredient of ingredients; let i = index">
+          *ngFor="let ingredient of ingredients; let i = index"
+        >
           <div class="list-item-check">
             <i class="icon ion-checkmark-round"></i>
           </div>

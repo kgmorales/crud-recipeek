@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '@core/models';
+import { Recipe } from '@client/app/core/interfaces';
 // import { ListComponent } from '@shared/components/list/list.component';
 
 @Component({

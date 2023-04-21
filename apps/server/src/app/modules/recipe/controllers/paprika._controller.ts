@@ -30,15 +30,15 @@ export class PaprikaController {
     return await this.paprikaService.recipeIds();
   }
 
-  @Post('create')
-  async create(@Body() data: string) {
-    try {
-      const recipe = JSON.parse(data) as IRecipe;
-      const response = await this.paprikaService.syncRecipe(recipe);
-      return response;
-    } catch (error) {
-      console.error(error);
-      return { message: 'Error creating recipe' };
-    }
-  }
+  // @Post('create')
+  // async create(@Body() data: string) {
+  //   try {
+  //     const recipe = JSON.parse(data) as IRecipe;
+  //     const response = await this.paprikaService.syncRecipe(recipe);
+  //     return response;
+  //   } catch (error) {
+  //     console.error(error);
+  //     return { message: 'Error creating recipe' };
+  //   }
+  // }
 }

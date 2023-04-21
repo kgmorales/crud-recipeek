@@ -1,4 +1,4 @@
-import { AllCategories, AllRecipes, Recipe } from '@core/models';
+import { AllCategories, AllRecipes, Recipe } from '@client/app/core/interfaces';
 
 export const buildRecipesModel = (allRecipes: AllRecipes) => {
   return Object.values(allRecipes)[0].map((recipe: Recipe) => {

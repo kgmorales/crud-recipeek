@@ -3,7 +3,7 @@ import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { Connection, Model } from 'mongoose';
 
 import { Category, Recipe, RecipeIds } from '../schemas';
-import { PaprikaService } from '../services';
+import { PaprikaService } from '.';
 
 import { IRecipe } from '../interfaces/recipe.interface';
 import { RecipeDto } from '../dtos/recipe.dto';
@@ -18,10 +18,10 @@ export class RecipesService {
     @InjectConnection() private readonly connection: Connection
   ) {}
 
-  // async createRecipe(recipeDto: RecipeDto): Promise<IRecipe> {
-  //   const createdRecipe = new this.recipeModel(recipeDto);
-  //   return createdRecipe.save();
-  // }
+  async createRecipe(recipeDto: RecipeDto): Promise<IRecipe> {
+    const createdRecipe = new this.recipeModel(recipeDto);
+    return createdRecipe.save();
+  }
 
   private async deleteAll(): Promise<void> {
     const collections = await this.connection.db.collections();

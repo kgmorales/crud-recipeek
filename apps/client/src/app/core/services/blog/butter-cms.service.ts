@@ -4,7 +4,7 @@ import { catchError, Observable, from, map } from 'rxjs';
 
 import Butter from 'buttercms';
 
-import { BlogPost, BlogPostMeta } from '@core/models';
+import { BlogPost, BlogPostMeta } from '@client/app/core/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -14,17 +14,14 @@ export class ButterCMSService {
 
   constructor(private route: Router) {}
 
-  getPosts(
-    page: number,
-    pageSize: number
-  ): Observable<any> {
+  getPosts(page: number, pageSize: number): Observable<any> {
     return from(
       this.butter.post.list({
         page,
         page_size: pageSize,
       })
     ).pipe(
-      map(response => {
+      map((response) => {
         return response.data;
       })
     );
@@ -32,10 +29,10 @@ export class ButterCMSService {
 
   getPostDetails(slug: string): Observable<any> {
     return from(this.butter.post.retrieve(slug)).pipe(
-      map(response => {
+      map((response) => {
         return response.data;
       }),
-      catchError(error => {
+      catchError((error) => {
         return this.route.navigate(['/']);
       })
     );

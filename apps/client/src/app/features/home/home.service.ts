@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, combineLatest, concatMap, filter, map, take } from 'rxjs';
 
-import { Category, Recipe, RecipeState } from '@core/models';
+import { Category, Recipe, RecipeState } from '@client/app/core/interfaces';
 import { RecipesStateService } from '@core/services/';
 
 import * as utils from './utils';
@@ -12,21 +12,23 @@ export class HomeService {
   homePreviews$ = combineLatest([
     this.recipesStateService.favorites$,
     this.recipesStateService.categories$,
-  ]).pipe(map(([favorites, categories]) => this.buildPreview(favorites, categories)));
+  ]).pipe(
+    map(([favorites, categories]) => this.buildPreview(favorites, categories))
+  );
 
   constructor(private recipesStateService: RecipesStateService) {}
 
   buildPreview(recipes: Recipe[], categoryTypes: Category[]): Preview[] {
     const previewRecipes: Recipe[] = utils.getMultipleRandom(recipes, 4);
 
-    return previewRecipes.map(recipe => {
+    return previewRecipes.map((recipe) => {
       const { image_url, name } = recipe;
       /**
        * turns the category from paprika db into category string names.
        */
       const categories = categoryTypes
-        .filter(category => recipe.categories.includes(category.uid))
-        .map(category => category.name);
+        .filter((category) => recipe.categories.includes(category.uid))
+        .map((category) => category.name);
 
       const cook_time: number = Number(recipe.cook_time.replace(/\D/g, ''));
 

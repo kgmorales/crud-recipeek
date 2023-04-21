@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 //* Core
-import { BlogPost, PostsData } from '@core/models';
+import { BlogPost, PostsData } from '@client/app/core/interfaces';
 import { ButterCMSService } from '@core/services';
 
 //* 3rd Party
