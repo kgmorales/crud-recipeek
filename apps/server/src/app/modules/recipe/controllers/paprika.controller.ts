@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { PaprikaService } from '../services';
 import {
   ICategory,
@@ -28,5 +28,17 @@ export class PaprikaController {
   @Get('recipeIds')
   async recipeIds(): Promise<IRecipeItem[]> {
     return await this.paprikaService.recipeIds();
+  }
+
+  @Post('create')
+  async create(@Body() data: string) {
+    try {
+      const recipe = JSON.parse(data) as IRecipe;
+      const response = await this.paprikaService.syncRecipe(recipe);
+      return response;
+    } catch (error) {
+      console.error(error);
+      return { message: 'Error creating recipe' };
+    }
   }
 }

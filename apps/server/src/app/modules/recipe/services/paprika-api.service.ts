@@ -1,4 +1,7 @@
+import { Injectable } from '@nestjs/common';
 import request, { Options } from 'request-promise-native';
+
+import { ConfigService } from '@nestjs/config';
 import {
   IBookmark,
   ICategory,
@@ -12,16 +15,16 @@ import {
   IStatus,
 } from '../interfaces/recipe.interface';
 
-//TODO: REWRITE THIS AS A CONTROLLER
-export class PaprikaApi {
+@Injectable()
+export class PaprikaApiService {
   private email: string;
   private password: string;
 
   private baseUrl = 'https://www.paprikaapp.com/api/v1/sync/';
 
-  constructor(email: string, password: string) {
-    this.email = email;
-    this.password = password;
+  constructor(private readonly configService: ConfigService) {
+    this.email = this.configService.get<string>('pakrikaUser') as string;
+    this.password = this.configService.get<string>('paprikaPass') as string;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

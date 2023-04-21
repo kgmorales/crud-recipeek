@@ -6,7 +6,7 @@ import { Category, Recipe, RecipeIds } from '../schemas';
 import { PaprikaService } from '../services';
 
 import { IRecipe } from '../interfaces/recipe.interface';
-import { Url } from 'url';
+import { RecipeDto } from '../dtos/recipe.dto';
 
 @Injectable()
 export class RecipesService {
@@ -17,6 +17,11 @@ export class RecipesService {
     @InjectModel(Category.name) private categoryModel: Model<Category>,
     @InjectConnection() private readonly connection: Connection
   ) {}
+
+  // async createRecipe(recipeDto: RecipeDto): Promise<IRecipe> {
+  //   const createdRecipe = new this.recipeModel(recipeDto);
+  //   return createdRecipe.save();
+  // }
 
   private async deleteAll(): Promise<void> {
     const collections = await this.connection.db.collections();
@@ -68,15 +73,15 @@ export class RecipesService {
   }
 
   // async scrapeRecipe(url: Url): Promise<IRecipe> {
-  //   try {
-  //     const cleanRecipe = JSON.parse(scrapedRecipe);
-  //     const recipe = await scraper.setScrapeToRecipeModel(cleanRecipe);
-
-  //     return { recipe };
-  //   } catch {
-  //     throw new Error('Problem scraping Recipe');
-  //   }
-  // }
+  //   const scrapedRecipe = await this.scrapeService
+  //   //   try {
+  //   //     const cleanRecipe = JSON.parse(scrapedRecipe);
+  //   //     const recipe = await scraper.setScrapeToRecipeModel(cleanRecipe);
+  //   //     return { recipe };
+  //   //   } catch {
+  //   //     throw new Error('Problem scraping Recipe');
+  //   //   }
+  //   // }
   // }
 
   // async findByName(name: string): Promise<Recipe[]> {

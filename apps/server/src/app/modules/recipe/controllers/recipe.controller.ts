@@ -1,10 +1,17 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UsePipes,
+} from '@nestjs/common';
 import { RecipesService } from '../services/recipe.service';
 import { IRecipe } from '../interfaces/recipe.interface';
-
-// import * as paprika from '../middleware/recipes/paprika.middleware';
-// import * as scraper from '../middleware/recipes/scraper.middleware';
-// import * as sharedTypes from '../../../shared/types';
+import { ScrapeService } from '../services/scrape.service';
+import { ValidateUrlMiddleware } from '../middleware/validate-url.middleware';
+import { RecipeDto } from '../dtos/recipe.dto';
 
 interface SuccessMessage {
   message: 'Success';
@@ -12,7 +19,16 @@ interface SuccessMessage {
 
 @Controller('recipes')
 export class RecipesController {
-  constructor(private recipeService: RecipesService) {}
+  constructor(
+    private recipeService: RecipesService,
+    private scrapeService: ScrapeService
+  ) {}
+
+  // @Post('create')
+  // async create(@Body() recipeDto: RecipeDto): Promise<SuccessMessage> {
+  //   await this.recipeService.create(recipeDto);
+  //   return { message: 'Success' };
+  // }
 
   @Get('refreshDB')
   async refreshDB(): Promise<SuccessMessage> {
@@ -30,8 +46,9 @@ export class RecipesController {
     return await this.recipeService.findById(uid);
   }
 
-  // @Get('scraped-recipe')
-  // async getScrapedRecipe(@Query('url') url: string): Promise<IRecipe> {
-  //   return await scraper.scrapeRecipe(url);
-  // }
+  @Get('scrape')
+  @UsePipes(ValidateUrlMiddleware)
+  async scrapeRecipe(@Query('url') url: string): Promise<IRecipe> {
+    return await this.scrapeService.scrape(url);
+  }
 }

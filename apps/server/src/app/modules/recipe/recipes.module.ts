@@ -8,20 +8,26 @@ import * as services from './services';
 import * as apis from './controllers';
 import { CategorySchema } from './schemas/categories.schema';
 import { RecipeIdsSchema } from './schemas/recipeIds.schema';
-import { PaprikaApi } from './services/paprika-api';
+import { ValidateUrlMiddleware } from './middleware/validate-url.middleware';
+import { HttpModule } from '@nestjs/axios';
 
 const providers = [
   ConfigService,
-  PaprikaApi,
+  // services.CreatePaprikaService,
   services.PaprikaService,
+  services.PaprikaApiService,
   services.RecipesService,
+  services.ScrapeService,
+  ValidateUrlMiddleware,
 ];
 
 const controllers = [apis.PaprikaController, apis.RecipesController];
+
 const recipes = { providers, controllers };
 
 @Module({
   imports: [
+    HttpModule,
     MongooseModule.forFeature([{ name: 'Recipe', schema: RecipeSchema }]),
     MongooseModule.forFeature([{ name: 'Category', schema: CategorySchema }]),
     MongooseModule.forFeature([{ name: 'RecipeIds', schema: RecipeIdsSchema }]),
