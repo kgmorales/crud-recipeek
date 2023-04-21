@@ -31,7 +31,8 @@
       "@client/*": ["apps/client/src/*"],
       "@core/*": ["apps/client/src/app/core/*"],
       "@features/*": ["apps/client/src/app/features/*"],
-      "@shared/*": ["apps/client/src/app/shared/*"]
+      "@shared/*": ["apps/client/src/app/shared/*"],
+      "@modules/*": ["apps/server/src/app/modules/*"]
     },
     "rootDir": ".",
     "sourceMap": true,

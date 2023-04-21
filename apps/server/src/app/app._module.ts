@@ -1,11 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { RecipesModule } from './modules/recipe/recipes.module';
+import { RecipesModule } from '@modules/recipe/recipes._module';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import configuration from './config/configuration';
+import configuration from './config/config';
 
 const configOptions = {
   config: {
@@ -31,7 +29,6 @@ const configOptions = {
     MongooseModule.forRootAsync(configOptions.mongoDB),
     RecipesModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, ConfigService],
+  providers: [ConfigService],
 })
 export class AppModule {}

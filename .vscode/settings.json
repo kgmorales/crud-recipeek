@@ -26,11 +26,21 @@
   },
 
   "material-icon-theme.folders.associations": {
+    "controllers": "public",
     "directives": "functions",
-    "dtos": "interface",
+    "dtos": "tasks",
     "enums": "content",
     "features": "middleware",
-    "schemas": "meta"
+    "schemas": "meta",
+    "interfaces": "context",
+    "providers": "plastic"
+  },
+  "material-icon-theme.files.associations": {
+    "apps/client/src/app/**/*.service.ts": "angular-service",
+    "*._service.ts": "nest-service",
+    "*._module.ts": "nest-module",
+    "*._controller.ts": "nest-controller",
+    "*._middleware.ts": "nest-middleware"
   },
   "material-icon-theme.folders.color": "#90a4ae",
   "workbench.colorCustomizations": {

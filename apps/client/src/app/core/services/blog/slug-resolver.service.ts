@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {
+  Resolve,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import { BlogPost, BlogPostMeta } from '@core/models';
+import { BlogPost, BlogPostMeta } from '@client/app/core/interfaces';
 import { ButterCMSService } from '@core/services';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SlugResolverService implements Resolve<{ data: BlogPost; meta: BlogPostMeta }> {
+export class SlugResolverService
+  implements Resolve<{ data: BlogPost; meta: BlogPostMeta }>
+{
   constructor(private butterCMSService: ButterCMSService) {}
   resolve(
     route: ActivatedRouteSnapshot,

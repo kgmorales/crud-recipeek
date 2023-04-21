@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
 
 //* Core
-import { BlogPost, BlogPostMeta } from '@core/models';
+import { BlogPost, BlogPostMeta } from '@client/app/core/interfaces';
 
 @Component({
   selector: 'la-post',

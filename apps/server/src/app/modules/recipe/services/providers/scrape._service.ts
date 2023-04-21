@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { spawn } from 'child_process';
 
 import { v4 as uuidv4 } from 'uuid';
-import { cleanScrapedRecipe } from '../../../utils';
+import { cleanScrapedRecipe } from '../../../../utils';
 
-import { emptyRecipe, matchPaprikaKeys } from '../constants';
+import { emptyRecipe, matchPaprikaKeys } from '../../constants';
 
-import { IRecipe, IScrapedRecipe } from '../interfaces';
+import { IRecipe, IScrapedRecipe } from '../../interfaces';
 
 @Injectable()
 export class ScrapeService {
