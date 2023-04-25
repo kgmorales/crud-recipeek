@@ -8,7 +8,7 @@ import sys
 
 def parse_recipe(recipe_url):
     try:
-        recipes = scrape_schema_recipe.scrape_url(recipe_url)
+        recipe = scrape_schema_recipe.scrape_url(recipe_url)
         # if len(recipes) == 1 and recipes[0] is not None:
         #     recipe = recipes[0]
         #     if 'keywords' in recipe:
@@ -57,7 +57,7 @@ def parse_recipe(recipe_url):
         #     "totalTime": scraper.total_time(),
         # }
         # return to_return
-        
+
         return scraper.to_json()
     except Exception as e:
         pass
@@ -88,9 +88,11 @@ def parse_recipe(recipe_url):
 
 if __name__ == '__main__':
     recipe_url = sys.argv[1]
+
     recipe = parse_recipe(recipe_url)
     if recipe:
         # print(recipe)
         print(json.dumps(recipe))
     else:
+        print("test-4")
         print("Unable to parse recipe from provided URL.")

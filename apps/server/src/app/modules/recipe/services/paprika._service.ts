@@ -1,10 +1,4 @@
 import { Injectable } from '@nestjs/common';
-// import { HttpService } from '@nestjs/axios';
-
-// import FormData from 'form-data';
-// import { createReadStream } from 'fs';
-// import * as gzip from 'gzip-js';
-// import { AxiosResponse } from 'axios';
 
 import { PaprikaApiService } from './providers/paprika-api._service';
 import {
@@ -59,37 +53,4 @@ export class PaprikaService {
     const ids = await this.paprikaApiService.recipes();
     return ids || [];
   }
-
-  // private async convertRecipeToFormData(recipe: IRecipe): Promise<FormData> {
-  //   const recipeFormData = new FormData();
-  //   const recipeJson = JSON.stringify(recipe);
-  //   const gzipRecipeBuffer = Buffer.from(gzip.zip(Buffer.from(recipeJson), {}));
-  //   recipeFormData.append('data', createReadStream(gzipRecipeBuffer), {
-  //     filename: 'recipe.json',
-  //   });
-  //   return recipeFormData;
-  // }
-
-  // async syncRecipe(recipe: IRecipe): Promise<string> {
-  //   const formData = await this.convertRecipeToFormData(recipe);
-  //   const headers = formData.getHeaders();
-  //   const response = await this.httpService
-  //     .post(
-  //       `https://www.paprikaapp.com/api/v1/sync/recipe/${recipe.uid}/`,
-  //       formData,
-  //       {
-  //         headers: {
-  //           ...headers,
-  //           'Content-Encoding': 'gzip',
-  //         },
-  //       }
-  //     )
-  //     .toPromise();
-
-  //   if (!response) {
-  //     throw new Error('Response is undefined');
-  //   }
-
-  //   return response.data.result;
-  // }
 }

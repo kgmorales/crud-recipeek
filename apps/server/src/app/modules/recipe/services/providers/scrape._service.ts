@@ -12,7 +12,7 @@ import { IRecipe, IScrapedRecipe } from '../../interfaces';
 export class ScrapeService {
   private async scrapeUrl(recipeUrl: string): Promise<string> {
     return new Promise((resolve, reject) => {
-      const python = spawn('python3', [
+      const python = spawn('python', [
         'apps/server/src/app/utils/scrape.py',
         recipeUrl,
       ]);
@@ -35,6 +35,7 @@ export class ScrapeService {
     const joinObjectToString = (data: Record<string, string>) =>
       Object.entries(data).join('\n');
     const cleanScraped = cleanScrapedRecipe(matchPaprikaKeys, scrapedRecipe);
+    const created = Date.now();
 
     const categories: string[] = [];
     const ingredients =
@@ -50,6 +51,7 @@ export class ScrapeService {
     const prettyRecipeData = {
       ...cleanScraped,
       categories,
+      created,
       ingredients,
       nutritional_info,
       servings,
@@ -66,7 +68,8 @@ export class ScrapeService {
 
   async scrape(url: string): Promise<IRecipe> {
     const scrapedRecipe = await this.scrapeUrl(url);
-    const cleanRecipe = JSON.parse(scrapedRecipe);
+
+    const cleanRecipe = await JSON.parse(scrapedRecipe);
 
     const newRecipe = await this.setScrapeToRecipeModel(cleanRecipe);
     return newRecipe || null;
