@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { RecipesService } from '../services/recipe._service';
 import { IRecipe } from '../interfaces/recipe.interface';
 import { ScrapeService } from '../services/providers/scrape._provider';
@@ -15,9 +15,9 @@ export class RecipesController {
     private scrapeService: ScrapeService
   ) {}
 
-  @Get('create')
-  async createRecipe(@Body() recipe: RecipeDto) {
-    await this.recipeService.createRecipe(recipe);
+  @Post('create')
+  async createRecipe(@Body() recipeDto: RecipeDto) {
+    await this.recipeService.createRecipe(recipeDto);
   }
 
   @Get('refreshDB')

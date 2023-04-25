@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { spawn } from 'child_process';
-import crypto from 'crypto';
+import { createHash } from 'crypto';
 
 import { v4 as uuidv4 } from 'uuid';
 import { cleanScrapedRecipe } from '../../../../utils';
@@ -36,10 +36,12 @@ export class ScrapeService {
     const joinObjectToString = (data: Record<string, string>) =>
       Object.entries(data).join('\n');
     const cleanScraped = cleanScrapedRecipe(matchPaprikaKeys, scrapedRecipe);
-    const created = Date.now();
+    const created = currentDate();
 
     const categories: string[] = [];
-    const hash = crypto.createHash('sha256');
+    const deleted = false;
+    const uid = `${uuidv4()}`;
+    const hash = getHash(uid as string);
     const ingredients =
       cleanScraped.instructions_list.length === 0
         ? ''
@@ -47,17 +49,19 @@ export class ScrapeService {
     const nutritional_info =
       isEmpty(cleanScraped.nutritional_info) &&
       joinObjectToString(cleanScraped.nutritional_info);
-    const servings = Number(cleanScraped.servings.replace(/\D/g, ''));
-    const uid = `${uuidv4()}`;
+    const on_favorites = 0;
+    // const servings = Number(cleanScraped.servings.replace(/\D/g, ''));
 
     const prettyRecipeData = {
       ...cleanScraped,
       categories,
       created,
+      deleted,
       hash,
       ingredients,
       nutritional_info,
-      servings,
+      on_favorites,
+      // servings,
       uid,
     };
 
@@ -77,4 +81,21 @@ export class ScrapeService {
     const newRecipe = await this.setScrapeToRecipeModel(cleanRecipe);
     return newRecipe || null;
   }
+}
+
+function currentDate() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+function getHash(str: string) {
+  const newHash = createHash('sha256');
+  newHash.update(str);
+  return newHash.digest('hex');
 }

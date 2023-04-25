@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import request, { OptionsWithUrl } from 'request-promise-native';
 import zlib from 'zlib';
+import FormData from 'form-data';
+
+const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODI0NTI0NjQsImVtYWlsIjoibmFkYW1zMTY1QGdtYWlsLmNvbSJ9.5T_hL7F5OhYI4_rQn_f-LMR0n29SYK7lpWZ0ILyTl7Q`;
 
 import { ConfigService } from '@nestjs/config';
 import {
@@ -13,7 +16,6 @@ import {
   IPantryItem,
   IRecipe,
   IRecipeItem,
-  IStatus,
 } from '../../interfaces/recipe.interface';
 import { RecipeDto } from '../../dtos/recipe.dto';
 
@@ -92,7 +94,7 @@ export class PaprikaApiService {
     return this.resource('recipe/' + recipeUid);
   }
 
-  private async convertToGzipJson(recipeDto: RecipeDto): Promise<Buffer> {
+  async create(recipeDto: RecipeDto): Promise<void> {
     const jsonString = JSON.stringify(recipeDto);
     const gzippedJson = await new Promise<Buffer>((resolve, reject) => {
       zlib.gzip(jsonString, (err, buffer) => {
@@ -103,29 +105,29 @@ export class PaprikaApiService {
         }
       });
     });
-    return gzippedJson;
-  }
 
-  status(): Promise<IStatus> {
-    return this.resource('status');
-  }
+    const formData = new FormData();
+    formData.append('data', gzippedJson, { filename: 'recipe.json.gz' });
 
-  async create(recipeDto: RecipeDto): Promise<void> {
-    const gzippedJson = await this.convertToGzipJson(recipeDto);
-
-    const options: OptionsWithUrl = {
-      auth: {
-        user: this.email,
-        pass: this.password,
-      },
+    const options = {
       method: 'POST',
-      baseUrl: this.baseUrl,
-      url: `recipe/${recipeDto.uid}`,
-      body: gzippedJson,
       headers: {
-        'User-Agent': 'PaprikaApi NodeJS library',
-        'Content-Type': 'application/json',
-        'Content-Encoding': 'gzip',
+        Host: 'www.paprikaapp.com',
+        Accept: '*/*',
+        'Accept-Language': 'en-US;q=1.0',
+        Connection: 'keep-alive',
+        'Accept-Encoding': 'br;q=1.0, gzip;q=0.9, deflate;q=0.8',
+        Authorization: `Bearer ${token}`,
+      },
+      url: `https://www.paprikaapp.com/api/v2/sync/recipe/${recipeDto.uid}`,
+      formData: {
+        data: {
+          value: formData.getBuffer(),
+          options: {
+            filename: 'recipe.json.gz',
+            contentType: 'application/gzip',
+          },
+        },
       },
     };
 
