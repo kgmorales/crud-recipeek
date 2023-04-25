@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { spawn } from 'child_process';
+import crypto from 'crypto';
 
 import { v4 as uuidv4 } from 'uuid';
 import { cleanScrapedRecipe } from '../../../../utils';
@@ -38,6 +39,7 @@ export class ScrapeService {
     const created = Date.now();
 
     const categories: string[] = [];
+    const hash = crypto.createHash('sha256');
     const ingredients =
       cleanScraped.instructions_list.length === 0
         ? ''
@@ -52,6 +54,7 @@ export class ScrapeService {
       ...cleanScraped,
       categories,
       created,
+      hash,
       ingredients,
       nutritional_info,
       servings,
@@ -69,7 +72,7 @@ export class ScrapeService {
   async scrape(url: string): Promise<IRecipe> {
     const scrapedRecipe = await this.scrapeUrl(url);
 
-    const cleanRecipe = await JSON.parse(scrapedRecipe);
+    const cleanRecipe = JSON.parse(scrapedRecipe);
 
     const newRecipe = await this.setScrapeToRecipeModel(cleanRecipe);
     return newRecipe || null;

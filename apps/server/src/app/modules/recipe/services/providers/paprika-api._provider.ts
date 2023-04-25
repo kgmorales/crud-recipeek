@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import request, { Options } from 'request-promise-native';
+import request, { OptionsWithUrl } from 'request-promise-native';
+import zlib from 'zlib';
 
 import { ConfigService } from '@nestjs/config';
 import {
@@ -14,6 +15,7 @@ import {
   IRecipeItem,
   IStatus,
 } from '../../interfaces/recipe.interface';
+import { RecipeDto } from '../../dtos/recipe.dto';
 
 @Injectable()
 export class PaprikaApiService {
@@ -28,15 +30,15 @@ export class PaprikaApiService {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private resource(endpoint: string): Promise<any> {
-    const options: Options = {
+  private resource(endpoint: string, method = 'GET', body?: any): Promise<any> {
+    const options: OptionsWithUrl = {
       auth: {
         user: this.email,
         pass: this.password,
       },
-      method: 'GET',
+      method,
       baseUrl: this.baseUrl,
-      uri: endpoint,
+      url: endpoint,
       json: true,
       headers: {
         'User-Agent': 'PaprikaApi NodeJS library',
@@ -46,6 +48,11 @@ export class PaprikaApiService {
         return body.result;
       },
     };
+
+    if (body) {
+      options.body = body;
+    }
+
     return request(options);
   }
 
@@ -85,7 +92,43 @@ export class PaprikaApiService {
     return this.resource('recipe/' + recipeUid);
   }
 
+  private async convertToGzipJson(recipeDto: RecipeDto): Promise<Buffer> {
+    const jsonString = JSON.stringify(recipeDto);
+    const gzippedJson = await new Promise<Buffer>((resolve, reject) => {
+      zlib.gzip(jsonString, (err, buffer) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(buffer);
+        }
+      });
+    });
+    return gzippedJson;
+  }
+
   status(): Promise<IStatus> {
     return this.resource('status');
+  }
+
+  async create(recipeDto: RecipeDto): Promise<void> {
+    const gzippedJson = await this.convertToGzipJson(recipeDto);
+
+    const options: OptionsWithUrl = {
+      auth: {
+        user: this.email,
+        pass: this.password,
+      },
+      method: 'POST',
+      baseUrl: this.baseUrl,
+      url: `recipe/${recipeDto.uid}`,
+      body: gzippedJson,
+      headers: {
+        'User-Agent': 'PaprikaApi NodeJS library',
+        'Content-Type': 'application/json',
+        'Content-Encoding': 'gzip',
+      },
+    };
+
+    await request(options);
   }
 }

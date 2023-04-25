@@ -2,7 +2,9 @@
   "name": "lamora",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "nx run-many --target=serve --projects=client,server --parallel=true --watch"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~15.2.0",
@@ -85,4 +87,3 @@
     "typescript": "~4.9.5"
   }
 }
-

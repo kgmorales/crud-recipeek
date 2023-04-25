@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { PaprikaApiService } from './providers/paprika-api._service';
+import { PaprikaApiService } from './providers/paprika-api._provider';
 import {
   IRecipe,
   ICategory,
@@ -9,10 +9,7 @@ import {
 
 @Injectable()
 export class PaprikaService {
-  constructor(
-    // private httpService: HttpService,
-    private paprikaApiService: PaprikaApiService
-  ) {}
+  constructor(private paprikaApiService: PaprikaApiService) {}
 
   async recipesIds(): Promise<IRecipeItem[]> {
     return await this.paprikaApiService.recipes();

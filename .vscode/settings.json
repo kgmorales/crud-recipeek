@@ -33,13 +33,14 @@
     "features": "middleware",
     "schemas": "meta",
     "interfaces": "context",
-    "providers": "plastic"
+    "providers": "mjml"
   },
   "material-icon-theme.files.associations": {
     "apps/client/src/app/**/*.service.ts": "angular-service",
     "*._service.ts": "nest-service",
     "*._module.ts": "nest-module",
     "*._controller.ts": "nest-controller",
+    "*._provider.ts": "nest-filter",
     "*._middleware.ts": "nest-middleware"
   },
   "material-icon-theme.folders.color": "#90a4ae",

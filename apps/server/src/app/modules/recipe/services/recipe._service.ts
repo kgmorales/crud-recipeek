@@ -3,7 +3,7 @@ import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { Connection, Model } from 'mongoose';
 
 import { Category, Recipe, RecipeIds } from '../schemas';
-import { PaprikaService } from '.';
+import { PaprikaApiService, PaprikaService } from '.';
 
 import { IRecipe } from '../interfaces/recipe.interface';
 import { RecipeDto } from '../dtos/recipe.dto';
@@ -12,6 +12,7 @@ import { RecipeDto } from '../dtos/recipe.dto';
 export class RecipesService {
   constructor(
     private paprikaService: PaprikaService,
+    private paprikaApiService: PaprikaApiService,
     @InjectModel(Recipe.name) private recipeModel: Model<IRecipe>,
     @InjectModel(RecipeIds.name) private recipeIDModel: Model<RecipeIds>,
     @InjectModel(Category.name) private categoryModel: Model<Category>,
@@ -20,6 +21,8 @@ export class RecipesService {
 
   async createRecipe(recipeDto: RecipeDto): Promise<IRecipe> {
     const createdRecipe = new this.recipeModel(recipeDto);
+
+    await this.paprikaApiService.create(recipeDto);
     return createdRecipe.save();
   }
 
@@ -71,37 +74,4 @@ export class RecipesService {
 
     return foundRecipe || null;
   }
-
-  // async scrapeRecipe(url: Url): Promise<IRecipe> {
-  //   const scrapedRecipe = await this.scrapeService
-  //   //   try {
-  //   //     const cleanRecipe = JSON.parse(scrapedRecipe);
-  //   //     const recipe = await scraper.setScrapeToRecipeModel(cleanRecipe);
-  //   //     return { recipe };
-  //   //   } catch {
-  //   //     throw new Error('Problem scraping Recipe');
-  //   //   }
-  //   // }
-  // }
-
-  // async findByName(name: string): Promise<Recipe[]> {
-  //   return await this.recipeModel.findByName(name);
-  // }
-
-  // public async findByAlignment(alignment: string): Promise<Recipe[]> {
-  //   return await this.recipeModel.findByAlignment(alignment);
-  // }
-
-  // public async create(hero: Recipe) {
-  //   const newHero = await this.recipeModel.create(hero);
-  //   return newHero;
-  // }
-
-  // public async delete(id: string) {
-  //   return this.recipeModel.findByIdAndRemove(id);
-  // }
-
-  // private get recipeModel() {
-  //   return this.RecipesModel.herosRepository();
-  // }
 }
