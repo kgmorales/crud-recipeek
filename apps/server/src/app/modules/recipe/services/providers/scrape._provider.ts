@@ -11,7 +11,7 @@ import { IRecipe, IScrapedRecipe } from '../../interfaces';
 
 @Injectable()
 export class ScrapeService {
-  private async scrapeUrl(recipeUrl: string): Promise<string> {
+  private async scrapeByUrl(recipeUrl: string): Promise<string> {
     return new Promise((resolve, reject) => {
       const python = spawn('python', [
         'apps/server/src/app/utils/scrape.py',
@@ -67,6 +67,7 @@ export class ScrapeService {
 
     const newRecipe = { ...emptyRecipe, ...prettyRecipeData };
 
+    //* DISSECT UNNECESSARY PROPERTIES
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { author, host, instructions_list, language, ...recipe } = newRecipe;
 
@@ -74,11 +75,12 @@ export class ScrapeService {
   }
 
   async scrape(url: string): Promise<IRecipe> {
-    const scrapedRecipe = await this.scrapeUrl(url);
+    const rawScrapedRecipe = await this.scrapeByUrl(url);
 
-    const cleanRecipe = JSON.parse(scrapedRecipe);
+    const newRecipe = await this.setScrapeToRecipeModel(
+      JSON.parse(rawScrapedRecipe)
+    );
 
-    const newRecipe = await this.setScrapeToRecipeModel(cleanRecipe);
     return newRecipe || null;
   }
 }

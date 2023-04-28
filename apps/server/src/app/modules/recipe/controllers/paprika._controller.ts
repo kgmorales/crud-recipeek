@@ -20,13 +20,13 @@ export class PaprikaController {
     return await this.paprikaService.categories();
   }
 
-  @Get('recipesByUID')
-  async recipesByUID(@Query('uids') uids: string): Promise<IRecipe[]> {
-    return await this.paprikaService.recipesByUID(uids);
-  }
-
   @Get('recipeIds')
   async recipeIds(): Promise<IRecipeItem[]> {
     return await this.paprikaService.recipeIds();
+  }
+
+  @Get('recipesByUID')
+  async recipesByUID(@Query('uids') uids: string): Promise<IRecipe[]> {
+    return await this.paprikaService.recipesByUID(uids);
   }
 }

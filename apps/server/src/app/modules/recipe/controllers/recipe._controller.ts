@@ -20,17 +20,6 @@ export class RecipesController {
     await this.recipeService.createRecipe(recipeDto);
   }
 
-  @Get('refreshDB')
-  async refreshDB(): Promise<SuccessMessage> {
-    await this.recipeService.refreshDB();
-    return { message: 'Success' };
-  }
-
-  @Get('update')
-  async updateRecipes(): Promise<IRecipe[]> {
-    return await this.recipeService.updateRecipes();
-  }
-
   @Get('find/:uid')
   async findRecipe(
     @Param('uid') uid: Pick<IRecipe, 'uid'>
@@ -38,8 +27,19 @@ export class RecipesController {
     return await this.recipeService.findById(uid);
   }
 
+  @Get('refreshDB')
+  async refreshDB(): Promise<SuccessMessage> {
+    await this.recipeService.refreshDB();
+    return { message: 'Success' };
+  }
+
   @Get('scrape')
   async scrapeRecipe(@Query('url') url: string): Promise<IRecipe> {
     return await this.scrapeService.scrape(url);
+  }
+
+  @Get('update')
+  async updateRecipes(): Promise<IRecipe[]> {
+    return await this.recipeService.updateRecipes();
   }
 }
