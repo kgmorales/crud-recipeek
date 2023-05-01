@@ -1,34 +1,36 @@
+//* NESTJS
 import { Injectable } from '@nestjs/common';
+
+//* MONGOOSE
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { Connection, Model } from 'mongoose';
 
-import { Category, Recipe, RecipeIds } from '../schemas';
-import { PaprikaApiService, PaprikaService } from '.';
-
 //* Module
-import { IRecipe, IRecipeItem } from '../interfaces/recipe.interface';
-import { RecipeDto } from '../dtos/recipe.dto';
+import { IRecipe, IRecipeItem } from '../interfaces';
+import { RecipeDto } from '../dtos';
+import { Category, Recipe, RecipeIds } from '../schemas';
+import { PaprikaApiService, PaprikaService } from '../services';
 
 @Injectable()
 export class RecipesService {
   constructor(
-    private paprikaService: PaprikaService,
-    private paprikaApiService: PaprikaApiService,
-    @InjectModel(Recipe.name) private recipeModel: Model<IRecipe>,
+    @InjectModel(Recipe.name) private recipeModel: Model<Recipe>,
     @InjectModel(RecipeIds.name) private recipeIDModel: Model<RecipeIds>,
     @InjectModel(Category.name) private categoryModel: Model<Category>,
-    @InjectConnection() private readonly connection: Connection
+    @InjectConnection() private readonly connection: Connection,
+    private paprikaService: PaprikaService,
+    private paprikaApiService: PaprikaApiService
   ) {}
 
   /**
    * Create new Recipe and add to Database.
    */
   //* CREATE
-  async createRecipe(recipeDto: RecipeDto): Promise<IRecipe> {
+  async createRecipe(recipeDto: RecipeDto): Promise<void> {
     const createdRecipe = new this.recipeModel(recipeDto);
 
     await this.paprikaApiService.create(recipeDto);
-    return createdRecipe.save();
+    await createdRecipe.save();
   }
 
   /**
@@ -52,7 +54,7 @@ export class RecipesService {
   async refreshDB(): Promise<void> {
     await this.deleteAll();
     const allRecipes = await this.paprikaService.allRecipes();
-    const allIDs = await this.paprikaService.recipesIds();
+    const allIDs = await this.paprikaService.recipeIds();
     const allCategories = await this.paprikaService.categories();
 
     await this.recipeModel.insertMany(allRecipes);
@@ -71,13 +73,11 @@ export class RecipesService {
 
     if (paprikaIds.length !== dbRecipeCount) {
       const dbIds = await this.recipeIDModel.find().lean();
-      const newRecipeIds = paprikaIds.filter(
+      const newRecipeIds = await paprikaIds.filter(
         (paprikaId) => !dbIds.find((dbId) => paprikaId.uid === dbId.uid)
       );
       const newUIDs = newRecipeIds.map((ids) => ids.uid);
-      const newRecipes = await this.paprikaService.recipesByUID(
-        newUIDs.join('')
-      );
+      const newRecipes = await this.paprikaService.findByUID(newUIDs.join(''));
 
       await this.recipeIDModel.collection.insertMany(newRecipeIds);
       await this.recipeModel.collection.insertMany(newRecipes);
@@ -92,10 +92,9 @@ export class RecipesService {
    * @param uid
    * @returns Promise<IRecipe | null>
    */
-  //* FIND
-  async findById(uid: Pick<IRecipe, 'uid'>): Promise<IRecipe | null> {
+  //* FIND BY UID
+  async findByUID(uid: string): Promise<Recipe | null> {
     const foundRecipe = await this.recipeModel.findById(uid);
-
     return foundRecipe || null;
   }
 }

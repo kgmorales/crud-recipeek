@@ -3,36 +3,42 @@ import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { HttpModule } from '@nestjs/axios';
 
-import { CategorySchema, RecipeIdsSchema, RecipeSchema } from './schemas';
-import * as services from './services';
 import * as apis from './controllers';
+import {
+  Category,
+  PaprikaToken,
+  Recipe,
+  RecipeIds,
+  CategorySchema,
+  PaprikaTokenSchema,
+  RecipeIdsSchema,
+  RecipeSchema,
+} from './schemas';
+import * as localServices from './services';
 
-import { ValidateUrlMiddleware } from './middleware';
+// import { ValidateUrlMiddleware } from '@recipes/middleware';
 
 const imports = [
   HttpModule,
-  MongooseModule.forFeature([{ name: 'Recipe', schema: RecipeSchema }]),
-  MongooseModule.forFeature([{ name: 'Category', schema: CategorySchema }]),
-  MongooseModule.forFeature([{ name: 'RecipeIds', schema: RecipeIdsSchema }]),
+  MongooseModule.forFeature([{ name: Category.name, schema: CategorySchema }]),
+  MongooseModule.forFeature([
+    { name: PaprikaToken.name, schema: PaprikaTokenSchema },
+  ]),
+  MongooseModule.forFeature([{ name: Recipe.name, schema: RecipeSchema }]),
+  MongooseModule.forFeature([
+    { name: RecipeIds.name, schema: RecipeIdsSchema },
+  ]),
 ];
 
-const providers = [
-  ConfigService,
-  // services.CreatePaprikaService,
-  services.PaprikaService,
-  services.PaprikaApiService,
-  services.RecipesService,
-  services.ScrapeService,
-  ValidateUrlMiddleware,
-];
+const services = [ConfigService, ...localServices.services];
 
-const controllers = [apis.PaprikaController, apis.RecipesController];
+const controllers = apis.controllers;
 
-const recipes = { controllers, imports, providers };
+const recipes = { controllers, imports, services };
 
 @Module({
   imports: recipes.imports,
   controllers: recipes.controllers,
-  providers: recipes.providers,
+  providers: recipes.services,
 })
 export class RecipesModule {}

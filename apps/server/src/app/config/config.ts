@@ -6,7 +6,11 @@ export default () => ({
       useUnifiedTopology: true,
     },
   },
-  pakrikaUser: process.env.PAPRIKA_USER,
-  paprikaPass: process.env.PAPRIKA_PASS,
+  paprika: {
+    baseURL: `https://www.paprikaapp.com/api/v2/`,
+    bearerToken: '',
+    password: process.env.PAPRIKA_PASS,
+    user: process.env.PAPRIKA_USER,
+  },
   port: process.env.PORT || 3000,
 });

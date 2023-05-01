@@ -1,12 +1,10 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { RecipesService } from '../services/recipe._service';
-import { IRecipe } from '../interfaces/recipe.interface';
-import { ScrapeService } from '../services/providers/scrape._provider';
-import { RecipeDto } from '../dtos/recipe.dto';
 
-interface SuccessMessage {
-  message: 'Success';
-}
+//* Module
+import { RecipeDto } from '@recipes/dtos';
+import { IRecipe, ISuccessMessage } from '@recipes/interfaces';
+import { RecipesService, ScrapeService } from '@recipes/services';
+
 
 @Controller('recipes')
 export class RecipesController {
@@ -24,11 +22,11 @@ export class RecipesController {
   async findRecipe(
     @Param('uid') uid: Pick<IRecipe, 'uid'>
   ): Promise<IRecipe | null> {
-    return await this.recipeService.findById(uid);
+    return await this.recipeService.findByUID(uid);
   }
 
   @Get('refreshDB')
-  async refreshDB(): Promise<SuccessMessage> {
+  async refreshDB(): Promise<ISuccessMessage> {
     await this.recipeService.refreshDB();
     return { message: 'Success' };
   }

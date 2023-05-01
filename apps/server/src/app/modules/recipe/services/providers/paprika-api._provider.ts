@@ -3,9 +3,6 @@ import request, { OptionsWithUrl } from 'request-promise-native';
 import zlib from 'zlib';
 import FormData from 'form-data';
 
-const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODI0NTI0NjQsImVtYWlsIjoibmFkYW1zMTY1QGdtYWlsLmNvbSJ9.5T_hL7F5OhYI4_rQn_f-LMR0n29SYK7lpWZ0ILyTl7Q`;
-
-import { ConfigService } from '@nestjs/config';
 import {
   IBookmark,
   ICategory,
@@ -16,30 +13,49 @@ import {
   IPantryItem,
   IRecipe,
   IRecipeItem,
-} from '../../interfaces/recipe.interface';
-import { RecipeDto } from '../../dtos/recipe.dto';
+  IPaprikaConfig,
+} from '../../interfaces';
+import { RecipeDto } from '../../dtos';
+import { PaprikaAuthService } from '../providers/paprika-auth._provider';
 
 @Injectable()
 export class PaprikaApiService {
-  private email: string;
-  private password: string;
+  private paprikaConfig: IPaprikaConfig;
 
-  private baseUrl = 'https://www.paprikaapp.com/api/v1/sync/';
-
-  constructor(private readonly configService: ConfigService) {
-    this.email = this.configService.get<string>('pakrikaUser') as string;
-    this.password = this.configService.get<string>('paprikaPass') as string;
+  constructor(private paprikaAuthService: PaprikaAuthService) {
+    this.paprikaConfig = this.paprikaAuthService.paprikaConfig;
+    console.log(this.paprikaConfig);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private resource(endpoint: string, method = 'GET', body?: any): Promise<any> {
+  private async gZip(jsonString: string): Promise<Buffer> {
+    return await new Promise<Buffer>((resolve, reject) => {
+      zlib.gzip(jsonString, (err, buffer) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(buffer);
+        }
+      });
+    });
+  }
+
+  private async getPhotoData(photoUrl: string): Promise<Buffer> {
+    const options: OptionsWithUrl = {
+      url: photoUrl,
+      encoding: null,
+    };
+    const photoData = await request.get(options);
+    return photoData;
+  }
+
+  private resource(endpoint: string, method = 'GET', body?: Body) {
     const options: OptionsWithUrl = {
       auth: {
-        user: this.email,
-        pass: this.password,
+        user: this.paprikaConfig.email,
+        pass: this.paprikaConfig.password,
       },
       method,
-      baseUrl: this.baseUrl,
+      baseUrl: this.paprikaConfig.baseUrl,
       url: endpoint,
       json: true,
       headers: {
@@ -95,21 +111,17 @@ export class PaprikaApiService {
   }
 
   async create(recipeDto: RecipeDto): Promise<void> {
-    const jsonString = JSON.stringify(recipeDto);
-    const gzippedJson = await new Promise<Buffer>((resolve, reject) => {
-      zlib.gzip(jsonString, (err, buffer) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(buffer);
-        }
-      });
-    });
-
+    const gzippedJson = await this.gZip(JSON.stringify(recipeDto));
     const formData = new FormData();
+
     formData.append('data', gzippedJson, { filename: 'recipe.json.gz' });
 
-    const options = {
+    if (recipeDto.image_url) {
+      const photoData = await this.getPhotoData(recipeDto.image_url);
+      formData.append('photo', photoData, { filename: 'photo.jpg' });
+    }
+
+    const options: OptionsWithUrl = {
       method: 'POST',
       headers: {
         Host: 'www.paprikaapp.com',
@@ -117,9 +129,9 @@ export class PaprikaApiService {
         'Accept-Language': 'en-US;q=1.0',
         Connection: 'keep-alive',
         'Accept-Encoding': 'br;q=1.0, gzip;q=0.9, deflate;q=0.8',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${this.paprikaConfig.bearerToken}`,
       },
-      url: `https://www.paprikaapp.com/api/v2/sync/recipe/${recipeDto.uid}`,
+      url: `${this.paprikaConfig.baseUrl}/sync/recipe/${recipeDto.uid}`,
       formData: {
         data: {
           value: formData.getBuffer(),

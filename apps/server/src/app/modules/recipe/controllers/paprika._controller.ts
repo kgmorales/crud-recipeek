@@ -27,6 +27,6 @@ export class PaprikaController {
 
   @Get('recipesByUID')
   async recipesByUID(@Query('uids') uids: string): Promise<IRecipe[]> {
-    return await this.paprikaService.recipesByUID(uids);
+    return await this.paprikaService.findByUID(uids);
   }
 }

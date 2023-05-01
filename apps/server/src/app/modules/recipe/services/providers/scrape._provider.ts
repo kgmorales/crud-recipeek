@@ -1,12 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { spawn } from 'child_process';
-import { createHash } from 'crypto';
+import { createHash, randomUUID } from 'crypto';
 
-import { v4 as uuidv4 } from 'uuid';
 import { cleanScrapedRecipe } from '../../../../utils';
-
 import { emptyRecipe, matchPaprikaKeys } from '../../constants';
-
 import { IRecipe, IScrapedRecipe } from '../../interfaces';
 
 @Injectable()
@@ -40,7 +37,7 @@ export class ScrapeService {
 
     const categories: string[] = [];
     const deleted = false;
-    const uid = `${uuidv4()}`;
+    const uid = randomUUID();
     const hash = getHash(uid as string);
     const ingredients =
       cleanScraped.instructions_list.length === 0
@@ -85,7 +82,7 @@ export class ScrapeService {
   }
 }
 
-function currentDate() {
+function currentDate(): string {
   const now = new Date();
   const year = now.getFullYear();
   const month = String(now.getMonth() + 1).padStart(2, '0');
@@ -96,7 +93,7 @@ function currentDate() {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
-function getHash(str: string) {
+function getHash(str: string): string {
   const newHash = createHash('sha256');
   newHash.update(str);
   return newHash.digest('hex');
