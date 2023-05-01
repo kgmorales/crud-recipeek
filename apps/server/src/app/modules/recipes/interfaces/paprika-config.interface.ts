@@ -1,6 +1,6 @@
 export interface IPaprikaConfig {
-  baseUrl: string;
-  bearerToken: string;
-  email: string;
+  baseURL: string;
+  user: string;
   password: string;
+  bearerToken?: string;
 }

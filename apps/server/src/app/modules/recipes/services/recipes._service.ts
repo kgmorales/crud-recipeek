@@ -1,5 +1,5 @@
 //* NESTJS
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 //* MONGOOSE
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';

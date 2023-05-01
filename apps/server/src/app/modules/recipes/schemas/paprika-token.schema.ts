@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
 export type PaprikaTokenDocument = PaprikaToken & Document;
 
@@ -10,3 +10,8 @@ export class PaprikaToken extends Document {
 }
 
 export const PaprikaTokenSchema = SchemaFactory.createForClass(PaprikaToken);
+
+export const PaprikaTokenModel = mongoose.model<PaprikaToken>(
+  'Paprika_Token',
+  PaprikaTokenSchema
+);

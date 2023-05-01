@@ -13,7 +13,6 @@ export class PaprikaApiService {
 
   constructor(private paprikaAuthService: PaprikaAuthService) {
     this.paprikaConfig = this.paprikaAuthService.paprikaConfig;
-    console.log(this.paprikaConfig);
   }
 
   private async gZip(jsonString: string): Promise<Buffer> {
@@ -40,11 +39,11 @@ export class PaprikaApiService {
   private resource(endpoint: string, method = 'GET', body?: Body) {
     const options: OptionsWithUrl = {
       auth: {
-        user: this.paprikaConfig.email,
+        user: this.paprikaConfig.user,
         pass: this.paprikaConfig.password,
       },
       method,
-      baseUrl: this.paprikaConfig.baseUrl,
+      baseUrl: this.paprikaConfig.baseURL,
       url: endpoint,
       json: true,
       headers: {
@@ -120,7 +119,7 @@ export class PaprikaApiService {
         'Accept-Encoding': 'br;q=1.0, gzip;q=0.9, deflate;q=0.8',
         Authorization: `Bearer ${this.paprikaConfig.bearerToken}`,
       },
-      url: `${this.paprikaConfig.baseUrl}/sync/recipe/${recipeDto.uid}`,
+      url: `${this.paprikaConfig.baseURL}/sync/recipe/${recipeDto.uid}`,
       formData: {
         data: {
           value: formData.getBuffer(),
