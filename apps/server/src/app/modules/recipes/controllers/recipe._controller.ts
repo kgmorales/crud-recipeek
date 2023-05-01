@@ -5,7 +5,6 @@ import { RecipeDto } from '@recipes/dtos';
 import { IRecipe, ISuccessMessage } from '@recipes/interfaces';
 import { RecipesService, ScrapeService } from '@recipes/services';
 
-
 @Controller('recipes')
 export class RecipesController {
   constructor(

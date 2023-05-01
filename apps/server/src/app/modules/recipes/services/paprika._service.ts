@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { IRecipe, ICategory, IRecipeItem } from '../interfaces';
-import { PaprikaApiService } from '../services/providers/paprika-api._provider';
+import { IRecipe, ICategory, IRecipeItem } from '@recipes/interfaces';
+import { PaprikaApiService } from '@recipes/services/providers';
 
 @Injectable()
 export class PaprikaService {

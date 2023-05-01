@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { RecipesModule } from './modules/recipe/recipes._module';
+import { RecipesModule } from '@recipes/recipes._module';
 
 import configuration from './config/config';
 

@@ -1,25 +1,25 @@
 //* NESTJS
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 
 //* MONGOOSE
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { Connection, Model } from 'mongoose';
 
 //* Module
-import { IRecipe, IRecipeItem } from '../interfaces';
-import { RecipeDto } from '../dtos';
-import { Category, Recipe, RecipeIds } from '../schemas';
-import { PaprikaApiService, PaprikaService } from '../services';
+import { RecipeDto } from '@recipes/dtos';
+import { IRecipe, IRecipeItem } from '@recipes/interfaces';
+import { Category, Recipe, RecipeIds } from '@recipes/schemas';
+import { PaprikaApiService, PaprikaService } from '@recipes/services';
 
 @Injectable()
 export class RecipesService {
   constructor(
-    @InjectModel(Recipe.name) private recipeModel: Model<Recipe>,
+    @InjectModel(Recipe.name) private recipeModel: Model<IRecipe>,
     @InjectModel(RecipeIds.name) private recipeIDModel: Model<RecipeIds>,
     @InjectModel(Category.name) private categoryModel: Model<Category>,
     @InjectConnection() private readonly connection: Connection,
-    private paprikaService: PaprikaService,
-    private paprikaApiService: PaprikaApiService
+    private paprikaApiService: PaprikaApiService,
+    private paprikaService: PaprikaService
   ) {}
 
   /**
@@ -93,7 +93,7 @@ export class RecipesService {
    * @returns Promise<IRecipe | null>
    */
   //* FIND BY UID
-  async findByUID(uid: string): Promise<Recipe | null> {
+  async findByUID(uid: Pick<IRecipe, 'uid'>): Promise<IRecipe | null> {
     const foundRecipe = await this.recipeModel.findById(uid);
     return foundRecipe || null;
   }

@@ -8,9 +8,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 //* Module
-import { PaprikaTokenDto } from '../../dtos';
-import { IPaprikaConfig } from '../../interfaces';
-import { PaprikaToken } from '../../schemas';
+import { IPaprikaConfig } from '@recipes/interfaces';
+import { PaprikaToken } from '@recipes/schemas';
 
 const paprikaV2URL = 'https://www.paprikaapp.com/api/v2';
 
@@ -25,9 +24,9 @@ export class PaprikaAuthService {
     private readonly configService: ConfigService
   ) {
     this.paprikaConfig = this.getConfig();
-    this.getToken().then((token) => {
-      this.paprikaToken = token;
-    });
+    // this.getToken().then((token) => {
+    //   this.paprikaToken = token;
+    // });
   }
 
   /** Build private config object containing paprika creds

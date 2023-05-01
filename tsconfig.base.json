@@ -31,7 +31,7 @@
       "@core/*": ["apps/client/src/app/core/*"],
       "@features/*": ["apps/client/src/app/features/*"],
       "@modules/*": ["apps/server/src/app/modules/*"],
-      "@recipes/*": ["apps/server/src/app/modules/recipe/*"],
+      "@recipes/*": ["apps/server/src/app/modules/recipes/*"],
       "@server/*": ["apps/server/src/app/*"],
       "@shared/*": ["apps/client/src/app/shared/*"]
     },

@@ -3,24 +3,13 @@ import request, { OptionsWithUrl } from 'request-promise-native';
 import zlib from 'zlib';
 import FormData from 'form-data';
 
-import {
-  IBookmark,
-  ICategory,
-  IGroceryItem,
-  IMeal,
-  IMenu,
-  IMenuItem,
-  IPantryItem,
-  IRecipe,
-  IRecipeItem,
-  IPaprikaConfig,
-} from '../../interfaces';
-import { RecipeDto } from '../../dtos';
-import { PaprikaAuthService } from '../providers/paprika-auth._provider';
+import * as model from '@recipes/interfaces';
+import { RecipeDto } from '@recipes/dtos';
+import { PaprikaAuthService } from '@recipes/services/providers';
 
 @Injectable()
 export class PaprikaApiService {
-  private paprikaConfig: IPaprikaConfig;
+  private paprikaConfig: model.IPaprikaConfig;
 
   constructor(private paprikaAuthService: PaprikaAuthService) {
     this.paprikaConfig = this.paprikaAuthService.paprikaConfig;
@@ -74,39 +63,39 @@ export class PaprikaApiService {
     return request(options);
   }
 
-  bookmarks(): Promise<IBookmark[]> {
+  bookmarks(): Promise<model.IBookmark[]> {
     return this.resource('bookmarks');
   }
 
-  categories(): Promise<ICategory[]> {
+  categories(): Promise<model.ICategory[]> {
     return this.resource('categories');
   }
 
-  groceries(): Promise<IGroceryItem[]> {
+  groceries(): Promise<model.IGroceryItem[]> {
     return this.resource('groceries');
   }
 
-  meals(): Promise<IMeal[]> {
+  meals(): Promise<model.IMeal[]> {
     return this.resource('meals');
   }
 
-  menus(): Promise<IMenu[]> {
+  menus(): Promise<model.IMenu[]> {
     return this.resource('menus');
   }
 
-  menuItems(): Promise<IMenuItem[]> {
+  menuItems(): Promise<model.IMenuItem[]> {
     return this.resource('menuitems');
   }
 
-  pantry(): Promise<IPantryItem[]> {
+  pantry(): Promise<model.IPantryItem[]> {
     return this.resource('pantry');
   }
 
-  recipes(): Promise<IRecipeItem[]> {
+  recipes(): Promise<model.IRecipeItem[]> {
     return this.resource('recipes');
   }
 
-  recipe(recipeUid: string): Promise<IRecipe> {
+  recipe(recipeUid: string): Promise<model.IRecipe> {
     return this.resource('recipe/' + recipeUid);
   }
 
