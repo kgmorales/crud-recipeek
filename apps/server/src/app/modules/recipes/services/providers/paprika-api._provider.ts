@@ -12,6 +12,8 @@ import { RecipeDto } from '@recipes/dtos';
 import * as model from '@recipes/interfaces';
 import { PaprikaAuthService } from '@recipes/services/providers';
 
+const PAPRIKA_V1_BASEURL = 'https://www.paprikaapp.com/api/v1';
+
 @Injectable()
 export class PaprikaApiService {
   private paprikaConfig: model.IPaprikaConfig;
@@ -59,20 +61,22 @@ export class PaprikaApiService {
    */
   private resource(endpoint: string, method = 'GET', body?: Body) {
     const options: OptionsWithUrl = {
+      auth: {
+        user: this.paprikaConfig.user,
+        pass: this.paprikaConfig.password,
+      },
       method,
-      baseUrl: `${this.paprikaConfig.baseURL}/sync/`,
+      baseUrl: `${PAPRIKA_V1_BASEURL}/sync/`,
       url: endpoint,
       json: true,
-      headers: {
-        ...paprikaBaseHeaders,
-        Authentication: `Bearer ${this.paprikaConfig.bearerToken}`,
-      },
       // Use the 'result' property of the response
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       transform(body: any) {
         return body.result;
       },
     };
+
+    console.log(options);
 
     if (body) {
       options.body = body;

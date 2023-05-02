@@ -56,9 +56,24 @@ export class PaprikaAuthService {
    * @returns Promise<string>
    */
   async getToken(): Promise<string> {
-    // If the token is already set, return it
+    // If the token is already set, check its validity and return it
     if (this.paprikaToken) {
-      return this.paprikaToken;
+      const options = {
+        url: `${this.localConfig.baseURL}/sync/status/`,
+        headers: {
+          Authorization: `Bearer ${this.paprikaToken}`,
+        },
+      };
+
+      try {
+        // Check the token's validity against the sync/status API
+        await request(options);
+
+        return this.paprikaToken;
+      } catch (error) {
+        // The token is invalid, refresh it
+        this.paprikaToken = await this.refreshToken();
+      }
     }
 
     // Try to get the token from the database
@@ -73,8 +88,9 @@ export class PaprikaAuthService {
       };
 
       try {
-        // Check the token's validity against their status api (above).
+        // Check the token's validity against the sync/status API
         await request(options);
+
         this.paprikaToken = paprikaToken.token;
         return paprikaToken.token;
       } catch (error) {
