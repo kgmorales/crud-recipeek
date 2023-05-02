@@ -3,7 +3,7 @@ import mongoose, { Document } from 'mongoose';
 
 export type PaprikaTokenDocument = PaprikaToken & Document;
 
-@Schema()
+@Schema({ collection: 'paprika_bearer_token' })
 export class PaprikaToken extends Document {
   @Prop({ required: true, unique: true })
   token: string;

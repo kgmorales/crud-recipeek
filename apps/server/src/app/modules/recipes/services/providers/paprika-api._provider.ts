@@ -1,10 +1,15 @@
+//* NESTJS
 import { Injectable } from '@nestjs/common';
 import request, { OptionsWithUrl } from 'request-promise-native';
+
+//* 3RD PARTY
 import zlib from 'zlib';
 import FormData from 'form-data';
 
-import * as model from '@recipes/interfaces';
+//* Module
+import { paprikaBaseHeaders } from '@recipes/constants';
 import { RecipeDto } from '@recipes/dtos';
+import * as model from '@recipes/interfaces';
 import { PaprikaAuthService } from '@recipes/services/providers';
 
 @Injectable()
@@ -12,7 +17,9 @@ export class PaprikaApiService {
   private paprikaConfig: model.IPaprikaConfig;
 
   constructor(private paprikaAuthService: PaprikaAuthService) {
-    this.paprikaConfig = this.paprikaAuthService.paprikaConfig;
+    this.paprikaAuthService.config.then((config) => {
+      this.paprikaConfig = config;
+    });
   }
 
   private async gZip(jsonString: string): Promise<Buffer> {
@@ -43,7 +50,7 @@ export class PaprikaApiService {
         pass: this.paprikaConfig.password,
       },
       method,
-      baseUrl: this.paprikaConfig.baseURL,
+      baseUrl: `${this.paprikaConfig.baseURL}/sync/`,
       url: endpoint,
       json: true,
       headers: {
@@ -112,11 +119,7 @@ export class PaprikaApiService {
     const options: OptionsWithUrl = {
       method: 'POST',
       headers: {
-        Host: 'www.paprikaapp.com',
-        Accept: '*/*',
-        'Accept-Language': 'en-US;q=1.0',
-        Connection: 'keep-alive',
-        'Accept-Encoding': 'br;q=1.0, gzip;q=0.9, deflate;q=0.8',
+        ...paprikaBaseHeaders,
         Authorization: `Bearer ${this.paprikaConfig.bearerToken}`,
       },
       url: `${this.paprikaConfig.baseURL}/sync/recipe/${recipeDto.uid}`,

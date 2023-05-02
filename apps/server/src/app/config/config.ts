@@ -8,7 +8,7 @@ export default () => ({
   },
   paprika: {
     baseURL: `https://www.paprikaapp.com/api/v2/`,
-    bearerToken: '',
+    bearerToken: process.env.PAPRIKA_BEARER_TOKEN,
     password: process.env.PAPRIKA_PASS,
     user: process.env.PAPRIKA_USER,
   },

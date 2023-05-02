@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import request, { OptionsWithUrl } from 'request-promise-native';
-
+import request from 'request-promise-native';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-
 import { IPaprikaConfig } from '@recipes/interfaces';
 import { PaprikaToken } from '@recipes/schemas';
 
@@ -12,7 +10,8 @@ const PAPRIKA_V2_URL = 'https://www.paprikaapp.com/api/v2';
 
 @Injectable()
 export class PaprikaAuthService {
-  paprikaConfig: IPaprikaConfig;
+  config: Promise<IPaprikaConfig>
+  private localConfig: IPaprikaConfig;
   private paprikaToken: string;
 
   constructor(
@@ -20,22 +19,24 @@ export class PaprikaAuthService {
     private readonly paprikaTokenModel: Model<PaprikaToken>,
     private readonly configService: ConfigService
   ) {
-    this.paprikaConfig = this.getConfig();
-    this.getToken().then((token) => {
-      this.paprikaToken = token;
-    });
+    this.config = this.getAuthConfig();
   }
 
-  /** Build private config object containing paprika creds
+  async getAuthConfig(): Promise<IPaprikaConfig> {
+    const token = await this.getToken();
+    this.localConfig = await this.getPaprikaConfig(token);
+    this.localConfig.bearerToken = token;
+    return this.localConfig;
+  }
+
+  /** Build config auth object containing paprika creds
    *
    * @returns IConfig
    */
-  private getConfig(): IPaprikaConfig {
+  private async getPaprikaConfig(token: string): Promise<IPaprikaConfig> {
     return {
       baseURL: this.configService.get<string>('paprika.baseURL') as string,
-      bearerToken: this.configService.get<string>(
-        'paprika.bearerToken'
-      ) as string,
+      bearerToken: token,
       user: this.configService.get<string>('paprika.user') as string,
       password: this.configService.get<string>('paprika.password') as string,
     };
@@ -55,7 +56,7 @@ export class PaprikaAuthService {
     let paprikaToken = await this.paprikaTokenModel.findOne().exec();
 
     if (paprikaToken && paprikaToken.token) {
-      const options: OptionsWithUrl = {
+      const options = {
         url: `${PAPRIKA_V2_URL}/sync/status/`,
         headers: {
           Authorization: `Bearer ${paprikaToken.token}`,
@@ -65,10 +66,6 @@ export class PaprikaAuthService {
       try {
         await request(options);
         this.paprikaToken = paprikaToken.token;
-
-        // Update configService with token
-        this.configService.get('paprika').bearerToken = paprikaToken.token;
-
         return paprikaToken.token;
       } catch (error) {
         // The token is invalid, refresh it
@@ -85,9 +82,6 @@ export class PaprikaAuthService {
     await paprikaToken.save();
     this.paprikaToken = paprikaToken.token;
 
-    // Update configService with token
-    this.configService.get('paprika').bearerToken = paprikaToken.token;
-
     return paprikaToken.token;
   }
 
@@ -101,13 +95,14 @@ export class PaprikaAuthService {
       url: `${PAPRIKA_V2_URL}/account/login/`,
       json: true,
       formData: {
-        email: this.paprikaConfig.user,
-        password: this.paprikaConfig.password,
+        email: this.localConfig.user,
+        password: this.localConfig.password,
       },
     };
 
     const response = await request(options);
-
-    return await response.result.token;
+    // Update configService with token
+    const newToken = response.result.token;
+    return newToken;
   }
 }
