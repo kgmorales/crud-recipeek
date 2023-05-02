@@ -11,11 +11,13 @@ import { Model } from 'mongoose';
 import { IPaprikaConfig } from '@recipes/interfaces';
 import { PaprikaToken } from '@recipes/schemas';
 
-const PAPRIKA_V2_URL = 'https://www.paprikaapp.com/api/v2';
-
 @Injectable()
 export class PaprikaAuthService {
-  config: Promise<IPaprikaConfig>;
+  /**
+   * Promise containing Paprika Auth config
+   */
+  authConfig: Promise<IPaprikaConfig>;
+
   private localConfig: IPaprikaConfig;
   private paprikaToken: string;
 
@@ -24,11 +26,12 @@ export class PaprikaAuthService {
     private readonly paprikaTokenModel: Model<PaprikaToken>,
     private readonly configService: ConfigService
   ) {
+    // Setting the localConfig and config properties
     this.localConfig = this.getPaprikaConfig();
-    this.config = this.getAuthConfig();
+    this.authConfig = this.buildAuthConfig();
   }
 
-  async getAuthConfig(): Promise<IPaprikaConfig> {
+  async buildAuthConfig(): Promise<IPaprikaConfig> {
     const token = await this.getToken();
     this.localConfig.bearerToken = token;
 
@@ -63,13 +66,14 @@ export class PaprikaAuthService {
 
     if (paprikaToken && paprikaToken.token) {
       const options = {
-        url: `${PAPRIKA_V2_URL}/sync/status/`,
+        url: `${this.localConfig.baseURL}/sync/status/`,
         headers: {
           Authorization: `Bearer ${paprikaToken.token}`,
         },
       };
 
       try {
+        // Check the token's validity against their status api (above).
         await request(options);
         this.paprikaToken = paprikaToken.token;
         return paprikaToken.token;
@@ -91,14 +95,14 @@ export class PaprikaAuthService {
     return paprikaToken.token;
   }
 
-  /** Refresh Paprika bearer token.
+  /** Refresh Paprika API bearer token.
    *
    * @returns Promise<string>
    */
   private async refreshToken(): Promise<string> {
     const options = {
       method: 'POST',
-      url: `${PAPRIKA_V2_URL}/account/login/`,
+      url: `${this.localConfig.baseURL}/account/login/`,
       json: true,
       formData: {
         email: this.localConfig.user,

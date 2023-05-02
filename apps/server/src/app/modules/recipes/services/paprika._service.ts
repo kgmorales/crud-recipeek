@@ -1,6 +1,9 @@
+//* NESTJS
 import { Injectable } from '@nestjs/common';
 
+//* Module
 import { IRecipe, ICategory, IRecipeItem } from '@recipes/interfaces';
+//TODO: fix why this blows up if you only load from '@recipes/services'.
 import { PaprikaApiService } from '@recipes/services/providers';
 
 @Injectable()

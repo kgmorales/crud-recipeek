@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { spawn } from 'child_process';
 import { createHash, randomUUID } from 'crypto';
@@ -36,7 +37,6 @@ export class ScrapeService {
     const created = currentDate();
 
     const categories: string[] = [];
-    const deleted = false;
     const uid = randomUUID();
     const hash = getHash(uid as string);
     const ingredients =
@@ -46,27 +46,33 @@ export class ScrapeService {
     const nutritional_info =
       isEmpty(cleanScraped.nutritional_info) &&
       joinObjectToString(cleanScraped.nutritional_info);
-    const on_favorites = 0;
     // const servings = Number(cleanScraped.servings.replace(/\D/g, ''));
 
     const prettyRecipeData = {
       ...cleanScraped,
       categories,
       created,
-      deleted,
       hash,
       ingredients,
       nutritional_info,
-      on_favorites,
+
       // servings,
       uid,
     };
 
     const newRecipe = { ...emptyRecipe, ...prettyRecipeData };
 
-    //* DISSECT UNNECESSARY PROPERTIES
+    //* EXTRACT UNNECESSARY PROPERTIES
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { author, host, instructions_list, language, ...recipe } = newRecipe;
+    const {
+      author,
+      category,
+      host,
+      instructions_list,
+      language,
+      source,
+      ...recipe
+    } = newRecipe;
 
     return recipe;
   }

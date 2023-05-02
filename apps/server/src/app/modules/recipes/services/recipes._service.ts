@@ -76,6 +76,7 @@ export class RecipesService {
       const newRecipeIds = await paprikaIds.filter(
         (paprikaId) => !dbIds.find((dbId) => paprikaId.uid === dbId.uid)
       );
+
       const newUIDs = newRecipeIds.map((ids) => ids.uid);
       const newRecipes = await this.paprikaService.findByUID(newUIDs.join(''));
 
@@ -89,7 +90,7 @@ export class RecipesService {
 
   /**
    * Find's recipe in Database by UID.
-   * @param uid
+   * @param uid string
    * @returns Promise<IRecipe | null>
    */
   //* FIND BY UID

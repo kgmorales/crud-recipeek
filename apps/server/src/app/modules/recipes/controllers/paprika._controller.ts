@@ -1,7 +1,9 @@
+//* NESTJS
 import { Controller, Get, Query } from '@nestjs/common';
 
-import { PaprikaService } from '../services/paprika._service';
-import { ICategory, IRecipe, IRecipeItem } from '../interfaces';
+//* Module
+import { ICategory, IRecipe, IRecipeItem } from '@recipes/interfaces';
+import { PaprikaService } from '@recipes/services';
 
 @Controller('paprika')
 export class PaprikaController {

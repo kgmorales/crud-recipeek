@@ -1,10 +1,10 @@
 //* NESTJS
 import { Injectable } from '@nestjs/common';
-import request, { OptionsWithUrl } from 'request-promise-native';
 
 //* 3RD PARTY
 import zlib from 'zlib';
 import FormData from 'form-data';
+import request, { OptionsWithUrl } from 'request-promise-native';
 
 //* Module
 import { paprikaBaseHeaders } from '@recipes/constants';
@@ -17,12 +17,17 @@ export class PaprikaApiService {
   private paprikaConfig: model.IPaprikaConfig;
 
   constructor(private paprikaAuthService: PaprikaAuthService) {
-    this.paprikaAuthService.config.then((config) => {
+    // Get the Paprika config from the auth service
+    this.paprikaAuthService.authConfig.then((config) => {
       this.paprikaConfig = config;
-      console.log(this.paprikaConfig);
     });
   }
 
+  /**
+   * GZip a JSON string
+   * @param jsonString @type string
+   * @returns Promise<Buffer>
+   */
   private async gZip(jsonString: string): Promise<Buffer> {
     return await new Promise<Buffer>((resolve, reject) => {
       zlib.gzip(jsonString, (err, buffer) => {
@@ -35,6 +40,11 @@ export class PaprikaApiService {
     });
   }
 
+  /**
+   * Get the binary data for Photo URL
+   * @param photoUrl @type string
+   * @returns
+   */
   private async getPhotoData(photoUrl: string): Promise<Buffer> {
     const options: OptionsWithUrl = {
       url: photoUrl,
@@ -44,19 +54,20 @@ export class PaprikaApiService {
     return photoData;
   }
 
+  /**
+   * Make a request to the Paprika API with authentication headers
+   */
   private resource(endpoint: string, method = 'GET', body?: Body) {
     const options: OptionsWithUrl = {
-      auth: {
-        user: this.paprikaConfig.user,
-        pass: this.paprikaConfig.password,
-      },
       method,
       baseUrl: `${this.paprikaConfig.baseURL}/sync/`,
       url: endpoint,
       json: true,
       headers: {
-        'User-Agent': 'PaprikaApi NodeJS library',
+        ...paprikaBaseHeaders,
+        Authentication: `Bearer ${this.paprikaConfig.bearerToken}`,
       },
+      // Use the 'result' property of the response
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       transform(body: any) {
         return body.result;
@@ -111,10 +122,11 @@ export class PaprikaApiService {
     const formData = new FormData();
 
     formData.append('data', gzippedJson, { filename: 'recipe.json.gz' });
-
     if (recipeDto.image_url) {
       const photoData = await this.getPhotoData(recipeDto.image_url);
-      formData.append('photo', photoData, { filename: 'photo.jpg' });
+      formData.append('photo', photoData, {
+        filename: `${recipeDto.name.replaceAll(' ', '-')}.jpg`,
+      });
     }
 
     const options: OptionsWithUrl = {
@@ -134,7 +146,6 @@ export class PaprikaApiService {
         },
       },
     };
-
     await request(options);
   }
 }

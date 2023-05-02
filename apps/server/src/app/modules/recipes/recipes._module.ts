@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { HttpModule } from '@nestjs/axios';
 
-//TODO: FIX THIS SHOULD BE EXPORTED TO ARRAY. IDK WHY PROVIDERS RUINS IT
+//TODO: FIX THIS SHOULD BE EXPORTED TO ARRAY. IDK WHY ADDING PROVIDERS RUINS IT
 import { PaprikaAuthService } from './services/providers/paprika-auth._provider';
 import { PaprikaApiService } from './services/providers/paprika-api._provider';
 import { ScrapeService } from './services/providers/scrape._provider';
