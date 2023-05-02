@@ -1,8 +1,13 @@
+//* NESTJS
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import request from 'request-promise-native';
 import { InjectModel } from '@nestjs/mongoose';
+
+//* 3RD Party
+import request from 'request-promise-native';
 import { Model } from 'mongoose';
+
+//* Module
 import { IPaprikaConfig } from '@recipes/interfaces';
 import { PaprikaToken } from '@recipes/schemas';
 
@@ -10,7 +15,7 @@ const PAPRIKA_V2_URL = 'https://www.paprikaapp.com/api/v2';
 
 @Injectable()
 export class PaprikaAuthService {
-  config: Promise<IPaprikaConfig>
+  config: Promise<IPaprikaConfig>;
   private localConfig: IPaprikaConfig;
   private paprikaToken: string;
 
@@ -19,13 +24,14 @@ export class PaprikaAuthService {
     private readonly paprikaTokenModel: Model<PaprikaToken>,
     private readonly configService: ConfigService
   ) {
+    this.localConfig = this.getPaprikaConfig();
     this.config = this.getAuthConfig();
   }
 
   async getAuthConfig(): Promise<IPaprikaConfig> {
     const token = await this.getToken();
-    this.localConfig = await this.getPaprikaConfig(token);
     this.localConfig.bearerToken = token;
+
     return this.localConfig;
   }
 
@@ -33,10 +39,10 @@ export class PaprikaAuthService {
    *
    * @returns IConfig
    */
-  private async getPaprikaConfig(token: string): Promise<IPaprikaConfig> {
+  private getPaprikaConfig(token?: string): IPaprikaConfig {
     return {
       baseURL: this.configService.get<string>('paprika.baseURL') as string,
-      bearerToken: token,
+      bearerToken: token || '',
       user: this.configService.get<string>('paprika.user') as string,
       password: this.configService.get<string>('paprika.password') as string,
     };

@@ -19,6 +19,7 @@ export class PaprikaApiService {
   constructor(private paprikaAuthService: PaprikaAuthService) {
     this.paprikaAuthService.config.then((config) => {
       this.paprikaConfig = config;
+      console.log(this.paprikaConfig);
     });
   }
 
