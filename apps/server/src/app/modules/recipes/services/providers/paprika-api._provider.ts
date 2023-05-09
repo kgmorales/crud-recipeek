@@ -48,6 +48,7 @@ export class PaprikaApiService {
    * @returns
    */
   private async getPhotoData(photoUrl: string): Promise<Buffer> {
+    console.log(photoUrl);
     const options: OptionsWithUrl = {
       url: photoUrl,
       encoding: null,
@@ -75,8 +76,6 @@ export class PaprikaApiService {
         return body.result;
       },
     };
-
-    console.log(options);
 
     if (body) {
       options.body = body;
@@ -122,14 +121,23 @@ export class PaprikaApiService {
   }
 
   async create(recipeDto: RecipeDto): Promise<void> {
+    if (!recipeDto) {
+      throw new Error('Recipe DTO is null or undefined');
+    }
+
     const gzippedJson = await this.gZip(JSON.stringify(recipeDto));
     const formData = new FormData();
 
-    formData.append('data', gzippedJson, { filename: 'recipe.json.gz' });
     if (recipeDto.image_url) {
       const photoData = await this.getPhotoData(recipeDto.image_url);
+
       formData.append('photo', photoData, {
-        filename: `${recipeDto.name.replaceAll(' ', '-')}.jpg`,
+        filename: `recipe.jpg`,
+      });
+
+      formData.append('data', gzippedJson, {
+        filename: 'recipe.json.gz',
+        contentType: 'application/gzip',
       });
     }
 
@@ -137,19 +145,13 @@ export class PaprikaApiService {
       method: 'POST',
       headers: {
         ...paprikaBaseHeaders,
+        'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${this.paprikaConfig.bearerToken}`,
       },
       url: `${this.paprikaConfig.baseURL}/sync/recipe/${recipeDto.uid}`,
-      formData: {
-        data: {
-          value: formData.getBuffer(),
-          options: {
-            filename: 'recipe.json.gz',
-            contentType: 'application/gzip',
-          },
-        },
-      },
+      formData,
     };
+
     await request(options);
   }
 }

@@ -15,7 +15,7 @@ export class RecipesController {
 
   @Post('create')
   async createRecipe(@Body() recipeDto: RecipeDto) {
-    await this.recipeService.createRecipe(recipeDto);
+    return this.recipeService.createRecipe(recipeDto);
   }
 
   @Get('find/:uid')

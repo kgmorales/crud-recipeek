@@ -20,7 +20,7 @@ export class RecipesApiService {
 
   getRecipes(): Observable<Recipe[]> {
     return this.http
-      .get<AllRecipes>(`${coreConst.url.localHost}/home`)
+      .get<AllRecipes>(`${coreConst.url.localHost}/allRecipes`)
       .pipe(map((allRecipes) => buildRecipesModel(allRecipes)));
   }
 

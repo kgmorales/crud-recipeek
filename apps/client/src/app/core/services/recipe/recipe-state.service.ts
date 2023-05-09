@@ -51,7 +51,7 @@ export class RecipesStateService extends StateService<RecipeState> {
     shareReplay({ bufferSize: 1, refCount: true })
   );
 
-  scrapedRecipe$: any;
+  scrapedRecipe$: unknown;
 
   constructor(private apiService: RecipesApiService) {
     super(initialState);
