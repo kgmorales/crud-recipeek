@@ -86,6 +86,7 @@
     "*.cxx": "$(capture).hpp, $(capture).h, $(capture).hxx",
     "*.dart": "$(capture).freezed.dart, $(capture).g.dart",
     "*.ex": "$(capture).html.eex, $(capture).html.heex, $(capture).html.leex",
+    "*.eslintrc.json":"eslintignore",
     "*.go": "$(capture)_test.go",
     "*.java": "$(capture).class",
     "*.js": "$(capture).js.map, $(capture).*.js, $(capture)_*.js",

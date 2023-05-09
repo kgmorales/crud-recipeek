@@ -1,8 +1,6 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RecipesStateService } from '@core/services';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'la-scrape-form',

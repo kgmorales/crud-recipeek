@@ -18,7 +18,7 @@ export class StateService<T> {
     );
   }
 
-  protected setState(newState: Partial<T>) {
+  protected setState(newState: Partial<T>): void {
     this.state$.next({
       ...this.state,
       ...newState,

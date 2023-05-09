@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { WellKnownRoutes } from '@core/enums';
 @Component({
@@ -6,12 +6,10 @@ import { WellKnownRoutes } from '@core/enums';
   templateUrl: 'side-nav.component.html',
   styleUrls: ['./side-nav.component.scss'],
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent {
   route = WellKnownRoutes;
   isOpen = false;
-  constructor() {}
 
-  ngOnInit() {}
 
   open(): void {
     this.isOpen = !this.isOpen;
