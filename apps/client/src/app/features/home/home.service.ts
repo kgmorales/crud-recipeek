@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, combineLatest, concatMap, filter, map, take } from 'rxjs';
+import { Observable, combineLatest, map } from 'rxjs';
 
-import { Category, Recipe, RecipeState } from '@client/app/core/interfaces';
+import { Category, Recipe } from '@client/app/core/interfaces';
 import { RecipesStateService } from '@core/services/';
 
 import * as utils from './utils';
@@ -9,14 +9,20 @@ import { Preview } from './models';
 
 @Injectable({ providedIn: 'root' })
 export class HomeService {
-  homePreviews$ = combineLatest([
-    this.recipesStateService.favorites$,
-    this.recipesStateService.categories$,
-  ]).pipe(
-    map(([favorites, categories]) => this.buildPreview(favorites, categories))
-  );
+  homePreviews$: Observable<Preview[]>;
 
-  constructor(private recipesStateService: RecipesStateService) {}
+  constructor(private recipesStateService: RecipesStateService) {
+    this.homePreviews$ = this.getPreview();
+  }
+
+  getPreview(): Observable<Preview[]> {
+    return combineLatest([
+      this.recipesStateService.favorites$,
+      this.recipesStateService.categories$,
+    ]).pipe(
+      map(([favorites, categories]) => this.buildPreview(favorites, categories))
+    );
+  }
 
   buildPreview(recipes: Recipe[], categoryTypes: Category[]): Preview[] {
     const previewRecipes: Recipe[] = utils.getMultipleRandom(recipes, 4);
@@ -30,7 +36,7 @@ export class HomeService {
         .filter((category) => recipe.categories.includes(category.uid))
         .map((category) => category.name);
 
-      const cook_time: number = Number(recipe.cook_time.replace(/\D/g, ''));
+      const cook_time = Number(recipe.cook_time.replace(/\D/g, ''));
 
       const created = Date.parse(recipe.created);
 

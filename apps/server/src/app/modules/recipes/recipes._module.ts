@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { HttpModule } from '@nestjs/axios';
+import { CacheModule } from '@nestjs/cache-manager';
 
 //TODO: FIX THIS SHOULD BE EXPORTED TO ARRAY. IDK WHY ADDING PROVIDERS RUINS IT
 import { PaprikaAuthService } from './services/providers/paprika-auth._provider';
@@ -16,7 +16,7 @@ import { schema } from '@recipes/schemas';
 // import { ValidateUrlMiddleware } from '@recipes/middleware';
 
 const imports = [
-  HttpModule,
+  CacheModule.register(),
   MongooseModule.forFeature([
     { name: schema.Category.name, schema: schema.CategorySchema },
   ]),

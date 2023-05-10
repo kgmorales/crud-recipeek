@@ -3,7 +3,7 @@ import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 
 //* Module
 import { RecipeDto } from '@recipes/dtos';
-import { IRecipe, ISuccessMessage } from '@recipes/interfaces';
+import { ICategory, IRecipe, ISuccessMessage } from '@recipes/interfaces';
 import { RecipesService, ScrapeService } from '@recipes/services';
 
 @Controller('recipes')
@@ -13,9 +13,19 @@ export class RecipesController {
     private scrapeService: ScrapeService
   ) {}
 
+  @Get('allDBRecipes')
+  async getDBRecipes(): Promise<IRecipe[]> {
+    return await this.recipeService.allDBRecipes();
+  }
+
+  @Get('categories')
+  async getDBCategories(): Promise<ICategory[]> {
+    return await this.recipeService.allDBCategories();
+  }
+
   @Post('create')
-  async createRecipe(@Body() recipeDto: RecipeDto) {
-    return this.recipeService.createRecipe(recipeDto);
+  async createRecipe(@Body() recipeDto: RecipeDto): Promise<void> {
+    return await this.recipeService.createRecipe(recipeDto);
   }
 
   @Get('find/:uid')
@@ -23,6 +33,14 @@ export class RecipesController {
     @Param('uid') uid: Pick<IRecipe, 'uid'>
   ): Promise<IRecipe | null> {
     return await this.recipeService.findByUID(uid);
+  }
+
+  @Get('paginatedRecipes')
+  async getPaginatedRecipes(
+    @Query('limit') limit: number,
+    @Query('page') page: number
+  ) {
+    return await this.recipeService.getPaginatedRecipes({ page, limit });
   }
 
   @Get('refreshDB')

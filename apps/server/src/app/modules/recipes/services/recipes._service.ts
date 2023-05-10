@@ -7,7 +7,7 @@ import { Connection, Model } from 'mongoose';
 
 //* Module
 import { RecipeDto } from '@recipes/dtos';
-import { IRecipe, IRecipeItem } from '@recipes/interfaces';
+import { ICategory, IRecipe, IRecipeItem } from '@recipes/interfaces';
 import { Category, Recipe, RecipeIds } from '@recipes/schemas';
 import { PaprikaApiService, PaprikaService } from '@recipes/services';
 
@@ -21,6 +21,15 @@ export class RecipesService {
     private paprikaApiService: PaprikaApiService,
     private paprikaService: PaprikaService
   ) {}
+
+  //* ALL RECIPES IN MONGO
+  async allDBRecipes(): Promise<IRecipe[]> {
+    return await this.recipeModel.find().exec();
+  }
+
+  async allDBCategories(): Promise<ICategory[]> {
+    return await this.categoryModel.find().exec();
+  }
 
   /**
    * Create new Recipe and add to Database.
@@ -45,6 +54,19 @@ export class RecipesService {
         await collection.deleteMany({});
       })
     );
+  }
+
+  async getPaginatedRecipes({ page = 1, limit = 10 }) {
+    limit = limit > 100 ? 100 : limit; // Optional: this line caps the limit at 100 items
+
+    const skippedItems = (page - 1) * limit;
+    const recipes = await this.recipeModel
+      .find()
+      .skip(skippedItems)
+      .limit(limit)
+      .exec();
+
+    return recipes;
   }
 
   /**
