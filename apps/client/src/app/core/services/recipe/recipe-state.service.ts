@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { StateService } from '../state.service';
-import { Category, Filter, Recipe, RecipeState } from '../../interfaces';
-
 import { Observable, combineLatest, filter, map, shareReplay } from 'rxjs';
-import { RecipesApiService } from './recipe-api.service';
+
+import { StateService } from '@core/services/state.service';
+import { Category, Filter, Recipe, RecipeState } from '@core/interfaces';
+import { RecipesApiService } from '@core/services';
 
 const initialState: RecipeState = {
   categories: [] as Category[],
@@ -26,7 +26,9 @@ export class RecipesStateService extends StateService<RecipeState> {
     return getRecipesFiltered(state.recipes, state.filter);
   });
 
-  categories$ = this.select((state) => state.categories);
+  categories$: Observable<Category[]> = this.select(
+    (state) => state.categories
+  );
 
   recipes$: Observable<Recipe[]> = this.select((state) => state.recipes);
 
@@ -134,7 +136,10 @@ function getRecipesFiltered(recipes: Recipe[], filter: Filter): Recipe[] {
       (filter.category.isFastCookTime
         ? Number(item.cook_time.replace(/regExp/g, ''))
         : true) &&
-      (filter.category.isFavorite ? item.on_favorites : true)
+      (filter.category.isFavorite ? item.on_favorites : true) &&
+      item.ingredientsList?.some((ingredient) =>
+        ingredient.toUpperCase().includes(filter.search.toUpperCase())
+      )
     );
   });
 }

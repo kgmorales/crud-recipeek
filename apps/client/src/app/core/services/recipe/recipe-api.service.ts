@@ -4,8 +4,8 @@ import { Observable, map } from 'rxjs';
 
 //? Core
 import * as coreConst from '@core/constants';
-import { Category, Recipe } from '@client/app/core/interfaces';
-import { buildRecipesModel } from '@core/utils/service';
+import { Category, Recipe } from '@core/interfaces';
+import { buildRecipesModel } from '@core/utils';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +14,7 @@ export class RecipesApiService {
 
   getRecipes(): Observable<Recipe[]> {
     return this.http
-      .get<Recipe[]>(`${coreConst.url.localHost}/allDBRecipes`)
+      .get<Recipe[]>(`${coreConst.url.localHost}/allRecipes`)
       .pipe(map((allRecipes) => buildRecipesModel(allRecipes)));
   }
 

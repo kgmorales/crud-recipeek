@@ -181,14 +181,6 @@ export class Recipe {
   nutritional_info: string;
 }
 
-export interface AllRecipes {
-  allRecipes: Recipe[];
-}
-
-export interface AllCategories {
-  categories: Category[];
-}
-
 /*
 Example:
 {

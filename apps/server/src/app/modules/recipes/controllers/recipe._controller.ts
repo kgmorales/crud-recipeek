@@ -13,7 +13,7 @@ export class RecipesController {
     private scrapeService: ScrapeService
   ) {}
 
-  @Get('allDBRecipes')
+  @Get('allRecipes')
   async getDBRecipes(): Promise<IRecipe[]> {
     return await this.recipeService.allDBRecipes();
   }

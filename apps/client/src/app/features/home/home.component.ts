@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { LoadingService } from '@core/services';
+import { LoadingService, RecipesStateService } from '@core/services';
 
 import { HomeService } from './home.service';
 
@@ -24,6 +24,9 @@ export class HomeComponent {
 
   constructor(
     private loadingService: LoadingService,
-    private homeService: HomeService
-  ) {}
+    private homeService: HomeService,
+    private recipeStateService: RecipesStateService
+  ) {
+    this.recipeStateService.filter$.subscribe((x) => console.log(x));
+  }
 }
