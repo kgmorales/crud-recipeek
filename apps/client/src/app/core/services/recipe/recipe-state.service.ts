@@ -82,7 +82,11 @@ export class RecipesStateService extends StateService<RecipeState> {
     });
   }
 
-  // API CALLS
+  //* FIRE INITIAL API CALLS
+  /**
+   * THIS BUILDS RECIPE INITIAL STATE.
+   * @default RecipeState
+   */
   load(): void {
     combineLatest([
       this.apiService.getCategories(),

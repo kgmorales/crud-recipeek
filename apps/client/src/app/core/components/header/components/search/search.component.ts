@@ -9,28 +9,32 @@ import { RecipesStateService } from '@core/services';
     <div class="search-bar">
       <input
         type="text"
-        name="search"
+        class="form-control"
+        placeholder="eg. Chicken..."
         [(ngModel)]="searchTerm"
-        #search="ngModel"
+        (ngModelChange)="onSearchChange()"
+        aria-label="eg. Chicken..."
+        autofocus
       />
     </div>
   `,
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
   searchTerm: string;
-  recipes$: Observable<Recipe[]>;
 
   constructor(private recipesStateService: RecipesStateService) {}
 
-  ngOnInit(): void {
-    this.recipes$ = this.recipesStateService.recipes$;
-  }
-
+  /**
+   * Search Function.
+   * setTimout is used to delay (5 seconds) the search of typing for sending to retrieve results.
+   */
   onSearchChange(): void {
-    this.recipesStateService.updateFilter({
-      search: this.searchTerm,
-      category: { isFastCookTime: false, isFavorite: false },
-    });
+    setTimeout(() => {
+      this.recipesStateService.updateFilter({
+        search: this.searchTerm,
+        category: { isFastCookTime: false, isFavorite: false },
+      });
+    }, 2000);
   }
 }
