@@ -3,4 +3,5 @@ export enum WellKnownRoutes {
   blog = 'blog',
   recipe = 'recipe',
   recipes = 'recipes',
+  search = 'search',
 }

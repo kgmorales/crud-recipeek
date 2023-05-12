@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgFor } from '@angular/common';
 
-import { Preview } from '@features/home/models';
+import { Preview } from '@core/interfaces';
 @Component({
   selector: 'la-recipe-preview',
   templateUrl: './recipe-preview.component.html',

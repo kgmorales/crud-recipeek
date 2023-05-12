@@ -1,33 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Observable, combineLatest, map } from 'rxjs';
 
-import { Category, Preview, Recipe } from '@core/interfaces';
+import { Category, Recipe } from '@client/app/core/interfaces';
+import { RecipesStateService } from '@core/services/';
 
-import { RecipesStateService } from '@core/services';
-
-import * as utils from '@features/home/utils';
+import { Preview } from '@core/interfaces';
 
 @Injectable({ providedIn: 'root' })
-export class HomeService {
-  homePreviews$: Observable<Preview[]>;
+export class SearchResultService {
+  searchResult$: Observable<Preview[]>;
 
   constructor(private recipesStateService: RecipesStateService) {
-    this.homePreviews$ = this.getPreview();
+    this.searchResult$ = this.getPreview();
   }
 
   getPreview(): Observable<Preview[]> {
     return combineLatest([
-      this.recipesStateService.favorites$,
+      this.recipesStateService.searchResult$,
       this.recipesStateService.categories$,
     ]).pipe(
-      map(([favorites, categories]) => this.buildPreview(favorites, categories))
+      map(([searched, categories]) => this.buildPreview(searched, categories))
     );
   }
 
   buildPreview(recipes: Recipe[], categoryTypes: Category[]): Preview[] {
-    const previewRecipes: Recipe[] = utils.getMultipleRandom(recipes, 4);
-
-    return previewRecipes.map((recipe) => {
+    return recipes.map((recipe) => {
       const { image_url, name } = recipe;
       /**
        * turns the category from paprika db into category string names.

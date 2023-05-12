@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Location } from '@angular/common';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable, combineLatest, filter, map, shareReplay } from 'rxjs';
 
 import { StateService } from '@core/services/state.service';
@@ -22,6 +24,7 @@ const initialState: RecipeState = {
   providedIn: 'root',
 })
 export class RecipesStateService extends StateService<RecipeState> {
+  private previousUrl: string;
   private recipesFiltered$ = this.select((state) => {
     return getRecipesFiltered(state.recipes, state.filter);
   });
@@ -53,9 +56,21 @@ export class RecipesStateService extends StateService<RecipeState> {
     shareReplay({ bufferSize: 1, refCount: true })
   );
 
+  searchResult$: Observable<Recipe[]> = this.recipesFiltered$;
+
+  hasSearchTerm$: Observable<boolean> = this.select((state) => {
+    const searchTerm = state.filter.search;
+    return !!searchTerm && searchTerm.trim().length > 0;
+  });
+
   scrapedRecipe$: unknown;
 
-  constructor(private apiService: RecipesApiService) {
+  constructor(
+    private apiService: RecipesApiService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {
     super(initialState);
 
     this.load();
@@ -80,6 +95,14 @@ export class RecipesStateService extends StateService<RecipeState> {
         ...filter,
       },
     });
+
+    if (filter.search.trim() !== '') {
+      // Navigate to the search results page
+      this.router.navigateByUrl('/search');
+    } else {
+      // Navigate back to the previous route
+      this.router.navigate(['../'], { relativeTo: this.route });
+    }
   }
 
   //* FIRE INITIAL API CALLS

@@ -3,11 +3,23 @@ import { LoadingService } from '../app/core/services';
 
 @Component({
   selector: 'la-root',
-  templateUrl: './app.component.html',
+  template: `
+    <div class="app">
+      <la-side-nav />
+      <div class="wrapper">
+        <la-header />
+        <div class="main-container">
+          <router-outlet #page="outlet"></router-outlet>
+        </div>
+      </div>
+    </div>
+  `,
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'lamora';
 
-  constructor(private loadingService: LoadingService) {}
+  constructor(
+    private loadingService: LoadingService,
+  ) {}
 }

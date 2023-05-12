@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { LoadingService, RecipesStateService } from '@core/services';
 
 import { HomeService } from './home.service';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'la-home',
@@ -19,14 +20,23 @@ import { HomeService } from './home.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+  showSearchResults: boolean;
   loading$ = this.loadingService.isLoading$;
-  homePreview$ = this.homeService.homePreviews$;
+  homePreview$ = this.homeService.homePreviews$.pipe(debounceTime(200));
 
   constructor(
     private loadingService: LoadingService,
     private homeService: HomeService,
     private recipeStateService: RecipesStateService
   ) {
+    // this.recipeStateService.filter$.subscribe((filter) => {
+    //   if (filter.search.trim().length > 0) {
+    //     this.showSearchResults = true;
+    //   } else {
+    //     this.showSearchResults = false;
+    //   }
+    // });
+
     this.recipeStateService.filter$.subscribe((x) => console.log(x));
   }
 }

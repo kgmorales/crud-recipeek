@@ -35,6 +35,6 @@ export class SearchComponent {
         search: this.searchTerm,
         category: { isFastCookTime: false, isFavorite: false },
       });
-    }, 2000);
+    }, 200);
   }
 }

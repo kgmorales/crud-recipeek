@@ -7,7 +7,7 @@ import { Recipe } from '@client/app/core/interfaces';
 //? 3RD PARTY
 
 @Component({
-  selector: 'app-list',
+  selector: 'la-list',
   standalone: true,
   imports: [NgClass, NgIf, NgFor],
   styleUrls: ['./list.component.scss'],

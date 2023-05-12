@@ -7,16 +7,16 @@ import { RouterModule } from '@angular/router';
 import { FormBuilderModule } from './components/form-builder/form-builder.module';
 
 //* Import Core Components & Services
-// import * as coreComponents from './components';
+import * as coreComponents from './components';
 // import { providers } from '@core/services/core-providers';
 
 //* Organize Core Module
-// const components = coreComponents.components;
+const components = coreComponents.components;
 const modules = [CommonModule, FormsModule, RouterModule, FormBuilderModule];
 
 //* Create Core Object
 export const core = {
-  // components,
+  components,
   modules,
 };
 

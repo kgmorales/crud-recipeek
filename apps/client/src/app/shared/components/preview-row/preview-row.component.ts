@@ -1,12 +1,6 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  SimpleChange,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RecipePreviewComponent } from '../recipe-preview/recipe-preview.component';
-import { Preview } from '@features/home/models';
+import { Preview } from '@core/interfaces';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({
