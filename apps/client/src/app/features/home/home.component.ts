@@ -1,42 +1,47 @@
 import { Component } from '@angular/core';
+import { Observable, combineLatest, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Preview } from '@client/app/core/interfaces';
 
-import { LoadingService, RecipesStateService } from '@core/services';
-
+import { LoadingService } from '@core/services';
 import { HomeService } from './home.service';
-import { debounceTime } from 'rxjs';
+
+interface HomeViewModel {
+  previews: Preview[];
+  titles: string[];
+}
+
+const titles = ['Favorites', 'Dinner', 'Breakfast', 'Desserts'];
 
 @Component({
   selector: 'la-home',
   template: `
-    <ng-container *ngIf="homePreview$ | async as previews">
-      <!-- <div class=" main-header anim">Recipes</div> -->
-      <div *ngIf="previews" class="main-blogs">
-        <la-preview-row title="Favorites" [previews]="previews" />
-        <la-preview-row title="Dinner" [previews]="previews" />
-        <la-preview-row title="Desserts" [previews]="previews" />
+    <ng-container *ngIf="homeViewModel$ | async as vm">
+      <div *ngIf="vm" class="main-blogs">
+        <ng-container *ngFor="let previews of vm.previews; let i = index">
+          <la-preview-row [title]="vm.titles[i]" [previews]="vm.previews" />
+        </ng-container>
       </div>
     </ng-container>
   `,
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  showSearchResults: boolean;
-  loading$ = this.loadingService.isLoading$;
-  homePreview$ = this.homeService.homePreviews$.pipe(debounceTime(200));
+  homeViewModel$: Observable<HomeViewModel>;
 
   constructor(
-    private loadingService: LoadingService,
     private homeService: HomeService,
-    private recipeStateService: RecipesStateService
+    private loadingService: LoadingService
   ) {
-    // this.recipeStateService.filter$.subscribe((filter) => {
-    //   if (filter.search.trim().length > 0) {
-    //     this.showSearchResults = true;
-    //   } else {
-    //     this.showSearchResults = false;
-    //   }
-    // });
+    this.homeViewModel$ = this.buildHomeVm();
+  }
 
-    this.recipeStateService.filter$.subscribe((x) => console.log(x));
+  buildHomeVm(): Observable<HomeViewModel> {
+    return combineLatest([this.homeService.homePreviews$, of(titles)]).pipe(
+      map(([previews, titles]) => ({
+        previews,
+        titles,
+      }))
+    );
   }
 }

@@ -8,6 +8,7 @@ import {
   PreviewComponent,
   PreviewRowComponent,
 } from '@shared/components';
+
 import { SearchResultComponent } from './search-result.component';
 import { SearchResultService } from './search-result.service';
 

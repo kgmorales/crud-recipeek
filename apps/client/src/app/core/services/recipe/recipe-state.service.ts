@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, combineLatest, filter, map, shareReplay } from 'rxjs';
 
-import { StateService } from '@core/services/state.service';
-import { Category, Filter, Recipe, RecipeState } from '@core/interfaces';
+import { Category as ICategory, Filter as IFilter, Recipe as IRecipe, RecipeState } from '@core/interfaces';
 import { RecipesApiService } from '@core/services';
+import { StateService } from '@core/services/state.service';
 
 const initialState: RecipeState = {
-  categories: [] as Category[],
-  recipes: [] as Recipe[],
+  categories: [] as ICategory[],
+  recipes: [] as IRecipe[],
   selectedUID: undefined ?? ('' as string),
   filter: {
     search: '' as string,
@@ -24,31 +23,31 @@ const initialState: RecipeState = {
   providedIn: 'root',
 })
 export class RecipesStateService extends StateService<RecipeState> {
-  private previousUrl: string;
   private recipesFiltered$ = this.select((state) => {
     return getRecipesFiltered(state.recipes, state.filter);
   });
 
-  categories$: Observable<Category[]> = this.select(
+  categories$: Observable<ICategory[]> = this.select(
     (state) => state.categories
   );
 
-  recipes$: Observable<Recipe[]> = this.select((state) => state.recipes);
+  recipes$: Observable<IRecipe[]> = this.select((state) => state.recipes);
 
-  favorites$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
+  favorites$: Observable<IRecipe[]> = this.recipesFiltered$.pipe(
     map((recipes) => recipes.filter((recipe) => recipe.on_favorites))
   );
 
-  notFavorites$: Observable<Recipe[]> = this.recipesFiltered$.pipe(
+  notFavorites$: Observable<IRecipe[]> = this.recipesFiltered$.pipe(
     map((recipes) => recipes.filter((recipe) => !recipe.on_favorites))
   );
 
-  filter$: Observable<Filter> = this.select((state) => state.filter);
+  filter$: Observable<IFilter> = this.select((state) => state.filter);
+
   /**
    * Observable of a selected Recipe by uid.
    */
   selectedRecipe$ = this.select((state) => {
-    if (state.selectedUID === '') return new Recipe();
+    if (state.selectedUID === '') return new IRecipe();
 
     return state.recipes.find((item) => item.uid === state.selectedUID);
   }).pipe(
@@ -56,7 +55,7 @@ export class RecipesStateService extends StateService<RecipeState> {
     shareReplay({ bufferSize: 1, refCount: true })
   );
 
-  searchResult$: Observable<Recipe[]> = this.recipesFiltered$;
+  searchResult$: Observable<IRecipe[]> = this.recipesFiltered$;
 
   hasSearchTerm$: Observable<boolean> = this.select((state) => {
     const searchTerm = state.filter.search;
@@ -68,15 +67,14 @@ export class RecipesStateService extends StateService<RecipeState> {
   constructor(
     private apiService: RecipesApiService,
     private router: Router,
-    private route: ActivatedRoute,
-    private location: Location
+    private route: ActivatedRoute
   ) {
     super(initialState);
 
     this.load();
   }
 
-  selectRecipe(recipe: Recipe): void {
+  selectRecipe(recipe: IRecipe): void {
     this.setState({ selectedUID: recipe.uid });
   }
 
@@ -88,7 +86,7 @@ export class RecipesStateService extends StateService<RecipeState> {
     this.setState({ selectedUID: undefined });
   }
 
-  updateFilter(filter: Filter): void {
+  updateFilter(filter: IFilter): void {
     this.setState({
       filter: {
         ...this.state.filter,
@@ -100,6 +98,13 @@ export class RecipesStateService extends StateService<RecipeState> {
       // Navigate to the search results page
       this.router.navigateByUrl('/search');
     } else {
+      // Clear State
+      this.setState({
+        filter: {
+          ...this.state.filter,
+          search: '',
+        },
+      });
       // Navigate back to the previous route
       this.router.navigate(['../'], { relativeTo: this.route });
     }
@@ -127,7 +132,7 @@ export class RecipesStateService extends StateService<RecipeState> {
       });
   }
 
-  create(recipe: Recipe): void {
+  create(recipe: IRecipe): void {
     this.apiService.createRecipe(recipe).subscribe((newRecipe) => {
       this.setState({
         recipes: [...this.state.recipes, newRecipe],
@@ -136,7 +141,7 @@ export class RecipesStateService extends StateService<RecipeState> {
     });
   }
 
-  update(recipe: Recipe): void {
+  update(recipe: IRecipe): void {
     this.apiService.updateRecipe(recipe).subscribe((updatedRecipe) => {
       this.setState({
         recipes: this.state.recipes.map((item) =>
@@ -146,7 +151,7 @@ export class RecipesStateService extends StateService<RecipeState> {
     });
   }
 
-  delete(recipe: Recipe): void {
+  delete(recipe: IRecipe): void {
     this.apiService.deleteRecipe(recipe).subscribe(() => {
       this.setState({
         selectedUID: '',
@@ -156,8 +161,8 @@ export class RecipesStateService extends StateService<RecipeState> {
   }
 }
 
-function getRecipesFiltered(recipes: Recipe[], filter: Filter): Recipe[] {
-  return recipes.filter((item: Recipe) => {
+function getRecipesFiltered(recipes: IRecipe[], filter: IFilter): IRecipe[] {
+  return recipes.filter((item: IRecipe) => {
     return (
       item.name.toUpperCase().indexOf(filter.search.toUpperCase()) > -1 &&
       (filter.category.isFastCookTime

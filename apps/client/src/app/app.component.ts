@@ -9,7 +9,7 @@ import { LoadingService } from '../app/core/services';
       <div class="wrapper">
         <la-header />
         <div class="main-container">
-          <router-outlet #page="outlet"></router-outlet>
+          <router-outlet #page="outlet" />
         </div>
       </div>
     </div>
@@ -19,7 +19,5 @@ import { LoadingService } from '../app/core/services';
 export class AppComponent {
   title = 'lamora';
 
-  constructor(
-    private loadingService: LoadingService,
-  ) {}
+  constructor(private loadingService: LoadingService) {}
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, debounceTime, take } from 'rxjs';
+import { Observable, debounceTime } from 'rxjs';
 import { Preview } from '@core/interfaces';
 
 import { SearchResultService } from './search-result.service';
@@ -23,7 +23,7 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.searched$ = this.searchResultService.searchResult$.pipe(
-      debounceTime(200)
+      debounceTime(300)
     );
   }
 }
