@@ -29,11 +29,11 @@ const routes: Routes = [
         (m) => m.SearchResultModule
       ),
   },
-  // {
-  //   path: 'blog',
-  //   loadChildren: () =>
-  //     import('../app/features/blog/blog.module').then((m) => m.BlogModule),
-  // },
+  {
+    path: 'blog',
+    loadChildren: () =>
+      import('@features/blog/blog.module').then((m) => m.BlogModule),
+  },
 ];
 
 @NgModule({
