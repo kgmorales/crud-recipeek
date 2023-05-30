@@ -5,7 +5,7 @@
   "scripts": {
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "lint": "eslint . --ext .ts",
-    "dev": "nx run-many --target=serve --projects=client,server --parallel=true --watch",
+    "dev": "nx run-many --target=serve --projects=client,server,blog --parallel=true --watch",
     "prepare": "husky install"
   },
   "husky": {
@@ -74,6 +74,7 @@
     "@nrwl/web": "15.9.2",
     "@nrwl/webpack": "^15.9.2",
     "@nrwl/workspace": "15.9.2",
+    "@nx-extend/strapi": "^3.5.1",
     "@schematics/angular": "~15.2.0",
     "@types/gzip-js": "^0.3.3",
     "@types/jest": "^29.4.0",

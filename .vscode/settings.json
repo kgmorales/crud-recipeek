@@ -33,7 +33,8 @@
     "features": "middleware",
     "schemas": "meta",
     "interfaces": "context",
-    "providers": "mjml"
+    "providers": "mjml",
+    "blog": "Meta"
   },
   "material-icon-theme.files.associations": {
     "apps/client/src/app/**/*.service.ts": "angular-service",
