@@ -8,22 +8,20 @@ import request from 'request-promise-native';
 import { Model } from 'mongoose';
 
 //* Module
-import { IPaprikaConfig } from '@recipes/interfaces';
-import { PaprikaToken } from '@recipes/schemas';
+
+import { PaprikaConfig, PaprikaToken } from '@prisma/client';
 
 @Injectable()
 export class PaprikaAuthService {
   /**
    * Promise containing Paprika Auth config
    */
-  authConfig: Promise<IPaprikaConfig>;
+  authConfig: Promise<PaprikaConfig>;
 
-  private localConfig: IPaprikaConfig;
+  private localConfig: PaprikaConfig;
   private paprikaToken: string;
 
   constructor(
-    @InjectModel(PaprikaToken.name)
-    private readonly paprikaTokenModel: Model<PaprikaToken>,
     private readonly configService: ConfigService
   ) {
     // Setting the localConfig and config properties
@@ -31,7 +29,7 @@ export class PaprikaAuthService {
     this.authConfig = this.buildAuthConfig();
   }
 
-  async buildAuthConfig(): Promise<IPaprikaConfig> {
+  async buildAuthConfig(): Promise<PaprikaConfig> {
     const token = await this.getToken();
     this.localConfig.bearerToken = token;
 
@@ -42,7 +40,7 @@ export class PaprikaAuthService {
    *
    * @returns IConfig
    */
-  private getPaprikaConfig(token?: string): IPaprikaConfig {
+  private getPaprikaConfig(token?: string): PaprikaConfig {
     return {
       baseURL: this.configService.get<string>('paprika.baseURL') as string,
       bearerToken: token || '',

@@ -5,7 +5,7 @@ import { createHash, randomUUID } from 'crypto';
 
 import { cleanScrapedRecipe } from '@server/utils';
 import { emptyRecipe, matchPaprikaKeys } from '@recipes/constants';
-import { IRecipe, IScrapedRecipe } from '@recipes/interfaces';
+import { Recipe, ScrapedRecipe } from '@prisma/client';
 
 @Injectable()
 export class ScrapeService {
@@ -27,8 +27,8 @@ export class ScrapeService {
   }
 
   private async setScrapeToRecipeModel(
-    scrapedRecipe: IScrapedRecipe
-  ): Promise<IRecipe> {
+    scrapedRecipe: ScrapedRecipe
+  ): Promise<Recipe> {
     const isEmpty = (obj: Record<string, string>) =>
       Object.keys(obj).length === 0;
     const joinObjectToString = (data: Record<string, string>) =>
@@ -77,7 +77,7 @@ export class ScrapeService {
     return recipe;
   }
 
-  async scrape(url: string): Promise<IRecipe> {
+  async scrape(url: string): Promise<Recipe> {
     const rawScrapedRecipe = await this.scrapeByUrl(url);
 
     const newRecipe = await this.setScrapeToRecipeModel(

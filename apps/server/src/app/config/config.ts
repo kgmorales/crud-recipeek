@@ -1,10 +1,9 @@
+import { PrismaClient } from '@prisma/client';
+
 export default () => ({
-  mongoDB: {
-    uri: process.env.MONGODB_URI,
-    options: {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    },
+  prisma: {
+    client: new PrismaClient(),
+    dbURL: process.env.DATABASE_URL,
   },
   paprika: {
     baseURL: `https://www.paprikaapp.com/api/v2`,

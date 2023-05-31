@@ -73,6 +73,11 @@ export class RecipeDto {
   photo_hash: string;
 
   @ApiProperty()
+  @IsOptional()
+  @IsString()
+  photo_url: string;
+
+  @ApiProperty()
   @IsString()
   prep_time: string;
 
@@ -81,9 +86,8 @@ export class RecipeDto {
   rating: number;
 
   @ApiProperty()
-  @IsOptional()
-  @IsInt()
-  scale: number;
+  @IsString() // Update to IsString()
+  scale: string; // Update to string type
 
   @ApiProperty()
   @IsString()

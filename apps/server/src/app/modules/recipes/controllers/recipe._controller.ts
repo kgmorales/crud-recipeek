@@ -3,9 +3,11 @@ import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 
 //* Module
 import { RecipeDto } from '@recipes/dtos';
-import { ICategory, IRecipe, ISuccessMessage } from '@recipes/interfaces';
+import { ISuccessMessage } from '@recipes/interfaces';
+import { Recipe, Category } from '@prisma/client';
 import { RecipesService, ScrapeService } from '@recipes/services';
 
+//TODO: set the strings to enum recipe.all, recipe.categories, etc
 @Controller('recipes')
 export class RecipesController {
   constructor(
@@ -14,12 +16,12 @@ export class RecipesController {
   ) {}
 
   @Get('allRecipes')
-  async getDBRecipes(): Promise<IRecipe[]> {
+  async getDBRecipes(): Promise<Recipe[]> {
     return await this.recipeService.allDBRecipes();
   }
 
   @Get('categories')
-  async getDBCategories(): Promise<ICategory[]> {
+  async getDBCategories(): Promise<Category[]> {
     return await this.recipeService.allDBCategories();
   }
 
@@ -28,12 +30,12 @@ export class RecipesController {
     return await this.recipeService.createRecipe(recipeDto);
   }
 
-  @Get('find/:uid')
-  async findRecipe(
-    @Param('uid') uid: Pick<IRecipe, 'uid'>
-  ): Promise<IRecipe | null> {
-    return await this.recipeService.findByUID(uid);
-  }
+  // @Get('find/:uid')
+  // async findRecipe(
+  //   @Param('uid') uid: Pick<Recipe, 'uid'>
+  // ): Promise<Recipe | null> {
+  //   return await this.recipeService.findByUID(uid);
+  // }
 
   @Get('paginatedRecipes')
   async getPaginatedRecipes(
@@ -50,12 +52,12 @@ export class RecipesController {
   }
 
   @Get('scrape')
-  async scrapeRecipe(@Query('url') url: string): Promise<IRecipe> {
+  async scrapeRecipe(@Query('url') url: string): Promise<Recipe> {
     return await this.scrapeService.scrape(url);
   }
 
   @Get('update')
-  async updateRecipes(): Promise<IRecipe[]> {
+  async updateRecipes(): Promise<Recipe[]> {
     return await this.recipeService.updateRecipes();
   }
 }

@@ -11,6 +11,7 @@ import { paprikaBaseHeaders } from '@recipes/constants';
 import { RecipeDto } from '@recipes/dtos';
 import * as model from '@recipes/interfaces';
 import { PaprikaAuthService } from '@recipes/services/providers';
+import { Recipe, Category } from '@prisma/client';
 
 const PAPRIKA_V1_BASEURL = 'https://www.paprikaapp.com/api/v1';
 
@@ -88,7 +89,7 @@ export class PaprikaApiService {
     return this.resource('bookmarks');
   }
 
-  categories(): Promise<model.ICategory[]> {
+  categories(): Promise<Category[]> {
     return this.resource('categories');
   }
 
@@ -116,7 +117,7 @@ export class PaprikaApiService {
     return this.resource('recipes');
   }
 
-  recipe(recipeUid: string): Promise<model.IRecipe> {
+  recipe(recipeUid: string): Promise<Recipe> {
     return this.resource('recipe/' + recipeUid);
   }
 

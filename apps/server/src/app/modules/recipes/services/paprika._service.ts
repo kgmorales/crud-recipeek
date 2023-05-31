@@ -2,7 +2,8 @@
 import { Injectable } from '@nestjs/common';
 
 //* Module
-import { IRecipe, ICategory, IRecipeItem } from '@recipes/interfaces';
+
+import { Recipe, RecipeItem, Category } from '@prisma/client';
 //TODO: fix why this blows up if you only load from '@recipes/services'.
 import { PaprikaApiService } from '@recipes/services/providers';
 
@@ -17,20 +18,18 @@ export class PaprikaService {
    * @returns Promise<IRecipe[]>
    */
   //* ALL RECIPES
-  async allRecipes(): Promise<IRecipe[]> {
+  async allRecipes(): Promise<Recipe[]> {
     //* 1.
-    const recipeItems: IRecipeItem[] = await this.paprikaApiService.recipes();
+    const recipeItems: RecipeItem[] = await this.paprikaApiService.recipes();
     const recipeUids: string[] = recipeItems.map((item) => item.uid);
     //* 2.
-    const recipePromises: Promise<IRecipe>[] = recipeUids.map((uid) =>
+    const recipePromises: Promise<Recipe>[] = recipeUids.map((uid) =>
       this.paprikaApiService.recipe(uid)
     );
-    const recipes: IRecipe[] = await Promise.all(recipePromises).catch(
-      (err) => {
-        console.error(err);
-        return [];
-      }
-    );
+    const recipes: Recipe[] = await Promise.all(recipePromises).catch((err) => {
+      console.error(err);
+      return [];
+    });
     return recipes;
   }
 
@@ -39,7 +38,7 @@ export class PaprikaService {
    * @returns Promise<ICategory[]>
    */
   //* CATEGORIES
-  async categories(): Promise<ICategory[]> {
+  async categories(): Promise<Category[]> {
     const categories = await this.paprikaApiService.categories();
     return categories || [];
   }
@@ -50,7 +49,7 @@ export class PaprikaService {
    * @returns Promise<IRecipe[]>
    */
   //* FIND BY UIDS
-  async findByUID(uids: string): Promise<IRecipe[]> {
+  async findByUID(uids: string): Promise<Recipe[]> {
     const getRecipe = async (uid: string) =>
       await this.paprikaApiService.recipe(uid);
 
@@ -66,7 +65,7 @@ export class PaprikaService {
    * @returns Promise<IRecipeItem[]>
    */
   //* RECIPE IDS
-  async recipeIds(): Promise<IRecipeItem[]> {
+  async recipeIds(): Promise<RecipeItem[]> {
     const ids = await this.paprikaApiService.recipes();
     return ids || [];
   }

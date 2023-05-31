@@ -3,7 +3,150 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "postgresql"
+  url      = env("postgresql://postgres:hOxl6Pzm6SLmGQEo@db.cjyieezuuvkctchwaymc.supabase.co:5432/postgres")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Optional: used for migration shadow database
+  referentialIntegrity = "prisma"
+}
+
+model Bookmark {
+  url        String
+  title      String
+  uid        String @id
+  order_flag Int
+}
+
+model Category {
+  name        String
+  uid         String @id
+  parent_uid  String
+  order_flag  Int
+}
+
+model GroceryItem {
+  aisle       String
+  uid         String @id
+  order_flag  Int
+  recipe      String
+  name        String
+  purchased   Boolean
+  recipe_uid  String
+  ingredient  String
+}
+
+model Meal {
+  uid          String @id
+  order_flag   Int
+  recipe_uid   String
+  date         String
+  type         Int
+  name         String
+}
+
+model Menu {
+  notes       String
+  uid         String @id
+  name        String
+  order_flag  Int
+}
+
+model MenuItem {
+  name        String
+  recipe_uid  String
+  uid         String @id
+  menu_uid    String
+  order_flag  Int
+}
+
+model PantryItem {
+  aisle       String
+  uid         String @id
+  ingredient  String
+}
+
+model ScrapedRecipe {
+  id                Int      @id @default(autoincrement())
+  author            String?
+  canonical_url     String
+  category          String
+  cook_time         Int?
+  description       String?
+  host              String?
+  image             String?
+  ingredients       String[]
+  instructions      String
+  instructions_list String[]
+  language          String
+  nutrients         Json?
+  prep_time         Int?
+  ratings           Int?
+  site_name         String
+  title             String
+  total_time        Int?
+  yields            String?
+}
+
+model Recipe {
+  categories       String[]
+  cook_time        String
+  created          String
+  difficulty       String
+  directions       String
+  hash             String
+  ingredients      String
+  image_url        String
+  name             String
+  notes            String
+  nutritional_info String
+  on_favorites     Boolean
+  photo            String
+  photo_url        String
+  photo_hash       String
+  prep_time        String
+  rating           Int
+  scale            String
+  servings         String
+  source           String
+  source_url       String
+  uid              String @id
+}
+
+model RecipeItem {
+  hash  String
+  uid   String @id
+}
+
+model Status {
+  uid        Int     @id
+  recipes    Int
+  pantry     Int
+  meals      Int
+  menus      Int
+  groceries  Int
+  bookmarks  Int
+  menuitems  Int
+  categories Int
+}
+
+model PaprikaToken {
+  id    Int    @id @default(autoincrement())
+  token String @unique
+}
+
+model PaprikaConfig {
+  id        Int     @id @default(autoincrement())
+  baseURL   String
+  user      String
+  password  String
+  bearerToken String?
+}
+
+model TokenResult {
+  id    Int    @id @default(autoincrement())
+  token String
+}
+
+model SuccessMessage {
+  id      Int     @id @default(autoincrement())
+  message String
 }
