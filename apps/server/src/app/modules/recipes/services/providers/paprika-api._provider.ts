@@ -9,19 +9,29 @@ import request, { OptionsWithUrl } from 'request-promise-native';
 //* Module
 import { paprikaBaseHeaders } from '@recipes/constants';
 import { RecipeDto } from '@recipes/dtos';
-import * as model from '@recipes/interfaces';
 import { PaprikaAuthService } from '@recipes/services/providers';
-import { Recipe, Category } from '@prisma/client';
+import {
+  Bookmark,
+  Category,
+  GroceryItem,
+  Meal,
+  Menu,
+  MenuItem,
+  PantryItem,
+  PaprikaConfig,
+  Recipe,
+  RecipeItem,
+} from '@prisma/client';
 
 const PAPRIKA_V1_BASEURL = 'https://www.paprikaapp.com/api/v1';
 
 @Injectable()
 export class PaprikaApiService {
-  private paprikaConfig: model.IPaprikaConfig;
+  private paprikaConfig: PaprikaConfig;
 
   constructor(private paprikaAuthService: PaprikaAuthService) {
-    // Get the Paprika config from the auth service
-    this.paprikaAuthService.authConfig.then((config) => {
+    //Get the Paprika config from the auth service
+    this.paprikaAuthService.buildAuthConfig().then((config) => {
       this.paprikaConfig = config;
     });
   }
@@ -85,7 +95,7 @@ export class PaprikaApiService {
     return request(options);
   }
 
-  bookmarks(): Promise<model.IBookmark[]> {
+  bookmarks(): Promise<Bookmark[]> {
     return this.resource('bookmarks');
   }
 
@@ -93,27 +103,27 @@ export class PaprikaApiService {
     return this.resource('categories');
   }
 
-  groceries(): Promise<model.IGroceryItem[]> {
+  groceries(): Promise<GroceryItem[]> {
     return this.resource('groceries');
   }
 
-  meals(): Promise<model.IMeal[]> {
+  meals(): Promise<Meal[]> {
     return this.resource('meals');
   }
 
-  menus(): Promise<model.IMenu[]> {
+  menus(): Promise<Menu[]> {
     return this.resource('menus');
   }
 
-  menuItems(): Promise<model.IMenuItem[]> {
+  menuItems(): Promise<MenuItem[]> {
     return this.resource('menuitems');
   }
 
-  pantry(): Promise<model.IPantryItem[]> {
+  pantry(): Promise<PantryItem[]> {
     return this.resource('pantry');
   }
 
-  recipes(): Promise<model.IRecipeItem[]> {
+  recipes(): Promise<RecipeItem[]> {
     return this.resource('recipes');
   }
 

@@ -42,7 +42,7 @@ export class RecipesService {
   }
 
   async refreshDB(): Promise<void> {
-    await this.deleteAll();
+    // await this.deleteAll();
 
     const allRecipes = await this.paprikaService.allRecipes();
     const allIDs = await this.paprikaService.recipeIds();

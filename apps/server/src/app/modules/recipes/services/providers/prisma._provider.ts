@@ -6,7 +6,7 @@ export class PrismaService {
   public client: PrismaClient;
 
   constructor() {
-    this.client = new PrismaClient();
+    this.client = new PrismaClient({ errorFormat: 'pretty' });
   }
 
   async onModuleDestroy() {

@@ -3,7 +3,7 @@ import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
 import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 
 //* Module
-import { ICategory, IRecipe, IRecipeItem } from '@recipes/interfaces';
+import { Category, Recipe, RecipeItem } from '@prisma/client';
 import { PaprikaService } from '@recipes/services';
 
 @Controller('paprika')
@@ -13,23 +13,23 @@ export class PaprikaController {
   @Get('allRecipes')
   @UseInterceptors(CacheInterceptor)
   @CacheTTL(60)
-  async allRecipes(): Promise<IRecipe[]> {
+  async allRecipes(): Promise<Recipe[]> {
     return await this.paprikaService.allRecipes();
   }
 
   @UseInterceptors(CacheInterceptor)
   @Get('categories')
-  async allCategories(): Promise<ICategory[]> {
+  async allCategories(): Promise<Category[]> {
     return await this.paprikaService.categories();
   }
 
   @Get('recipeIds')
-  async recipeIds(): Promise<IRecipeItem[]> {
+  async recipeIds(): Promise<RecipeItem[]> {
     return await this.paprikaService.recipeIds();
   }
 
   @Get('recipesByUID')
-  async recipesByUID(@Query('uids') uids: string): Promise<IRecipe[]> {
+  async recipesByUID(@Query('uids') uids: string): Promise<Recipe[]> {
     return await this.paprikaService.findByUID(uids);
   }
 }

@@ -1,47 +1,32 @@
-//* NESTJS
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { InjectModel } from '@nestjs/mongoose';
-
-//* 3RD Party
+import { PrismaService } from './prisma._provider';
 import request from 'request-promise-native';
-import { Model } from 'mongoose';
-
-//* Module
-
-import { PaprikaConfig, PaprikaToken } from '@prisma/client';
+import { PaprikaConfig } from '@prisma/client';
 
 @Injectable()
 export class PaprikaAuthService {
-  /**
-   * Promise containing Paprika Auth config
-   */
-  authConfig: Promise<PaprikaConfig>;
-
   private localConfig: PaprikaConfig;
+  authConfig: Promise<PaprikaConfig>;
   private paprikaToken: string;
 
   constructor(
+    private readonly prisma: PrismaService,
     private readonly configService: ConfigService
   ) {
-    // Setting the localConfig and config properties
     this.localConfig = this.getPaprikaConfig();
     this.authConfig = this.buildAuthConfig();
   }
 
-  async buildAuthConfig(): Promise<PaprikaConfig> {
+  async buildAuthConfig() {
     const token = await this.getToken();
     this.localConfig.bearerToken = token;
-
     return this.localConfig;
   }
 
-  /** Build config auth object containing paprika creds
-   *
-   * @returns IConfig
-   */
   private getPaprikaConfig(token?: string): PaprikaConfig {
     return {
+      id: 0,
       baseURL: this.configService.get<string>('paprika.baseURL') as string,
       bearerToken: token || '',
       user: this.configService.get<string>('paprika.user') as string,
@@ -49,70 +34,49 @@ export class PaprikaAuthService {
     };
   }
 
-  /** Get the Paprika bearer token.
-   *
-   * @returns Promise<string>
-   */
   async getToken(): Promise<string> {
-    // If the token is already set, check its validity and return it
     if (this.paprikaToken) {
-      const options = {
-        url: `${this.localConfig.baseURL}/sync/status/`,
-        headers: {
-          Authorization: `Bearer ${this.paprikaToken}`,
-        },
-      };
-
       try {
-        // Check the token's validity against the sync/status API
-        await request(options);
-
+        await this.checkTokenValidity(this.paprikaToken);
         return this.paprikaToken;
       } catch (error) {
-        // The token is invalid, refresh it
         this.paprikaToken = await this.refreshToken();
       }
     }
 
-    // Try to get the token from the database
-    let paprikaToken = await this.paprikaTokenModel.findOne().exec();
+    let paprikaToken = await this.prisma.client.paprikaToken.findFirst();
 
     if (paprikaToken && paprikaToken.token) {
-      const options = {
-        url: `${this.localConfig.baseURL}/sync/status/`,
-        headers: {
-          Authorization: `Bearer ${paprikaToken.token}`,
-        },
-      };
-
       try {
-        // Check the token's validity against the sync/status API
-        await request(options);
-
+        await this.checkTokenValidity(paprikaToken.token);
         this.paprikaToken = paprikaToken.token;
         return paprikaToken.token;
       } catch (error) {
-        // The token is invalid, refresh it
         paprikaToken.token = await this.refreshToken();
       }
     } else {
-      // The token doesn't exist in the database, refresh it
-      paprikaToken = new this.paprikaTokenModel({
-        token: await this.refreshToken(),
+      paprikaToken = await this.prisma.client.paprikaToken.create({
+        data: { token: await this.refreshToken() },
       });
     }
 
-    // Save the new token to the database and return it
-    await paprikaToken.save();
-    this.paprikaToken = paprikaToken.token;
+    await this.prisma.client.paprikaToken.update({
+      where: { id: paprikaToken.id },
+      data: { token: paprikaToken.token },
+    });
 
+    this.paprikaToken = paprikaToken.token;
     return paprikaToken.token;
   }
 
-  /** Refresh Paprika API bearer token.
-   *
-   * @returns Promise<string>
-   */
+  private async checkTokenValidity(token: string) {
+    const options = {
+      url: `${this.localConfig.baseURL}/sync/status/`,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    await request(options);
+  }
+
   private async refreshToken(): Promise<string> {
     const options = {
       method: 'POST',
@@ -123,10 +87,7 @@ export class PaprikaAuthService {
         password: this.localConfig.password,
       },
     };
-
     const response = await request(options);
-    // Update configService with token
-    const newToken = response.result.token;
-    return newToken;
+    return response.result.token;
   }
 }

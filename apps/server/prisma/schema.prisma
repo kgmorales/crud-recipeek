@@ -1,12 +1,12 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("postgresql://postgres:hOxl6Pzm6SLmGQEo@db.cjyieezuuvkctchwaymc.supabase.co:5432/postgres")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Optional: used for migration shadow database
-  referentialIntegrity = "prisma"
+  url      = env("DATABASE_URL")
+  schemas  = ["nestjs"]
 }
 
 model Bookmark {
@@ -14,54 +14,68 @@ model Bookmark {
   title      String
   uid        String @id
   order_flag Int
+
+  @@schema("nestjs")
 }
 
 model Category {
-  name        String
-  uid         String @id
-  parent_uid  String
-  order_flag  Int
+  name       String
+  uid        String @id
+  parent_uid String
+  order_flag Int
+
+  @@schema("nestjs")
 }
 
 model GroceryItem {
-  aisle       String
-  uid         String @id
-  order_flag  Int
-  recipe      String
-  name        String
-  purchased   Boolean
-  recipe_uid  String
-  ingredient  String
+  aisle      String
+  uid        String  @id
+  order_flag Int
+  recipe     String
+  name       String
+  purchased  Boolean
+  recipe_uid String
+  ingredient String
+
+  @@schema("nestjs")
 }
 
 model Meal {
-  uid          String @id
-  order_flag   Int
-  recipe_uid   String
-  date         String
-  type         Int
-  name         String
+  uid        String @id
+  order_flag Int
+  recipe_uid String
+  date       String
+  type       Int
+  name       String
+
+  @@schema("nestjs")
 }
 
 model Menu {
-  notes       String
-  uid         String @id
-  name        String
-  order_flag  Int
+  notes      String
+  uid        String @id
+  name       String
+  order_flag Int
+
+  @@schema("nestjs")
 }
 
 model MenuItem {
-  name        String
-  recipe_uid  String
-  uid         String @id
-  menu_uid    String
-  order_flag  Int
+  name       String
+  recipe_uid String
+  uid        String @id
+  menu_uid   String
+  order_flag Int
+
+  @@schema("nestjs")
 }
 
 model PantryItem {
-  aisle       String
-  uid         String @id
-  ingredient  String
+  aisle      String
+  uid        String @id
+  ingredient String
+
+  @@schema("nestjs")
 }
 
 model ScrapedRecipe {
@@ -84,6 +98,8 @@ model ScrapedRecipe {
   title             String
   total_time        Int?
   yields            String?
+
+  @@schema("nestjs")
 }
 
 model Recipe {
@@ -108,16 +124,20 @@ model Recipe {
   servings         String
   source           String
   source_url       String
-  uid              String @id
+  uid              String   @id
+
+  @@schema("nestjs")
 }
 
 model RecipeItem {
-  hash  String
-  uid   String @id
+  hash String
+  uid  String @id
+
+  @@schema("nestjs")
 }
 
 model Status {
-  uid        Int     @id
+  uid        Int @id
   recipes    Int
   pantry     Int
   meals      Int
@@ -126,27 +146,30 @@ model Status {
   bookmarks  Int
   menuitems  Int
   categories Int
+
+  @@schema("nestjs")
 }
 
 model PaprikaToken {
   id    Int    @id @default(autoincrement())
   token String @unique
+
+  @@schema("nestjs")
 }
 
 model PaprikaConfig {
-  id        Int     @id @default(autoincrement())
-  baseURL   String
-  user      String
-  password  String
+  id          Int     @id @default(autoincrement())
+  baseURL     String
+  user        String
+  password    String
   bearerToken String?
+
+  @@schema("nestjs")
 }
 
 model TokenResult {
   id    Int    @id @default(autoincrement())
   token String
-}
 
-model SuccessMessage {
-  id      Int     @id @default(autoincrement())
-  message String
+  @@schema("nestjs")
 }

@@ -1,9 +1,13 @@
 //* NESTJS
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+
+interface SuccessMessage {
+  id: number;
+  message: string;
+}
 
 //* Module
 import { RecipeDto } from '@recipes/dtos';
-import { ISuccessMessage } from '@recipes/interfaces';
 import { Recipe, Category } from '@prisma/client';
 import { RecipesService, ScrapeService } from '@recipes/services';
 
@@ -46,9 +50,9 @@ export class RecipesController {
   }
 
   @Get('refreshDB')
-  async refreshDB(): Promise<ISuccessMessage> {
+  async refreshDB(): Promise<SuccessMessage> {
     await this.recipeService.refreshDB();
-    return { message: 'Success' };
+    return { id: 0, message: 'Success' };
   }
 
   @Get('scrape')
