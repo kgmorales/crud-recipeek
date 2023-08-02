@@ -1,17 +1,27 @@
 //* NESTJS
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 
-interface SuccessMessage {
-  id: number;
-  message: string;
-}
-
 //* Module
 import { RecipeDto } from '@recipes/dtos';
 import { Recipe, Category } from '@prisma/client';
 import { RecipesService, ScrapeService } from '@recipes/services';
 
-//TODO: set the strings to enum recipe.all, recipe.categories, etc
+interface SuccessMessage {
+  id: number;
+  message: string;
+}
+
+enum RecipeApi {
+  allRecipes = 'allRecipes',
+  categories = 'categories',
+  create = 'create',
+  find = 'find',
+  paginatedRecipes = 'paginatedRecipes',
+  refreshDB = 'refreshDB',
+  scrape = 'scrape',
+  update = 'update',
+}
+
 @Controller('recipes')
 export class RecipesController {
   constructor(
@@ -19,17 +29,17 @@ export class RecipesController {
     private scrapeService: ScrapeService
   ) {}
 
-  @Get('allRecipes')
+  @Get(RecipeApi.allRecipes)
   async getDBRecipes(): Promise<Recipe[]> {
     return await this.recipeService.allDBRecipes();
   }
 
-  @Get('categories')
+  @Get(RecipeApi.categories)
   async getDBCategories(): Promise<Category[]> {
     return await this.recipeService.allDBCategories();
   }
 
-  @Post('create')
+  @Post(RecipeApi.create)
   async createRecipe(@Body() recipeDto: RecipeDto): Promise<void> {
     return await this.recipeService.createRecipe(recipeDto);
   }
@@ -41,7 +51,7 @@ export class RecipesController {
   //   return await this.recipeService.findByUID(uid);
   // }
 
-  @Get('paginatedRecipes')
+  @Get(RecipeApi.paginatedRecipes)
   async getPaginatedRecipes(
     @Query('limit') limit: number,
     @Query('page') page: number
@@ -49,18 +59,18 @@ export class RecipesController {
     return await this.recipeService.getPaginatedRecipes({ page, limit });
   }
 
-  @Get('refreshDB')
+  @Get(RecipeApi.refreshDB)
   async refreshDB(): Promise<SuccessMessage> {
     await this.recipeService.refreshDB();
     return { id: 0, message: 'Success' };
   }
 
-  @Get('scrape')
+  @Get(RecipeApi.scrape)
   async scrapeRecipe(@Query('url') url: string): Promise<Recipe> {
     return await this.scrapeService.scrape(url);
   }
 
-  @Get('update')
+  @Get(RecipeApi.update)
   async updateRecipes(): Promise<Recipe[]> {
     return await this.recipeService.updateRecipes();
   }

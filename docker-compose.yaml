@@ -1,10 +1,16 @@
 version: '3'
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  server:
+    build: ./apps/server
     ports:
-      - 8080:8080 # Port for the server app
-      - 4200:4200 # Port for the client app
-      - 1337:1337 # Port for the blog app
+      - '3000:3000'
+
+  blog:
+    build: ./apps/blog
+    ports:
+      - '1337:1337'
+
+  client:
+    build: ./apps/client
+    ports:
+      - '4200:4200'
