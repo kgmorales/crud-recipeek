@@ -1,13 +1,13 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["lamora"]
+}
+
 generator client {
   provider        = "prisma-client-js"
   binaryTargets   = ["native", "darwin-arm64"]
   previewFeatures = ["multiSchema"]
-}
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-  schemas  = ["nestjs"]
 }
 
 model Bookmark {
@@ -16,7 +16,7 @@ model Bookmark {
   uid        String @id
   order_flag Int
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model Category {
@@ -25,7 +25,7 @@ model Category {
   parent_uid String
   order_flag Int
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model GroceryItem {
@@ -38,7 +38,7 @@ model GroceryItem {
   recipe_uid String
   ingredient String
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model Meal {
@@ -49,7 +49,7 @@ model Meal {
   type       Int
   name       String
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model Menu {
@@ -58,7 +58,7 @@ model Menu {
   name       String
   order_flag Int
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model MenuItem {
@@ -68,7 +68,7 @@ model MenuItem {
   menu_uid   String
   order_flag Int
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model PantryItem {
@@ -76,7 +76,7 @@ model PantryItem {
   uid        String @id
   ingredient String
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model ScrapedRecipe {
@@ -100,41 +100,47 @@ model ScrapedRecipe {
   total_time        Int?
   yields            String?
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model Recipe {
   categories       String[]
   cook_time        String
   created          String
+  description      String
   difficulty       String
   directions       String
   hash             String
   ingredients      String
+  in_trash         Boolean
   image_url        String
+  is_pinned        Boolean
   name             String
   notes            String
   nutritional_info String
   on_favorites     Boolean
+  on_grocery_list  Boolean
   photo            String
-  photo_url        String
   photo_hash       String
+  photo_large      String?
+  photo_url        String
   prep_time        String
   rating           Int
-  scale            String
+  scale            String?
   servings         String
   source           String
   source_url       String
+  total_time       String
   uid              String   @id
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model RecipeItem {
   hash String
   uid  String @id
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model Status {
@@ -148,14 +154,14 @@ model Status {
   menuitems  Int
   categories Int
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model PaprikaToken {
   id    Int    @id @default(autoincrement())
   token String @unique
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model PaprikaConfig {
@@ -165,12 +171,12 @@ model PaprikaConfig {
   password    String
   bearerToken String?
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }
 
 model TokenResult {
-  id    Int    @id @default(autoincrement())
+  id    Int    @id
   token String
 
-  @@schema("nestjs")
+  @@schema("lamora")
 }

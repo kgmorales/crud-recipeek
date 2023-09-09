@@ -5,4 +5,8 @@ export class PaprikaTokenDto {
   @ApiProperty()
   @IsString()
   token: string;
+
+  @ApiProperty()
+  @IsString()
+  id: string;
 }

@@ -21,6 +21,10 @@ export class RecipeDto {
   created: string;
 
   @ApiProperty()
+  @IsString()
+  description: string;
+
+  @ApiProperty()
   @IsBoolean()
   deleted: boolean;
 
@@ -37,13 +41,21 @@ export class RecipeDto {
   hash: string;
 
   @ApiProperty()
+  @IsString()
+  ingredients: string;
+
+  @ApiProperty()
+  @IsString()
+  in_trash: boolean;
+
+  @ApiProperty()
   @IsOptional()
   @IsString()
   image_url: string;
 
   @ApiProperty()
   @IsString()
-  ingredients: string;
+  is_pinned: boolean;
 
   @ApiProperty()
   @IsString()
@@ -63,6 +75,10 @@ export class RecipeDto {
   on_favorites: boolean;
 
   @ApiProperty()
+  @IsBoolean()
+  on_grocery_list: boolean;
+
+  @ApiProperty()
   @IsOptional()
   @IsString()
   photo: string;
@@ -71,6 +87,11 @@ export class RecipeDto {
   @IsOptional()
   @IsString()
   photo_hash: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  photo_large: string;
 
   @ApiProperty()
   @IsOptional()
@@ -101,6 +122,11 @@ export class RecipeDto {
   @IsOptional()
   @IsString()
   source_url: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  total_time: string;
 
   @ApiProperty()
   @IsString()

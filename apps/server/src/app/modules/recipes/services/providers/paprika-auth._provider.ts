@@ -18,7 +18,7 @@ export class PaprikaAuthService {
     this.authConfig = this.buildAuthConfig();
   }
 
-  async buildAuthConfig() {
+  async buildAuthConfig(): Promise<PaprikaConfig> {
     const token = await this.getToken();
     this.localConfig.bearerToken = token;
     return this.localConfig;
@@ -55,26 +55,50 @@ export class PaprikaAuthService {
         paprikaToken.token = await this.refreshToken();
       }
     } else {
-      paprikaToken = await this.prisma.client.paprikaToken.create({
-        data: { token: await this.refreshToken() },
-      });
+      try {
+        paprikaToken = await this.prisma.client.paprikaToken.create({
+          data: { token: await this.refreshToken() },
+        });
+      } catch (error: any) {
+        if (error.code === 'P2002') {
+          paprikaToken = await this.prisma.client.paprikaToken.findFirst({
+            where: { token: await this.refreshToken() },
+          });
+        } else {
+          throw error;
+        }
+      }
     }
 
-    await this.prisma.client.paprikaToken.update({
-      where: { id: paprikaToken.id },
-      data: { token: paprikaToken.token },
-    });
+    if (paprikaToken) {
+      await this.prisma.client.paprikaToken.update({
+        where: { id: paprikaToken.id },
+        data: { token: paprikaToken.token },
+      });
 
-    this.paprikaToken = paprikaToken.token;
-    return paprikaToken.token;
+      this.paprikaToken = paprikaToken.token;
+      return paprikaToken.token;
+    } else {
+      // Attempt to refresh the token one more time before throwing an error
+      this.paprikaToken = await this.refreshToken();
+      if (this.paprikaToken) {
+        return this.paprikaToken;
+      } else {
+        throw new Error('PaprikaToken is null');
+      }
+    }
   }
 
   private async checkTokenValidity(token: string) {
-    const options = {
-      url: `${this.localConfig.baseURL}/sync/status/`,
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    await request(options);
+    try {
+      const options = {
+        url: `${this.localConfig.baseURL}/sync/status/`,
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      await request(options);
+    } catch (error) {
+      throw new Error('Token validation failed');
+    }
   }
 
   private async refreshToken(): Promise<string> {
