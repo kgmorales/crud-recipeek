@@ -1,0 +1,24 @@
+<div class="recipe anim">
+  <div class="recipe-categories">
+    <div class="recipe-time" *ngFor="let category of preview.categories">{{category}}</div>
+  </div>
+
+  <div class="recipe-wrapper">
+    <img class="recipe-image" [src]="preview.image_url" lazyload="true" />
+    <div class="author-img__wrapper recipe-author">
+      <!-- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+        stroke-linejoin="round" class="feather feather-check">
+        <path d="M20 6L9 17l-5-5" />
+      </svg> -->
+      <div class="author-img">{{preview.cook_time}}</div>
+    </div>
+  </div>
+  <div class="recipe-created-by">
+    <div class="recipe-by">
+      <i *ngFor="let rating of preview.rating" class="star"></i>
+    </div>
+  </div>
+
+  <div class="recipe-name">{{preview.name}}</div>
+  <div class="recipe-view">text</div>
+</div>

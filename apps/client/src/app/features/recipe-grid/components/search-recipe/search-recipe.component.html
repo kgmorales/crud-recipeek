@@ -1,0 +1,69 @@
+<!-- <div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" required [(ngModel)]="tutorial.title" name="title" />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input class="form-control" id="description" required [(ngModel)]="tutorial.description" name="description" />
+      </div>
+
+      <button (click)="saveTutorial()" class="btn btn-success">Submit</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Tutorial was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newTutorial()">Add</button>
+    </div>
+  </div>
+</div> -->
+<!-- <div>
+  <label for="name">Recipe </label>
+  <input type="text" id="listSearch" class="form-control" placeholder="Search" #search />
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+    </tr>
+    <ng-container *ngIf="recipes$ | async as recipes">
+      <tr *ngFor="let recipe of recipes | search:'name': search.value">
+        <td>{{recipe.name}}</td>
+      </tr>
+    </ng-container>
+  </table>
+</div> -->
+
+
+<!-- <ng-container *ngIf="_recipes$ | async as recipes">
+  <div class="container">
+    <h2 class="py-4">Scrape Recipe Data</h2>
+    <!-- //! THIS IS THE SCRAPE SEARCH URL COMPONENT WITH FORM -->
+<!-- <app-scrape-form /> -->
+
+<!-- <div *ngIf="scrapedRecipe$ | async as recipe" class="container">
+      <app-recipe-card [recipe]="recipe" />
+    </div> -->
+<!-- //! END -->
+
+<!--<div class="form-group mb-4">
+      <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search">
+    </div>
+
+    <div class="grid">
+      <ng-container *ngIf="(recipes | filter: searchText).length > 0; else noResults">
+        <la-recipe-card *ngFor="let recipe of recipes | filter: searchText;" [recipe]="recipe" />
+
+        <ng-template #noResults>
+          <p>No results found for "{{searchText}}".</p>
+        </ng-template>
+      </ng-container>
+    </div>
+
+    <ng-template #noResults>
+      <p>No results found for "{{searchText}}".</p>
+    </ng-template>
+  </div>
+  <ng-container> -->

@@ -1,0 +1,45 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "../../tsconfig.base.json",
+  // "compileOnSave": false,
+  // "compilerOptions": {
+  //   "baseUrl": "../apps/client/src",
+  //   "rootDirs": ["../apps/client/src", "../shared"],
+  //   "outDir": "./dist/out-tsc",
+  //   "forceConsistentCasingInFileNames": true,
+  //   "strict": true,
+  //   "noImplicitOverride": true,
+  //   "noPropertyAccessFromIndexSignature": true,
+  //   "noImplicitReturns": true,
+  //   "noFallthroughCasesInSwitch": true,
+  //   "sourceMap": true,
+  //   "declaration": false,
+  //   "downlevelIteration": true,
+  //   "experimentalDecorators": true,
+  //   "moduleResolution": "node",
+  //   "importHelpers": true,
+  //   "strictPropertyInitialization": false,
+  //   "target": "ES2022",
+  //   "module": "ES2022",
+  //   "useDefineForClassFields": false,
+  //   "lib": ["ES2022", "dom"],
+  //   "paths": {
+  //     "@blog/*": ["src/app/features/blog/*"],
+  //     "@core/*": ["src/app/core/*"],
+  //     "@features/*": ["src/app/features/*"],
+  //     "@recipes/*": ["src/app/features/recipes/*"],
+  //     "@shared/*": ["src/app/shared/*"],
+  //     "@styles/*": ["src/styles/*"]
+  //   }
+  // },
+  // "angularCompilerOptions": {
+  //   "enableI18nLegacyMessageIdFormat": false,
+  //   "strictInjectionParameters": true,
+  //   "strictInputAccessModifiers": true,
+  //   "strictTemplates": true,
+  //   "strictPropertyInitialization": false,
+  //   "fullTemplateTypeCheck": true,
+  //   "preserveWhitespaces": false,
+  //   "noImplicitAny": false
+  // }
+}

@@ -1,0 +1,139 @@
+@import 'mixins';
+
+.sidebar {
+  width: 220px;
+  height: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition-duration: 0.2s;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &__logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30px;
+    flex-shrink: 0;
+    color: #fff;
+
+    @include tablet {
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background-color: #22b07d;
+    }
+
+    &--collapsed {
+      display: none;
+
+      @include tablet {
+        display: flex;
+        width: 30px;
+      }
+    }
+
+    &--expand {
+      text-decoration: none;
+      color: #fff;
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 34px;
+      position: sticky;
+      top: 0;
+      display: flex;
+
+      @include tablet {
+        display: none;
+      }
+    }
+  }
+
+  @include tablet {
+    width: 90px;
+    border-right: 1px solid var(--border-color);
+  }
+}
+
+.side-menu {
+  $this: &;
+  padding: 36px 0;
+  width: 145px;
+
+  @include mobile {
+    width: 30px;
+  }
+
+  &--bordered {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  &__title {
+    font-size: 12px;
+    letter-spacing: 0.07em;
+    margin-bottom: 24px;
+
+    @media (max-width: 1090px) {
+      display: none;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--body-color);
+
+    &:not(:first-child) {
+      margin-top: 26px;
+    }
+
+    &:hover,
+    &--active {
+      color: #fff;
+      font-weight: 600;
+
+      &:nth-child(2n) {
+        #{$this}__icon {
+          background: #32a7e2;
+        }
+      }
+
+      &:nth-child(2n + 1) {
+        #{$this}__icon {
+          background: #ff7551;
+        }
+      }
+
+      &:nth-child(2n + 3) {
+        #{$this}__icon {
+          background: var(--primary-color);
+        }
+      }
+    }
+  }
+
+  &__icon {
+    width: 30px;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: var(--button-bg);
+    flex-shrink: 0;
+    margin-right: 16px;
+
+    @media (max-width: 1090px) {
+      margin-right: 30px;
+    }
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
