@@ -5,7 +5,7 @@
   "scripts": {
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "lint": "eslint . --ext .ts",
-    "dev": "nx run-many --target=serve --projects=client,server,blog --parallel=true --watch",
+    "dev": "nx run-many --target=serve --projects=client,server --parallel=true --watch",
     "prepare": "husky install"
   },
   "husky": {
@@ -30,7 +30,6 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
-    "@nestjs/mongoose": "^9.2.2",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.3.0",
     "@nrwl/angular": "^15.9.2",
@@ -57,7 +56,6 @@
     "@angular/compiler-cli": "~15.2.0",
     "@angular/language-service": "~15.2.0",
     "@angular/material": "^15.2.7",
-    "@nestjs/axios": "^2.0.0",
     "@nestjs/schematics": "^9.1.0",
     "@nestjs/testing": "^9.0.0",
     "@nrwl/cypress": "15.9.2",

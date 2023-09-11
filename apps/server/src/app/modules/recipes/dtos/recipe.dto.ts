@@ -75,6 +75,7 @@ export class RecipeDto {
   on_favorites: boolean;
 
   @ApiProperty()
+  @IsOptional()
   @IsBoolean()
   on_grocery_list: boolean;
 

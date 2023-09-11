@@ -82,7 +82,7 @@ export class RecipesService {
 
   async findRecipeByUID(uid: string): Promise<Recipe | null> {
     return this.prisma.client.recipe.findUnique({
-      where: { uid }, // Use the uid field as a unique identifier
+      where: { uid: uid }, // Specify 'uid' as the identifier
     });
   }
 }

@@ -105,33 +105,34 @@ model ScrapedRecipe {
 
 model Recipe {
   categories       String[]
-  cook_time        String
-  created          String
-  description      String
-  difficulty       String
+  cook_time        String?
+  created          DateTime @default(now())
+  description      String?
+  difficulty       String?
   directions       String
   hash             String
-  ingredients      String
-  in_trash         Boolean
+  id               String   @id @default(uuid())
   image_url        String
+  in_trash         Boolean
+  ingredients      String
   is_pinned        Boolean
   name             String
-  notes            String
+  notes            String?
   nutritional_info String
   on_favorites     Boolean
-  on_grocery_list  Boolean
-  photo            String
-  photo_hash       String
+  on_grocery_list  Boolean?
+  photo            String?
+  photo_hash       String?
   photo_large      String?
   photo_url        String
-  prep_time        String
+  prep_time        String?
   rating           Int
   scale            String?
-  servings         String
+  servings         String?
   source           String
   source_url       String
-  total_time       String
-  uid              String   @id
+  total_time       String?
+  uid              String   @unique
 
   @@schema("lamora")
 }
