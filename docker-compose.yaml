@@ -7,4 +7,3 @@ services:
     ports:
       - 8080:8080 # Port for the server app
       - 4200:4200 # Port for the client app
-      - 1337:1337 # Port for the blog app

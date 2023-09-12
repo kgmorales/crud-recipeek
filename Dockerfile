@@ -20,7 +20,3 @@ CMD nx run client:serve
 # Build and serve the server app
 RUN nx run server:build --prod
 CMD nx run server:serve
-
-# Build and serve the blog app
-RUN nx run blog:build --prod
-CMD nx run blog:serve
