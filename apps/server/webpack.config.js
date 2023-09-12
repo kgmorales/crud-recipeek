@@ -1,8 +1,17 @@
 const { composePlugins, withNx } = require('@nrwl/webpack');
 
-// Nx plugins for webpack.
+const swcDefaultConfig =
+  require('@nestjs/cli/lib/compiler/defaults/swc-defaults').swcDefaultsFactory()
+    .swcOptions;
+
 module.exports = composePlugins(withNx(), (config) => {
-  // Update the webpack config as needed here.
-  // e.g. `config.plugins.push(new MyPlugin())`
+  config.module.rules.push({
+    test: /\.ts$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'swc-loader',
+      options: swcDefaultConfig,
+    },
+  });
   return config;
 });
