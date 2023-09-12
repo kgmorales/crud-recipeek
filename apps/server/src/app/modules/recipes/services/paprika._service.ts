@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 
 import { Recipe, RecipeItem, Category } from '@prisma/client';
 //TODO: fix why this blows up if you only load from '@recipes/services'.
-import { PaprikaApiService } from '@recipes/services/providers';
+import { PaprikaApiService } from './providers/paprika-api._provider';
 
 @Injectable()
 export class PaprikaService {

@@ -1,15 +1,17 @@
 //* NESTJS
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 
+//* Module
+import { RecipeDto } from '@recipes/dtos';
+import { Recipe, Category } from '@prisma/client';
+import { RecipesService } from '../services/recipes._service';
+import { ScrapeService } from '../services/providers/scrape._provider';
+
+
 interface SuccessMessage {
   id: number;
   message: string;
 }
-
-//* Module
-import { RecipeDto } from '@recipes/dtos';
-import { Recipe, Category } from '@prisma/client';
-import { RecipesService, ScrapeService } from '@recipes/services';
 
 //TODO: set the strings to enum recipe.all, recipe.categories, etc
 @Controller('recipes')

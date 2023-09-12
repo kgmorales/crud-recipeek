@@ -4,7 +4,7 @@ import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 
 //* Module
 import { Category, Recipe, RecipeItem } from '@prisma/client';
-import { PaprikaService } from '@recipes/services';
+import { PaprikaService } from '../services/paprika._service';
 
 @Controller('paprika')
 export class PaprikaController {

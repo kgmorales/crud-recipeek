@@ -1,15 +1,10 @@
 //* NESTJS
-import { Injectable } from '@nestjs/common';
-
-//* 3RD PARTY
-import zlib from 'zlib';
-import FormData from 'form-data';
-import request, { OptionsWithUrl } from 'request-promise-native';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 
 //* Module
 import { paprikaBaseHeaders } from '@recipes/constants';
 import { RecipeDto } from '@recipes/dtos';
-import { PaprikaAuthService } from '@recipes/services/providers';
+import { PaprikaAuthService } from '../providers/paprika-auth._provider';
 import {
   Bookmark,
   Category,
@@ -23,17 +18,24 @@ import {
   RecipeItem,
 } from '@prisma/client';
 
+//* 3RD PARTY
+import zlib from 'zlib';
+import FormData from 'form-data';
+import request, { OptionsWithUrl } from 'request-promise-native';
+
+
 const PAPRIKA_V1_BASEURL = 'https://www.paprikaapp.com/api/v1';
 
 @Injectable()
-export class PaprikaApiService {
+export class PaprikaApiService implements OnModuleInit {
   private paprikaConfig: PaprikaConfig;
 
   constructor(private paprikaAuthService: PaprikaAuthService) {
-    //Get the Paprika config from the auth service
-    this.paprikaAuthService.buildAuthConfig().then((config) => {
-      this.paprikaConfig = config;
-    });
+  }
+
+  async onModuleInit() {
+     //Get the Paprika config from the auth service
+      this.paprikaConfig = await this.paprikaAuthService.buildAuthConfig()
   }
 
   /**
