@@ -1,4 +1,8 @@
 import { NestFactory } from '@nestjs/core';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
 import { AppModule } from './app/app._module';
 import {
   SwaggerModule,
@@ -7,7 +11,7 @@ import {
 } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter, { cors: true });
   app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
