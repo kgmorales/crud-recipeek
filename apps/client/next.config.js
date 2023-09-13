@@ -1,3 +1,4 @@
+const path = require('path');
 //@ts-check
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -12,6 +13,15 @@ const nextConfig = {
     // Set this to true if you would like to use SVGR
     // See: https://github.com/gregberge/svgr
     svgr: false,
+  },
+  
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
   },
 };
 

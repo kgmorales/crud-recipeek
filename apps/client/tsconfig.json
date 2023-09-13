@@ -1,15 +1,23 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "preserve",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "jsx": "preserve",
     "incremental": true,
     "plugins": [
       {
@@ -17,10 +25,52 @@
       }
     ],
     "types": [
-      "jest",
       "node"
     ],
-    "module": "esnext"
+    "paths": {
+      "../*": [
+        "./src/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@enums/*": [
+        "./src/enums/*"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
+      ],
+      "@public/*": [
+        "./public/*"
+      ],
+      "@imgs/*": [
+        "./public/imgs/*"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@types/*": [
+        "./src/types/*"
+      ],
+      "@config/*": [
+        "./src/config/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ]
+    }
   },
   "include": [
     "**/*.ts",

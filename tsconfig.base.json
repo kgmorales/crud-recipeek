@@ -61,7 +61,13 @@
       ],
       "@shared/*": [
         "apps/client/src/app/shared/*"
-      ]
+      ],
+      "@styles/*": [
+        "apps/client/src/styles/*"
+      ],
+      "@utils/*": [
+        "apps/client/src/utils/*"
+      ],
     },
     "rootDir": ".",
     "sourceMap": true,
