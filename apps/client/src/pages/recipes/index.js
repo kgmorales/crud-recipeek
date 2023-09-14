@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { fetchRecipes } from './utils/fetchRecipes';
-import { RecipeFnNames } from '../../enums';
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query';
+
 import Head from 'next/head';
 import PortfolioFilter from '../../components/elements/PortfolioFilter';
 import Layout from '../../components/layout/Layout';
@@ -9,28 +9,15 @@ import Pagination from '../../components/elements/Pagination';
 import MyServices from '../../components/sections/MyServices';
 import PartnersLogs from '../../components/sections/PartnersLogs';
 
-export async function getServerSideProps() {
-  try {
-    const recipes = await fetchRecipes('refreshDB');
-    return {
-      props: {
-        recipes,
-      },
-    };
-  } catch (error) {
-    return {
-      props: {
-        recipes: [],
-        error: error.message,
-      },
-    };
-  }
-}
+import { fetchPaginatedRecipes } from '../api/recipes/paginatedRecipes';
 
-const Recipes = ({ recipes, error }) => {
+
+const Recipes = () => {
+  const { data: recipes, error } = useQuery('paginatedRecipes', fetchPaginatedRecipes);
+
   useEffect(() => {
     console.log({ recipes });
-  }, []);
+  }, [recipes]);
 
   if (error) {
     return <div>Error loading recipes: {error}</div>;

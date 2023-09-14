@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Breadcrumb from "../components/elements/Breadcrumb"
+import Breadcrumb from "./Breadcrumb"
 
 const PageHeader1 = ({ title, des }) => {
     return (

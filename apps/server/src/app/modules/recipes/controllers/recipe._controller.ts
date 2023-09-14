@@ -44,11 +44,9 @@ export class RecipesController {
   // }
 
   @Get('paginatedRecipes')
-  async getPaginatedRecipes(
-    @Query('limit') limit: number,
-    @Query('page') page: number
-  ) {
-    return await this.recipeService.getPaginatedRecipes({ page, limit });
+  async getPaginatedRecipes(@Query() query: any) {
+    const { page, limit, filter } = query;
+    return this.recipeService.getPaginatedRecipes({ page, limit, filter });
   }
 
   @Get('refreshDB')

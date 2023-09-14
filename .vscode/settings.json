@@ -141,5 +141,7 @@
     "client": "client-e2e",
     "jest.config.ts": "jest.preset.js",
     "project.json": "webpack.config.ts"
-  }
+  },
+  "WillLuke.nextjs.addTypesOnSave": true,
+  "WillLuke.nextjs.hasPrompted": true
 }

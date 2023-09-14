@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Layout from '../components/layout/Layout';
 import Hero from '../components/sections/Hero';
 import FeaturedRecipes from '../components/sections/FeaturedRecipes';
-import Sidebar2 from '../components/layout/Sidebar2';
+// import Sidebar2 from '../components/layout/Sidebar2';
 import RecentPosts from '../components/sections/RecentPosts4';
 
 export default function Home() {

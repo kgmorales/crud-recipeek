@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import data from '../../utils/blogData2';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 const FeaturedRecipes = () => {
+  const queryClient = useQueryClient();
+
+  const query = useQuery({queryKey: 'featuredRecipes', queryFn: () => data.slice(0, 6)});
   return (
     <>
       <div className="row mt-70">

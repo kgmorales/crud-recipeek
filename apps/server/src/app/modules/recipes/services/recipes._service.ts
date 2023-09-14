@@ -5,11 +5,21 @@ import { Recipe, Category } from '@prisma/client';
 import { RecipeDto } from '@recipes/dtos';
 import { PaprikaService } from './paprika._service';
 
+interface GetPaginatedRecipesParams {
+  page?: number;
+  limit?: number;
+  filter?: {
+    name?: string;
+    category?: string;
+    // ... other filter fields
+  };
+}
+
 @Injectable()
 export class RecipesService {
   constructor(
     private paprikaService: PaprikaService,
-    private prisma: PrismaService
+    private prisma: PrismaService,
   ) {}
 
   async allDBRecipes(): Promise<Recipe[]> {
@@ -29,16 +39,32 @@ export class RecipesService {
     await this.prisma.client.category.deleteMany();
   }
 
-  async getPaginatedRecipes({ page = 1, limit = 10 }) {
-    limit = limit > 100 ? 100 : limit;
+  async getPaginatedRecipes(
+    params: GetPaginatedRecipesParams,
+  ): Promise<{ recipes: Recipe[]; total: number }> {
+    try {
+      const { page = 1, limit = 10, filter = {} } = params;
 
-    const skippedItems = (page - 1) * limit;
-    const recipes = await this.prisma.client.recipe.findMany({
-      skip: skippedItems,
-      take: limit,
-    });
+      const sanitizedLimit = Math.min(Math.max(limit, 1), 100); // Ensuring limit is between 1 and 100
+      const sanitizedPage = Math.max(page, 1); // Ensuring page is at least 1
 
-    return recipes;
+      const skippedItems = (sanitizedPage - 1) * sanitizedLimit;
+
+      const total = await this.prisma.client.recipe.count({
+        where: filter,
+      });
+
+      const recipes = await this.prisma.client.recipe.findMany({
+        skip: skippedItems,
+        take: sanitizedLimit,
+        where: filter,
+      });
+
+      return { recipes, total };
+    } catch (error) {
+      console.error('Error fetching paginated recipes:', error);
+      throw new Error('Error fetching paginated recipes');
+    }
   }
 
   async refreshDB(): Promise<void> {
@@ -63,7 +89,7 @@ export class RecipesService {
       const dbIds = await this.prisma.client.recipeItem.findMany();
 
       const newRecipeIds = paprikaIds.filter(
-        (paprikaId) => !dbIds.some((dbId) => paprikaId.uid === dbId.uid)
+        (paprikaId) => !dbIds.some((dbId) => paprikaId.uid === dbId.uid),
       );
 
       const newUIDs = newRecipeIds.map((ids) => ids.uid);
@@ -80,9 +106,9 @@ export class RecipesService {
     return [];
   }
 
-  async findRecipeByUID(uid: string): Promise<Recipe | null> {
-    return this.prisma.client.recipe.findUnique({
-      where: { uid: uid }, // Specify 'uid' as the identifier
+  async findRecipeByFilter(filter: RecipeDto): Promise<Recipe[]> {
+    return this.prisma.client.recipe.findMany({
+      where: filter,
     });
   }
 }

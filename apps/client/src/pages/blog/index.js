@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import Head from 'next/head';
-import Layout from '../components/layout/Layout';
-import PopularCategories from '../components/sections/PopularCategories';
-import Sidebar2 from '../components/layout/Sidebar2';
-import Pagination from '../components/elements/Pagination';
-import PageHeader1 from '../components/elements/PageHeader1';
+import Layout from '../../components/layout/Layout';
+import PopularCategories from '../../components/sections/PopularCategories';
+import Sidebar2 from '../../components/layout/Sidebar2';
+import Pagination from '../../components/elements/Pagination';
+import PageHeader1 from '../../components/elements/PageHeader1';
 import data from '../../utils/blogData2';
-import Sidebar from '../components/layout/Sidebar';
+import Sidebar from '../../components/layout/Sidebar';
 
 export default function Blog() {
   return (
