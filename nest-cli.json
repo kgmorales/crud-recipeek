@@ -8,6 +8,18 @@
         "classValidatorShim": false,
         "introspectComments": true
       }
+    },
+    "webpack": true
+  },
+  "projects": {
+    "shared-prisma": {
+      "type": "library",
+      "root": "libs/shared-prisma",
+      "entryFile": "index",
+      "sourceRoot": "libs/shared-prisma/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/shared-prisma/tsconfig.lib.json"
+      }
     }
   }
 }

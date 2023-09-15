@@ -11,5 +11,5 @@ export default () => ({
     password: process.env.PAPRIKA_PASS,
     user: process.env.PAPRIKA_USER,
   },
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 8080,
 });

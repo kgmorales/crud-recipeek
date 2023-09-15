@@ -14,7 +14,7 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
-  
+
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
@@ -23,6 +23,9 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: ['http://uploads.paprikaapp.com.s3.amazonaws.com/']
+  }
 };
 
 const plugins = [

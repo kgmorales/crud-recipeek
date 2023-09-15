@@ -7,7 +7,6 @@ import { Recipe, Category } from '@prisma/client';
 import { RecipesService } from '../services/recipes._service';
 import { ScrapeService } from '../services/providers/scrape._provider';
 
-
 interface SuccessMessage {
   id: number;
   message: string;
@@ -18,7 +17,7 @@ interface SuccessMessage {
 export class RecipesController {
   constructor(
     private recipeService: RecipesService,
-    private scrapeService: ScrapeService
+    private scrapeService: ScrapeService,
   ) {}
 
   @Get('allRecipes')
@@ -36,15 +35,25 @@ export class RecipesController {
     return await this.recipeService.createRecipe(recipeDto);
   }
 
-  // @Get('find/:uid')
-  // async findRecipe(
-  //   @Param('uid') uid: Pick<Recipe, 'uid'>
-  // ): Promise<Recipe | null> {
-  //   return await this.recipeService.findByUID(uid);
+  // @Get('filter')
+  // async findRecipeByFilter(@Query() filter: RecipeFilterDto) {
+  //   return this.recipeService.findRecipesByFilter(filter);
   // }
 
+  @Get('favorites')
+  async findFavoriteRecipes(): Promise<Recipe[]> {
+    return await this.recipeService.findFavoriteRecipes();
+  }
+
   @Get('paginatedRecipes')
-  async getPaginatedRecipes(@Query() query: any) {
+  async getPaginatedRecipes(
+    @Query()
+    query: {
+      page?: number;
+      limit?: number;
+      filter: Record<string, never>;
+    },
+  ) {
     const { page, limit, filter } = query;
     return this.recipeService.getPaginatedRecipes({ page, limit, filter });
   }

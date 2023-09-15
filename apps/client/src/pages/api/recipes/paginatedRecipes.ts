@@ -2,7 +2,7 @@ import { Recipe } from "@prisma/client";
 
 export async function fetchPaginatedRecipes(page: number, limit: number): Promise<Recipe[]> {
   try {
-    const response = await fetch(`http://localhost:8080/paginatedRecipes?page=${page}&limit=${limit}`);
+    const response = await fetch(`http://localhost:8080/api/recipes/paginatedRecipes?page=${page}&limit=${limit}`);
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
     }

@@ -12,7 +12,7 @@ export class PaprikaController {
 
   @Get('allRecipes')
   @UseInterceptors(CacheInterceptor)
-  @CacheTTL(60)
+  @CacheTTL(1000)
   async allRecipes(): Promise<Recipe[]> {
     return await this.paprikaService.allRecipes();
   }
