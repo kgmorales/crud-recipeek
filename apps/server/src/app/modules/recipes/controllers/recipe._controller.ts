@@ -6,13 +6,8 @@ import { RecipeDto } from '@recipes/dtos';
 import { Recipe, Category } from '@prisma/client';
 import { RecipesService } from '../services/recipes._service';
 import { ScrapeService } from '../services/providers/scrape._provider';
+import { SuccessMessageDto } from '../dtos/success-message';
 
-interface SuccessMessage {
-  id: number;
-  message: string;
-}
-
-//TODO: set the strings to enum recipe.all, recipe.categories, etc
 @Controller('recipes')
 export class RecipesController {
   constructor(
@@ -35,16 +30,6 @@ export class RecipesController {
     return await this.recipeService.createRecipe(recipeDto);
   }
 
-  // @Get('filter')
-  // async findRecipeByFilter(@Query() filter: RecipeFilterDto) {
-  //   return this.recipeService.findRecipesByFilter(filter);
-  // }
-
-  @Get('favorites')
-  async findFavoriteRecipes(): Promise<Recipe[]> {
-    return await this.recipeService.findFavoriteRecipes();
-  }
-
   @Get('paginatedRecipes')
   async getPaginatedRecipes(
     @Query()
@@ -59,7 +44,7 @@ export class RecipesController {
   }
 
   @Get('refreshDB')
-  async refreshDB(): Promise<SuccessMessage> {
+  async refreshDB(): Promise<SuccessMessageDto> {
     await this.recipeService.refreshDB();
     return { id: 0, message: 'Success' };
   }

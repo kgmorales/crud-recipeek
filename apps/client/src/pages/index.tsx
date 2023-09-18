@@ -1,16 +1,20 @@
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Head from 'next/head';
-import Layout from '../components/layout/Layout';
-import Hero from '../components/sections/Hero';
-import FeaturedRecipes from '../components/sections/FeaturedRecipes';
-// import Sidebar2 from '../components/layout/Sidebar2';
-import RecentPosts from '../components/sections/RecentPosts4';
 
-export default function Home() {
+import Layout from '@components/layout/Layout';
+import Hero from '@components/sections/Hero';
+import FeaturedRecipes from '../components/sections/FeaturedRecipes';
+import RecentRecipes from '@components/sections/RecentRecipes';
+import fetchHome from '@api/pages/home.routes';
+
+const Home: React.FC = () => {
+  const { data: home } = useQuery(['home'], async () => await fetchHome());
+
   return (
     <>
       <Head>
-        <title>Lamora | Recipes</title>
+        <title>laMora | Recipes</title>
       </Head>
       <Layout>
         <div className="cover-home1">
@@ -18,12 +22,11 @@ export default function Home() {
             <div className="row">
               <div className="col-xl-1" />
               <div className="col-xl-10 col-lg-12">
-                <Hero />
-                <FeaturedRecipes />
-                {/* <TrendingTopic2 /> */}
+                <Hero categoryNames={home?.categoryNames} />
+                <FeaturedRecipes featured={home?.favorites} />
                 <div className="row mt-70">
                   <div className="col-lg-12">
-                    <RecentPosts />
+                    <RecentRecipes recent={home?.recent} />
                   </div>
                 </div>
               </div>
@@ -33,4 +36,6 @@ export default function Home() {
       </Layout>
     </>
   );
-}
+};
+
+export default Home;

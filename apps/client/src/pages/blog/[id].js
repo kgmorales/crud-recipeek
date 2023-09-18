@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import Layout from '../components/layout/Layout';
-import Breadcrumb from '../components/elements/Breadcrumb';
-import data from '@utils/blogData';
+import Layout from '../../components/layout/Layout';
+import Breadcrumb from '../../components/elements/Breadcrumb';
+import data from '../../utils/blogData';
 
 const BlogDetails = () => {
   // Import the useRouter hook from 'next/router' module

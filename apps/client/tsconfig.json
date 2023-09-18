@@ -2,11 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -24,60 +20,15 @@
         "name": "next"
       }
     ],
-    "types": [
-      "node"
-    ],
-    "paths": {
-      "../*": [
-        "./src/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@enums/*": [
-        "./src/enums/*"
-      ],
-      "@pages/*": [
-        "./src/pages/*"
-      ],
-      "@public/*": [
-        "./public/*"
-      ],
-      "@imgs/*": [
-        "./public/imgs/*"
-      ],
-      "@styles/*": [
-        "./src/styles/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@hooks/*": [
-        "./src/hooks/*"
-      ],
-      "@services/*": [
-        "./src/services/*"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@types/*": [
-        "./src/types/*"
-      ],
-      "@config/*": [
-        "./src/config/*"
-      ],
-      "@lib/*": [
-        "./src/lib/*"
-      ]
-    }
+    "types": ["node"]
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    "../server/src/app/modules/recipes/dtos/success-message.ts"
   ],
   "exclude": [
     "node_modules",

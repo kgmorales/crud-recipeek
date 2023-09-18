@@ -1,35 +1,19 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
-import { CacheModule } from '@nestjs/cache-manager';
-import { PaprikaApiService } from './services/providers/paprika-api._provider';
-import { PaprikaAuthService } from './services/providers/paprika-auth._provider';
-import { PrismaService } from './services/providers/prisma._provider';
-import { ScrapeService } from './services/providers/scrape._provider';
-import { RecipesService } from './services/recipes._service';
-import { PaprikaService } from './services/paprika._service';
-
-import { apis } from '@recipes/controllers';
+//* Controllers
+import { ControllersModule } from './controllers/controllers.module';
+//* Middleware
 import { BooleanConversionMiddleware } from './middleware/boolean-conversion.middleware';
+//* Services
+import { ServicesModule } from './services/services._module';
 
-const imports = [CacheModule.register()];
-
-const services = [
-  PaprikaApiService,
-  PaprikaAuthService,
-  PaprikaService,
-  PrismaService,
-  RecipesService,
-  ScrapeService,
-];
-
-const controllers = apis;
+//? Imports
+const imports = [ControllersModule, ServicesModule];
 
 @Module({
-  imports: imports,
-  controllers: controllers,
-  providers: services,
+  imports,
 })
-export class RecipesModule {
+export class RecipesModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(BooleanConversionMiddleware).forRoutes('recipes/filter');
   }

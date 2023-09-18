@@ -18,56 +18,27 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "module": "ES2022",
     "moduleResolution": "node",
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noPropertyAccessFromIndexSignature": false,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "paths": {
-      "@allRecipes/*": [
-        "apps/client/src/app/features/recipes/*"
-      ],
-      "@blog/*": [
-        "apps/client/src/app/features/blog/*"
-      ],
-      "@client/*": [
-        "apps/client/src/*"
-      ],
-      "@core/*": [
-        "apps/client/src/app/core/*"
-      ],
-      "@features/*": [
-        "apps/client/src/app/features/*"
-      ],
-      "@home/*": [
-        "apps/client/src/app/features/home/*"
-      ],
-      "@modules/*": [
-        "apps/server/src/app/modules/*"
-      ],
-      "@recipes/*": [
-        "apps/server/src/app/modules/recipes/*"
-      ],
-      "@server/*": [
-        "apps/server/src/app/*"
-      ],
-      "@shared/*": [
-        "apps/client/src/app/shared/*"
-      ],
-      "@styles/*": [
-        "apps/client/src/styles/*"
-      ],
-      "@utils/*": [
-        "apps/client/src/utils/*"
-      ],
+      "@api/*": ["apps/client/src/pages/api/*"],
+      "@components/*": ["apps/client/src/components/*"],
+      "@constants/*": ["apps/client/src/constants/*"],
+      "@contexts/*": ["apps/client/src/contexts/*"],
+      "@enums/*": ["apps/client/src/enums/*"],
+      "@pages/*": ["apps/client/src/pages/*"],
+      "@styles/*": ["apps/client/src/styles/*"],
+      "@types": ["apps/client/src/types"],
+      "@utils/*": ["apps/client/src/utils/*"],
+      "@modules/*": ["apps/server/src/app/modules/*"],
+      "@recipes/*": ["apps/server/src/app/modules/recipes/*"],
+      "@server/*": ["apps/server/src/app/*"]
     },
     "rootDir": ".",
     "sourceMap": true,
@@ -78,8 +49,5 @@
     "target": "ES2022",
     "useDefineForClassFields": false
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

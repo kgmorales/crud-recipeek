@@ -1,6 +1,6 @@
 //* NESTJS
 import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
-import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
+// import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 
 //* Module
 import { Category, Recipe, RecipeItem } from '@prisma/client';
@@ -11,13 +11,13 @@ export class PaprikaController {
   constructor(private paprikaService: PaprikaService) {}
 
   @Get('allRecipes')
-  @UseInterceptors(CacheInterceptor)
-  @CacheTTL(1000)
+  // @UseInterceptors(CacheInterceptor)
+  // @CacheTTL(1000)
   async allRecipes(): Promise<Recipe[]> {
     return await this.paprikaService.allRecipes();
   }
 
-  @UseInterceptors(CacheInterceptor)
+  // @UseInterceptors(CacheInterceptor)
   @Get('categories')
   async allCategories(): Promise<Category[]> {
     return await this.paprikaService.categories();

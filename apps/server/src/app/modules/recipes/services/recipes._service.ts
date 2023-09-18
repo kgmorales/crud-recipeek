@@ -4,7 +4,6 @@ import { Recipe, Category } from '@prisma/client';
 
 import { RecipeDto } from '@recipes/dtos';
 import { PaprikaService } from './paprika._service';
-import { RecipeFilterDto } from '../dtos/recipe-filter.dto';
 
 interface GetPaginatedRecipesParams {
   page?: number;
@@ -40,22 +39,6 @@ export class RecipesService {
     await this.prisma.client.category.deleteMany();
   }
 
-  // async findRecipesByFilter(params: RecipeFilterDto): Promise<Recipe[]> {
-  //   return this.prisma.client.recipe.findMany({
-  //     where: {
-  //       AND: [{ filters: { some: { name: { contains: params. } } } }],
-  //     },
-  //     take: params.take,
-  //   });
-  // }
-
-  async findFavoriteRecipes(): Promise<Recipe[]> {
-    return await this.prisma.client.recipe.findMany({
-      where: { on_favorites: true },
-      take: 6,
-    });
-  }
-
   async getPaginatedRecipes(
     params: GetPaginatedRecipesParams,
   ): Promise<{ recipes: Recipe[]; total: number }> {
@@ -82,6 +65,15 @@ export class RecipesService {
       console.error('Error fetching paginated recipes:', error);
       throw new Error('Error fetching paginated recipes');
     }
+  }
+
+  async getRecipesByMostRecent(): Promise<Recipe[]> {
+    return await this.prisma.client.recipe.findMany({
+      orderBy: {
+        created: 'desc',
+      },
+      take: 5,
+    });
   }
 
   async refreshDB(): Promise<void> {
@@ -123,3 +115,13 @@ export class RecipesService {
     return [];
   }
 }
+
+
+  // async findRecipesByFilter(params: RecipeFilterDto): Promise<Recipe[]> {
+  //   return this.prisma.client.recipe.findMany({
+  //     where: {
+  //       AND: [{ filters: { some: { name: { contains: params. } } } }],
+  //     },
+  //     take: params.take,
+  //   });
+  // }
