@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import Footer from './Footer';
+import React, { useState, FC } from 'react';
+import Footer from '../layout/Footer';
 import Header from './Header';
 import MobileMenu from './MobileMenu';
 
-const Layout = ({ children }) => {
+interface LayoutProps {
+  categoryNames?: string[];
+  children?: React.ReactNode;
+}
+
+const Layout: FC<LayoutProps> = ({ categoryNames, children }) => {
   // State to control the 'openClass' CSS class
-  const [openClass, setOpenClass] = useState('');
+  const [openClass, setOpenClass] = useState<string>('');
 
   // Function to handle opening the mobile menu
   const handleOpen = () => {
@@ -27,6 +32,7 @@ const Layout = ({ children }) => {
       setOpenClass('');
     }
   };
+
   return (
     <>
       {openClass && <div className="body-overlay-1" onClick={handleRemove} />}
@@ -38,7 +44,7 @@ const Layout = ({ children }) => {
       />
       <MobileMenu openClass={openClass} />
       <main className="main">{children}</main>
-      <Footer />
+      <Footer categoryNames={categoryNames} />
     </>
   );
 };

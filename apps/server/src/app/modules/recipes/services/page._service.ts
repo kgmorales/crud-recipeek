@@ -14,10 +14,12 @@ export class PageService {
   constructor(private prisma: PrismaService) {}
 
   async getHome(): Promise<Home> {
-    const StringsFilter = (category: Category) => category.name;
-    const categoryNames = (await this.prisma.client.category.findMany()).map(
-      (category) => StringsFilter(category),
-    );
+    const NamesFilter = (category: Category) => category.name;
+    const categoryNames = (
+      await this.prisma.client.category.findMany({
+        where: { parent_uid: null },
+      })
+    ).map((category) => NamesFilter(category));
 
     const favorites = await this.prisma.client.recipe.findMany({
       where: { on_favorites: true },

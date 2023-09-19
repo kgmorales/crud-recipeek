@@ -16,7 +16,7 @@ const Home: React.FC = () => {
       <Head>
         <title>laMora | Recipes</title>
       </Head>
-      <Layout>
+      <Layout categoryNames={home?.categoryNames}>
         <div className="cover-home1">
           <div className="container">
             <div className="row">

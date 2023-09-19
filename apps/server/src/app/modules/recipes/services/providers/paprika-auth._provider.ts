@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from './prisma._provider';
-import request from 'request-promise-native';
+import request, { OptionsWithUrl } from 'request-promise-native';
 import { PaprikaConfig } from '@prisma/client';
 import { getErrorMessage, toErrorWithMessage } from '../../types/error';
 import { JwtService } from '@nestjs/jwt';
@@ -21,13 +21,16 @@ export class PaprikaAuthService {
     this.authConfig = this.buildAuthConfig();
   }
 
+  /**
+   *
+   * @returns Promise<PaprikaConfig>
+   * returns a PaprikaConfig object with a hashed bearerToken
+   */
   async buildAuthConfig(): Promise<PaprikaConfig> {
-    this.localConfig = {
+    return {
       ...this.localConfig,
       bearerToken: await bcrypt.hash(await this.getToken(), 10),
     };
-    console.log(this.localConfig);
-    return this.localConfig;
   }
 
   private getPaprikaConfig(): PaprikaConfig {
@@ -102,7 +105,7 @@ export class PaprikaAuthService {
   }
 
   private async refreshToken(): Promise<string> {
-    const options = {
+    const options: OptionsWithUrl = {
       method: 'POST',
       url: `${this.localConfig.baseURL}/account/login/`,
       json: true,
