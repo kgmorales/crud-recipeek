@@ -4,6 +4,7 @@ import { Recipe, Category } from '@prisma/client';
 
 import { RecipeDto } from '@recipes/dtos';
 import { PaprikaService } from './paprika._service';
+import { PaprikaAuthService } from './providers/paprika-auth._provider';
 
 interface GetPaginatedRecipesParams {
   page?: number;
@@ -11,7 +12,6 @@ interface GetPaginatedRecipesParams {
   filter?: {
     name?: string;
     category?: string;
-    // ... other filter fields
   };
 }
 
@@ -19,6 +19,7 @@ interface GetPaginatedRecipesParams {
 export class RecipesService {
   constructor(
     private paprikaService: PaprikaService,
+    private paprikaAuthService: PaprikaAuthService,
     private prisma: PrismaService,
   ) {}
 
@@ -37,6 +38,8 @@ export class RecipesService {
   private async deleteAll(): Promise<void> {
     await this.prisma.client.recipe.deleteMany();
     await this.prisma.client.category.deleteMany();
+    await this.prisma.client.recipeItem.deleteMany();
+    await this.prisma.client.paprikaToken.deleteMany();
   }
 
   async getPaginatedRecipes(
@@ -116,12 +119,11 @@ export class RecipesService {
   }
 }
 
-
-  // async findRecipesByFilter(params: RecipeFilterDto): Promise<Recipe[]> {
-  //   return this.prisma.client.recipe.findMany({
-  //     where: {
-  //       AND: [{ filters: { some: { name: { contains: params. } } } }],
-  //     },
-  //     take: params.take,
-  //   });
-  // }
+// async findRecipesByFilter(params: RecipeFilterDto): Promise<Recipe[]> {
+//   return this.prisma.client.recipe.findMany({
+//     where: {
+//       AND: [{ filters: { some: { name: { contains: params. } } } }],
+//     },
+//     take: params.take,
+//   });
+// }

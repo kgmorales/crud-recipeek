@@ -166,18 +166,12 @@ model PaprikaToken {
 }
 
 model PaprikaConfig {
-  id          Int     @id @default(autoincrement())
   baseURL     String
-  user        String
-  password    String
   bearerToken String?
-
-  @@schema("lamora")
-}
-
-model TokenResult {
-  id    Int    @id
-  token String
+  id          Int     @id @default(autoincrement())
+  jwtSecret   String
+  password    String
+  user        String
 
   @@schema("lamora")
 }

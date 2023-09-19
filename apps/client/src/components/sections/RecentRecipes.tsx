@@ -78,7 +78,7 @@ const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
               </div>
               <div className="col-lg-5">
                 <div className="row">
-                  {recent?.slice(2, 8).map((recipe, i) => (
+                  {recent?.slice(2, 9).map((recipe, i) => (
                     <div className="col-lg-12" key={i}>
                       <div
                         className="card-list-posts card-list-posts-small mb-30 wow animate__animated animate__fadeIn"

@@ -1,19 +1,36 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-// import { CacheModule } from '@nestjs/cache-manager';
+import { CacheModule } from '@nestjs/cache-manager';
 import { PrismaClient } from '@prisma/client';
+// * Modules
 import { RecipesModule } from '@recipes/recipes._module';
 
+//? Config
 import configuration from './config/config';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
+    PassportModule,
+    CacheModule.register({ isGlobal: true }),
     ConfigModule.forRoot({
       load: [configuration],
       isGlobal: true,
       cache: true,
     }),
-    // CacheModule.register({ isGlobal: true }),
+    JwtModule.registerAsync({
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        const secret = configService.get<string>('paprika.jwtSecret');
+        if (!secret) throw new Error('JWT Secret is undefined');
+
+        return {
+          secret,
+          signOptions: { expiresIn: '1d' },
+        };
+      },
+    }),
     RecipesModule,
   ],
   providers: [

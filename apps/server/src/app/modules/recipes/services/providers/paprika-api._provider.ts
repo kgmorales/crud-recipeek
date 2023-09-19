@@ -2,8 +2,8 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 
 //* Module
-import { paprikaBaseHeaders } from '@recipes/constants';
-import { RecipeDto } from '@recipes/dtos';
+// import { paprikaBaseHeaders } from '@recipes/constants';
+// import { RecipeDto } from '@recipes/dtos';
 import { PaprikaAuthService } from '../providers/paprika-auth._provider';
 import {
   Bookmark,
@@ -20,9 +20,8 @@ import {
 
 //* 3RD PARTY
 import zlib from 'zlib';
-import FormData from 'form-data';
+// import FormData from 'form-data';
 import request, { OptionsWithUrl } from 'request-promise-native';
-
 
 const PAPRIKA_V1_BASEURL = 'https://www.paprikaapp.com/api/v1';
 
@@ -30,12 +29,11 @@ const PAPRIKA_V1_BASEURL = 'https://www.paprikaapp.com/api/v1';
 export class PaprikaApiService implements OnModuleInit {
   private paprikaConfig: PaprikaConfig;
 
-  constructor(private paprikaAuthService: PaprikaAuthService) {
-  }
+  constructor(private paprikaAuthService: PaprikaAuthService) {}
 
   async onModuleInit() {
-     //Get the Paprika config from the auth service
-      this.paprikaConfig = await this.paprikaAuthService.buildAuthConfig()
+    //Get the Paprika config from the auth service
+    this.paprikaConfig = await this.paprikaAuthService.buildAuthConfig();
   }
 
   /**
@@ -53,21 +51,6 @@ export class PaprikaApiService implements OnModuleInit {
         }
       });
     });
-  }
-
-  /**
-   * Get the binary data for Photo URL
-   * @param photoUrl @type string
-   * @returns
-   */
-  private async getPhotoData(photoUrl: string): Promise<Buffer> {
-    console.log(photoUrl);
-    const options: OptionsWithUrl = {
-      url: photoUrl,
-      encoding: null,
-    };
-    const photoData = await request.get(options);
-    return photoData;
   }
 
   /**
@@ -133,38 +116,54 @@ export class PaprikaApiService implements OnModuleInit {
     return this.resource('recipe/' + recipeUid);
   }
 
-  async create(recipeDto: RecipeDto): Promise<void> {
-    if (!recipeDto) {
-      throw new Error('Recipe DTO is null or undefined');
-    }
+  //! This requires getting photodata, which is not finished.
+  // async create(recipeDto: RecipeDto): Promise<void> {
+  //   if (!recipeDto) {
+  //     throw new Error('Recipe DTO is null or undefined');
+  //   }
 
-    const gzippedJson = await this.gZip(JSON.stringify(recipeDto));
-    const formData = new FormData();
+  //   const gzippedJson = await this.gZip(JSON.stringify(recipeDto));
+  //   const formData = new FormData();
 
-    if (recipeDto.image_url) {
-      const photoData = await this.getPhotoData(recipeDto.image_url);
+  //   if (recipeDto.image_url) {
+  //     const photoData = await this.getPhotoData(recipeDto.image_url);
 
-      formData.append('photo', photoData, {
-        filename: `recipe.jpg`,
-      });
+  //     formData.append('photo', photoData, {
+  //       filename: `recipe.jpg`,
+  //     });
 
-      formData.append('data', gzippedJson, {
-        filename: 'recipe.json.gz',
-        contentType: 'application/gzip',
-      });
-    }
+  //     formData.append('data', gzippedJson, {
+  //       filename: 'recipe.json.gz',
+  //       contentType: 'application/gzip',
+  //     });
+  //   }
 
-    const options: OptionsWithUrl = {
-      method: 'POST',
-      headers: {
-        ...paprikaBaseHeaders,
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${this.paprikaConfig.bearerToken}`,
-      },
-      url: `${this.paprikaConfig.baseURL}/sync/recipe/${recipeDto.uid}`,
-      formData,
-    };
+  //   const options: OptionsWithUrl = {
+  //     method: 'POST',
+  //     headers: {
+  //       ...paprikaBaseHeaders,
+  //       'Content-Type': 'multipart/form-data',
+  //       Authorization: `Bearer ${this.paprikaConfig.bearerToken}`,
+  //     },
+  //     url: `${this.paprikaConfig.baseURL}/sync/recipe/${recipeDto.uid}`,
+  //     formData,
+  //   };
 
-    await request(options);
-  }
+  //   await request(options);
+  // }
 }
+
+// /**
+//  * Get the binary data for Photo URL
+//  * @param photoUrl @type string
+//  * @returns
+//  */
+// private async getPhotoData(photoUrl: string): Promise<Buffer> {
+//   console.log(photoUrl);
+//   const options: OptionsWithUrl = {
+//     url: photoUrl,
+//     encoding: null,
+//   };
+//   const photoData = await request.get(options);
+//   return photoData;
+// }

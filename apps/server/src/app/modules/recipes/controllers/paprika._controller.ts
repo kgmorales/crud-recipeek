@@ -1,5 +1,5 @@
 //* NESTJS
-import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 // import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 
 //* Module
