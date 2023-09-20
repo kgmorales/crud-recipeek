@@ -15,9 +15,11 @@
     border-radius: 8px;
     overflow: hidden;
     position: relative;
+
     img {
       width: 100%;
       border-radius: 8px;
+      color: white !important;
     }
     .link-post {
       &:hover {
@@ -121,6 +123,7 @@
     height: 32px;
     margin-right: 8px;
     min-width: 32px;
+    color: white;
     img {
       width: 32px;
       height: 32px;
@@ -216,8 +219,8 @@
 }
 .card-testimonials {
   position: relative;
-  background: url(../../../../public/assets/imgs/page/about/quote.svg)
-    no-repeat bottom right 15px;
+  background: url(../../../../public/assets/imgs/page/about/quote.svg) no-repeat
+    bottom right 15px;
   padding: 30px 24px 50px 24px;
   border-width: 1px;
   border-style: solid;

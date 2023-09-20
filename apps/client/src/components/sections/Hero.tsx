@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import React from 'react';
-import { Home } from '../../types/home.types';
+import { HeroVm } from './constants/Hero';
+import Image from 'next/image';
 
-interface HeroProps {
-  categoryNames?: Home['categoryNames'];
-}
+const iconPATH = '/assets/icons';
 
-const Hero: React.FC<HeroProps> = ({ categoryNames }) => {
+console.log(HeroVm);
+const Hero: React.FC<HeroVm> = () => {
   return (
     <>
       <div className="banner banner-home2">
@@ -18,23 +18,25 @@ const Hero: React.FC<HeroProps> = ({ categoryNames }) => {
         </div>
         <div className="text-center mt-50">
           <ul className="list-tags-col-5 mb-50 text-center">
-            {categoryNames?.slice(0, 10).map((category: string, i: number) => (
-              <li key={i}>
+            {HeroVm.categories.map((category) => (
+              <li key={category.key}>
                 <div
                   className="card-style-2 hover-up hover-neon wow animate__animated animate__fadeInUp"
-                  data-wow-delay={`${i / 10}s`}
+                  data-wow-delay={`${category.key / 10}s`}
                 >
-                  {/* <div className="card-image">
-                    <Link href="/blog-archive">
-                      <img
-                        src={`assets/imgs/page/homepage1/${item.img}`}
-                        alt="Genz"
+                  <div className="card-image">
+                    <Link href="/blog-archive" >
+                      <Image
+                        src={`${iconPATH}/${category.icon}`}
+                        alt="icon"
+                        width={200}
+                        height={200}
                       />
                     </Link>
-                  </div> */}
+                  </div>
                   <div className="card-info">
                     <Link className="color-gray-500" href="/blog-archive">
-                      {category}
+                      {category.title}
                     </Link>
                   </div>
                 </div>

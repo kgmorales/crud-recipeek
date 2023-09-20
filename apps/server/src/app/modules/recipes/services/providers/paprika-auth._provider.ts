@@ -48,10 +48,9 @@ export class PaprikaAuthService {
 
     if (tokenFromDB?.token) {
       // Step 2: Verify the token's signature to ensure it's valid
-      const isTokenVerified =
-        this.jwtService.verify(tokenFromDB.token, {
-          secret: this.localConfig.jwtSecret,
-        }) !== null;
+      const isTokenVerified = this.jwtService.verify(tokenFromDB.token, {
+        secret: this.localConfig.jwtSecret,
+      });
 
       if (isTokenVerified) {
         // Step 3: Check if the token is valid with the Paprika API
