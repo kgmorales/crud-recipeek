@@ -12,10 +12,10 @@ const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
     <>
       <div className="row mt-70">
         <h2 className="color-linear d-inline-block mb-10 wow animate__animated animate__fadeInUp">
-          Featured Articles
+          Family Favorites
         </h2>
         <p className="text-lg color-gray-500 wow animate__animated animate__fadeInUp">
-          Discover the most outstanding articles in all topics
+          Discover our most popular recipes.
         </p>
         <div className="row mt-70">
           {featured?.map((recipe: Recipe) => (

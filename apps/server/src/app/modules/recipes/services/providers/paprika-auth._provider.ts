@@ -3,9 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { PrismaService } from './prisma._provider';
 import request, { OptionsWithUrl } from 'request-promise-native';
 import { PaprikaConfig } from '@prisma/client';
-import { getErrorMessage, toErrorWithMessage } from '../../types/error';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class PaprikaAuthService {
@@ -29,7 +27,7 @@ export class PaprikaAuthService {
   async buildAuthConfig(): Promise<PaprikaConfig> {
     return {
       ...this.localConfig,
-      bearerToken: await bcrypt.hash(await this.getToken(), 10),
+      bearerToken: await this.getToken(),
     };
   }
 
@@ -45,63 +43,51 @@ export class PaprikaAuthService {
   }
 
   async getToken(): Promise<string> {
-    let token: string | null = null;
-
     // Step 1: Retrieve the initial token (if any) from the database
-    const paprikaTokenFromDb =
-      await this.prisma.client.paprikaToken.findFirst();
+    const tokenFromDB = await this.prisma.client.paprikaToken.findFirst();
 
-    if (paprikaTokenFromDb && paprikaTokenFromDb.token) {
-      const decodedToken = this.jwtService.decode(paprikaTokenFromDb.token);
-      if (decodedToken && typeof decodedToken === 'string') {
-        const isTokenValid = await bcrypt.compare(
-          decodedToken,
-          paprikaTokenFromDb.token,
+    if (tokenFromDB?.token) {
+      // Step 2: Verify the token's signature to ensure it's valid
+      const isTokenVerified =
+        this.jwtService.verify(tokenFromDB.token, {
+          secret: this.localConfig.jwtSecret,
+        }) !== null;
+
+      if (isTokenVerified) {
+        // Step 3: Check if the token is valid with the Paprika API
+        const isValidWithPaprika = await this.checkTokenPaprikaValidity(
+          tokenFromDB.token,
         );
-        if (isTokenValid) {
-          token = decodedToken;
+
+        if (isValidWithPaprika) {
+          // The token is valid, so return it
+          return tokenFromDB.token;
         }
       }
     }
 
-    if (token) {
-      try {
-        await this.checkTokenValidity(token);
-        return token;
-      } catch (error) {
-        token = await this.refreshToken();
-      }
-    } else {
-      try {
-        token = await bcrypt.hash(await this.refreshToken(), 10);
-        await this.prisma.client.paprikaToken.deleteMany();
-        await this.prisma.client.paprikaToken.create({ data: { token } });
-      } catch (error) {
-        const errorMessage = getErrorMessage(error);
-        throw toErrorWithMessage(new Error(errorMessage));
-      }
-    }
+    //* TOKEN !VERIFIED || NULL, so we refresh the token
+    const newToken = await this.refreshToken();
 
-    // Step 3: Ensure that the token variable contains a valid token string before signing it
-    if (token) {
-      return this.jwtService.sign(token, {
-        secret: this.localConfig.jwtSecret,
-      });
-    } else {
-      throw new Error('Failed to retrieve a valid token');
-    }
+    // Store the new token in the database
+    await this.prisma.client.paprikaToken.deleteMany();
+    await this.prisma.client.paprikaToken.create({
+      data: { token: newToken },
+    });
+
+    return this.jwtService.sign(newToken, {
+      secret: this.localConfig.jwtSecret,
+    });
   }
 
-  private async checkTokenValidity(token: string): Promise<void> {
-    try {
-      const options = {
-        url: `${this.localConfig.baseURL}/sync/status/`,
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      await request(options);
-    } catch (error) {
-      throw new Error('Token validation failed');
-    }
+  private async checkTokenPaprikaValidity(token: string): Promise<boolean> {
+    const options = {
+      url: `${this.localConfig.baseURL}/sync/status/`,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const response = await request(options);
+    return response.statusCode === 200;
   }
 
   private async refreshToken(): Promise<string> {
