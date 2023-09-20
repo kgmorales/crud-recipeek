@@ -5,7 +5,6 @@ import Image from 'next/image';
 
 const iconPATH = '/assets/icons';
 
-console.log(HeroVm);
 const Hero: React.FC<HeroVm> = () => {
   return (
     <>
@@ -25,7 +24,7 @@ const Hero: React.FC<HeroVm> = () => {
                   data-wow-delay={`${category.key / 10}s`}
                 >
                   <div className="card-image">
-                    <Link href="/blog-archive" >
+                    <Link href="/blog-archive">
                       <Image
                         src={`${iconPATH}/${category.icon}`}
                         alt="icon"
