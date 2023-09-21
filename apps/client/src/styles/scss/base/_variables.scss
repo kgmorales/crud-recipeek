@@ -14,11 +14,11 @@ $font-2xl: 22px;
 $font-3xl: 58px;
 //2.COLOR
 $color-black: #000000;
-$color-brand-1: #554890;
+$color-brand-1: #4d4182;
 $color-brand-2: #e8c1ed;
-$color-brand-3: #554890;
+$color-brand-3: #4d4182;
 $color-border-1: #e8c1ed;
-$color-gray-50: #d0cde4;
+$color-gray-50: #e8c1ed;
 $color-gray-100: #d0cde4;
 $color-gray-200: #b8b2d1;
 $color-gray-300: #a097be;
@@ -30,20 +30,21 @@ $color-gray-800: #2b2448;
 $color-gray-850: #231e3f;
 $color-gray-900: #1b1836;
 $color-gray-950: #13122d;
-$color-gray-100-day: #d8d9e6;
-$color-gray-200-day: #c9cadf;
-$color-gray-300-day: #babbd8;
-$color-gray-400-day: #abacd1;
-$color-gray-500-day: #9c9dca;
-$color-gray-600-day: #8d8ec3;
-$color-gray-700-day: #7e7fbc;
-$color-gray-750-day: #8081be;
-$color-gray-800-day: #6f70b5;
-$color-gray-850-day: #6051ae;
-$color-gray-900-day: #554890;
-$color-gray-950-day: #4a3f82;
-$color-gray-50-day: #344161;
+$color-gray-100-day: #403272;
+$color-gray-200-day: #403272;
+$color-gray-300-day: #403272;
+$color-gray-400-day: #403272;
+$color-gray-500-day: #403272;
+$color-gray-600-day: #403272;
+$color-gray-700-day: #403272;
+$color-gray-800-day: #403272;
+$color-gray-850-day: #403272;
+$color-gray-900-day: #a097be;
+$color-gray-950-day: #403272;
 
+$color-gray-50-day: #300a30;
+
+$color-gray-50-day: #584685;
 $color-primary: #1aaeed;
 $color-secondary: #8d99ae;
 $color-success: #6cffc1;
@@ -55,18 +56,18 @@ $color-green: #00ff8a;
 $color-yellow: #fff500;
 $color-pink: #ff6bc4;
 $color-blue: #3aa1ff;
-$color-linear: rgba(85, 72, 144, 1);
+$color-linear: rgb(55, 43, 109);
 $color-gray: #667085;
 // End New
 //3.Boxshadow
-$box-shadow-1: rgba(85, 72, 144, 0.2) 0px 3px 20px;
-$box-shadow-1-day: rgba(232, 193, 237, 0.2) 0px 3px 20px;
+$box-shadow-1: rgba(55, 43, 109, 1) 0px 3px 20px;
+$box-shadow-1-day: rgba(55, 43, 109, 0.2) 0px 3px 20px;
 
-$box-shadow-7: rgba(85, 72, 144, 0.3) 0px 3px 20px;
+$box-shadow-7: rgba(55, 43, 109, 1) 0px 3px 20px;
 
 $box-shadow-2: 0px 45px 80px rgba(0, 0, 0, 0.04);
 $box-shadow-3: 0px 47px 65px rgba(21, 28, 38, 0.1);
-$box-shadow-4: 4px 6px 23px rgba(228, 92, 35, 0.1);
+$box-shadow-4: 4px 6px 23px rgba(55, 43, 109, 0.1);
 $box-shadow-5: 4px 4px 40px rgba(16, 24, 40, 0.1);
 $box-shadow-inner: inset 0px 40px 80px #fcfcfc;
 $box-shadow-6: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -76,15 +77,15 @@ $box-shadow-6: 0px 4px 4px rgba(0, 0, 0, 0.25);
 $background-white: #ffffff;
 $background-linear: linear-gradient(
     90deg,
-    rgba(85, 72, 144, 1),
-    rgba(228, 97, 143, 1) 51%,
-    rgba(85, 72, 144, 1)
+    rgba(232, 193, 237, 1),
+    rgba(55, 43, 109, 1) 51%,
+    rgba(55, 43, 109, 1)
   )
   var(--x, 0) / 200%;
 $background-linear-2: linear-gradient(
   90deg,
-  rgba(228, 97, 143, 1) 0%,
-  rgba(85, 72, 144, 1) 100%
+  rgba(232, 193, 237, 1) 0%,
+  rgba(55, 43, 109, 1) 100%
 );
 // End new
 // 6. text-shadow
