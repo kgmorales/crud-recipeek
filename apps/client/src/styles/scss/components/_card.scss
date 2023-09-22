@@ -72,8 +72,8 @@
   border-width: 1px;
   border-style: solid;
   margin-bottom: 30px;
-  border: 1px solid $color-gray-300;
-  background-color: $color-gray-300;
+  border: 1px solid $color-gray-800;
+  background-color: $color-gray-850;
   .card-image {
     position: relative;
     img {
@@ -82,7 +82,7 @@
     }
   }
   .card-info {
-    color: $color-gray-950;
+    color: $color-gray-300;
     a {
       &:hover {
         color: $color-brand-2 !important;

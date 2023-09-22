@@ -33,7 +33,7 @@ export default function Blog() {
                         {data.slice(0, 6).map((item, i) =>
                           i === 0 ? (
                             <div
-                              className="card-blog-1 card-blog-2 hover-up wow animate__animated animate__fadeIn"
+                              className="card-blog-1 hover-up wow animate__animated animate__fadeIn"
                               key={i}
                             >
                               <div className="card-image mb-20">

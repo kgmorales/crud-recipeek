@@ -156,8 +156,8 @@ const PortfolioFilter: React.FC<PortfolioFilterProps> = ({ col, show }) => {
                           />
                           <div className="card-info card-bg-2">
                             <div className="info-bottom mb-15">
-                              <h3 className="color-white mb-10">{item.name}</h3>
-                              <p className="color-gray-500 text-sm">
+                              <h3 className=" mb-10">{item.name}</h3>
+                              <p className="text-sm">
                                 Lorem ipsum dolor sit amet, consectetur
                                 adipiscing elit. Nullam volutpat vitae risus
                                 eget maximus. Pellentesque suscipit
