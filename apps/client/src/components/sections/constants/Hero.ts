@@ -1,14 +1,13 @@
 enum Icon {
-  Breakfast = 'pan-frying.svg',
-  CrockPot = 'cauldron.svg',
-  Dinner = 'plate-utensils.svg',
-  Dessert = 'cupcake.svg',
-  Family = 'house-solid.svg',
-  FreezerMeals = 'refrigerator.svg',
-  InstantPot = 'wand-magic-sparkles.svg',
-  Lunch = 'clock-twelve.svg',
-  TraderJoes = 'store-solid.svg',
-  Seafood = 'fish.svg',
+  Breakfast = 'pan-frying',
+  CrockPot = 'cauldron',
+  Dinner = 'plate-utensils',
+  Dessert = 'cupcake',
+  Family = 'house-solid',
+  FreezerMeals = 'refrigerator',
+  InstantPot = 'wand-magic-sparkles',
+  Lunch = 'clock-twelve',
+  TraderJoes = 'store-solid',
 }
 
 export interface CategoryVm {

@@ -33,7 +33,7 @@ const Recipes: React.FC = (props) => {
                   <h2 className="color-linear d-inline-block mb-20 wow animate__animated animate__fadeInUp">
                     My Latest Projects
                   </h2>
-                  <p className="text-lg color-gray-500 wow animate__animated animate__fadeInUp">
+                  <p className="text-lg color-gray-300 wow animate__animated animate__fadeInUp">
                     The convention is the main event of the year for
                     professionals in
                     <br className="d-none d-lg-block" />

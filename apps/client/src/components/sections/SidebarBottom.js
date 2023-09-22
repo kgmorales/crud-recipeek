@@ -176,7 +176,7 @@ const SidebarBottom = () => {
               <div className="box-sidebar bg-gray-850 border-gray-800">
                 <div className="head-sidebar">
                   <Link href="/">
-                    <img src="assets/imgs/template/logo.svg" alt="Genz" />
+                    <img src="assets/lamora-logo.svg" alt="Genz" />
                   </Link>
                   <h6 className="color-gray-700">Follow us on instagram</h6>
                 </div>

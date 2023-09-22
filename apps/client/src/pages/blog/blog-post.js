@@ -23,7 +23,7 @@ export default function BlogPost() {
                 </div>
                 <div className="row mt-50 align-items-end">
                   <div className="col-lg-8 m-auto text-center">
-                    <h2 className="color-linear">
+                    <h2 className="color-white">
                       Digital Design That Will Help You Start Your Business
                     </h2>
                   </div>

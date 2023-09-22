@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -19,7 +20,20 @@ const Footer: React.FC<FooterProps> = ({ categoryNames }) => {
                   className="wow animate__animated animate__fadeInUp"
                   href="/"
                 >
-                  <img src="/assets/imgs/template/logo.svg" alt="Genz" />
+                  <Image
+                    alt="lamora logo"
+                    className="logo-night"
+                    src="/assets/imgs/lamora-logo-night.svg"
+                    width={100}
+                    height={100}
+                  />
+                  <Image
+                    className="d-none logo-day"
+                    alt="lamora logo"
+                    src="/assets/imgs/lamora-logo.svg"
+                    width={100}
+                    height={100}
+                  />
                 </Link>
                 <p className="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">
                   Join the Morales Family&apos;s culinary journey, where family

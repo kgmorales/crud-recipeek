@@ -727,7 +727,7 @@ const BlogDetails = () => {
                             <div className="head-sidebar">
                               <Link href="/">
                                 <img
-                                  src="/assets/imgs/template/logo.svg"
+                                  src="assets/lamora-logo.svg"
                                   alt="Genz"
                                 />
                               </Link>

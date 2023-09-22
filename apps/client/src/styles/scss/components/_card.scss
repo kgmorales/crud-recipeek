@@ -63,6 +63,7 @@
     }
   }
 }
+// TODO: This should highlight lighter for darker red hover text color change. like the black shadow. But white.
 .card-blog-1 {
   padding: 20px;
   position: relative;
@@ -71,8 +72,8 @@
   border-width: 1px;
   border-style: solid;
   margin-bottom: 30px;
-  border: 1px solid $color-gray-800;
-  background-color: $color-gray-850;
+  border: 1px solid $color-gray-300;
+  background-color: $color-gray-300;
   .card-image {
     position: relative;
     img {
@@ -81,19 +82,20 @@
     }
   }
   .card-info {
+    color: $color-gray-950;
     a {
       &:hover {
-        color: $color-brand-1 !important;
+        color: $color-brand-2 !important;
         h4,
         h5 {
-          color: $color-brand-1 !important;
+          color: $color-brand-2 !important;
         }
       }
     }
   }
   &:hover {
     h4.color-white {
-      color: $color-brand-2 !important;
+      color: $color-gray-950 !important;
     }
   }
 }

@@ -27,7 +27,10 @@ const PopularCategories = () => {
                   </Link>
                 </div>
                 <div className="card-info">
-                  <Link className="color-gray-500" href="/blog-archive">
+                  <Link
+                    className="color-gray-200 hover-neon"
+                    href="/blog-archive"
+                  >
                     {item.title}
                   </Link>
                 </div>

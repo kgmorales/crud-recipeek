@@ -11,10 +11,10 @@ const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
   return (
     <>
       <div className="row mt-70">
-        <h2 className="color-linear d-inline-block mb-10 wow animate__animated animate__fadeInUp">
+        <h2 className="color-gray-300 d-inline-block mb-10 wow animate__animated animate__fadeInUp">
           Family Favorites
         </h2>
-        <p className="text-lg color-gray-500 wow animate__animated animate__fadeInUp">
+        <p className="text-lg color-gray-300 wow animate__animated animate__fadeInUp">
           Discover our most popular recipes.
         </p>
         <div className="row mt-70">
@@ -38,19 +38,19 @@ const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
                     ) : (
                       ''
                     )}
-                    <div className="card-info card-bg-2">
+                    <div className="card-info">
                       <div className="info-bottom mb-15">
-                        <h4 className="color-white mb-15">{recipe.name}</h4>
+                        <h4 className="color-gray-100 mb-15">{recipe.name}</h4>
                         <div className="box-author">
                           {/* <img
                             src="assets/imgs/page/homepage3/author.jpg"
                             alt="Genz"
                           /> */}
                           <div className="author-info">
-                            <h6 className="mr-15 color-gray-700">
+                            <h6 className="mr-15 color-gray-100">
                               {recipe.cook_time}
                             </h6>
-                            <span className="color-gray-700 text-sm">
+                            <span className="color-gray-100 text-sm">
                               {recipe.created}
                             </span>
                           </div>

@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
-    width: 100%;
+    // width: 100%;
     padding: 5px 0px;
     .header-logo {
       max-width: 150px;
@@ -22,9 +22,9 @@
       }
     }
     .header-nav {
-      display: inline-block;
-      width: 65%;
-      text-align: center;
+      // display: inline-block;
+      // width: 65%;
+      // text-align: center;
     }
     .header-search {
       width: 35%;
@@ -269,14 +269,13 @@
     vertical-align: middle;
   }
   .form-switch .form-check-input {
-    width: 40px;
-    height: 22px;
-    margin-left: 0px;
-    background-image: url(../../../../public/assets/imgs/template/icons/mode.svg);
+    width: 80px;
+    height: 44px;
+    margin-left: 0pxoh ok;
+    background-image: url(/assets/imgs/lamora-logo-night.svg);
     background-position: left 2px center;
-    background-color: $color-gray-600;
-    border-color: $color-gray-600;
-    background-size: 18px;
+    background-color: #eabad6;
+    border-color: $color-gray-100;
   }
   .form-check-input:checked {
     background-color: $color-gray-800;
@@ -284,7 +283,7 @@
   }
   .form-switch .form-check-input:checked {
     background-position: right 2px center;
-    background-image: url(../../../../public/assets/imgs/template/icons/mode.svg);
+    background-image: url(/assets/imgs/lamora-logo-night.svg);
   }
 }
 .sticky-bar {

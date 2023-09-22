@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -28,21 +29,25 @@ const MobileMenu = ({ openClass }) => {
   return (
     <>
       <div
-        className={`mobile-header-active mobile-header-wrapper-style perfect-scrollbar bg-gray-900 ${openClass}`}
+        className={`mobile-header-active mobile-header-wrapper-style perfect-scrollbar bg-gray-950 ${openClass}`}
       >
         <div className="mobile-header-wrapper-inner">
           <div className="mobile-header-content-area">
-            <div className="mobile-logo border-gray-800">
+            <div className="mobile-logo">
               <Link className="d-flex" href="/">
-                <img
+                <Image
                   className="logo-night"
-                  alt="GenZ"
-                  src="/assets/imgs/template/logo.svg"
+                  alt="lamora logo night"
+                  src="/assets/imgs/lamora-logo-night.svg"
+                  width={50}
+                  height={50}
                 />
-                <img
+                <Image
                   className="d-none logo-day"
-                  alt="GenZ"
-                  src="/assets/imgs/template/logo-day.svg"
+                  alt="lamora logo day"
+                  src="/assets/imgs/lamora-logo.svg"
+                  width={50}
+                  height={50}
                 />
               </Link>
             </div>

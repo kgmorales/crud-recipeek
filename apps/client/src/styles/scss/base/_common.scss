@@ -360,21 +360,18 @@ body {
 
 h1 {
   font-family: $font-text;
-  font-weight: 800;
   font-size: 64px;
   line-height: 87px;
   color: $color-black;
 }
 h2 {
   font-family: $font-text;
-  font-weight: 700;
   font-size: 45px;
   line-height: 61px;
   color: $color-black;
 }
 h3 {
   font-family: $font-text;
-  font-weight: 700;
   font-size: 32px;
   line-height: 44px;
   color: $color-black;
@@ -647,11 +644,11 @@ h6 {
   &:hover {
     background:
       linear-gradient($color-gray-850, $color-gray-850) padding-box,
-      linear-gradient(to right, rgba(14, 165, 234, 1), rgba(11, 209, 209, 1))
+      linear-gradient(to right, rgba(85, 72, 144, 1), rgba(85, 72, 144, 1))
         border-box;
     border-radius: 16px;
     border: 1px solid transparent;
-    box-shadow: $box-shadow-1;
+    box-shadow: $box-shadow-7;
     transform: translateY(-2px);
     transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
   }

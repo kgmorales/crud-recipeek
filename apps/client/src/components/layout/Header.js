@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { React, useState, useEffect } from 'react';
 import SwitchButton from '../elements/SwitchButton';
+import Image from 'next/image';
 
 const Header = ({ handleOpen, handleRemove, openClass }) => {
   // State to keep track of the scroll position
@@ -46,17 +47,24 @@ const Header = ({ handleOpen, handleRemove, openClass }) => {
         <div className="container">
           <div className="main-header">
             <div className="header-logo">
-              <Link className="d-flex" href="/">
-                <img
+              <Link className="d-flex justify-center align-items-center" href="/">
+                <Image
                   className="logo-night"
-                  alt="GenZ"
-                  src="/assets/imgs/template/logo.svg"
+                  alt="lamora logo"
+                  src="/assets/imgs/lamora-logo-night.svg"
+                  width={50}
+                  height={50}
                 />
-                <img
+                <Image
                   className="d-none logo-day"
-                  alt="GenZ"
-                  src="/assets/imgs/template/logo-day.svg"
+                  alt="lamora logo"
+                  src="/assets/imgs/lamora-logo.svg"
+                  width={50}
+                  height={50}
                 />
+                <h6 className="color-gray-300 d-flex justify-center align-items-bottom">
+                  laMora
+                </h6>
               </Link>
             </div>
             <div className="header-nav">
@@ -104,11 +112,11 @@ const Header = ({ handleOpen, handleRemove, openClass }) => {
               </div>
             </div>
             <div className="header-right text-end">
-              <Link
+              {/* <Link
                 className="btn btn-search"
                 href="#"
                 onClick={toggleTrueFalse}
-              />
+              /> */}
               <SwitchButton />
               <div
                 className={
@@ -127,19 +135,19 @@ const Header = ({ handleOpen, handleRemove, openClass }) => {
                 </form>
                 <div className="popular-keywords text-start mt-20">
                   <p className="mb-10 color-white">Popular tags:</p>
-                  <Link className="color-gray-600 mr-10 font-xs" href="#">
+                  <Link className="color-gray-500 mr-10 font-xs" href="#">
                     # Travel,
                   </Link>
-                  <Link className="color-gray-600 mr-10 font-xs" href="#">
+                  <Link className="color-gray-500 mr-10 font-xs" href="#">
                     # Tech,
                   </Link>
-                  <Link className="color-gray-600 mr-10 font-xs" href="#">
+                  <Link className="color-gray-500 mr-10 font-xs" href="#">
                     # Movie
                   </Link>
-                  <Link className="color-gray-600 mr-10 font-xs" href="#">
+                  <Link className="color-gray-500 mr-10 font-xs" href="#">
                     # Lifestyle
                   </Link>
-                  <Link className="color-gray-600 mr-10 font-xs" href="#">
+                  <Link className="color-gray-500 mr-10 font-xs" href="#">
                     # Sport
                   </Link>
                 </div>

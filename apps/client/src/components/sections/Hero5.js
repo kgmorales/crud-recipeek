@@ -6,7 +6,7 @@ const Hero5 = () => {
       <div className="banner">
         <div className="row align-items-end">
           <div className="col-lg-6 pt-100">
-            <span className="text-sm-bold color-gray-600 wow animate__animated animate__fadeInUp">
+            <span className="text-sm-bold color-gray-500 wow animate__animated animate__fadeInUp">
               Hello Everyone!
             </span>
             <h1 className="color-gray-50 mt-20 mb-20 wow animate__animated animate__fadeInUp">
@@ -22,7 +22,7 @@ const Hero5 = () => {
             </h1>
             <div className="row">
               <div className="col-lg-9">
-                <p className="text-base color-gray-600 wow animate__animated animate__fadeInUp">
+                <p className="text-base color-gray-500 wow animate__animated animate__fadeInUp">
                   I use animation as a third dimension by which to simplify
                   experiences and kuiding thro each and every interaction. I’m
                   not adding motion just to spruce things up, but doing it in

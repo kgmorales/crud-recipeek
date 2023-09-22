@@ -143,7 +143,7 @@
     display: none;
   }
   .switch-button .form-switch .form-check-input {
-    background-image: url(../../../../public/assets/imgs/template/icons/mode-day.svg);
+    background-image: url(/assets/imgs/lamora-logo.svg);
   }
   .pagination {
     li {
@@ -175,13 +175,14 @@
   }
 
   .card-blog-1 {
-    border: 1px solid $color-gray-800-day;
-    background-color: $color-gray-850-day;
+    // border: 1px solid $color-gray-950;
+    background-color: $color-gray-900;
+    color: $color-gray-300;
   }
 
   .card-blog-1 {
-    h4.color-white {
-      color: $color-gray-50-day !important;
+    h4 {
+      color: $color-gray-300 !important;
     }
   }
   .readmore::before {
@@ -189,25 +190,25 @@
   }
 
   .card-style-1 {
-    h6.color-white,
-    h4.color-white,
-    h3.color-white {
+    h6,
+    h4,
+    h3 {
       color: $color-gray-950-day !important;
     }
   }
   .btn.btn-tag {
-    color: $color-gray-200-day;
+    color: $color-gray-300;
   }
   .hover-neon {
     transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
-    border: 1px solid $color-gray-800-day;
-    background-color: $color-gray-850-day;
-    a.color-gray-500 {
-      color: $color-gray-50-day !important;
+    border: 1px solid $color-gray-500-day;
+    background-color: $color-gray-500-day;
+    a.color-gray-900-day {
+      color: $color-gray-900-day !important;
     }
     &:hover {
-      border: 1px solid $color-gray-800-day;
-      background: $color-gray-900-day !important;
+      border: 1px solid $color-gray-500-day;
+      background: $color-gray-500-day !important;
       box-shadow: none;
     }
   }

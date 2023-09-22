@@ -7,7 +7,7 @@ const PageHeader1 = ({ title, des }) => {
             <div className="row align-items-end mt-50">
                 <div className="col-lg-7 mb-20">
                     <div className="d-inline-block position-relative">
-                        <h1 className="color-white mb-20 color-linear wow animate__animated animate__fadeIn">{title}</h1>
+                        <h1 className="color-white mb-20 color-white wow animate__animated animate__fadeIn">{title}</h1>
                         <span className="btn btn-linear-small btn-number-arts">36 articles</span>
                     </div>
                     <p className="color-gray-500 text-base wow animate__animated animate__fadeIn">{des}</p>

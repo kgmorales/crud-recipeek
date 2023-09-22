@@ -9,10 +9,10 @@ interface RecentProps {
 const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
   return (
     <>
-      <h2 className="color-linear d-inline-block mb-10 wow animate__animated animate__fadeInUp">
+      <h2 className="color-gray-300 d-inline-block mb-10 wow animate__animated animate__fadeInUp">
         Most Recent Recipes
       </h2>
-      <p className="text-lg color-gray-500 wow animate__animated animate__fadeInUp">
+      <p className="text-lg color-gray-300 wow animate__animated animate__fadeInUp">
         Our most recently added recipes
       </p>
       <div className="row mt-90 mb-50">
@@ -43,11 +43,9 @@ const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
                     </div>
                     <div className="card-info">
                       <Link href={`/blog/${recipe.id}`}>
-                        <h4 className="color-white mt-30">{recipe.name}</h4>
+                        <h4 className="mt-30">{recipe.name}</h4>
                       </Link>
-                      <p className="mt-25 text-lg color-gray-700">
-                        {recipe.description}
-                      </p>
+                      <p className="mt-25 text-lg">{recipe.description}</p>
                       <div className="row align-items-center mt-45">
                         <div className="col-7">
                           <div className="box-author">
@@ -56,16 +54,14 @@ const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
                               alt="Genz"
                             />
                             <div className="author-info">
-                              <h6 className="color-gray-700">Joseph</h6>
-                              <span className="color-gray-700 text-sm">
-                                {recipe.created}
-                              </span>
+                              <h6>Joseph</h6>
+                              <span className="text-sm">{recipe.created}</span>
                             </div>
                           </div>
                         </div>
                         <div className="col-5 text-end">
                           <Link
-                            className="readmore color-gray-500 text-sm"
+                            className="readmore text-sm"
                             href={`/recipes/${recipe.id}`}
                           >
                             <span>Read more</span>
@@ -105,17 +101,19 @@ const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
                             className="btn btn-tag bg-gray-800 hover-up mb-10 text-xs"
                             href="/blog-archive"
                           >
-                            {recipe.categories}
+                            test
                           </Link>
                           <Link href={`/blog/${recipe.id}`}>
-                            <h5 className="mb-10 color-white">{recipe.name}</h5>
+                            <h5 className="mb-10 color-gray-300">
+                              {recipe.name}
+                            </h5>
                           </Link>
                           <div className="row mt-10">
                             <div className="col-12">
-                              <span className="calendar-icon color-gray-700 text-sm mr-20">
+                              <span className="calendar-icon color-gray-300 text-sm mr-20">
                                 {recipe.created}
                               </span>
-                              <span className="color-gray-700 text-sm timeread">
+                              <span className="color-gray-300 text-sm timeread">
                                 {recipe.created}
                               </span>
                             </div>

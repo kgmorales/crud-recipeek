@@ -13,8 +13,7 @@
     color: $color-brand-2 !important;
   }
   &.btn-linear {
-    background: rgb(85, 72, 144);
-    background: $background-linear;
+    background: $color-gray-950-day;
     color: $color-white;
     transition: 0.5s;
     &:hover {
