@@ -1,7 +1,14 @@
 .card-style-1 {
   position: relative;
   width: 100%;
+  h4,
+  h6,
+  p,
+  a {
+    color: $color-gray-300;
+  }
   &:hover {
+    h4,
     h6 {
       color: $color-brand-2 !important;
     }
@@ -72,8 +79,11 @@
   border-width: 1px;
   border-style: solid;
   margin-bottom: 30px;
-  border: 1px solid $color-gray-800;
-  background-color: $color-gray-850;
+  border: 1px solid $color-gray-500;
+  background-color: $color-gray-900;
+  h4 {
+    color: $color-gray-300;
+  }
   .card-image {
     position: relative;
     img {
@@ -82,8 +92,8 @@
     }
   }
   .card-info {
-    color: $color-gray-300;
     a {
+      color: $color-gray-300;
       &:hover {
         color: $color-brand-2 !important;
         h4,
@@ -91,11 +101,6 @@
           color: $color-brand-2 !important;
         }
       }
-    }
-  }
-  &:hover {
-    h4.color-white {
-      color: $color-gray-950 !important;
     }
   }
 }
@@ -134,6 +139,7 @@
   }
   .card-info {
     a {
+      color: $color-gray-300;
       &:hover {
         color: $color-brand-2;
       }

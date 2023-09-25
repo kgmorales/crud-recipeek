@@ -56,7 +56,7 @@ const Hero: React.FC<HeroVm> = () => {
                     </Link>
                   </div>
                   <div className="card-info">
-                    <Link href="/blog-archive" className="color-gray-300">
+                    <Link href="/blog-archive">
                       {category.title}
                     </Link>
                   </div>

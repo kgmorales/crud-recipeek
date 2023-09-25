@@ -29,7 +29,7 @@ const MobileMenu = ({ openClass }) => {
   return (
     <>
       <div
-        className={`mobile-header-active mobile-header-wrapper-style perfect-scrollbar bg-gray-950 ${openClass}`}
+        className={`mobile-header-active mobile-header-wrapper-style perfect-scrollbar ${openClass}`}
       >
         <div className="mobile-header-wrapper-inner">
           <div className="mobile-header-content-area">

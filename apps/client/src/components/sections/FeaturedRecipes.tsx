@@ -40,17 +40,17 @@ const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
                     )}
                     <div className="card-info">
                       <div className="info-bottom mb-15">
-                        <h4 className="color-gray-100 mb-15">{recipe.name}</h4>
+                        <h4 className="mb-15">{recipe.name}</h4>
                         <div className="box-author">
                           {/* <img
                             src="assets/imgs/page/homepage3/author.jpg"
                             alt="Genz"
                           /> */}
                           <div className="author-info">
-                            <h6 className="mr-15 color-gray-100">
+                            <h6 className="mr-15">
                               {recipe.cook_time}
                             </h6>
-                            <span className="color-gray-100 text-sm">
+                            <span className="text-sm">
                               {recipe.created}
                             </span>
                           </div>

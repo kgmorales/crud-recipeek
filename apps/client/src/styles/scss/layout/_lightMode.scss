@@ -1,4 +1,4 @@
-/*DARK MODE*/
+/*LIGHT MODE*/
 
 .theme-day {
   ::placeholder {
@@ -91,9 +91,10 @@
   .bg-gray-950 {
     background-color: $color-gray-950-day !important;
   }
-  .btn.btn-tags {
-    color: $color-gray-950;
-  }
+  // .btn.btn-tag {
+  //   color: $color-gray-950;
+  //   background-color: $color-gray-500;
+  // }
   .form-control {
     color: $color-gray-900 !important;
   }
@@ -101,8 +102,14 @@
     border-color: $color-gray-800-day;
     background-color: $color-gray-850-day;
   }
+  .btn.btn-linear {
+    background-color: $color-gray-500;
+    &:hover {
+      background-color: $color-gray-900;
+    }
+  }
   .btn.btn-border-linear {
-    color: $color-gray-700;
+    color: $color-gray-950-day;
   }
   .border-gray-800 {
     border-color: $color-gray-700-day !important;
@@ -175,14 +182,14 @@
   }
 
   .card-blog-1 {
-    // border: 1px solid $color-gray-950;
-    background-color: trasparent;
+    border: 1px solid $color-gray-500;
+    background-color: transparent;
     color: $color-gray-300;
   }
 
   .card-blog-1 {
     h4 {
-      color: $color-gray-300 !important;
+      color: $color-gray-900;
     }
   }
   .readmore::before {
@@ -196,20 +203,22 @@
       color: $color-gray-300 !important;
     }
   }
+
   .btn.btn-tag {
     color: $color-gray-300;
+    background-color: $color-gray-500;
   }
   .hover-neon {
     transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
-    border: 1px solid $color-gray-500-day;
-    background-color: $color-gray-500-day;
+    border: 1px solid $color-gray-100;
+    background-color: $color-gray-500;
     a.color-gray-900-day {
       color: $color-gray-900-day !important;
     }
     &:hover {
-      border: 1px solid $color-gray-500-day;
-      background: $color-gray-500-day !important;
-      box-shadow: none;
+      border: 1px solid $color-gray-500;
+      background: $color-gray-900;
+      box-shadow: $box-shadow-7;
     }
   }
   .box-topics.box-topics-2 {
@@ -225,6 +234,10 @@
   }
   .form-login input.border-gray-800 {
     border: 1px solid $color-gray-700-day !important;
+  }
+
+  .mobile-header-wrapper-style {
+    background-color: $color-gray-500;
   }
 
   .mobile-header-wrapper-style

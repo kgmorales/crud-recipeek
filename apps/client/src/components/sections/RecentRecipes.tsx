@@ -10,7 +10,7 @@ const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
   return (
     <>
       <h2 className="color-gray-300 d-inline-block mb-10 wow animate__animated animate__fadeInUp">
-        Most Recent Recipes
+        Newest Recipes
       </h2>
       <p className="text-lg color-gray-300 wow animate__animated animate__fadeInUp">
         Our most recently added recipes
@@ -43,7 +43,7 @@ const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
                     </div>
                     <div className="card-info">
                       <Link href={`/blog/${recipe.id}`}>
-                        <h4 className="mt-30">{recipe.name}</h4>
+                        <h4 className="mt-30 color-gray-300">{recipe.name}</h4>
                       </Link>
                       <p className="mt-25 text-lg">{recipe.description}</p>
                       <div className="row align-items-center mt-45">
@@ -98,7 +98,7 @@ const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
                         </div>
                         <div className="card-info">
                           <Link
-                            className="btn btn-tag bg-gray-800 hover-up mb-10 text-xs"
+                            className="btn btn-tag hover-up mb-10 text-xs"
                             href="/blog-archive"
                           >
                             test

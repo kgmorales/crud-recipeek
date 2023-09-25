@@ -13,7 +13,7 @@ const Footer: React.FC<FooterProps> = ({ categoryNames }) => {
     <>
       <footer className="footer">
         <div className="container">
-          <div className="footer-1 bg-gray-850 border-gray-800">
+          <div className="footer-1">
             <div className="row">
               <div className="col-lg-8 mb-30">
                 <Link
@@ -35,7 +35,7 @@ const Footer: React.FC<FooterProps> = ({ categoryNames }) => {
                     height={100}
                   />
                 </Link>
-                <p className="mb-20 mt-20 text-sm color-gray-500 wow animate__animated animate__fadeInUp">
+                <p className="mb-20 mt-20 text-sm wow animate__animated animate__fadeInUp">
                   Join the Morales Family&apos;s culinary journey, where family
                   recipes are not just preserved but cherished. laMora Recipes
                   are intended to be shared to foster bonds that are as
@@ -44,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({ categoryNames }) => {
                 <h6 className="color-white mb-5 wow animate__animated animate__fadeInUp">
                   Address
                 </h6>
-                <p className="text-sm color-gray-500 wow animate__animated animate__fadeInUp">
+                <p className="text-sm wow animate__animated animate__fadeInUp">
                   123 Main Street
                   <br />
                   New York, NY 10001
