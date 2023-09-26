@@ -1,4 +1,18 @@
 import { Home } from '@types';
+import { addCategoryStringToRecipes } from '@utils/cleanRecipeCategories';
+
+async function responseMiddleware(response: Response): Promise<Home> {
+  const data: Home = await response.json();
+
+  // Process the recipes
+  const processedRecipes = await addCategoryStringToRecipes(
+    data.recipes,
+    data.categories,
+  );
+  data.recipes = processedRecipes;
+
+  return data;
+}
 
 async function fetchHome(): Promise<Home> {
   try {

@@ -1,6 +1,6 @@
 import { Category, Recipe } from '@prisma/client';
 
-export async function processRecipesWithCategoryName(
+export async function addCategoryStringToRecipes(
   recipes: Recipe[],
   categories: Category[],
 ): Promise<Recipe[]> {
