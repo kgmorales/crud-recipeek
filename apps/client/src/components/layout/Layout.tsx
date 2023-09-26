@@ -4,11 +4,10 @@ import Header from './Header';
 import MobileMenu from './MobileMenu';
 
 interface LayoutProps {
-  categoryNames?: string[];
   children?: React.ReactNode;
 }
 
-const Layout: FC<LayoutProps> = ({ categoryNames, children }) => {
+const Layout: FC<LayoutProps> = ({ children }) => {
   // State to control the 'openClass' CSS class
   const [openClass, setOpenClass] = useState<string>('');
 
@@ -35,16 +34,19 @@ const Layout: FC<LayoutProps> = ({ categoryNames, children }) => {
 
   return (
     <>
-      {openClass && <div className="body-overlay-1" onClick={handleRemove} />}
+      {openClass === 'sidebar-visible' && (
+        <div className="body-overlay-1" onClick={handleRemove} />
+      )}
 
       <Header
         handleOpen={handleOpen}
         handleRemove={handleRemove}
-        openClass={openClass}
+        openClass={openClass === 'sidebar-visible'}
       />
+
       <MobileMenu openClass={openClass} />
       <main className="main">{children}</main>
-      <Footer categoryNames={categoryNames} />
+      <Footer />
     </>
   );
 };

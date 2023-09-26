@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
-import { HeroVm } from './constants/Hero';
+import { categoryVm } from './constants/Hero';
 import Image from 'next/image';
 
 const iconPATH = '/assets/icons';
 
-const Hero: React.FC<HeroVm> = () => {
+const Hero: React.FC = () => {
   return (
     <>
       <div className="banner banner-home2">
@@ -31,7 +31,7 @@ const Hero: React.FC<HeroVm> = () => {
         </div>
         <div className="d-flex flex-1 align-center mt-50">
           <ul className="list-tags-col-5 mb-50 text-center">
-            {HeroVm.categories.map((category) => (
+            {categoryVm.map((category) => (
               <li key={category.key}>
                 <div
                   className="card-style-2 hover-up hover-neon wow animate__animated animate__fadeInUp"
@@ -56,9 +56,7 @@ const Hero: React.FC<HeroVm> = () => {
                     </Link>
                   </div>
                   <div className="card-info">
-                    <Link href="/blog-archive">
-                      {category.title}
-                    </Link>
+                    <Link href="/blog-archive">{category.title}</Link>
                   </div>
                 </div>
               </li>

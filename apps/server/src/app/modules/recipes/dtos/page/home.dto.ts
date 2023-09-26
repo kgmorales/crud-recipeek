@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Recipe } from '@prisma/client';
+import { Category, Recipe } from '@prisma/client';
 import { IsArray, IsString } from 'class-validator';
 
 export class HomeDto {
   @ApiProperty()
   @IsArray()
-  categoryNames: string[];
+  categories: Category[];
 
   @ApiProperty()
   @IsString()

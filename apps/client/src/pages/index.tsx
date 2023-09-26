@@ -8,7 +8,7 @@ import FeaturedRecipes from '../components/sections/FeaturedRecipes';
 import RecentRecipes from '@components/sections/RecentRecipes';
 import fetchHome from '@api/pages/home.routes';
 
-const Home: React.FC = () => {
+const Home: React.FC = (props) => {
   const { data: home } = useQuery(['home'], async () => await fetchHome());
 
   return (
@@ -16,13 +16,13 @@ const Home: React.FC = () => {
       <Head>
         <title>laMora | Recipes</title>
       </Head>
-      <Layout categoryNames={home?.categoryNames}>
+      <Layout>
         <div className="cover-home1">
           <div className="container">
             <div className="row">
               <div className="col-xl-1" />
               <div className="col-xl-10 col-lg-12">
-                <Hero categoryNames={home?.categoryNames} />
+                <Hero />
                 <FeaturedRecipes featured={home?.favorites} />
                 <div className="row mt-70">
                   <div className="col-lg-12">

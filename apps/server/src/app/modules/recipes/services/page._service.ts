@@ -4,7 +4,7 @@ import { PrismaService } from './providers/prisma._provider';
 // import { Recipe } from '@prisma/client';
 
 interface Home {
-  categoryNames: string[];
+  categories: Category[];
   favorites: Recipe[];
   recent: Recipe[];
 }
@@ -14,12 +14,9 @@ export class PageService {
   constructor(private prisma: PrismaService) {}
 
   async getHome(): Promise<Home> {
-    const NamesFilter = (category: Category) => category.name;
-    const categoryNames = (
-      await this.prisma.client.category.findMany({
-        where: { parent_uid: null },
-      })
-    ).map((category) => NamesFilter(category));
+    const categories = await this.prisma.client.category.findMany({
+      where: { parent_uid: null },
+    });
 
     const favorites = await this.prisma.client.recipe.findMany({
       where: { on_favorites: true },
@@ -33,6 +30,6 @@ export class PageService {
       take: 9,
     });
 
-    return { categoryNames, favorites, recent };
+    return { categories, favorites, recent };
   }
 }

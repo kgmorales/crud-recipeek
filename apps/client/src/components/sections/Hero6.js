@@ -21,7 +21,7 @@ const Hero6 = () => {
                         Hello Everyone!
                       </span>
                       <h3 className="color-white d-inline-block mt-10 mb-15">
-                        I'm Steven, a lover of technology, business and
+                        I&apos;m Steven, a lover of technology, business and
                         experiencing new things
                       </h3>
                       <div className="box-socials">

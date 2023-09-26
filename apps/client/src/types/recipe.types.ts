@@ -75,18 +75,18 @@ export interface RecipeItem {
   uid: string;
 }
 export interface Status {
-  recipes: number;
-  pantry: number;
-  meals: number;
-  menus: number;
-  groceries: number;
   bookmarks: number;
-  menuitems: number;
   categories: number;
+  groceries: number;
+  recipes: number;
+  meals: number;
+  menuitems: number;
+  menus: number;
+  pantry: number;
 }
 
-export type RecipeFunctionArgsMap = {
-  getAllRecipes: [];
-  getAllCategories: [];
-  createRecipe: [Recipe];
-};
+// export type RecipeFunctionArgsMap = {
+//   getAllRecipes: [];
+//   getAllCategories: [];
+//   createRecipe: [Recipe];
+// };

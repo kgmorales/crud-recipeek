@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '../components/layout/Layout';
-import PageHeader1 from '../components/elements/PageHeader1';
 import Pagination from '../components/elements/Pagination';
 import PopularCategories from '../components/sections/PopularCategories';
 import data from '@utils/blogData3';

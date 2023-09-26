@@ -1,14 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { categoryNames } from '@components/sections/constants/Hero';
 
-interface FooterProps {
-  categoryNames?: string[];
-}
+const length = Math.ceil(categoryNames.length / 2);
+const firstHalf = categoryNames.slice(0, length);
+const secondHalf = categoryNames.slice(length);
 
-const Footer: React.FC<FooterProps> = ({ categoryNames }) => {
-  const firstHalf = categoryNames?.slice(0, 6);
-  const secondHalf = categoryNames?.slice(6, 12);
+const Footer: React.FC = () => {
   return (
     <>
       <footer className="footer">
@@ -45,9 +44,7 @@ const Footer: React.FC<FooterProps> = ({ categoryNames }) => {
                   Address
                 </h6>
                 <p className="text-sm wow animate__animated animate__fadeInUp">
-                  123 Main Street
-                  <br />
-                  New York, NY 10001
+                  Chicago, IL
                 </p>
               </div>
               <div className="col-lg-4 mb-30">
@@ -57,28 +54,24 @@ const Footer: React.FC<FooterProps> = ({ categoryNames }) => {
                 <div className="row">
                   <div className="col-6">
                     <ul className="menu-footer">
-                      {firstHalf?.map((categoryName, i) => (
+                      {firstHalf?.map((category) => (
                         <li
-                          key={i}
+                          key={category.key}
                           className="wow animate__animated animate__fadeInUp"
                         >
-                          <Link className="color-gray-500" href="/blog-archive">
-                            {categoryName}
-                          </Link>
+                          <Link href="/blog-archive">{category.name}</Link>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div className="col-6">
                     <ul className="menu-footer">
-                      {secondHalf?.map((categoryName, i) => (
+                      {secondHalf?.map((category) => (
                         <li
-                          key={i}
+                          key={category.key}
                           className="wow animate__animated animate__fadeInUp"
                         >
-                          <Link className="color-gray-500" href="/blog-archive">
-                            {categoryName}
-                          </Link>
+                          <Link href="/blog-archive">{category.name}</Link>
                         </li>
                       ))}
                     </ul>

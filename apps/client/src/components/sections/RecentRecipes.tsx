@@ -49,10 +49,10 @@ const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
                       <div className="row align-items-center mt-45">
                         <div className="col-7">
                           <div className="box-author">
-                            <img
+                            {/* <img
                               src="assets/imgs/page/homepage1/author.jpg"
                               alt="Genz"
-                            />
+                            /> */}
                             <div className="author-info">
                               <h6>Joseph</h6>
                               <span className="text-sm">{recipe.created}</span>
