@@ -3,10 +3,11 @@ import Image from 'next/image';
 import { Home } from '@types';
 
 interface RecentProps {
-  recent?: Home['recent'];
+  recents?: Home['recents'];
 }
 
-const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
+const RecentRecipes: React.FC<RecentProps> = ({ recents }) => {
+  console.log({ recents });
   return (
     <>
       <h2 className="color-gray-300 d-inline-block mb-10 wow animate__animated animate__fadeInUp">
@@ -20,7 +21,7 @@ const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
           <div className="box-list-posts">
             <div className="row">
               <div className="col-lg-7">
-                {recent?.slice(0, 2).map((recipe, i) => (
+                {recents?.slice(0, 2).map((recipe, i) => (
                   <div
                     className="card-blog-1 card-blog-2 hover-up wow animate__animated animate__fadeIn"
                     data-wow-delay={0}
@@ -74,7 +75,7 @@ const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
               </div>
               <div className="col-lg-5">
                 <div className="row">
-                  {recent?.slice(2, 9).map((recipe, i) => (
+                  {recents?.slice(2, 9).map((recipe, i) => (
                     <div className="col-lg-12" key={i}>
                       <div
                         className="card-list-posts card-list-posts-small mb-30 wow animate__animated animate__fadeIn"
@@ -101,7 +102,7 @@ const RecentRecipes: React.FC<RecentProps> = ({ recent }) => {
                             className="btn btn-tag hover-up mb-10 text-xs"
                             href="/blog-archive"
                           >
-                            test
+                            {recipe.categories[0]}
                           </Link>
                           <Link href={`/blog/${recipe.id}`}>
                             <h5 className="mb-10 color-gray-300">

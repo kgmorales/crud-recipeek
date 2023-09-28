@@ -1,17 +1,15 @@
-import { Category, Recipe } from '@prisma/client';
+import { Recipe, Category } from '@prisma/client';
 
-export async function addCategoryStringToRecipes(
+export const addCategoryToRecipe = (
   recipes: Recipe[],
   categories: Category[],
-): Promise<Recipe[]> {
+): Recipe[] => {
   const categoryMap = new Map(categories.map((cat) => [cat.uid, cat.name]));
 
-  const processedRecipes: Recipe[] = recipes.map((recipe) => ({
+  return recipes.map((recipe) => ({
     ...recipe,
     categories: recipe.categories.map(
       (catId) => categoryMap.get(catId) || catId,
     ),
   }));
-
-  return processedRecipes;
-}
+};

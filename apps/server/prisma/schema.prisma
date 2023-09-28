@@ -145,7 +145,7 @@ model RecipeItem {
 }
 
 model Status {
-  uid        Int @id
+  uid        Int      @id
   recipes    Int
   pantry     Int
   meals      Int
@@ -154,6 +154,7 @@ model Status {
   bookmarks  Int
   menuitems  Int
   categories Int
+  createdAt  DateTime @default(now()) @db.Timestamptz(6)
 
   @@schema("lamora")
 }
@@ -172,6 +173,24 @@ model PaprikaConfig {
   jwtSecret   String
   password    String
   user        String
+
+  @@schema("lamora")
+}
+
+model PaprikaStatus {
+  categories         Int
+  recipes            Int
+  photos             Int
+  groceries          Int
+  grocertlists       Int
+  groceryaisles      Int
+  groceryingredients Int
+  meals              Int
+  mealtypes          Int
+  menus              Int
+  menuitems          Int
+  createdAt          DateTime @default(now()) @db.Timestamptz(6)
+  id                 Int      @id @default(autoincrement())
 
   @@schema("lamora")
 }

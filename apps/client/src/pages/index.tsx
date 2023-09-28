@@ -1,15 +1,14 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
 import Head from 'next/head';
 
 import Layout from '@components/layout/Layout';
 import Hero from '@components/sections/Hero';
 import FeaturedRecipes from '../components/sections/FeaturedRecipes';
 import RecentRecipes from '@components/sections/RecentRecipes';
-import fetchHome from '@api/pages/home.routes';
+import { useHome } from '../hooks/useHome';
 
 const Home: React.FC = (props) => {
-  const { data: home } = useQuery(['home'], async () => await fetchHome());
+  const { home } = useHome();
 
   return (
     <>
@@ -26,7 +25,7 @@ const Home: React.FC = (props) => {
                 <FeaturedRecipes featured={home?.favorites} />
                 <div className="row mt-70">
                   <div className="col-lg-12">
-                    <RecentRecipes recent={home?.recent} />
+                    <RecentRecipes recents={home?.recents} />
                   </div>
                 </div>
               </div>

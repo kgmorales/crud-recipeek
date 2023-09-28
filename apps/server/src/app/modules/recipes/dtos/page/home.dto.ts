@@ -13,5 +13,5 @@ export class HomeDto {
 
   @ApiProperty()
   @IsString()
-  recent: Recipe[];
+  recents: Recipe[];
 }

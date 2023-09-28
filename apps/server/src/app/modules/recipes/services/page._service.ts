@@ -6,7 +6,7 @@ import { PrismaService } from './providers/prisma._provider';
 interface Home {
   categories: Category[];
   favorites: Recipe[];
-  recent: Recipe[];
+  recents: Recipe[];
 }
 
 @Injectable()
@@ -23,13 +23,13 @@ export class PageService {
       take: 6,
     });
 
-    const recent = await this.prisma.client.recipe.findMany({
+    const recents = await this.prisma.client.recipe.findMany({
       orderBy: {
         created: 'desc',
       },
       take: 9,
     });
 
-    return { categories, favorites, recent };
+    return { categories, favorites, recents };
   }
 }

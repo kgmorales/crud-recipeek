@@ -19,7 +19,8 @@
 
   &.sidebar-visible {
     visibility: visible;
-    background: $color-gray-950-day;
+    background: #231e3f;
+    border-left: 1px solid $color-gray-950-day;
     opacity: 1;
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0);

@@ -4,7 +4,7 @@ import { Recipe, Category } from '@prisma/client';
 
 import { RecipeDto } from '@recipes/dtos';
 import { PaprikaService } from './paprika._service';
-import { PaprikaAuthService } from './providers/paprika-auth._provider';
+import { SyncService } from './providers/sync._provider';
 
 interface GetPaginatedRecipesParams {
   page?: number;
@@ -19,8 +19,8 @@ interface GetPaginatedRecipesParams {
 export class RecipesService {
   constructor(
     private paprikaService: PaprikaService,
-    private paprikaAuthService: PaprikaAuthService,
     private prisma: PrismaService,
+    private syncService: SyncService,
   ) {}
 
   async allDBRecipes(): Promise<Recipe[]> {
@@ -40,6 +40,7 @@ export class RecipesService {
     await this.prisma.client.category.deleteMany();
     await this.prisma.client.recipeItem.deleteMany();
     await this.prisma.client.paprikaToken.deleteMany();
+    await this.prisma.client.status.deleteMany();
   }
 
   async getPaginatedRecipes(
@@ -85,12 +86,14 @@ export class RecipesService {
     const allRecipes = await this.paprikaService.allRecipes();
     const allIDs = await this.paprikaService.recipeIds();
     const allCategories = await this.paprikaService.categories();
+    const status = await this.syncService.checkStatus();
 
     await this.prisma.client.recipe.createMany({ data: allRecipes });
     await this.prisma.client.recipeItem.createMany({ data: allIDs });
     await this.prisma.client.category.createMany({
       data: allCategories,
     });
+    await this.prisma.client.status.create({ data: status });
   }
 
   async updateRecipes(): Promise<Recipe[]> {

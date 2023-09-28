@@ -1,2 +1,2 @@
 export * from './recipe.types';
-export * from './home.types';
+export * from './pages/home.types';

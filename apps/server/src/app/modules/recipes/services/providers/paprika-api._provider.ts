@@ -37,23 +37,6 @@ export class PaprikaApiService implements OnModuleInit {
   }
 
   /**
-   * GZip a JSON string
-   * @param jsonString @type string
-   * @returns Promise<Buffer>
-   */
-  private async gZip(jsonString: string): Promise<Buffer> {
-    return await new Promise<Buffer>((resolve, reject) => {
-      zlib.gzip(jsonString, (err, buffer) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(buffer);
-        }
-      });
-    });
-  }
-
-  /**
    * Make a request to the Paprika API with authentication headers
    */
   private resource(endpoint: string, method = 'GET', body?: Body) {
@@ -114,6 +97,23 @@ export class PaprikaApiService implements OnModuleInit {
 
   recipe(recipeUid: string): Promise<Recipe> {
     return this.resource('recipe/' + recipeUid);
+  }
+
+  /**
+   * GZip a JSON string
+   * @param jsonString @type string
+   * @returns Promise<Buffer>
+   */
+  private async gZip(jsonString: string): Promise<Buffer> {
+    return await new Promise<Buffer>((resolve, reject) => {
+      zlib.gzip(jsonString, (err, buffer) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(buffer);
+        }
+      });
+    });
   }
 
   //! This requires getting photodata, which is not finished.
