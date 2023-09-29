@@ -20,83 +20,63 @@ import {
 
 //* 3RD PARTY
 import zlib from 'zlib';
+import { resource } from '@server/utils/resource';
 // import FormData from 'form-data';
-import request, { OptionsWithUrl } from 'request-promise-native';
 
-const PAPRIKA_V1_BASEURL = 'https://www.paprikaapp.com/api/v1';
-
+interface v1Creds {
+  user: string;
+  pass: string;
+}
 @Injectable()
 export class PaprikaApiService implements OnModuleInit {
   private paprikaConfig: PaprikaConfig;
+  private v1Creds: v1Creds;
 
   constructor(private paprikaAuthService: PaprikaAuthService) {}
 
   async onModuleInit() {
     //Get the Paprika config from the auth service
     this.paprikaConfig = await this.paprikaAuthService.buildAuthConfig();
-  }
-
-  /**
-   * Make a request to the Paprika API with authentication headers
-   */
-  private resource(endpoint: string, method = 'GET', body?: Body) {
-    const options: OptionsWithUrl = {
-      auth: {
-        user: this.paprikaConfig.user,
-        pass: this.paprikaConfig.password,
-      },
-      method,
-      baseUrl: `${PAPRIKA_V1_BASEURL}/sync/`,
-      url: endpoint,
-      json: true,
-      // Use the 'result' property of the response
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      transform(body: any) {
-        return body.result;
-      },
+    this.v1Creds = {
+      user: this.paprikaConfig.user,
+      pass: this.paprikaConfig.password,
     };
-
-    if (body) {
-      options.body = body;
-    }
-
-    return request(options);
   }
 
   bookmarks(): Promise<Bookmark[]> {
-    return this.resource('bookmarks');
+    return resource(this.v1Creds, 'bookmarks');
   }
 
   categories(): Promise<Category[]> {
-    return this.resource('categories');
+    return resource(this.v1Creds, 'categories');
   }
 
   groceries(): Promise<GroceryItem[]> {
-    return this.resource('groceries');
+    return resource(this.v1Creds, 'groceries');
   }
 
   meals(): Promise<Meal[]> {
-    return this.resource('meals');
+    return resource(this.v1Creds, 'meals');
   }
 
   menus(): Promise<Menu[]> {
-    return this.resource('menus');
+    return resource(this.v1Creds, 'menus');
   }
 
   menuItems(): Promise<MenuItem[]> {
-    return this.resource('menuitems');
+    return resource(this.v1Creds, 'menuitems');
   }
 
   pantry(): Promise<PantryItem[]> {
-    return this.resource('pantry');
+    return resource(this.v1Creds, 'pantry');
   }
 
   recipes(): Promise<RecipeItem[]> {
-    return this.resource('recipes');
+    return resource(this.v1Creds, 'recipes');
   }
 
   recipe(recipeUid: string): Promise<Recipe> {
-    return this.resource('recipe/' + recipeUid);
+    return resource(this.v1Creds, 'recipe/' + recipeUid);
   }
 
   /**

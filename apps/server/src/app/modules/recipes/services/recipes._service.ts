@@ -86,14 +86,14 @@ export class RecipesService {
     const allRecipes = await this.paprikaService.allRecipes();
     const allIDs = await this.paprikaService.recipeIds();
     const allCategories = await this.paprikaService.categories();
-    const status = await this.syncService.checkStatus();
+    // const status = await this.syncService.status();
 
     await this.prisma.client.recipe.createMany({ data: allRecipes });
     await this.prisma.client.recipeItem.createMany({ data: allIDs });
     await this.prisma.client.category.createMany({
       data: allCategories,
     });
-    await this.prisma.client.status.create({ data: status });
+    // await this.prisma.client.status.create({ data: status });
   }
 
   async updateRecipes(): Promise<Recipe[]> {

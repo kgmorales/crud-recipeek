@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { HttpModule } from '@nestjs/axios';
 
 import { PaprikaApiService } from './paprika-api._provider';
 import { PaprikaAuthService } from './paprika-auth._provider';
@@ -17,6 +18,7 @@ const providers = [
 ];
 
 @Module({
+  imports: [HttpModule],
   providers,
   exports: providers,
 })
