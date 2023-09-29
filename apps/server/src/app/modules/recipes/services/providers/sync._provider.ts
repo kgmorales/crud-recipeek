@@ -1,107 +1,124 @@
-import { Injectable, Logger } from '@nestjs/common';
-import {
-  getErrorMessage,
-  // getErrorMessage,
-  toErrorWithMessage,
-} from '@modules/recipes/types/error';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { PrismaService } from './prisma._provider';
+import { Recipe, Status } from '@prisma/client';
+
+import { PaprikaAuthService } from './paprika-auth._provider';
 import { paprikaBaseHeaders } from '@modules/recipes/constants';
 import {
-  // Category,
-  PaprikaConfig,
-  Recipe,
-  RecipeItem,
-  Status,
-  // Status,
-} from '@prisma/client';
-import { PrismaService } from './prisma._provider';
-import { resource } from '@server/utils/resource';
-import { ConfigService } from '@nestjs/config';
+  getErrorMessage,
+  toErrorWithMessage,
+} from '@modules/recipes/types/error';
+import { PaprikaApiService } from './paprika-api._provider';
+import { omit } from '@server/utils/omit';
+
+const baseURL = 'https://www.paprikaapp.com/api/v2/sync';
 
 @Injectable()
-export class SyncService {
+export class SyncService implements OnModuleInit {
   private readonly logger = new Logger(SyncService.name);
-  private localConfig: PaprikaConfig;
 
   constructor(
-    private readonly configService: ConfigService,
     private prisma: PrismaService,
-  ) {
-    this.localConfig = this.getPaprikaConfig();
-    console.log(this.localConfig);
+    private paprikaAuthService: PaprikaAuthService,
+    private paprikaApiService: PaprikaApiService,
+  ) {}
+
+  async onModuleInit() {
+    await this.syncDataWithPaprika();
   }
 
-  private getPaprikaConfig(): PaprikaConfig {
-    return {
-      id: 0,
-      baseURL: this.configService.get<string>('paprika.baseURL') as string,
-      bearerToken: this.configService.get<string>(
-        'paprika.bearerToken',
-      ) as string,
-      jwtSecret: this.configService.get<string>('paprika.jwtSecret') as string,
-      password: this.configService.get<string>('paprika.password') as string,
-      user: this.configService.get<string>('paprika.user') as string,
-    };
-  }
-
-  recipe(recipeUid: string): Promise<Recipe> {
-    return resource(
-      { user: this.localConfig.user, pass: this.localConfig.password },
-      'recipe/' + recipeUid,
-    );
-  }
-
-  async status(): Promise<Status> {
+  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
+  async syncEveryDay() {
+    this.logger.debug('Starting daily sync with Paprika at midnight');
     try {
-      const response = await fetch(`${this.localConfig.baseURL}/sync/status`, {
-        method: 'GET',
-        headers: {
-          ...paprikaBaseHeaders,
-          Authorization: `Bearer ${this.localConfig.bearerToken}`,
-        },
-      });
-
-      if (!response.ok) {
-        const errorMessage = await response.text();
-        throw toErrorWithMessage(`Failed to get sync status: ${errorMessage}`);
-      }
-
-      const newStatus = await response.json();
-
-      return newStatus.result;
+      await this.syncDataWithPaprika();
+      this.logger.debug('Sync with Paprika completed successfully');
     } catch (error) {
-      this.logger.error(getErrorMessage(error));
-      throw error;
+      this.logger.error('Error during sync with Paprika:', error);
     }
   }
 
-  async recipes(): Promise<Recipe[]> {
-    const response = await fetch(`${this.localConfig.baseURL}/sync/recipes`, {
-      method: 'POST',
+  async syncDataWithPaprika(): Promise<void> {
+    const token = await this.paprikaAuthService.ensureValidToken();
+    const remoteStatus = await this.fetchStatus(token);
+    const localStatus: Status | null =
+      await this.prisma.client.status.findFirst();
+
+    const local = localStatus ? omit(localStatus, ['createdAt', 'uid']) : {};
+
+    // If there's no local status or if the local status is different from the remote status
+    if (
+      !localStatus ||
+      JSON.stringify(remoteStatus) !== JSON.stringify(local)
+    ) {
+      const remote = { ...remoteStatus, uid: 1 };
+      // Upsert the status in Prisma with id as 1
+      await this.prisma.client.status.upsert({
+        where: { uid: 1 },
+        update: { ...remote },
+        create: { ...remote },
+      });
+
+      await this.syncRecipes(token);
+      await this.syncCategories(token);
+    }
+  }
+
+  async fetchStatus(token: string): Promise<Status> {
+    const response = await fetch(`${baseURL}/status`, {
       headers: {
         ...paprikaBaseHeaders,
-        Authorization: `Bearer ${this.localConfig.bearerToken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
     if (!response.ok) {
       const errorMessage = await response.text();
-      throw toErrorWithMessage(`Failed to get sync status: ${errorMessage}`);
+      this.logger.error(getErrorMessage(new Error(errorMessage)));
+      throw toErrorWithMessage(`Failed to fetch status: ${errorMessage}`);
     }
 
-    const recipeItems: RecipeItem[] = await response.json();
-    console.log(recipeItems);
+    const status = await response.json();
 
-    const recipeUids: RecipeItem['uid'][] = recipeItems.map((item) => item.uid);
+    return status.result;
+  }
 
+  async syncRecipes(token: string): Promise<void> {
+    const response = await fetch(`${baseURL}/recipes`, {
+      headers: {
+        ...paprikaBaseHeaders,
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      this.logger.error(`Failed to sync recipes: ${errorMessage}`);
+      throw new Error(`Failed to sync recipes: ${errorMessage}`);
+    }
+
+    const responseData = await response.json();
+    const recipeItems = responseData.result; // Adjust based on the actual structure
+
+    if (!Array.isArray(recipeItems)) {
+      this.logger.error(
+        `Unexpected response format: ${JSON.stringify(responseData)}`,
+      );
+      throw new Error('Unexpected response format from sync/recipes endpoint');
+    }
+
+    const recipeUids: string[] = recipeItems.map((item) => item.uid);
+    //* 2.
     const recipePromises: Promise<Recipe>[] = recipeUids.map((uid) =>
-      this.recipe(uid),
+      this.paprikaApiService.recipe(uid),
     );
-
     const recipes: Recipe[] = await Promise.all(recipePromises).catch((err) => {
       console.error(err);
       return [];
     });
 
+    // Upsert the fetched recipes into the Prisma database
     for (const recipe of recipes) {
       await this.prisma.client.recipe.upsert({
         where: { uid: recipe.uid },
@@ -109,9 +126,41 @@ export class SyncService {
         create: recipe,
       });
     }
-
-    return recipes;
   }
 
-  async categories() {}
+  async syncCategories(token: string): Promise<void> {
+    const response = await fetch(`${baseURL}/categories`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      this.logger.error(getErrorMessage(new Error(errorMessage)));
+      throw toErrorWithMessage(`Failed to sync categories: ${errorMessage}`);
+    }
+
+    const responseData = await response.json();
+    const categories = responseData.result;
+
+    if (!Array.isArray(categories)) {
+      this.logger.error(
+        `Unexpected response format for categories: ${JSON.stringify(
+          responseData,
+        )}`,
+      );
+      throw new Error(
+        'Unexpected response format from sync/categories endpoint',
+      );
+    }
+
+    for (const category of categories) {
+      await this.prisma.client.category.upsert({
+        where: { uid: category.uid },
+        update: category,
+        create: category,
+      });
+    }
+  }
 }

@@ -18,118 +18,136 @@ import {
   RecipeItem,
 } from '@prisma/client';
 
-//* 3RD PARTY
-import zlib from 'zlib';
-import { resource } from '@server/utils/resource';
-// import FormData from 'form-data';
+import { paprikaBaseHeaders } from '@modules/recipes/constants';
 
-interface v1Creds {
-  user: string;
-  pass: string;
-}
+const PAPRIKA_V1_BASEURL = 'https://www.paprikaapp.com/api/v1';
+
 @Injectable()
 export class PaprikaApiService implements OnModuleInit {
   private paprikaConfig: PaprikaConfig;
-  private v1Creds: v1Creds;
 
   constructor(private paprikaAuthService: PaprikaAuthService) {}
 
   async onModuleInit() {
     //Get the Paprika config from the auth service
     this.paprikaConfig = await this.paprikaAuthService.buildAuthConfig();
-    this.v1Creds = {
-      user: this.paprikaConfig.user,
-      pass: this.paprikaConfig.password,
-    };
-  }
-
-  bookmarks(): Promise<Bookmark[]> {
-    return resource(this.v1Creds, 'bookmarks');
-  }
-
-  categories(): Promise<Category[]> {
-    return resource(this.v1Creds, 'categories');
-  }
-
-  groceries(): Promise<GroceryItem[]> {
-    return resource(this.v1Creds, 'groceries');
-  }
-
-  meals(): Promise<Meal[]> {
-    return resource(this.v1Creds, 'meals');
-  }
-
-  menus(): Promise<Menu[]> {
-    return resource(this.v1Creds, 'menus');
-  }
-
-  menuItems(): Promise<MenuItem[]> {
-    return resource(this.v1Creds, 'menuitems');
-  }
-
-  pantry(): Promise<PantryItem[]> {
-    return resource(this.v1Creds, 'pantry');
-  }
-
-  recipes(): Promise<RecipeItem[]> {
-    return resource(this.v1Creds, 'recipes');
-  }
-
-  recipe(recipeUid: string): Promise<Recipe> {
-    return resource(this.v1Creds, 'recipe/' + recipeUid);
   }
 
   /**
-   * GZip a JSON string
-   * @param jsonString @type string
-   * @returns Promise<Buffer>
+   * Make a request to the Paprika API with authentication headers
    */
-  private async gZip(jsonString: string): Promise<Buffer> {
-    return await new Promise<Buffer>((resolve, reject) => {
-      zlib.gzip(jsonString, (err, buffer) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(buffer);
-        }
-      });
+  private async resource(endpoint: string, method = 'GET', body?: Body) {
+    const url = `${PAPRIKA_V1_BASEURL}/sync/${endpoint}`;
+    const headers = {
+      ...paprikaBaseHeaders,
+      Authorization: `Basic ${Buffer.from(
+        `${this.paprikaConfig.user}:${this.paprikaConfig.password}`,
+      ).toString('base64')}`,
+    };
+
+    const response = await fetch(url, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
     });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch resource from ${endpoint}. Status: ${response.status}`,
+      );
+    }
+
+    const data = await response.json();
+    return data.result;
   }
+
+  bookmarks(): Promise<Bookmark[]> {
+    return this.resource('bookmarks');
+  }
+
+  categories(): Promise<Category[]> {
+    return this.resource('categories');
+  }
+
+  groceries(): Promise<GroceryItem[]> {
+    return this.resource('groceries');
+  }
+
+  meals(): Promise<Meal[]> {
+    return this.resource('meals');
+  }
+
+  menus(): Promise<Menu[]> {
+    return this.resource('menus');
+  }
+
+  menuItems(): Promise<MenuItem[]> {
+    return this.resource('menuitems');
+  }
+
+  pantry(): Promise<PantryItem[]> {
+    return this.resource('pantry');
+  }
+
+  recipes(): Promise<RecipeItem[]> {
+    return this.resource('recipes');
+  }
+
+  recipe(recipeUid: string): Promise<Recipe> {
+    return this.resource('recipe/' + recipeUid);
+  }
+
+  // /**
+  //  * GZip a JSON string
+  //  * @param jsonString @type string
+  //  * @returns Promise<Buffer>
+  //  */
+  // private async gZip(jsonString: string): Promise<Buffer> {
+  //   return await new Promise<Buffer>((resolve, reject) => {
+  //     zlib.gzip(jsonString, (err, buffer) => {
+  //       if (err) {
+  //         reject(err);
+  //       } else {
+  //         resolve(buffer);
+  //       }
+  //     });
+  //   });
+  // }
 
   //! This requires getting photodata, which is not finished.
   // async create(recipeDto: RecipeDto): Promise<void> {
-  //   if (!recipeDto) {
-  //     throw new Error('Recipe DTO is null or undefined');
-  //   }
+  //    if (!recipeDto) {
+  //        throw new Error('Recipe DTO is null or undefined');
+  //    }
 
-  //   const gzippedJson = await this.gZip(JSON.stringify(recipeDto));
-  //   const formData = new FormData();
+  //    const gzippedJson = await this.gZip(JSON.stringify(recipeDto));
+  //    const formData = new FormData();
 
-  //   if (recipeDto.image_url) {
-  //     const photoData = await this.getPhotoData(recipeDto.image_url);
+  //    if (recipeDto.image_url) {
+  //        const photoData = await this.getPhotoData(recipeDto.image_url);
 
-  //     formData.append('photo', photoData, {
-  //       filename: `recipe.jpg`,
-  //     });
+  //        formData.append('photo', photoData, {
+  //            filename: `recipe.jpg`,
+  //        });
 
-  //     formData.append('data', gzippedJson, {
-  //       filename: 'recipe.json.gz',
-  //       contentType: 'application/gzip',
-  //     });
-  //   }
+  //        formData.append('data', gzippedJson, {
+  //            filename: 'recipe.json.gz',
+  //            contentType: 'application/gzip',
+  //        });
+  //    }
 
-  //   const options: OptionsWithUrl = {
-  //     method: 'POST',
-  //     headers: {
-  //       ...paprikaBaseHeaders,
-  //       'Content-Type': 'multipart/form-data',
-  //       Authorization: `Bearer ${this.paprikaConfig.bearerToken}`,
-  //     },
-  //     url: `${this.paprikaConfig.baseURL}/sync/recipe/${recipeDto.uid}`,
-  //     formData,
-  //   };
+  //    const response = await fetch(`${this.paprikaConfig.baseURL}/sync/recipe/${recipeDto.uid}`, {
+  //        method: 'POST',
+  //        headers: {
+  //            ...paprikaBaseHeaders,
+  //            'Authorization': `Bearer ${this.paprikaConfig.bearerToken}`
+  //        },
+  //        body: formData
+  //    });
 
-  //   await request(options);
+  //    if (!response.ok) {
+  //        throw new Error(`Failed to create recipe. Status: ${response.status}`);
+  //    }
   // }
 }
 
@@ -139,11 +157,7 @@ export class PaprikaApiService implements OnModuleInit {
 //  * @returns
 //  */
 // private async getPhotoData(photoUrl: string): Promise<Buffer> {
-//   console.log(photoUrl);
-//   const options: OptionsWithUrl = {
-//     url: photoUrl,
-//     encoding: null,
-//   };
-//   const photoData = await request.get(options);
-//   return photoData;
+//    const response = await fetch(photoUrl);
+//    const photoData = await response.buffer();
+//    return photoData;
 // }

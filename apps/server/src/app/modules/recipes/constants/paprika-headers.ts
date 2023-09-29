@@ -1,6 +1,8 @@
-import { Headers } from 'request';
+type HttpHeaders = {
+  [key: string]: string;
+};
 
-export const paprikaBaseHeaders: Headers = {
+export const paprikaBaseHeaders: HttpHeaders = {
   Host: 'www.paprikaapp.com',
   Accept: '*/*',
   Connection: 'keep-alive',

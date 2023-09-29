@@ -1,24 +1,22 @@
 import { Module } from '@nestjs/common';
-import { HttpModule } from '@nestjs/axios';
+import { ScheduleModule } from '@nestjs/schedule';
 
-import { PaprikaApiService } from './paprika-api._provider';
-import { PaprikaAuthService } from './paprika-auth._provider';
 import { PrismaService } from './prisma._provider';
-import { ScrapeService } from './scrape._provider';
+import { PaprikaAuthService } from './paprika-auth._provider';
 import { SyncService } from './sync._provider';
-import { JwtService } from '@nestjs/jwt';
+import { PaprikaApiService } from './paprika-api._provider';
+import { ScrapeService } from './scrape._provider';
 
 const providers = [
-  PaprikaApiService,
-  PaprikaAuthService,
   PrismaService,
-  ScrapeService,
+  PaprikaAuthService,
   SyncService,
-  JwtService,
+  PaprikaApiService,
+  ScrapeService,
 ];
 
 @Module({
-  imports: [HttpModule],
+  imports: [ScheduleModule.forRoot()],
   providers,
   exports: providers,
 })

@@ -145,16 +145,21 @@ model RecipeItem {
 }
 
 model Status {
-  uid        Int      @id
-  recipes    Int
-  pantry     Int
-  meals      Int
-  menus      Int
-  groceries  Int
-  bookmarks  Int
-  menuitems  Int
-  categories Int
-  createdAt  DateTime @default(now()) @db.Timestamptz(6)
+  bookmarks          Int
+  categories         Int
+  createdAt          DateTime @default(now()) @db.Timestamptz(6)
+  groceries          Int
+  grocerylists       Int
+  groceryaisles      Int
+  groceryingredients Int
+  meals              Int
+  mealtypes          Int
+  menus              Int
+  menuitems          Int
+  pantry             Int
+  photos             Int
+  recipes            Int
+  uid                Int      @id
 
   @@schema("lamora")
 }
@@ -190,7 +195,7 @@ model PaprikaStatus {
   menus              Int
   menuitems          Int
   createdAt          DateTime @default(now()) @db.Timestamptz(6)
-  id                 Int      @id @default(autoincrement())
+  id                 Int      @id
 
   @@schema("lamora")
 }
