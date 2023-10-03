@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+// import { useQuery } from '@tanstack/react-query';
 
 import Head from 'next/head';
 import PortfolioFilter from '@components/elements/PortfolioFilter';
@@ -9,14 +9,10 @@ import Pagination from '../../components/elements/Pagination';
 import MyServices from '../../components/sections/MyServices';
 import PartnersLogs from '../../components/sections/PartnersLogs';
 
-import fetchFavorites from '../api/recipes/favorites.routes';
+// import fetchFavorites from '../api/recipes/favorites.routes';
 
 const Recipes: React.FC = (props) => {
-  const { data } = useQuery(['favorites'], async () => await fetchFavorites());
-
-  useEffect(() => {
-    console.log({ data });
-  }, [data]);
+  // const { data } = useQuery(['favorites'], async () => await fetchFavorites());
 
   return (
     <>

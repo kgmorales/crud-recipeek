@@ -30,10 +30,10 @@ export class SyncService implements OnModuleInit {
 
   @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async syncEveryDay() {
-    this.logger.debug('Starting daily sync with Paprika at midnight');
+    this.logger.log('Starting daily sync with Paprika at midnight');
     try {
       await this.syncDataWithPaprika();
-      this.logger.debug('Sync with Paprika completed successfully');
+      this.logger.log('Sync with Paprika completed successfully');
     } catch (error) {
       this.logger.error('Error during sync with Paprika:', error);
     }

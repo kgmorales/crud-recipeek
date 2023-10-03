@@ -34,7 +34,9 @@
     "schemas": "meta",
     "interfaces": "context",
     "providers": "mjml",
-    "blog": "Meta"
+    "blog": "Meta",
+    "recipes": "Examples",
+    "users": "Guard"
   },
   "material-icon-theme.files.associations": {
     "apps/client/src/app/**/*.service.ts": "angular-service",
@@ -42,7 +44,8 @@
     "*._module.ts": "nest-module",
     "*._controller.ts": "nest-controller",
     "*._provider.ts": "nest-filter",
-    "*._middleware.ts": "nest-middleware"
+    "*._middleware.ts": "nest-middleware",
+    "*.strategy.ts": "key"
   },
   "material-icon-theme.folders.color": "#90a4ae",
   "workbench.colorCustomizations": {
