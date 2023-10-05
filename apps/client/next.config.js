@@ -4,7 +4,6 @@ const path = require('path');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require('@nx/next');
 
-
 /**
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
@@ -15,6 +14,9 @@ const nextConfig = {
     svgr: false,
   },
 
+  test: /\.svg$/,
+  use: ['@svgr/webpack'],
+
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
@@ -24,8 +26,8 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['http://uploads.paprikaapp.com.s3.amazonaws.com/']
-  }
+    domains: ['http://uploads.paprikaapp.com.s3.amazonaws.com/'],
+  },
 };
 
 const plugins = [
@@ -34,4 +36,3 @@ const plugins = [
 ];
 
 module.exports = composePlugins(...plugins)(nextConfig);
-
