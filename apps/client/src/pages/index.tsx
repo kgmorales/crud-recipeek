@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Layout from '@components/layout/Layout';
 import Hero from '@components/sections/Hero';
-import FeaturedRecipes from '../components/sections/FeaturedRecipes';
+import FeaturedRecipes from '../components/sections/FeaturedRecipes/FeaturedRecipes';
 import RecentRecipes from '@components/sections/RecentRecipes';
 import { useHome } from '../hooks/useHome';
 

@@ -1,13 +1,25 @@
 import React from 'react';
-import Avocade from '/assets/icons/avocado.svg';
+import ListCheck from '@public/assets/icons/list-check.svg';
+import StopWatch from '@public/assets/icons/stopwatch.svg';
 
-const iconTypes = {
-  fire: Fire,
-  healthy: Healthy,
-  home: Home,
+interface IconType {
+  [key: string]: React.FC<React.SVGProps<SVGSVGElement>>;
+}
+
+const iconTypes: IconType = {
+  ingredients: ListCheck,
+  stopWatch: StopWatch,
 };
 
-const IconComponent = ({ name, ...props }) => {
+interface IconProps {
+  name: keyof typeof iconTypes;
+}
+
+const IconComponent: React.FC<IconProps> = ({ name, ...props }) => {
   const Icon = iconTypes[name];
+  if (!Icon) return null;
+
   return <Icon {...props} />;
 };
+
+export default IconComponent;

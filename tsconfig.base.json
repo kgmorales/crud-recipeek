@@ -33,6 +33,7 @@
       "@contexts/*": ["apps/client/src/contexts/*"],
       "@enums/*": ["apps/client/src/enums/*"],
       "@pages/*": ["apps/client/src/pages/*"],
+      "@public/*": ["apps/client/public/*"],
       "@styles/*": ["apps/client/src/styles/*"],
       "@types": ["apps/client/src/types"],
       "@utils/*": ["apps/client/src/utils/*"],

@@ -1,0 +1,176 @@
+$bp-md: 600px;
+$bp-lg: 800px;
+$duration: 700ms;
+$easing: cubic-bezier(0.19, 1, 0.22, 1);
+
+.container {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.card {
+  width: 100%;
+  height: 20rem;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  border-radius: 16px;
+  color: whitesmoke;
+  // background-color: whitesmoke;
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.1),
+    0 2px 2px rgba(0, 0, 0, 0.1),
+    0 4px 4px rgba(0, 0, 0, 0.1),
+    0 8px 8px rgba(0, 0, 0, 0.1),
+    0 16px 16px rgba(0, 0, 0, 0.1);
+
+  @media (min-width: $bp-md) {
+    height: 350;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110%;
+    background-size: cover;
+    background-position: 0 0;
+    transition: transform calc($duration * 1.5) $easing;
+    pointer-events: none;
+    border-radius: 16px;
+    background-image: url(https://tastefulventure.com/wp-content/uploads/2017/12/Greek-Lemon-Rice-and-Chicken-Soup-4.jpg);
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    pointer-events: none;
+    background-image: linear-gradient(
+      to bottom,
+      hsla(0, 0%, 0%, 0) 0%,
+      hsla(0, 0%, 0%, 0.009) 11.7%,
+      hsla(0, 0%, 0%, 0.034) 22.1%,
+      hsla(0, 0%, 0%, 0.072) 31.2%,
+      hsla(0, 0%, 0%, 0.123) 39.4%,
+      hsla(0, 0%, 0%, 0.182) 46.6%,
+      hsla(0, 0%, 0%, 0.249) 53.1%,
+      hsla(0, 0%, 0%, 0.32) 58.9%,
+      hsla(0, 0%, 0%, 0.394) 64.3%,
+      hsla(0, 0%, 0%, 0.468) 69.3%,
+      hsla(0, 0%, 0%, 0.54) 74.1%,
+      hsla(0, 0%, 0%, 0.607) 78.8%,
+      hsla(0, 0%, 0%, 0.668) 83.6%,
+      hsla(0, 0%, 0%, 0.721) 88.7%,
+      hsla(0, 0%, 0%, 0.762) 94.1%,
+      #231e3f 100%
+    );
+
+    transform: translateY(-50%);
+    transition: transform calc($duration * 2) $easing;
+  }
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  transition: transform $duration $easing;
+  z-index: 1;
+
+  > * + * {
+    margin-top: 1rem;
+  }
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.2;
+  color: whitesmoke;
+}
+
+.meta {
+  font-size: 1.6rem;
+  border-radius: 16px;
+  padding: 0.5rem;
+  li {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: whitesmoke;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    span {
+      margin-left: 0.5rem;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@media (hover: hover) and (min-width: $bp-md) {
+  .card:after {
+    transform: translateY (0);
+  }
+
+  .content {
+    transform: translateY(calc(100% - 4.5rem));
+
+    > *:not(.title) {
+      opacity: 0;
+      transform: translateY(1rem);
+      transition:
+        transform $duration $easing,
+        opacity $duration $easing;
+    }
+  }
+
+  .card:hover,
+  .card:focus-within {
+    align-items: center;
+
+    &:before {
+      transform: translateY(-4%);
+    }
+    &:after {
+      transform: translateY(-50%);
+    }
+
+    .content {
+      transform: translateY(0);
+
+      > *:not(.title) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: calc($duration / 8);
+      }
+    }
+  }
+
+  .card:focus-within {
+    &:before,
+    &:after,
+    .content,
+    .content > *:not(.title) {
+      transition-duration: 0s;
+    }
+  }
+}

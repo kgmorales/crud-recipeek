@@ -7,7 +7,6 @@ interface RecentProps {
 }
 
 const RecentRecipes: React.FC<RecentProps> = ({ recents }) => {
-  console.log({ recents });
   return (
     <>
       <h2 className="color-gray-300 d-inline-block mb-10 wow animate__animated animate__fadeInUp">
