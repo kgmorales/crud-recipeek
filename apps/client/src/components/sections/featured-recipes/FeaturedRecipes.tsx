@@ -3,12 +3,17 @@ import Link from 'next/link';
 import FeaturedCard from '@components/elements/featured-card/FeaturedCard';
 import { Recipe } from '@prisma/client';
 import styles from './FeaturedRecipes.module.scss';
+import { processRecipeForCard } from '../utils/Home.utils';
+import { FeaturedCardData } from '@types';
 
 interface FeaturedRecipesProps {
   featured?: Recipe[];
 }
 
-const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
+const FeaturedRecipes: React.FC<FeaturedRecipesProps> = (featured) => {
+  console.log(featured);
+  const cardInfo = processRecipeForCard(featured);
+
   return (
     <>
       <div className="row mt-70">
@@ -19,9 +24,9 @@ const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
           Discover our most popular recipes.
         </p>
         <div className={styles.cardContainer}>
-          {featured?.map((recipe: Recipe) => (
+          {cardInfo?.map((recipe: FeaturedCardData) => (
             <div key={recipe.id}>
-              <FeaturedCard />
+              <FeaturedCard cardInfo={cardInfo} />
             </div>
           ))}
         </div>

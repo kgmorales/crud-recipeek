@@ -1,16 +1,21 @@
 import React from 'react';
-import styles from './FeaturedCard.module.scss'; // Assuming you're using CSS modules and the styles are in card.module.scss
+import styles from './FeaturedCard.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
+import { FeaturedCardData } from '@types';
 
 const iconPATH = '/assets/icons';
 
-const CardComponent = () => {
+interface FeaturedCardProps {
+  cardInfo: FeaturedCardData;
+}
+
+const CardComponent: React.FC<FeaturedCardProps> = (cardInfo) => {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles.content}>
-          <h2 className={styles.title}>Lemon Rice Soup</h2>
+          <h2 className={styles.title}>{cardInfo.name}</h2>
           <ul className={styles.meta}>
             <li>
               <Image
@@ -28,8 +33,8 @@ const CardComponent = () => {
                 height={30}
               />
               <div className={styles.numberContainer}>
-                60
-                <span>mins</span>
+                {cardInfo.prep_time}
+                {/* <span>mins</span> */}
               </div>
             </li>
             <li>
@@ -48,14 +53,15 @@ const CardComponent = () => {
                 height={30}
               />
               <div className={styles.numberContainer}>
-                7<span>ingredients</span>
+                {cardInfo.ingredientsCount}
+                <span>ingredients</span>
               </div>
             </li>
           </ul>
           <div className="text-center mt-30">
             <Link
               className="btn btn-linear btn-load-more wow animate__animated animate__zoomIn"
-              href="#"
+              href="{cardInfo.recipeLink}"
             >
               Show Full Recipe
             </Link>

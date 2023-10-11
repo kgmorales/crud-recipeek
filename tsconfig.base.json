@@ -34,7 +34,7 @@
       "@enums/*": ["apps/client/src/enums/*"],
       "@pages/*": ["apps/client/src/pages/*"],
       "@public/*": ["apps/client/public/*"],
-      "@styles/*": ["apps/client/src/styles/*"],
+      "@styles/*": ["apps/client/src/styles/scss/*"],
       "@types": ["apps/client/src/types"],
       "@utils/*": ["apps/client/src/utils/*"],
       "@modules/*": ["apps/server/src/app/modules/*"],
