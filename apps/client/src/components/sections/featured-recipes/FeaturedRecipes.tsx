@@ -30,7 +30,7 @@ const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
           ))}
         </div>
 
-        <div className="text-center mt-30">
+        <div className={styles.buttonContainer}>
           <Link
             className="btn btn-linear btn-load-more wow animate__animated animate__zoomIn"
             href="#"
