@@ -9,6 +9,7 @@ import { useHome } from '../hooks/useHome';
 
 const Home: React.FC = (props) => {
   const { home } = useHome();
+  console.log(home?.favorites);
 
   return (
     <>

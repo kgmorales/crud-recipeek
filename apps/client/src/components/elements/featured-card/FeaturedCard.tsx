@@ -10,7 +10,7 @@ interface FeaturedCardProps {
   cardInfo: FeaturedCardData;
 }
 
-const CardComponent: React.FC<FeaturedCardProps> = (cardInfo) => {
+const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
   return (
     <div className={styles.container}>
       <div className={styles.card}>

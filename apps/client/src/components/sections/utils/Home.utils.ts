@@ -1,14 +1,12 @@
 import { Recipe } from '@prisma/client';
-import { FeaturedCardData } from '@types';
 
-const ingredientsCount = (ingredients: Recipe['ingredients']) =>
+const ingredientsCount = (ingredients: Recipe['ingredients']): number =>
   ingredients.split('\n').length;
 
 const buildRecipeLink = (name: Recipe['name']) =>
   `/recipes/${name.split(' ').join('-')}`;
 
-
-export function processRecipeForCard(recipes: Recipe[]): FeaturedCardData[] {
+export function processRecipeForCard(recipes?: Recipe[]) {
   return recipes?.map((recipe) => {
     return {
       description: recipe.description,
