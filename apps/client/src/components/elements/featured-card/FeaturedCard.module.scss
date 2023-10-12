@@ -116,7 +116,7 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   }
 }
 
-@media (hover: hover) and (min-width: $bp-md) {
+@media (hover: hover) {
   .card:after {
     transform: translateY (0);
   }
