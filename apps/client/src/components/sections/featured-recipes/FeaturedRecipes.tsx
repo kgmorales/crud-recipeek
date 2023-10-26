@@ -11,11 +11,10 @@ interface FeaturedRecipesProps {
 
 const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
   const cardInfo = processRecipeForCard(featured);
-  console.log(cardInfo);
 
   return (
     <>
-      <div className="row mt-70">
+      <div className="row mt-30">
         <div className={styles.cardContainer}>
           {cardInfo?.map((recipe: FeaturedCardData) => (
             <div key={recipe.id}>

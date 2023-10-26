@@ -160,9 +160,12 @@
     }
   }
   .menu-footer {
+    p {
+      color: $color-gray-300-day;
+    }
     li {
       a {
-        color: $color-gray-500-day;
+        color: $color-gray-300-day;
         &:hover {
           color: $color-brand-1;
         }

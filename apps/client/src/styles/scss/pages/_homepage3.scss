@@ -49,7 +49,7 @@
   padding-bottom: 85px;
 }
 .box-socials {
-  display: inline-block;
+  display: flex;
   margin-top: 0px;
   a {
     display: inline-block;
@@ -58,36 +58,6 @@
     border-radius: 50%;
     margin-right: 10px;
     transition: all 0.2s;
-    span {
-      display: inline-block;
-      height: 50px;
-      width: 50px;
-      border-radius: 50%;
-      &.fb {
-        background-image: url(../../../../public/assets/imgs/page/homepage3/fb.svg);
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-      &.inst {
-        background-image: url(../../../../public/assets/imgs/page/homepage3/inst.svg);
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-      &.snap {
-        background-image: url(../../../../public/assets/imgs/page/homepage3/snap.svg);
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-      &.tw {
-        background-image: url(../../../../public/assets/imgs/page/homepage3/tw.svg);
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-    }
-    &:hover {
-      background: $background-linear;
-      transition: all 0.2s;
-    }
   }
 }
 .footer {

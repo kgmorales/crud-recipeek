@@ -19,18 +19,17 @@ export class PageService {
     });
 
     const favorites = await this.prisma.client.recipe.findMany({
-      where: { on_favorites: true },
+      where: { on_favorites: true, in_trash: false },
       take: 6,
     });
 
     const recents = await this.prisma.client.recipe.findMany({
+      where: { in_trash: false },
       orderBy: {
         created: 'desc',
       },
       take: 6,
     });
-
-    console.log({ recents });
 
     return { categories, favorites, recents };
   }

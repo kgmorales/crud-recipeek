@@ -1,8 +1,6 @@
 export async function fetchFilteredRecipes(filter: URLSearchParams) {
   const params = new URLSearchParams(filter);
 
-  console.log('params:', params);
-
   try {
     const response = await fetch(
       `http://localhost:8080/api/recipes/filter?${params}`,

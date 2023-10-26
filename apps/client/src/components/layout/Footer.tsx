@@ -40,12 +40,6 @@ const Footer: React.FC = () => {
                   are intended to be shared to foster bonds that are as
                   comforting and warm as the dishes themselves.
                 </p>
-                <h6 className="color-white mb-5 wow animate__animated animate__fadeInUp">
-                  Address
-                </h6>
-                <p className="text-sm wow animate__animated animate__fadeInUp">
-                  Chicago, IL
-                </p>
               </div>
               <div className="col-lg-4 mb-30">
                 <h6 className="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">
@@ -78,91 +72,51 @@ const Footer: React.FC = () => {
                   </div>
                 </div>
               </div>
-              {/* <div className="col-lg-4 mb-30">
-                <h4 className="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">
-                  Newsletter
-                </h4>
-                <p className="text-base color-gray-500 wow animate__animated animate__fadeInUp">
-                  Sign up to be first to receive the latest stories inspiring
-                  us, case studies, and industry news.
-                </p>
-                <div className="form-newsletters mt-15 wow animate__animated animate__fadeInUp">
-                  <form action="#">
-                    <div className="form-group">
-                      <input
-                        className="input-name border-gray-500"
-                        type="text"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        className="input-email border-gray-500"
-                        type="email"
-                        placeholder="Emaill address"
-                      />
-                    </div>
-                    <div className="form-group mt-20">
-                      <button className="btn btn-linear hover-up">
-                        Subscribe
-                        <i className="fi-rr-arrow-small-right" />
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div> */}
             </div>
             <div className="footer-bottom border-gray-800">
-              <div className="row">
-                <div className="col-lg-5 text-center text-lg-start">
-                  <p className="text-base color-white wow animate__animated animate__fadeIn">
-                    © 2023 Created by
-                    <Link
-                      className="copyright"
-                      href="https://kevinmoral.es"
-                      target="_blank"
-                    >
-                      {' '}
-                      kevinmoral.es
-                    </Link>
-                  </p>
+              <p className="text-base color-white wow animate__animated animate__fadeIn">
+                © 2023 Created by
+                <Link
+                  className="copyright"
+                  href="https://kevinmoral.es"
+                  target="_blank"
+                >
+                  {' '}
+                  kevinmoral.es
+                </Link>
+              </p>
+              <div className="box-socials">
+                <div
+                  className=" wow animate__animated animate__fadeIn"
+                  data-wow-delay=".0s"
+                >
+                  <Link
+                    className="icon-socials icon-twitter"
+                    href="https://twitter.com"
+                  >
+                    <Image
+                      alt="twitter"
+                      src="/assets/imgs/template/icons/tw.svg"
+                      width={40}
+                      height={40}
+                    />
+                  </Link>
                 </div>
-                <div className="col-lg-7 text-center text-lg-end">
-                  <div className="box-socials">
-                    <div
-                      className="d-inline-block mr-30 wow animate__animated animate__fadeIn"
-                      data-wow-delay=".0s"
-                    >
-                      <Link
-                        className="icon-socials icon-twitter color-gray-500"
-                        href="https://twitter.com"
-                      >
-                        Twitter
-                      </Link>
-                    </div>
-                    <div
-                      className="d-inline-block mr-30 wow animate__animated animate__fadeIn"
-                      data-wow-delay=".2s"
-                    >
-                      <Link
-                        className="icon-socials icon-linked color-gray-500"
-                        href="https://www.linkedin.com"
-                      >
-                        LinkedIn
-                      </Link>
-                    </div>
-                    <div
-                      className="d-inline-block wow animate__animated animate__fadeIn"
-                      data-wow-delay=".4s"
-                    >
-                      <Link
-                        className="icon-socials icon-insta color-gray-500"
-                        href="https://www.instagram.com"
-                      >
-                        Instagram
-                      </Link>
-                    </div>
-                  </div>
+                <div
+                  className=" wow animate__animated animate__fadeIn"
+                  data-wow-delay=".4s"
+                >
+                  <Link
+                    className="icon-socials icon-twitter"
+                    href="https://instagram.com"
+                  >
+                    <Image
+                      alt="twitter"
+                      src="/assets/imgs/template/icons/insta.svg"
+                      width={40}
+                      height={40}
+                    />
+                  </Link>
                 </div>
               </div>
             </div>

@@ -1,6 +1,7 @@
 .footer {
   // New Agon
   .icon-socials {
+    color: $color-gray-100;
     display: inline-block;
     padding-left: 28px;
     height: 32px;
@@ -11,36 +12,6 @@
       transition-duration: 0.2s;
       color: $color-linear !important;
     }
-    &.icon-twitter {
-      background: url(../../../../public/assets/imgs/template/icons/tw.svg)
-        no-repeat 0px 0px;
-      transition-duration: 0.2s;
-      &:hover {
-        background: url(../../../../public/assets/imgs/template/icons/tw-hover.svg)
-          no-repeat 0px 0px;
-        transition-duration: 0.2s;
-      }
-    }
-    &.icon-insta {
-      background: url(../../../../public/assets/imgs/template/icons/insta.svg)
-        no-repeat 0px 0px;
-      transition-duration: 0.2s;
-      &:hover {
-        background: url(../../../../public/assets/imgs/template/icons/insta-hover.svg)
-          no-repeat 0px 0px;
-        transition-duration: 0.2s;
-      }
-    }
-    &.icon-linked {
-      background: url(../../../../public/assets/imgs/template/icons/linked.svg)
-        no-repeat 0px 0px;
-      transition-duration: 0.2s;
-      &:hover {
-        background: url(../../../../public/assets/imgs/template/icons/linked-hover.svg)
-          no-repeat 0px 0px;
-        transition-duration: 0.2s;
-      }
-    }
   }
 
   .menu-footer {
@@ -49,6 +20,7 @@
       list-style: none;
       margin-bottom: 12px;
       a {
+        color: $color-gray-100;
         font-size: $font-md;
         line-height: 24px;
         text-decoration: none;
@@ -64,6 +36,10 @@
     }
   }
   .footer-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     border-top-width: 1px;
     border-top-style: solid;
     padding: 50px 0px 0px 0px;

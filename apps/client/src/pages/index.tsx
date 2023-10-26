@@ -9,8 +9,6 @@ import { useHome } from '../hooks/useHome';
 const Home: React.FC = (props) => {
   const { home } = useHome();
 
-  console.log({ home });
-
   return (
     <>
       <Head>
@@ -21,21 +19,21 @@ const Home: React.FC = (props) => {
           <div className="container">
             <div className="row">
               <div className="col-xl-1" />
-              <div className="col-xl-10 col-lg-12">
+              <div className="col-xl-10 col-lg-12 text-center">
                 <Hero />
-                <h2 className="text-center color-gray-300 wow animate__animated animate__fadeInUp">
+                <h2 className="color-gray-300 wow animate__animated animate__fadeInUp">
                   Family Favorites
                 </h2>
-                <p className="text-lg text-center wow animate__animated animate__fadeInUp">
+                <p className="text-lg wow animate__animated animate__fadeInUp">
                   Discover our most popular recipes.
                 </p>
                 <FeaturedRecipes featured={home?.favorites} />
                 <div className="row mt-70">
-                  <div className="col-lg-12">
-                    <h2 className="color-gray-300 wow animate__animated animate__fadeInUp">
-                      Family Favorites
+                  <div className="col-lg-12 text-center">
+                    <h2 className="color-gray-300  wow animate__animated animate__fadeInUp">
+                      Recent Recipes
                     </h2>
-                    <p className="text-lg wow animate__animated animate__fadeInUp">
+                    <p className="text-lg  wow animate__animated animate__fadeInUp">
                       Discover our most popular recipes.
                     </p>
                     <FeaturedRecipes featured={home?.recents} />
