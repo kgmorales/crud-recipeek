@@ -27,8 +27,10 @@ export class PageService {
       orderBy: {
         created: 'desc',
       },
-      take: 9,
+      take: 6,
     });
+
+    console.log({ recents });
 
     return { categories, favorites, recents };
   }

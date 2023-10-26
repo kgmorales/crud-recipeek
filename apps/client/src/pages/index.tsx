@@ -4,12 +4,12 @@ import Head from 'next/head';
 import Layout from '@components/layout/Layout';
 import Hero from '@components/sections/Hero';
 import FeaturedRecipes from '../components/sections/featured-recipes/FeaturedRecipes';
-import RecentRecipes from '@components/sections/RecentRecipes';
 import { useHome } from '../hooks/useHome';
 
 const Home: React.FC = (props) => {
   const { home } = useHome();
-  console.log(home?.favorites);
+
+  console.log({ home });
 
   return (
     <>
@@ -23,10 +23,22 @@ const Home: React.FC = (props) => {
               <div className="col-xl-1" />
               <div className="col-xl-10 col-lg-12">
                 <Hero />
+                <h2 className="text-center color-gray-300 wow animate__animated animate__fadeInUp">
+                  Family Favorites
+                </h2>
+                <p className="text-lg text-center wow animate__animated animate__fadeInUp">
+                  Discover our most popular recipes.
+                </p>
                 <FeaturedRecipes featured={home?.favorites} />
                 <div className="row mt-70">
                   <div className="col-lg-12">
-                    <RecentRecipes recents={home?.recents} />
+                    <h2 className="color-gray-300 wow animate__animated animate__fadeInUp">
+                      Family Favorites
+                    </h2>
+                    <p className="text-lg wow animate__animated animate__fadeInUp">
+                      Discover our most popular recipes.
+                    </p>
+                    <FeaturedRecipes featured={home?.recents} />
                   </div>
                 </div>
               </div>
