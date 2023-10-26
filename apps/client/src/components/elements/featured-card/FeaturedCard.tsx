@@ -64,15 +64,12 @@ const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
               </div>
             </li>
           </ul>
-
-          <div className="text-center mt-30">
-            <Link
-              className="btn btn-linear btn-load-more wow animate__animated animate__zoomIn"
-              href="{cardInfo.recipeLink}"
-            >
-              Full Recipe
-            </Link>
-          </div>
+          <Link
+            className="btn btn-linear btn-load-more wow animate__animated animate__zoomIn"
+            href="{cardInfo.recipeLink}"
+          >
+            Full Recipe
+          </Link>
         </div>
       </div>
     </div>
