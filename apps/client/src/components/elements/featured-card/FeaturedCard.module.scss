@@ -83,8 +83,9 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   background: #2b2448;
   display: flex;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 16px;
   align-items: center;
+  padding: 1rem;
 }
 
 .notes {
