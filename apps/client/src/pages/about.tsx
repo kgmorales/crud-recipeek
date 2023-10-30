@@ -1,15 +1,15 @@
-import Link from 'next/link';
 import Head from 'next/head';
 import Accordion from '../components/elements/Accordion';
 import PortfolioFilter from '../components/elements/PortfolioFilter';
 import Layout from '../components/layout/Layout';
 import Testimonial from '../components/slider/Testimonial';
 import PricingTable from '../components/sections/PricingTable';
-import Hero5 from '../components/sections/Hero5';
 import MyServices from '../components/sections/MyServices';
 import PartnersLogs from '../components/sections/PartnersLogs';
+import AboutHero from '@components/sections/about-hero/AboutHero';
+import React from 'react';
 
-export default function About() {
+const About: React.FC = (props) => {
   return (
     <>
       <Head>
@@ -21,7 +21,7 @@ export default function About() {
             <div className="row">
               <div className="col-xl-1" />
               <div className="col-xl-10 col-lg-12">
-                <Hero5 />
+                <AboutHero />
                 <MyServices />
                 <div className="text-center mt-70 mb-50">
                   <h2 className="color-linear d-inline-block mb-20 wow animate__animated animate__fadeInUp">
@@ -34,7 +34,7 @@ export default function About() {
                     the world of design and architecture.
                   </p>
                 </div>
-                <PortfolioFilter col={4} />
+                {/* <PortfolioFilter col={4} /> */}
                 <PricingTable />
                 <div className="text-center mt-30">
                   <h2
@@ -56,4 +56,5 @@ export default function About() {
       </Layout>
     </>
   );
-}
+};
+export default About;

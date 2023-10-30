@@ -6,6 +6,7 @@ import { categoryNames } from '@components/sections/constants/Hero';
 const length = Math.ceil(categoryNames.length / 2);
 const firstHalf = categoryNames.slice(0, length);
 const secondHalf = categoryNames.slice(length);
+const copyrightYear = new Date().getFullYear();
 
 const Footer: React.FC = () => {
   return (
@@ -75,7 +76,7 @@ const Footer: React.FC = () => {
             </div>
             <div className="footer-bottom border-gray-800">
               <p className="text-base color-white wow animate__animated animate__fadeIn">
-                © 2023 Created by
+                © {copyrightYear} created by
                 <Link
                   className="copyright"
                   href="https://kevinmoral.es"
