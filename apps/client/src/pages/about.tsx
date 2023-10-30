@@ -1,13 +1,15 @@
 import Head from 'next/head';
-import Accordion from '../components/elements/Accordion';
-import PortfolioFilter from '../components/elements/PortfolioFilter';
+// import Accordion from '../components/elements/Accordion';
+// import PortfolioFilter from '../components/elements/PortfolioFilter';
 import Layout from '../components/layout/Layout';
-import Testimonial from '../components/slider/Testimonial';
-import PricingTable from '../components/sections/PricingTable';
-import MyServices from '../components/sections/MyServices';
-import PartnersLogs from '../components/sections/PartnersLogs';
+// import Testimonial from '../components/slider/Testimonial';
+// import PricingTable from '../components/sections/PricingTable';
+// import MyServices from '../components/sections/MyServices';
+// import PartnersLogs from '../components/sections/PartnersLogs';
 import AboutHero from '@components/sections/about-hero/AboutHero';
 import React from 'react';
+import Testimonial from '@components/slider/Testimonial';
+import PartnersLogs from '@components/sections/PartnersLogs';
 
 const About: React.FC = (props) => {
   return (
@@ -22,7 +24,9 @@ const About: React.FC = (props) => {
               <div className="col-xl-1" />
               <div className="col-xl-10 col-lg-12">
                 <AboutHero />
-                <MyServices />
+                <Testimonial />
+                <PartnersLogs />
+                {/* <MyServices />
                 <div className="text-center mt-70 mb-50">
                   <h2 className="color-linear d-inline-block mb-20 wow animate__animated animate__fadeInUp">
                     My Latest Projects
@@ -34,7 +38,7 @@ const About: React.FC = (props) => {
                     the world of design and architecture.
                   </p>
                 </div>
-                {/* <PortfolioFilter col={4} /> */}
+                <PortfolioFilter col={4} />
                 <PricingTable />
                 <div className="text-center mt-30">
                   <h2
@@ -48,7 +52,7 @@ const About: React.FC = (props) => {
                   <Accordion />
                 </div>
                 <Testimonial />
-                <PartnersLogs />
+                <PartnersLogs /> */}
               </div>
             </div>
           </div>

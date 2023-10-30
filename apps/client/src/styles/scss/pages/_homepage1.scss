@@ -142,38 +142,38 @@
   }
 }
 
-.cover-home1 {
-  position: relative;
+// .cover-home1 {
+//   position: relative;
 
-  .container {
-    position: relative;
-    z-index: 2;
-  }
+//   .container {
+//     position: relative;
+//     z-index: 2;
+//   }
 
-  &::after {
-    height: 800px;
-    width: 500px;
-    content: '';
-    z-index: 1;
-    background: url(../../../../public/assets/imgs/template/shadow-1.svg)
-      no-repeat right top;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-  }
+//   &::after {
+//     height: 800px;
+//     width: 500px;
+//     content: '';
+//     z-index: 1;
+//     background: url(../../../../public/assets/imgs/template/shadow-1.svg)
+//       no-repeat right top;
+//     position: absolute;
+//     left: 0px;
+//     top: 0px;
+//   }
 
-  &::before {
-    height: 1500px;
-    width: 500px;
-    content: '';
-    z-index: 1;
-    background: url(../../../../public/assets/imgs/template/shadow-3.svg)
-      no-repeat right bottom;
-    position: absolute;
-    right: 0px;
-    top: 700px;
-  }
-}
+//   &::before {
+//     height: 1500px;
+//     width: 500px;
+//     content: '';
+//     z-index: 1;
+//     background: url(../../../../public/assets/imgs/template/shadow-3.svg)
+//       no-repeat right bottom;
+//     position: absolute;
+//     right: 0px;
+//     top: 700px;
+//   }
+// }
 
 .pagination {
   display: inline-block;
