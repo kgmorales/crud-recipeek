@@ -13,15 +13,15 @@ export default function Hero() {
         width={800}
         height={400}
       />
-      <div className={`${styles.textContainer} color-gray-900-day`}>
-        <h1 className={styles.heading}>Morales Family</h1>
-        <p>
+      <div className={`${styles.textContainer}`}>
+        <h1 className={`${styles.heading} color-gray-300`}>Morales Family</h1>
+        <p className="color-gray-300">
           Welcome to our family recipe book. As a working mom with two eager
           toddler sous-chefs by my side, our kitchen is always buzzing with
           creativity, disaster, and laughter. Our style consists of meals that
           consider busy schedules, toddler health, and flavor.
         </p>
-        <p>
+        <p className="color-gray-300">
           This blog is our love letter to them, a collection of recipes,
           stories, and memories. It&apos;s our hope that as they grow,
           they&apos;ll come here to revisit old favorites, discover new ones,

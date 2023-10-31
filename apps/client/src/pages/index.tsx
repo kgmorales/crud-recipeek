@@ -24,7 +24,7 @@ const Home: React.FC = (props) => {
                 <h2 className="color-gray-300 wow animate__animated animate__fadeInUp">
                   Family Favorites
                 </h2>
-                <p className="text-lg wow animate__animated animate__fadeInUp">
+                <p className="text-lg color-gray-400 wow animate__animated animate__fadeInUp">
                   Discover our most popular recipes.
                 </p>
                 <FeaturedRecipes featured={home?.favorites} />
@@ -33,7 +33,7 @@ const Home: React.FC = (props) => {
                     <h2 className="color-gray-300  wow animate__animated animate__fadeInUp">
                       Recent Recipes
                     </h2>
-                    <p className="text-lg  wow animate__animated animate__fadeInUp">
+                    <p className="text-lg color-gray-400 wow animate__animated animate__fadeInUp">
                       Discover our most popular recipes.
                     </p>
                     <FeaturedRecipes featured={home?.recents} />

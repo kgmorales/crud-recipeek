@@ -91,7 +91,7 @@ const Header: React.FC<HeaderProps> = ({
                   width={50}
                   height={50}
                 />
-                <h6 className="color-gray-100 d-flex justify-center align-items-bottom">
+                <h6 className="color-gray-300 d-flex justify-center align-items-bottom">
                   laMora
                 </h6>
               </Link>

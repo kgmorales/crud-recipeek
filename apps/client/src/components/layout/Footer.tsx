@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
                     height={100}
                   />
                 </Link>
-                <p className="mb-20 mt-20 text-sm wow animate__animated animate__fadeInUp">
+                <p className="mb-20 mt-20 color-gray-300 text-sm wow animate__animated animate__fadeInUp">
                   Join the Morales Family&apos;s culinary journey, where family
                   recipes are not just preserved but cherished. laMora Recipes
                   are intended to be shared to foster bonds that are as
@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
                 </p>
               </div>
               <div className="col-lg-4 mb-30">
-                <h6 className="text-lg mb-30 color-white wow animate__animated animate__fadeInUp">
+                <h6 className="text-lg mb-30 color-gray-400 wow animate__animated animate__fadeInUp">
                   Categories
                 </h6>
                 <div className="row">
@@ -75,7 +75,7 @@ const Footer: React.FC = () => {
               </div>
             </div>
             <div className="footer-bottom border-gray-800">
-              <p className="text-base color-white wow animate__animated animate__fadeIn">
+              <p className="text-base color-gray-300 wow animate__animated animate__fadeIn">
                 © {copyrightYear} created by
                 <Link
                   className="copyright"

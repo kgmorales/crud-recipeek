@@ -12,7 +12,7 @@ interface FeaturedCardProps {
 
 const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container}`}>
       <div
         className={`${styles.card} hover-up hover-neon wow animate__ animate__fadeInUp animated`}
         style={{
@@ -22,11 +22,15 @@ const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
           backgroundRepeat: 'no-repeat',
         }}
       >
-        <div className={styles.content}>
-          <h2 className={styles.title}>{cardInfo.name}</h2>
-          <p className={styles.notes}>{cardInfo.description}</p>
+        <div className={`${styles.content} bg-gray-900`}>
+          <h2 className={`${styles.title} color-gray-100 hover-neon`}>
+            {cardInfo.name}
+          </h2>
+          <p className={`${styles.notes} color-gray-300`}>
+            {cardInfo.description}
+          </p>
 
-          <ul className={styles.meta}>
+          <ul className={`${styles.meta} color-gray-300`}>
             <li>
               <Image
                 className="d-none logo-day"

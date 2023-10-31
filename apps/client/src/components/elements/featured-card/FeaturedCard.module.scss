@@ -1,4 +1,4 @@
-@import '@styles/base/variables';
+@import 'variables';
 
 $bp-md: 600px;
 $bp-lg: 800px;
@@ -25,7 +25,6 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   padding: 1rem;
   text-align: center;
   border-radius: 16px;
-  color: whitesmoke;
   box-shadow:
     0 1px 1px rgba(0, 0, 0, 0.1),
     0 2px 2px rgba(0, 0, 0, 0.1),
@@ -79,7 +78,6 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   height: 60px;
   width: 100%;
   line-height: 1.2;
-  color: #fff;
   background: #2b2448;
   display: flex;
   justify-content: center;
@@ -90,8 +88,7 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
 
 .notes {
   font-size: 1rem;
-  line-height: 1.2;
-  color: #fff;
+  line-height: 1.1;
 }
 
 .meta {
@@ -103,7 +100,6 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    color: whitesmoke;
     padding: 0.5rem;
     gap: 0.5rem;
     span {
@@ -117,7 +113,7 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   .card:after {
     transform: translateY (0);
   }
-
+  //TODO: FIX THIS: IT SHOULD NOT HAVE A BORDER; SET BACKGROUND AFTER TRANSITION. BEFORE IS OPAQUE.
   .content {
     transform: translateY(calc(100% - 4.5rem));
     > *:not(.title) {
@@ -132,9 +128,6 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   .card:hover,
   .card:focus-within {
     align-items: center;
-    .title {
-      color: white;
-    }
 
     &:before {
       transform: translateY(-4%);
@@ -164,8 +157,7 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
 
     .content {
       transform: translateY(0);
-      background: #2b2448;
-
+      background: #29245b;
       > *:not(.title) {
         opacity: 1;
         transform: translateY(0);
