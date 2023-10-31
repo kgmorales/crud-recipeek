@@ -2,71 +2,31 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
-const iconPATH = '/assets/imgs/page/homepage1/';
+const iconPATH = '/assets/imgs/family/';
 
 const TrendingTopic: React.FC = () => {
-  const data = [
-    {
-      title: 'Sport',
-      article: 38,
-      img: 'sport.png',
-    },
-    {
-      title: 'Travel',
-      article: 63,
-      img: 'travel.png',
-    },
-    {
-      title: 'Design',
-      article: 78,
-      img: 'design.png',
-    },
-    {
-      title: 'Movie',
-      article: 125,
-      img: 'movie.png',
-    },
-    {
-      title: 'Lifestyle',
-      article: 45,
-      img: 'lifestyle.png',
-    },
-    {
-      title: 'Lifestyle',
-      article: 45,
-      img: 'lifestyle.png',
-    },
-    {
-      title: 'Lifestyle',
-      article: 45,
-      img: 'lifestyle.png',
-    },
-    {
-      title: 'Lifestyle',
-      article: 45,
-      img: 'lifestyle.png',
-    },
-    {
-      title: 'Lifestyle',
-      article: 45,
-      img: 'lifestyle.png',
-    },
-    {
-      title: 'Lifestyle',
-      article: 45,
-      img: 'lifestyle.png',
-    },
+  const imgs = [
+    '1.jpg',
+    '2.jpg',
+    '3.jpg',
+    '4.jpg',
+    '5.jpg',
+    '6.jpg',
+    '7.jpg',
+    '8.jpg',
+    '9.jpg',
   ];
-
   return (
     <>
       <Swiper
         slidesPerView={4}
         spaceBetween={30}
         loop={true}
-        autoplay={{ delay: 1000, disableOnInteraction: false }}
+        autoplay={{ delay: 2500, disableOnInteraction: false }}
+        modules={[Autoplay]}
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -95,13 +55,13 @@ const TrendingTopic: React.FC = () => {
         }}
         className="swiper-wrapper"
       >
-        {data.map((item, i) => (
+        {imgs.map((item, i) => (
           <SwiperSlide className="swiper-slide" key={i}>
             <div className="card-style-1">
               <div className="card-image">
                 <Image
-                  src={`${iconPATH}${item.img}`}
-                  width={200}
+                  src={`${iconPATH}${item}`}
+                  width={250}
                   height={350}
                   alt="kids"
                 />
