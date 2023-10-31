@@ -2,8 +2,8 @@ import Head from 'next/head';
 import Layout from '../components/layout/Layout';
 import AboutHero from '@components/sections/about-hero/AboutHero';
 import React from 'react';
-import TrendingTopic from '@components/slider/TrendingTopic';
-
+import ImageSlider from '@components/elements/ImageSlider';
+import AccordionWrapper from '@components/elements/accordion-wrapper/AccordionWrapper';
 
 const About: React.FC = (props) => {
   return (
@@ -16,7 +16,8 @@ const About: React.FC = (props) => {
           <div className="container">
             <div className="row">
               <AboutHero />
-              <TrendingTopic />
+              <ImageSlider />
+              <AccordionWrapper />
             </div>
           </div>
         </div>

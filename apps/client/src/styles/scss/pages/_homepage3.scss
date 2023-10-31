@@ -50,11 +50,15 @@
 }
 .box-socials {
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 0px;
+
   a {
-    display: inline-block;
-    height: 50px;
-    width: 50px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
     margin-right: 10px;
     transition: all 0.2s;

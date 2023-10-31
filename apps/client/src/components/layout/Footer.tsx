@@ -96,8 +96,16 @@ const Footer: React.FC = () => {
                     href="https://twitter.com"
                   >
                     <Image
-                      alt="twitter"
-                      src="/assets/imgs/template/icons/tw.svg"
+                      className="logo-night"
+                      alt="lamora logo"
+                      src="/assets/icons/tw.svg"
+                      width={40}
+                      height={40}
+                    />
+                    <Image
+                      className="d-none logo-day"
+                      alt="lamora logo"
+                      src="/assets/icons/tw-day.svg"
                       width={40}
                       height={40}
                     />
@@ -112,8 +120,16 @@ const Footer: React.FC = () => {
                     href="https://instagram.com"
                   >
                     <Image
-                      alt="twitter"
-                      src="/assets/imgs/template/icons/insta.svg"
+                      className="logo-night"
+                      alt="lamora logo"
+                      src="/assets/icons/insta.svg"
+                      width={40}
+                      height={40}
+                    />
+                    <Image
+                      className="d-none logo-day"
+                      alt="lamora logo"
+                      src="/assets/icons/insta-day.svg"
                       width={40}
                       height={40}
                     />

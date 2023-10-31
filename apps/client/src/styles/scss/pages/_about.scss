@@ -47,39 +47,3 @@
       no-repeat left center;
   }
 }
-.accordion-button {
-  border: 0px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-.accordion-collapse {
-  border-width: 0 0px;
-  padding-right: 70px;
-}
-.accordion-button:not(.collapsed) {
-  background-color: transparent;
-}
-.accordion-button::after {
-  background-image: url(../../../../public/assets/imgs/page/about/open.svg);
-  height: 54px;
-  width: 54px;
-  background-size: auto;
-}
-.accordion-button:not(.collapsed)::after {
-  background-image: url(../../../../public/assets/imgs/page/about/close.svg);
-  height: 54px;
-  width: 54px;
-  background-size: auto;
-}
-.accordion-item {
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  &:last-child {
-    border-bottom: 0px;
-  }
-}
-.accordion-body {
-  padding: 20px 0px 40px 0px;
-}

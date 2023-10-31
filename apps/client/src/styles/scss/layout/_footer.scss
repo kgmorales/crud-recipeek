@@ -4,7 +4,6 @@
     color: $color-gray-100;
     display: inline-block;
     padding-left: 28px;
-    height: 32px;
     width: auto;
     transition-duration: 0.2s;
     &:hover {
@@ -42,7 +41,6 @@
     align-items: center;
     border-top-width: 1px;
     border-top-style: solid;
-    padding: 50px 0px 0px 0px;
     font-size: $font-sm;
     a {
       text-decoration: none;

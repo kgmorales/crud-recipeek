@@ -2,6 +2,7 @@ import Image from 'next/image';
 import styles from './AboutHero.module.scss';
 import portraitImage from '@public/assets/imgs/page/about/us.jpg';
 import Link from 'next/link';
+import SpotifyNowPlaying from '@components/elements/spotify/SpotifyNowPlaying';
 
 export default function Hero() {
   return (
@@ -14,7 +15,9 @@ export default function Hero() {
         height={400}
       />
       <div className={`${styles.textContainer}`}>
-        <h1 className={`${styles.heading} color-gray-300`}>Morales Family</h1>
+        <h1 className={`${styles.heading} color-gray-300`}>
+          The Morales Family
+        </h1>
         <p className="color-gray-300">
           Welcome to our family recipe book. As a working mom with two eager
           toddler sous-chefs by my side, our kitchen is always buzzing with
@@ -29,38 +32,45 @@ export default function Hero() {
           family&apos;s story, and we&apos;re thrilled to share it with you.
         </p>
         <div className="box-socials mt-3">
-          <div
-            className=" wow animate__animated animate__fadeIn"
-            data-wow-delay=".0s"
+          <Link
+            className="icon-socials icon-twitter"
+            href="https://twitter.com"
           >
-            <Link
-              className="icon-socials icon-twitter"
-              href="https://twitter.com"
-            >
-              <Image
-                alt="twitter"
-                src="/assets/imgs/template/icons/tw.svg"
-                width={30}
-                height={30}
-              />
-            </Link>
-          </div>
-          <div
-            className=" wow animate__animated animate__fadeIn"
-            data-wow-delay=".4s"
+            <Image
+              className="logo-night"
+              alt="lamora logo"
+              src="/assets/icons/tw.svg"
+              width={50}
+              height={50}
+            />
+            <Image
+              className="d-none logo-day"
+              alt="lamora logo"
+              src="/assets/icons/tw-day.svg"
+              width={50}
+              height={50}
+            />
+          </Link>
+          <Link
+            className="icon-socials icon-twitter"
+            href="https://instagram.com"
           >
-            <Link
-              className="icon-socials icon-twitter"
-              href="https://instagram.com"
-            >
-              <Image
-                alt="twitter"
-                src="/assets/imgs/template/icons/insta.svg"
-                width={30}
-                height={30}
-              />
-            </Link>
-          </div>
+            <Image
+              className="logo-night"
+              alt="lamora logo"
+              src="/assets/icons/insta.svg"
+              width={50}
+              height={50}
+            />
+            <Image
+              className="d-none logo-day"
+              alt="lamora logo"
+              src="/assets/icons/insta-day.svg"
+              width={50}
+              height={50}
+            />
+          </Link>
+          <SpotifyNowPlaying />
         </div>
       </div>
     </div>

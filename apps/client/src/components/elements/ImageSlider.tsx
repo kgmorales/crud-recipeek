@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
@@ -7,7 +6,7 @@ import 'swiper/css';
 
 const iconPATH = '/assets/imgs/family/';
 
-const TrendingTopic: React.FC = () => {
+const ImageSlider: React.FC = () => {
   const imgs = [
     '1.jpg',
     '2.jpg',
@@ -74,4 +73,4 @@ const TrendingTopic: React.FC = () => {
   );
 };
 
-export default TrendingTopic;
+export default ImageSlider;
