@@ -8,6 +8,10 @@
   padding-top: 50px;
   flex: 2 1 0;
   gap: 3rem;
+  border: 1px solid;
+  padding: 2rem;
+  border-radius: 16px;
+  margin: 2rem 0;
   @include media('<=laptop') {
     padding-top: 0;
   }
@@ -15,7 +19,7 @@
 
 .heading {
   display: inline;
-  color:white;
+  color: white;
 }
 
 .image {

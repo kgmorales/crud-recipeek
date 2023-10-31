@@ -1,5 +1,5 @@
 .btn {
-  border-radius: 6px;
+  border-radius: 16px;
   padding: 10px 16px;
   font-family: $font-text;
   font-size: 14px;
@@ -32,7 +32,7 @@
     background: $background-linear;
     color: $color-white;
     padding: 6px 24px;
-    border-radius: 50px;
+    border-radius: 16px;
     &:hover {
       color: $color-gray-700 !important;
     }
@@ -49,7 +49,7 @@
       no-repeat center;
   }
   &.btn-load-more {
-    border-radius: 80px;
+    border-radius: 16px;
     padding: 18px 30px;
     i {
       display: inline-block;
@@ -57,7 +57,7 @@
     }
   }
   &.btn-tag {
-    border-radius: 50px;
+    border-radius: 16px;
     padding: 6px 15px;
     font-size: $font-xs;
     line-height: 16px;
@@ -78,7 +78,7 @@
   }
   &.btn-border-linear {
     border: 2px solid $color-brand-1;
-    border-radius: 50px;
+    border-radius: 16px;
     color: $color-white;
     padding: 5px 15px;
     font-size: $font-sm;
@@ -98,7 +98,7 @@
   &.btn-tags {
     border-width: 1px;
     border-style: solid;
-    border-radius: 8px;
+    border-radius: 16px;
     padding: 12px 20px;
     color: $color-white;
     font-size: 14px;

@@ -22,7 +22,9 @@ const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
           backgroundRepeat: 'no-repeat',
         }}
       >
-        <div className={`${styles.content} bg-gray-900`}>
+        <div
+          className={`${styles.content} bg-gray-900 hover-up hover-neon wow animate__ animate__fadeInUp animated`}
+        >
           <h2 className={`${styles.title} color-gray-100 hover-neon`}>
             {cardInfo.name}
           </h2>
