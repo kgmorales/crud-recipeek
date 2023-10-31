@@ -2,9 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay } from 'swiper';
 import 'swiper/css';
-import 'swiper/css/pagination';
 
 const iconPATH = '/assets/imgs/page/homepage1/';
 
@@ -61,30 +59,58 @@ const TrendingTopic: React.FC = () => {
       img: 'lifestyle.png',
     },
   ];
-  SwiperCore.use([Autoplay]);
+
   return (
-    <Swiper
-      spaceBetween={30}
-      modules={[Autoplay]}
-      centeredSlides={true}
-      autoplay={{
-        delay: 1000,
-        disableOnInteraction: false,
-      }}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
-      pagination={{ clickable: true }}
-    >
-      <SwiperSlide>Slide 1</SwiperSlide>
-      <SwiperSlide>Slide 2</SwiperSlide>
-      <SwiperSlide>Slide 3</SwiperSlide>
-      <SwiperSlide>Slide 4</SwiperSlide>
-      <SwiperSlide>Slide 5</SwiperSlide>
-      <SwiperSlide>Slide 6</SwiperSlide>
-      <SwiperSlide>Slide 7</SwiperSlide>
-      <SwiperSlide>Slide 8</SwiperSlide>
-      <SwiperSlide>Slide 9</SwiperSlide>
-    </Swiper>
+    <>
+      <Swiper
+        slidesPerView={4}
+        spaceBetween={30}
+        loop={true}
+        autoplay={{ delay: 1000, disableOnInteraction: false }}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 30,
+          },
+          575: {
+            slidesPerView: 1,
+            spaceBetween: 30,
+          },
+          767: {
+            slidesPerView: 1,
+            spaceBetween: 30,
+          },
+          991: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          1199: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1350: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+        }}
+        className="swiper-wrapper"
+      >
+        {data.map((item, i) => (
+          <SwiperSlide className="swiper-slide" key={i}>
+            <div className="card-style-1">
+              <div className="card-image">
+                <Image
+                  src={`${iconPATH}${item.img}`}
+                  width={200}
+                  height={350}
+                  alt="kids"
+                />
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </>
   );
 };
 
