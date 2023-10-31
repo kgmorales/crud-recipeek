@@ -1,14 +1,9 @@
 import Head from 'next/head';
-// import Accordion from '../components/elements/Accordion';
-// import PortfolioFilter from '../components/elements/PortfolioFilter';
 import Layout from '../components/layout/Layout';
-// import Testimonial from '../components/slider/Testimonial';
-// import PricingTable from '../components/sections/PricingTable';
-// import MyServices from '../components/sections/MyServices';
-// import PartnersLogs from '../components/sections/PartnersLogs';
 import AboutHero from '@components/sections/about-hero/AboutHero';
 import React from 'react';
 import TrendingTopic from '@components/slider/TrendingTopic';
+
 
 const About: React.FC = (props) => {
   return (
