@@ -1,7 +1,8 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { PrismaService } from './prisma._provider';
 import { PaprikaConfig } from '@prisma/client';
+
+import { PrismaService } from '@modules/shared/services/prisma._service';
 import { paprikaBaseHeaders } from '@modules/recipes/constants';
 import {
   getErrorMessage,

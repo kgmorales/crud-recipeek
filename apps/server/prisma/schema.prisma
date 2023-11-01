@@ -133,6 +133,7 @@ model Recipe {
   source_url       String
   total_time       String?
   uid              String   @unique
+  Blog             Blog[]
 
   @@schema("lamora")
 }
@@ -196,6 +197,29 @@ model PaprikaStatus {
   menuitems          Int
   createdAt          DateTime @default(now()) @db.Timestamptz(6)
   id                 Int      @id
+
+  @@schema("lamora")
+}
+
+model Blog {
+  content      String
+  categoryId   Int?
+  blogCategory BlogCategory? @relation(fields: [categoryId], references: [id])
+  createdAt    DateTime      @default(now())
+  id           Int           @id @default(autoincrement())
+  title        String
+  slug         String        @unique
+  updatedAt    DateTime      @updatedAt
+  recipeUID    String?
+  recipe       Recipe?       @relation(fields: [recipeUID], references: [uid], onDelete: SetNull)
+
+  @@schema("lamora")
+}
+
+model BlogCategory {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  blogs Blog[]
 
   @@schema("lamora")
 }

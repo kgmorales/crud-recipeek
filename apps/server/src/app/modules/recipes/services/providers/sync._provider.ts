@@ -1,6 +1,6 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { PrismaService } from './prisma._provider';
+import { PrismaService } from '../../../shared/services/prisma._service';
 import { Recipe, Status } from '@prisma/client';
 
 import { PaprikaAuthService } from './paprika-auth._provider';

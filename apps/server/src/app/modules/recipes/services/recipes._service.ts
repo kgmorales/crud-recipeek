@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../services/providers/prisma._provider';
+import { PrismaService } from '../../shared/services/prisma._service';
 import { Recipe, Category } from '@prisma/client';
 
 import { RecipeDto } from '@recipes/dtos';
 import { PaprikaService } from './paprika._service';
-import { SyncService } from './providers/sync._provider';
 
 interface GetPaginatedRecipesParams {
   page?: number;
