@@ -17,6 +17,8 @@ const ImageSlider: React.FC = () => {
     '7.jpg',
     '8.jpg',
     '9.jpg',
+    '10.jpg',
+    '11.jpg',
   ];
   return (
     <>

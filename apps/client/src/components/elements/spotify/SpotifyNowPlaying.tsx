@@ -36,7 +36,7 @@ const SpotifyNowPlaying: React.FC = () => {
           <div className={`${styles.bar} bg-gray-400`}></div>
           <div className={`${styles.bar} bg-gray-400`}></div>
         </div>
-        <p className="text-xs color-gray-300">Now Playing</p>
+        <p className="text-xs color-gray-300">Now Cookin&apos;</p>
       </div>
     </div>
   );

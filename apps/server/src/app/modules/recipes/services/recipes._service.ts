@@ -20,7 +20,6 @@ export class RecipesService {
   constructor(
     private paprikaService: PaprikaService,
     private prisma: PrismaService,
-    private syncService: SyncService,
   ) {}
 
   async allDBRecipes(): Promise<Recipe[]> {
