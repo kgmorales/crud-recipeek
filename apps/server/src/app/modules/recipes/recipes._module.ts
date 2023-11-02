@@ -7,9 +7,10 @@ import { ControllersModule } from './controllers/controllers._module';
 import { BooleanConversionMiddleware } from './middleware/boolean-conversion._middleware';
 
 //* Services
+import { SharedModule } from '../shared/shared._module';
 import { ServicesModule } from './services/services._module';
 
-const imports = [ControllersModule, ServicesModule];
+const imports = [ControllersModule, SharedModule, ServicesModule];
 
 @Module({
   imports,
