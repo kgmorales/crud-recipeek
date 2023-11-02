@@ -5,8 +5,9 @@ import { PageService } from './page._service';
 import { RecipesService } from './recipes._service';
 
 import { ProvidersModule } from './providers/providers._module';
+import { SharedModule } from '@modules/shared/shared._module';
 
-const imports = [ProvidersModule];
+const imports = [SharedModule, ProvidersModule];
 
 const services = [PageService, PaprikaService, RecipesService];
 

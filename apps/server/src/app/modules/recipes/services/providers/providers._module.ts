@@ -6,6 +6,8 @@ import { SyncService } from './sync._provider';
 import { PaprikaApiService } from './paprika-api._provider';
 import { ScrapeService } from './scrape._provider';
 
+import { SharedModule } from '@modules/shared/shared._module';
+
 const providers = [
   PaprikaAuthService,
   SyncService,
@@ -14,7 +16,7 @@ const providers = [
 ];
 
 @Module({
-  imports: [ScheduleModule.forRoot()],
+  imports: [ScheduleModule.forRoot(), SharedModule],
   providers,
   exports: providers,
 })
