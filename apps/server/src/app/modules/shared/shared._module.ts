@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 
 import { ServicesModule } from './services/services._module';
 
-const imports = [ServicesModule];
+const modules = [ServicesModule];
 
 @Module({
-  imports: [...imports],
+  imports: [...modules],
+  exports: [...modules],
 })
 export class SharedModule {}

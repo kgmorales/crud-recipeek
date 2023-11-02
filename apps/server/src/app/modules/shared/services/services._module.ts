@@ -13,7 +13,7 @@ const services = [PrismaService];
 
 @Module({
   // imports: imports,
-  providers: services,
+  providers: [...services],
   exports: [...services],
 })
 export class ServicesModule {}
