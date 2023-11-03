@@ -1,10 +1,10 @@
 // useUpdateRecipeCache.ts
 import { useQueryClient } from '@tanstack/react-query';
 import { Recipe } from '@prisma/client';
+import { masterRecipesKey } from '@constants/master-recipe-key';
 
 export const useUpdateRecipeCache = () => {
   const queryClient = useQueryClient();
-  const masterRecipesKey = 'masterRecipes'; // Your master cache key
 
   const updateRecipeCache = (newRecipes: Recipe[]) => {
     queryClient.setQueryData<Recipe[]>(

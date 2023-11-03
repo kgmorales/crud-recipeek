@@ -10,13 +10,23 @@ export async function fetchSearchResults(
     exclude: excludeUids.join(','),
   }).toString();
 
-  const response = await fetch(
-    `http://localhost:8080/search/recipes?${queryParams}`,
-  );
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/search/recipes?${queryParams}`,
+    );
 
-  console.log({ response });
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new TypeError("Oops, we haven't got JSON!");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching search results:', error);
+    throw error; // Re-throw the error to be handled by the caller
   }
-  return response.json();
 }

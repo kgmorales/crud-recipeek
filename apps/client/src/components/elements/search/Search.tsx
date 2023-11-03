@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useSearchRecipes } from '@hooks/useSearch'; // Update with the correct path
-import { Recipe } from '@prisma/client'; // Assuming this is the correct path to your Recipe type
-import debounce from '@clientUtils/debounce'; // Update with the correct path to your debounce utility
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSearchRecipes } from '@hooks/useSearch';
+import { Recipe } from '@prisma/client';
+import debounce from '@clientUtils/debounce'; // Ensure this is the correct path
 
 const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const { results, search } = useSearchRecipes();
-  console.log({ searchTerm, results });
+  const { results, search } = useSearchRecipes(searchTerm);
 
-  // Define the debounced function
-  const debouncedSearch = debounce((query: string) => {
-    search(query);
-  }, 300);
+  // Create a debounced version of the search function
+  const debouncedSearch = useCallback(
+    debounce((query: string) => {
+      search(query);
+    }, 300),
+    [],
+  );
 
   // Event handler for input changes
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
