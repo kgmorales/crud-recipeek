@@ -32,6 +32,7 @@
       "@constants/*": ["apps/client/src/constants/*"],
       "@contexts/*": ["apps/client/src/contexts/*"],
       "@enums/*": ["apps/client/src/enums/*"],
+      "@hooks/*": ["apps/client/src/hooks/*"],
       "@pages/*": ["apps/client/src/pages/*"],
       "@public/*": ["apps/client/public/*"],
       "@styles/*": ["apps/client/src/styles/scss/*"],

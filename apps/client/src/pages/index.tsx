@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Layout from '@components/layout/Layout';
 import Hero from '@components/sections/Hero';
-import FeaturedRecipes from '../components/sections/featured-recipes/FeaturedRecipes';
+import FeaturedRecipes from '@components/sections/featured-recipes/FeaturedRecipes';
 import { useHome } from '../hooks/useHome';
 
 const Home: React.FC = (props) => {

@@ -1,12 +1,11 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { fetchCategories } from '@api/recipes/categories.routes';
 import { fetchHome } from '@api/pages/home.routes';
-import { addCategoryToRecipe } from '@clientUtils/addCategoryNameToRecipe';
-import { Recipe } from '@prisma/client';
+import { addCategoryToRecipe } from '@clientUtils/addCategoryToRecipe';
+import { useUpdateRecipeCache } from '@hooks/useUpdateRecipeCache';
 
 export const useHome = () => {
-  const queryClient = useQueryClient();
-
+  const updateRecipeCache = useUpdateRecipeCache();
   const { data: categories, ...categoriesQueryInfo } = useQuery(
     ['categories'],
     fetchCategories,
@@ -14,17 +13,17 @@ export const useHome = () => {
 
   const { data: home, ...homeQueryInfo } = useQuery(['home'], fetchHome, {
     enabled: !!categories,
-    select: (home) => {
-      if (!categories) return home;
+    select: (homeData) => {
+      if (!categories) return homeData;
 
       return {
-        favorites: addCategoryToRecipe(home.favorites, categories),
-        recents: addCategoryToRecipe(home.recents, categories),
+        favorites: addCategoryToRecipe(homeData.favorites, categories),
+        recents: addCategoryToRecipe(homeData.recents, categories),
       };
     },
-    onSuccess: (data) => {
-      const combinedRecipes = combineLists(data.favorites, data.recents);
-      queryClient.setQueryData(['allRecipes'], combinedRecipes);
+    onSuccess: (homeData) => {
+      // Use the hook to update the cache with new recipes
+      updateRecipeCache([...homeData.favorites, ...homeData.recents]);
     },
   });
 
@@ -36,11 +35,4 @@ export const useHome = () => {
   };
 };
 
-const combineLists = (favorites: Recipe[], recents: Recipe[]) => {
-  const combined = [...favorites, ...recents];
-
-  const uniqueRecipes = [...new Set(combined.map((recipe) => recipe.id))].map(
-    (id) => combined.find((recipe) => recipe.id === id),
-  );
-  return uniqueRecipes;
-};
+export default useHome;
