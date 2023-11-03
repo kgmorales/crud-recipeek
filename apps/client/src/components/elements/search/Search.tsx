@@ -1,47 +1,29 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useSearchRecipes } from '@hooks/useSearch';
-import { Recipe } from '@prisma/client';
-import debounce from '@clientUtils/debounce'; // Ensure this is the correct path
+// Search.tsx
+import React, { useState } from 'react';
+import { useSearchRecipes } from '@hooks/useSearch'; // Update with the correct path
+import debounce from '@clientUtils/debounce'; // Ensure this is the correct path to your debounce function
 
-const Search: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const { results, search } = useSearchRecipes(searchTerm);
+const Search = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const { results, isLoading } = useSearchRecipes(searchTerm);
 
-  // Create a debounced version of the search function
-  const debouncedSearch = useCallback(
-    debounce((query: string) => {
-      search(query);
-    }, 300),
-    [],
-  );
+  // Debounce the search term input to limit the number of API calls
+  const debouncedSearch = debounce((newSearchTerm: string) => {
+    setSearchTerm(newSearchTerm);
+  }, 500); // Adjust the debounce time as needed
 
-  // Event handler for input changes
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    setSearchTerm(query);
-    debouncedSearch(query);
+    const newSearchTerm = event.target.value;
+    debouncedSearch(newSearchTerm);
   };
-
-  // Clean up the debounce function on component unmount
-  useEffect(() => {
-    return () => {
-      debouncedSearch.cancel();
-    };
-  }, [debouncedSearch]);
-
+  console.log({ searchTerm, results });
   return (
     <div>
       <input
         type="text"
         placeholder="Search recipes..."
-        value={searchTerm}
         onChange={handleSearchChange}
       />
-      <div>
-        {results.map((recipe: Recipe) => (
-          <div key={recipe.uid}>{recipe.name}</div>
-        ))}
-      </div>
     </div>
   );
 };

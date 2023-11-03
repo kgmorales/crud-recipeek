@@ -7,6 +7,11 @@ import { Recipe } from '@prisma/client';
 export const useSearchRecipes = (searchTerm: string) => {
   const queryClient = useQueryClient();
 
+  // Immediately return an empty array if the search term is blank
+  if (searchTerm.trim() === '') {
+    return { results: [], isLoading: false, isError: false, error: null };
+  }
+
   // Get cached recipes or an empty array if none are cached
   const cachedRecipes: Recipe[] =
     queryClient.getQueryData([masterRecipesKey]) || [];
@@ -15,6 +20,7 @@ export const useSearchRecipes = (searchTerm: string) => {
   const cachedResults = cachedRecipes.filter((recipe) =>
     recipe.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
+
   // Map to an array of UIDs to exclude from the server search
   const uidsToExclude = cachedResults.map((recipe) => recipe.uid);
 
@@ -23,10 +29,23 @@ export const useSearchRecipes = (searchTerm: string) => {
     ['searchResults', searchTerm, uidsToExclude],
     () => fetchSearchResults(searchTerm, uidsToExclude),
     {
-      // This option will keep the previous data while fetching new data
       keepPreviousData: true,
-      // Only execute the query if the searchTerm is not empty
-      enabled: searchTerm.trim() !== '',
+      onSuccess: (newData) => {
+        // Update the master cache with the new data
+        queryClient.setQueryData([masterRecipesKey], (oldData) => {
+          // Cast oldData to the correct type
+          const existingData = oldData as Recipe[] | undefined;
+          // Combine existing data with the new data, avoiding duplicates
+          const combinedData = existingData
+            ? [...existingData, ...newData]
+            : newData;
+          // Remove duplicates, if any, based on the unique identifier (uid)
+          const uniqueData = Array.from(
+            new Map(combinedData.map((item) => [item.uid, item])).values(),
+          );
+          return uniqueData;
+        });
+      },
     },
   );
 
