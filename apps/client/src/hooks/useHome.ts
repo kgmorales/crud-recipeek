@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchCategories } from '@api/recipes/categories.routes';
 import { fetchHome } from '@api/pages/home.routes';
-import { addCategoryToRecipe } from '@utils/addCategoryNameToRecipe';
+import { addCategoryToRecipe } from '@clientUtils/addCategoryNameToRecipe';
 import { Recipe } from '@prisma/client';
 
 export const useHome = () => {

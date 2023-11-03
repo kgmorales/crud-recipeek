@@ -1,6 +1,6 @@
 // components/Search.tsx
 
-import { debounce } from '@utils/debounce';
+import { debounce } from '@clientUtils/debounce';
 import React, { useState, useEffect } from 'react';
 
 function Search() {

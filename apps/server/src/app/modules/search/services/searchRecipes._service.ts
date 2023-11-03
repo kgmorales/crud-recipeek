@@ -7,7 +7,7 @@ export class SearchRecipesService {
   constructor(private prisma: PrismaService) {}
 
   async searchRecipes(searchTerm: string): Promise<Recipe[]> {
-    return this.prisma.client.recipe.findMany({
+    const recipes = await this.prisma.client.recipe.findMany({
       where: {
         OR: [
           {
@@ -25,5 +25,8 @@ export class SearchRecipesService {
         ],
       },
     });
+
+    // Prisma will return an empty array if no records are found
+    return recipes;
   }
 }

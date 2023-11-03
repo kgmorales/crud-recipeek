@@ -4,10 +4,7 @@ import { PaprikaConfig } from '@prisma/client';
 
 import { PrismaService } from '@modules/shared/services/prisma._service';
 import { paprikaBaseHeaders } from '@modules/recipes/constants';
-import {
-  getErrorMessage,
-  toErrorWithMessage,
-} from '@modules/recipes/types/error';
+import { getErrorMessage, toErrorWithMessage } from '@serverUtils/error';
 
 const baseURL = 'https://www.paprikaapp.com/api/v2';
 

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Layout from '../components/layout/Layout';
 import Pagination from '../components/elements/Pagination';
 import PopularCategories from '../components/sections/PopularCategories';
-import data from '@utils/blogData3';
+import data from '@clientUtils/blogData3';
 import SearchHeader from '../../private/Sections/SearchHeader';
 
 export default function Archive5() {

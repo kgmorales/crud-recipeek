@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import data from '@utils/blogData2';
+import data from '@clientUtils/blogData2';
 
 const RecentPosts3 = () => {
   return (

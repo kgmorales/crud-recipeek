@@ -26,16 +26,17 @@
   },
 
   "material-icon-theme.folders.associations": {
+    "blog": "Meta",
     "controllers": "public",
     "directives": "functions",
     "dtos": "tasks",
     "enums": "content",
     "features": "middleware",
-    "schemas": "meta",
     "interfaces": "context",
     "providers": "mjml",
-    "blog": "Meta",
     "recipes": "Examples",
+    "schemas": "meta",
+    "search": "review",
     "users": "Guard"
   },
   "material-icon-theme.files.associations": {

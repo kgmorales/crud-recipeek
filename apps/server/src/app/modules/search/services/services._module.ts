@@ -7,7 +7,7 @@ const imports = [SharedModule];
 const services = [SearchRecipesService];
 
 @Module({
-  imports: imports,
+  imports,
   providers: [...services],
   exports: [...services],
 })

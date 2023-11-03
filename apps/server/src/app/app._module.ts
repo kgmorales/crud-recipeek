@@ -2,10 +2,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CacheModule } from '@nestjs/cache-manager';
 import { PrismaClient } from '@prisma/client';
+
 // * Modules
+// import { BlogModule } from '@modules/blog/blog._module';
 import { RecipesModule } from '@modules/recipes/recipes._module';
-import { BlogModule } from '@modules/blog/blog._module';
+import { SearchModule } from '@modules/search/search._module';
 import { SharedModule } from '@modules/shared/shared._module';
+
 //? Config
 import configuration from './config/config';
 import { JwtModule } from '@nestjs/jwt';
@@ -32,8 +35,9 @@ import { PassportModule } from '@nestjs/passport';
         };
       },
     }),
-    SharedModule,
     RecipesModule,
+    SearchModule,
+    SharedModule,
   ],
   providers: [
     {

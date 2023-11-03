@@ -36,7 +36,8 @@
       "@public/*": ["apps/client/public/*"],
       "@styles/*": ["apps/client/src/styles/scss/*"],
       "@types": ["apps/client/src/types"],
-      "@utils/*": ["apps/client/src/utils/*"],
+      "@clientUtils/*": ["apps/client/src/utils/*"],
+      "@serverUtils/*": ["apps/server/src/app/utils/*"],
       "@modules/*": ["apps/server/src/app/modules/*"],
       "@recipes/*": ["apps/server/src/app/modules/recipes/*"],
       "@server/*": ["apps/server/src/app/*"]

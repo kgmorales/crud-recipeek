@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import data from '@utils/blogData';
+import data from '@clientUtils/blogData';
 import Pagination from '@components/elements/Pagination';
 import Image from 'next/image';
 

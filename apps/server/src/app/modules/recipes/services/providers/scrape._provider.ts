@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { spawn } from 'child_process';
 import { createHash, randomUUID } from 'crypto';
 
-import { cleanScrapedRecipe } from '@server/utils';
+import { cleanScrapedRecipe } from '@serverUtils/scrapeCleaner';
 import { emptyRecipe, matchPaprikaKeys } from '@recipes/constants';
 import { Recipe, ScrapedRecipe } from '@prisma/client';
 
@@ -27,7 +27,7 @@ export class ScrapeService {
   }
 
   private async setScrapeToRecipeModel(
-    scrapedRecipe: ScrapedRecipe
+    scrapedRecipe: ScrapedRecipe,
   ): Promise<Recipe> {
     const isEmpty = (obj: Record<string, string>) =>
       Object.keys(obj).length === 0;
@@ -81,7 +81,7 @@ export class ScrapeService {
     const rawScrapedRecipe = await this.scrapeByUrl(url);
 
     const newRecipe = await this.setScrapeToRecipeModel(
-      JSON.parse(rawScrapedRecipe)
+      JSON.parse(rawScrapedRecipe),
     );
 
     return newRecipe || null;
