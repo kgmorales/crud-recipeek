@@ -1,44 +1,43 @@
-// components/Search.tsx
+// Search.tsx
+import React, { useState, useCallback } from 'react';
+import { useSearchRecipes } from '@hooks/useSearch';
+import { Recipe } from '@prisma/client';
+import debounce from '@clientUtils/debounce'; // Ensure this is the correct path
 
-import { debounce } from '@clientUtils/debounce';
-import React, { useState, useEffect } from 'react';
+const Search: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const { results, search } = useSearchRecipes();
 
-function Search() {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
+  // Define the debounced search function
+  const debouncedSearch = useCallback(
+    debounce((query: string) => {
+      search(query);
+    }, 300),
+    [search],
+  );
 
-  // Debounce the search function
-  const debouncedSearch = debounce((query) => {
-    if (query) {
-      fetch(`/api/search?query=${query}`)
-        .then((response) => response.json())
-        .then((data) => setResults(data));
-    } else {
-      setResults([]);
-    }
-  }, 300); // 300ms delay
-
-  useEffect(() => {
+  // Event handler for input changes
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value;
+    setSearchTerm(query);
     debouncedSearch(query);
-    // Cancel the debounce on useEffect cleanup.
-    return debouncedSearch.cancel;
-  }, [query]);
+  };
 
   return (
     <div>
       <input
         type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search for recipes..."
+        placeholder="Search recipes..."
+        value={searchTerm}
+        onChange={handleSearchChange}
       />
       <div>
-        {results.map((result) => (
-          <div key={result.id}>{result.name}</div>
+        {results.map((recipe: Recipe) => (
+          <div key={recipe.uid}>{recipe.name}</div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default Search;

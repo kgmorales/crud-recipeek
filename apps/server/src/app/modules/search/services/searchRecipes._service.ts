@@ -6,27 +6,32 @@ import { Recipe } from '@prisma/client';
 export class SearchRecipesService {
   constructor(private prisma: PrismaService) {}
 
-  async searchRecipes(searchTerm: string): Promise<Recipe[]> {
+  async searchRecipes(
+    searchTerm: string,
+    excludeUids: string[],
+  ): Promise<Recipe[]> {
     const recipes = await this.prisma.client.recipe.findMany({
       where: {
-        OR: [
+        AND: [
           {
-            name: {
-              contains: searchTerm,
-              mode: 'insensitive', // Case-insensitive
+            uid: {
+              notIn: excludeUids,
             },
           },
           {
-            uid: {
-              contains: searchTerm,
-              mode: 'insensitive', // Case-insensitive
-            },
+            OR: [
+              {
+                name: {
+                  contains: searchTerm,
+                  mode: 'insensitive', // Case-insensitive
+                },
+              },
+            ],
           },
         ],
       },
     });
 
-    // Prisma will return an empty array if no records are found
     return recipes;
   }
 }
