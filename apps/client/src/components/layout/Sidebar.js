@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import data from '../../utils/blogData2';
 import comments from '../../utils/commentsData';
-import gallery from '../../utils/instagramData';
 
 const Sidebar = ({ openClass }) => {
   return (

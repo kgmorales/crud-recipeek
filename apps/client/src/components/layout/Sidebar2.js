@@ -4,7 +4,7 @@ import comments from '../../utils/commentsData';
 import gallery from '../../utils/instagramData';
 
 const Sidebar2 = ({ openClass }) => {
-	return (
+  return (
     <>
       <div className="sidebar">
         <div className="box-sidebar bg-gray-850 border-gray-800">

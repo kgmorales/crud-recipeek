@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { PrismaService } from './prisma._service';
+import { SearchService } from '../../search/services/searchRecipes._service';
 // import { PageService } from './page._service';
 // import { RecipesService } from './recipes._service';
 
@@ -9,7 +10,7 @@ import { PrismaService } from './prisma._service';
 // const imports = [ProvidersModule];
 
 // const services = [PageService, PaprikaService, RecipesService];
-const services = [PrismaService];
+const services = [PrismaService, SearchService];
 
 @Module({
   // imports: imports,

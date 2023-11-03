@@ -19,10 +19,10 @@ export default function Hero() {
           The Morales Family
         </h1>
         <p className="color-gray-300">
-          Welcome to our family recipe book. As a working mom with two eager
-          toddler sous-chefs by my side, our kitchen is always buzzing with
-          creativity, disaster, and laughter. Our style consists of meals that
-          consider busy schedules, toddler health, and flavor.
+          Welcome to our family recipe collection. As a working mom with two
+          eager toddler sous-chefs by my side, our kitchen is always buzzing
+          with creativity, disaster, and laughter. Our style consists of meals
+          that consider busy schedules, toddler health, and flavor.
         </p>
         <p className="color-gray-300">
           This blog is our love letter to them, a collection of recipes,
