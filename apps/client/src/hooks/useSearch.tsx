@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Recipe } from '@prisma/client'; // Ensure this is the correct path to your Recipe type
-import { masterRecipesKey } from '@constants/master-recipe-key';
 
 // Define a type for the return value of the hook
 interface UseSearchRecipesReturn {
@@ -16,8 +15,7 @@ export const useSearchRecipes = (): UseSearchRecipesReturn => {
 
   const search = async (searchTerm: string) => {
     // Get cached recipes or an empty array if none are cached
-    const cachedRecipes: Recipe[] =
-      queryClient.getQueryData([masterRecipesKey]) || [];
+    const cachedRecipes: Recipe[] = queryClient.getQueryData(['recipes']) || [];
 
     // Filter cached recipes that include the search term
     const cachedResults = cachedRecipes.filter((recipe) =>

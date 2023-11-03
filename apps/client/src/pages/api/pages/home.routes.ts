@@ -7,9 +7,9 @@ export async function fetchHome(): Promise<Home> {
       throw new Error('Network response was not ok ' + response.statusText);
     }
 
-    const data: Home = await response.json();
-    console.log({ data });
-    return data;
+    const home: Home = await response.json();
+    console.log({ home });
+    return home;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('Error fetching all recipes:', error);

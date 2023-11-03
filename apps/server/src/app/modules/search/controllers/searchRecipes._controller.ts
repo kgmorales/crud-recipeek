@@ -10,7 +10,7 @@ export class SearchRecipesController {
   async search(
     @Query('query') query: string,
     @Query('exclude') exclude: string,
-  ): Promise<Recipe[]> {
+  ): Promise<Recipe[] | []> {
     // Split the exclude query parameter into an array of UIDs, if provided
     const excludeUids = exclude ? exclude.split(',') : [];
     const results = await this.searchRecipesService.searchRecipes(
