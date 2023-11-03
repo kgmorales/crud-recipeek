@@ -1,25 +1,23 @@
-// useSearchRecipes.ts
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchSearchResults } from '@api/search/search.routes'; // Update with the correct path
-import { masterRecipesKey } from '@constants/master-recipe-key'; // Ensure this is the correct path to your constant
+import { fetchSearchResults } from '@api/search/search.routes';
+import { masterRecipesKey } from '@constants/master-recipe-key';
 import { Recipe } from '@prisma/client';
+import { useUpdateRecipeCache } from './useUpdateRecipeCache'; // Update with the correct path
 
 export const useSearchRecipes = (searchTerm: string) => {
   const queryClient = useQueryClient();
-
-  // Immediately return an empty array if the search term is blank
-  if (searchTerm.trim() === '') {
-    return { results: [], isLoading: false, isError: false, error: null };
-  }
+  const updateRecipeCache = useUpdateRecipeCache();
 
   // Get cached recipes or an empty array if none are cached
   const cachedRecipes: Recipe[] =
     queryClient.getQueryData([masterRecipesKey]) || [];
 
   // Filter cached recipes that include the search term
-  const cachedResults = cachedRecipes.filter((recipe) =>
-    recipe.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  const cachedResults = searchTerm.trim()
+    ? cachedRecipes.filter((recipe) =>
+        recipe.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      )
+    : [];
 
   // Map to an array of UIDs to exclude from the server search
   const uidsToExclude = cachedResults.map((recipe) => recipe.uid);
@@ -29,22 +27,13 @@ export const useSearchRecipes = (searchTerm: string) => {
     ['searchResults', searchTerm, uidsToExclude],
     () => fetchSearchResults(searchTerm, uidsToExclude),
     {
+      // This option will keep the previous data while fetching new data
       keepPreviousData: true,
-      onSuccess: (newData) => {
-        // Update the master cache with the new data
-        queryClient.setQueryData([masterRecipesKey], (oldData) => {
-          // Cast oldData to the correct type
-          const existingData = oldData as Recipe[] | undefined;
-          // Combine existing data with the new data, avoiding duplicates
-          const combinedData = existingData
-            ? [...existingData, ...newData]
-            : newData;
-          // Remove duplicates, if any, based on the unique identifier (uid)
-          const uniqueData = Array.from(
-            new Map(combinedData.map((item) => [item.uid, item])).values(),
-          );
-          return uniqueData;
-        });
+      // Only execute the query if the searchTerm is not empty
+      enabled: searchTerm.trim() !== '',
+      // On success, update the cache with the new recipes
+      onSuccess: (newRecipes) => {
+        updateRecipeCache(newRecipes);
       },
     },
   );

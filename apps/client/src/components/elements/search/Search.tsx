@@ -5,7 +5,7 @@ import debounce from '@clientUtils/debounce'; // Ensure this is the correct path
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { results, isLoading } = useSearchRecipes(searchTerm);
+  const { results } = useSearchRecipes(searchTerm);
 
   // Debounce the search term input to limit the number of API calls
   const debouncedSearch = debounce((newSearchTerm: string) => {

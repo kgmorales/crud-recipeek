@@ -23,14 +23,6 @@ interface Link {
   key: number;
 }
 
-const tags: Tag[] = [
-  { href: '#', label: 'Travel', key: 1 },
-  { href: '#', label: 'Tech', key: 2 },
-  { href: '#', label: 'Movie', key: 3 },
-  { href: '#', label: 'Lifestyle', key: 4 },
-  { href: '#', label: 'Sport', key: 5 },
-];
-
 const navLinks: Link[] = [
   { href: '/', label: 'Home', className: 'active', key: 1 },
   { href: '/about', label: 'About', className: 'color-gray-300', key: 2 },
@@ -45,10 +37,6 @@ const Header: React.FC<HeaderProps> = ({
   openClass,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isToggled, setToggled] = useState(false);
-
-  // Function to toggle the value of 'isToggled'
-  const toggleTrueFalse = () => setToggled(!isToggled);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -125,40 +113,7 @@ const Header: React.FC<HeaderProps> = ({
             </div>
             <div className="header-right text-end">
               <Search />
-              <Link
-                className="btn btn-search pr-4"
-                href="#"
-                onClick={toggleTrueFalse}
-              />
               <SwitchButton />
-              <div
-                className={
-                  isToggled
-                    ? 'form-search p-20 d-block'
-                    : ' form-search p-20 d-none'
-                }
-              >
-                <form action="#">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Search"
-                  />
-                  <input className="btn-search-2" />
-                </form>
-                <div className="popular-keywords text-start mt-20">
-                  <p className="mb-10 color-white">Popular tags:</p>
-                  {tags.map((tag) => (
-                    <Link
-                      key={tag.key}
-                      href={tag.href}
-                      className="color-gray-300 mr-10 font-xs"
-                    >
-                      #{tag.label},
-                    </Link>
-                  ))}
-                </div>
-              </div>
               <Link
                 className="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow"
                 href="/page-login"
