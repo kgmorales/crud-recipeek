@@ -1,47 +1,63 @@
+// useSearch.ts
+import { useState, useEffect, useMemo } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchSearchResults } from '@api/search/search.routes';
-import { masterRecipesKey } from '@constants/master-recipe-key';
+import { fetchSearchResults } from '../pages/api/search/search.routes'; // Adjust the import path as necessary
+import { masterRecipesKey } from '@constants/master-recipe-key'; // Adjust the import path as necessary
 import { Recipe } from '@prisma/client';
-import { useUpdateRecipeCache } from './useUpdateRecipeCache'; // Update with the correct path
+import { useUpdateRecipeCache } from './useUpdateRecipeCache'; // Adjust the import path as necessary
 
 const useSearch = (searchTerm: string) => {
   const queryClient = useQueryClient();
   const updateRecipeCache = useUpdateRecipeCache();
 
-  // Get cached recipes or an empty array if none are cached
-  const cachedRecipes: Recipe[] =
-    queryClient.getQueryData([masterRecipesKey]) || [];
+  // Memoize the retrieval of all cached recipes with a type assertion
+  const allCachedRecipes = useMemo(() => {
+    // Type assertion as Recipe[]
+    return queryClient.getQueryData<Recipe[]>([masterRecipesKey]) || [];
+  }, [queryClient]);
 
-  // Filter cached recipes that include the search term
-  const cachedResults = searchTerm.trim()
-    ? cachedRecipes.filter((recipe) =>
-        recipe.name.toLowerCase().includes(searchTerm.toLowerCase()),
-      )
-    : [];
+  // Memoize the filtered cached results
+  const cachedResults = useMemo(() => {
+    if (!searchTerm.trim()) return allCachedRecipes; // Return all if no search term
+    return allCachedRecipes.filter((recipe) =>
+      recipe.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+  }, [searchTerm, allCachedRecipes]);
 
-  // Map to an array of UIDs to exclude from the server search
-  const uidsToExclude = cachedResults.map((recipe) => recipe.uid);
+  // State to store combined results
+  const [combinedResults, setCombinedResults] = useState<Recipe[]>([]);
 
-  // Use the useQuery hook to fetch search results
+  // Fetch search results with react-query
   const { data, isLoading, isError, error } = useQuery(
-    ['searchResults', searchTerm, uidsToExclude],
-    () => fetchSearchResults(searchTerm, uidsToExclude),
+    ['searchResults', searchTerm],
+    () =>
+      fetchSearchResults(
+        searchTerm,
+        cachedResults.map((recipe) => recipe.uid),
+      ),
     {
-      // This option will keep the previous data while fetching new data
       keepPreviousData: true,
-      // Only execute the query if the searchTerm is not empty
       enabled: searchTerm.trim() !== '',
-      // On success, update the cache with the new recipes
       onSuccess: (newRecipes) => {
+        // Update cache with new recipes
         updateRecipeCache(newRecipes);
+      },
+      onError: (err) => {
+        // Handle errors, for example, by logging or setting an error state
+        console.error('Error fetching search results:', err);
       },
     },
   );
 
-  // Combine cached results with fetched results
-  const results = [...cachedResults, ...(data || [])];
+  // Effect to combine results only after fetching is complete
+  useEffect(() => {
+    // Only update combined results if not loading and no error
+    if (!isLoading && !isError) {
+      setCombinedResults([...cachedResults, ...(data || [])]);
+    }
+  }, [isLoading, isError, cachedResults, data]);
 
-  return { results, isLoading, isError, error };
+  return { results: combinedResults, isLoading, isError, error };
 };
 
 export default useSearch;

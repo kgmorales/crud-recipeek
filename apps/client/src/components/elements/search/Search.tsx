@@ -11,14 +11,12 @@ const Search: React.FC = () => {
   // Create a debounced function to update the search term
   const debouncedSetSearchTerm = debounce((newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);
-  }, 500);
+  }, 800);
 
   // Event handler that invokes the debounced function
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     debouncedSetSearchTerm(event.target.value);
   };
-
-  console.log({ searchTerm, results });
 
   // Render the search input
   return (
