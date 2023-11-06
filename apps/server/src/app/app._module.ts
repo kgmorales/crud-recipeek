@@ -17,7 +17,7 @@ import { PassportModule } from '@nestjs/passport';
 @Module({
   imports: [
     PassportModule,
-    CacheModule.register({ isGlobal: true }),
+    CacheModule.register({ isGlobal: true, ttl: 60 * 60 }),
     ConfigModule.forRoot({
       load: [configuration],
       isGlobal: true,

@@ -22,7 +22,6 @@ export const useUpdateRecipeCache = () => {
 
         // Convert the map back to an array
         const recipeList = Array.from(recipeMap.values());
-        console.log(recipeList);
 
         return recipeList;
       },
