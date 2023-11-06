@@ -10,12 +10,6 @@ interface HeaderProps {
   openClass: boolean;
 }
 
-interface Tag {
-  href: string;
-  label: string;
-  key: number;
-}
-
 interface Link {
   href: string;
   label: string;
