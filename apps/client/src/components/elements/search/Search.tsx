@@ -1,22 +1,26 @@
 // Search.tsx
 import React, { useState } from 'react';
-import { useSearchRecipes } from '@hooks/useSearch'; // Update with the correct path
-import debounce from '@clientUtils/debounce'; // Ensure this is the correct path to your debounce function
+import useSearch from '@hooks/useSearch'; // Update with the correct path
+import useDebounce from '@hooks/useDebounce'; // Update with the correct path to your useDebounce hook
 
-const Search = () => {
+const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { results } = useSearchRecipes(searchTerm);
+  const { results } = useSearch(searchTerm);
+  const debounce = useDebounce<(newSearchTerm: string) => void>();
 
-  // Debounce the search term input to limit the number of API calls
-  const debouncedSearch = debounce((newSearchTerm: string) => {
+  // Create a debounced function to update the search term
+  const debouncedSetSearchTerm = debounce((newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);
-  }, 500); // Adjust the debounce time as needed
+  }, 500);
 
+  // Event handler that invokes the debounced function
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newSearchTerm = event.target.value;
-    debouncedSearch(newSearchTerm);
+    debouncedSetSearchTerm(event.target.value);
   };
+
   console.log({ searchTerm, results });
+
+  // Render the search input
   return (
     <div>
       <input
@@ -24,6 +28,7 @@ const Search = () => {
         placeholder="Search recipes..."
         onChange={handleSearchChange}
       />
+      {/* Render search results or a loading indicator as needed */}
     </div>
   );
 };

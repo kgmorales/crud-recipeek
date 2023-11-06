@@ -3,27 +3,47 @@ import { fetchCategories } from '@api/recipes/categories.routes';
 import { fetchHome } from '@api/pages/home.routes';
 import { addCategoryToRecipe } from '@clientUtils/addCategoryToRecipe';
 import { useUpdateRecipeCache } from '@hooks/useUpdateRecipeCache';
+import { useMemo } from 'react';
+import { Home } from '../types/pages/home.types';
 
 export const useHome = () => {
   const updateRecipeCache = useUpdateRecipeCache();
+
   const { data: categories, ...categoriesQueryInfo } = useQuery(
     ['categories'],
     fetchCategories,
+    {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    },
   );
 
-  const { data: home, ...homeQueryInfo } = useQuery(['home'], fetchHome, {
-    enabled: !!categories,
-    select: (homeData) => {
-      if (!categories) return homeData;
+  const homeQueryKey = useMemo(
+    () => ['home', categories ? { categories } : {}],
+    [categories],
+  );
 
-      return {
-        favorites: addCategoryToRecipe(homeData.favorites, categories),
-        recents: addCategoryToRecipe(homeData.recents, categories),
-      };
-    },
+  const selectFunction = useMemo(() => {
+    return categories
+      ? (homeData: Home) => {
+          if (!homeData) return undefined; // Guard clause for undefined homeData
+          return {
+            favorites: addCategoryToRecipe(homeData.favorites, categories),
+            recents: addCategoryToRecipe(homeData.recents, categories),
+          };
+        }
+      : undefined;
+  }, [categories]);
+
+  const { data: home, ...homeQueryInfo } = useQuery(homeQueryKey, fetchHome, {
+    enabled: !!categories && !!selectFunction,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    select: selectFunction,
     onSuccess: (homeData) => {
-      // Use the hook to update the cache with new recipes
-      updateRecipeCache([...homeData.favorites, ...homeData.recents]);
+      if (homeData) {
+        // Guard clause for undefined homeData
+        const newRecipes = [...homeData.favorites, ...homeData.recents];
+        updateRecipeCache(newRecipes);
+      }
     },
   });
 

@@ -4,7 +4,7 @@ import { masterRecipesKey } from '@constants/master-recipe-key';
 import { Recipe } from '@prisma/client';
 import { useUpdateRecipeCache } from './useUpdateRecipeCache'; // Update with the correct path
 
-export const useSearchRecipes = (searchTerm: string) => {
+const useSearch = (searchTerm: string) => {
   const queryClient = useQueryClient();
   const updateRecipeCache = useUpdateRecipeCache();
 
@@ -43,3 +43,5 @@ export const useSearchRecipes = (searchTerm: string) => {
 
   return { results, isLoading, isError, error };
 };
+
+export default useSearch;
