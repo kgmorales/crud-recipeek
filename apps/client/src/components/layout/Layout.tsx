@@ -1,33 +1,28 @@
 import React, { useState, FC } from 'react';
-import Footer from '../layout/Footer';
-import Header from './Header';
-import MobileMenu from './MobileMenu';
+import Footer from '../layout/Footer'; // Adjust the import path as necessary
+import Header from './Header'; // Adjust the import path as necessary
+import MobileMenu from './MobileMenu'; // Adjust the import path as necessary
+import SearchResults from '@components/sections/search-results/SearchResults'; // Adjust the import path as necessary
+import { useSearchContext } from '@contexts/Search.context'; // Adjust the import path as necessary
 
 interface LayoutProps {
   children?: React.ReactNode;
 }
 
 const Layout: FC<LayoutProps> = ({ children }) => {
-  // State to control the 'openClass' CSS class
   const [openClass, setOpenClass] = useState<string>('');
+  const { results } = useSearchContext(); // Use the search context to get the results
 
   // Function to handle opening the mobile menu
   const handleOpen = () => {
-    // Add the "mobile-menu-active" class to the body element
     document.body.classList.add('mobile-menu-active');
-
-    // Set the 'openClass' state to "sidebar-visible"
     setOpenClass('sidebar-visible');
   };
 
   // Function to handle removing the mobile menu
   const handleRemove = () => {
-    // Check if the 'openClass' state is "sidebar-visible"
     if (openClass === 'sidebar-visible') {
-      // Remove the "mobile-menu-active" class from the body element
       document.body.classList.remove('mobile-menu-active');
-
-      // Reset the 'openClass' state to an empty string
       setOpenClass('');
     }
   };
@@ -45,7 +40,12 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       />
 
       <MobileMenu openClass={openClass} />
-      <main className="main">{children}</main>
+
+      <main className="main">
+        {/* Conditional rendering based on search results */}
+        {results && results.length > 0 ? <SearchResults /> : children}
+      </main>
+
       <Footer />
     </>
   );

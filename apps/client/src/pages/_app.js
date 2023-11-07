@@ -4,6 +4,7 @@ import '../styles/scss/style.scss';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { ThemeProvider } from '../contexts/Theme.context';
+import { SearchProvider } from '@contexts/Search.context';
 
 const queryClient = new QueryClient();
 
@@ -32,7 +33,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <Component {...pageProps} />
+        <SearchProvider>
+          <Component {...pageProps} />
+        </SearchProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
