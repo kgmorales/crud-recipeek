@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo, useContext } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Recipe } from '@prisma/client';
+import { SearchContext } from '@contexts';
 import { fetchSearchResults } from '../pages/api/search/search.routes';
 import { masterRecipesKey } from '@constants/master-recipe-key';
-import { useUpdateRecipeCache } from './useUpdateRecipeCache';
-import { SearchContext } from '@contexts';
+import { useUpdateRecipeCache } from '@hooks';
 
 export const useSearch = (searchTerm: string) => {
   const queryClient = useQueryClient();
