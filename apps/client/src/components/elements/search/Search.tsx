@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchContext } from '@contexts';
 import { useSearch, useDebounce } from '@hooks';
 
-const Search: React.FC = () => {
+export const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const { setResults } = useSearchContext();
   const { results } = useSearch(searchTerm);
@@ -35,5 +35,3 @@ const Search: React.FC = () => {
     </div>
   );
 };
-
-export default Search;

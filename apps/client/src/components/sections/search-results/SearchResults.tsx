@@ -23,7 +23,7 @@ const SearchResults: React.FC = () => {
           <div className={styles.cardContainer}>
             {/* Map over the results and render them */}
             {cardInfo?.map((recipe: FeaturedCardData, i) => (
-              <div key={recipe.id}>
+              <div key={recipe.uid}>
                 <FeaturedCard cardInfo={recipe} />
               </div>
             ))}

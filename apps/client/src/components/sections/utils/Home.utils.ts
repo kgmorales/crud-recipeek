@@ -10,7 +10,7 @@ export function processRecipeForCard(recipes?: Recipe[]) {
   return recipes?.map((recipe) => {
     return {
       description: recipe.description,
-      id: recipe.id,
+      uid: recipe.uid,
       image_url: recipe.image_url,
       ingredientsCount: ingredientsCount(recipe.ingredients),
       name: recipe.name,

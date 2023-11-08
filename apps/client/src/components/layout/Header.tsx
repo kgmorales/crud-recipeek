@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import SwitchButton from '../elements/SwitchButton';
 import Image from 'next/image';
-// import Search from '@components/elements/search/Search';
+// import { Search } from '@components/elements/search/Search';
 
 interface HeaderProps {
   handleOpen: () => void;

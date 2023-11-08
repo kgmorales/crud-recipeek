@@ -7,7 +7,7 @@ export type Home = {
 
 export type FeaturedCardData = {
   description?: Recipe['description'];
-  id?: Recipe['uid'];
+  uid?: Recipe['uid'];
   image_url?: Recipe['image_url'];
   ingredientsCount?: number;
   name?: Recipe['name'];

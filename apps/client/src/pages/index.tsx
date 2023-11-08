@@ -4,10 +4,11 @@ import Head from 'next/head';
 import Layout from '@components/layout/Layout';
 import Hero from '@components/sections/Hero';
 import FeaturedRecipes from '@components/sections/featured-recipes/FeaturedRecipes';
-import { useHome } from '../hooks/useHome.hook';
+import { useHome } from '@hooks';
 
-const Home: React.FC = (props) => {
+const Home: React.FC = () => {
   const { home } = useHome();
+  console.log({ home });
 
   return (
     <>
