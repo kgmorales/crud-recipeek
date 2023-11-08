@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from '@clientUtils/queryClient';
+
+import { SearchProvider } from '../contexts/Search';
+import { ThemeProvider } from '../contexts/Theme';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import '../styles/scss/style.scss';
-import { SearchProvider } from '../contexts/Search';
-import { ThemeProvider } from '../contexts/Theme';
-
-const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }) {
   // useEffect to initialize the WOW.js library when the component mounts

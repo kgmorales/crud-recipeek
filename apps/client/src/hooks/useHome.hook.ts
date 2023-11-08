@@ -1,27 +1,27 @@
+import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCategories } from '@api/recipes/categories.routes';
 import { fetchHome } from '@api/pages/home.routes';
 import { addCategoryToRecipe } from '@clientUtils/addCategoryToRecipe';
-import { useUpdateRecipeCache } from '@hooks';
-import { useMemo } from 'react';
-import { Home } from '../types/pages/home.types';
+import { Home } from '@types';
 
 export const useHome = () => {
-  const { updateRecipeCache } = useUpdateRecipeCache();
+  // Fetch categories with React Query's useQuery hook
+  const categoriesQuery = useQuery({
+    queryKey: ['categories'],
+    queryFn: fetchCategories,
+  });
 
-  const { data: categories, ...categoriesQueryInfo } = useQuery(
-    ['categories'],
-    fetchCategories,
-    {
-      staleTime: Infinity,
-    },
-  );
+  // Destructure data and other query info from the categories query
+  const { data: categories, ...categoriesQueryInfo } = categoriesQuery;
 
+  // Memoize the query key for the home data
   const homeQueryKey = useMemo(
     () => ['home', categories ? { categories } : {}],
     [categories],
   );
 
+  // Memoize the select function to transform the data
   const selectFunction = useMemo(() => {
     return categories
       ? (homeData: Home) => {
@@ -34,19 +34,18 @@ export const useHome = () => {
       : undefined;
   }, [categories]);
 
-  const { data: home, ...homeQueryInfo } = useQuery(homeQueryKey, fetchHome, {
+  // Fetch home data with React Query's useQuery hook
+  const homeQuery = useQuery({
+    queryKey: homeQueryKey,
+    queryFn: fetchHome,
     enabled: !!categories && !!selectFunction,
-    staleTime: 5 * 60 * 1000, // 5 minutes
     select: selectFunction,
-    onSuccess: (homeData) => {
-      if (homeData) {
-        // Guard clause for undefined homeData
-        const newRecipes = [...homeData.favorites, ...homeData.recents];
-        updateRecipeCache(newRecipes);
-      }
-    },
   });
 
+  // Destructure data and other query info from the home query
+  const { data: home, ...homeQueryInfo } = homeQuery;
+
+  // Return the data and query information
   return {
     categories,
     home,
