@@ -8,7 +8,7 @@ import { useUpdateRecipeCache } from '@hooks';
 
 export const useSearch = (searchTerm: string) => {
   const queryClient = useQueryClient();
-  const updateRecipeCache = useUpdateRecipeCache();
+  const { updateRecipeCache } = useUpdateRecipeCache();
   const { setResults } = useContext(SearchContext);
 
   //* Get cached Recipes that have been saved into React Query.

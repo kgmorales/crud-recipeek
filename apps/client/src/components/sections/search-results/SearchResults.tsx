@@ -1,23 +1,24 @@
 // SearchResults.tsx
 import React from 'react';
-import { useSearchContext } from '@contexts/Search.context'; // Adjust the import path as necessary
-import styles from './SearchResults.module.scss'; // Adjust the import path as necessary
+import { useSearchContext } from '@contexts';
 import { processRecipeForCard } from '../utils/Home.utils';
 import FeaturedCard from '@components/elements/featured-card/FeaturedCard';
 import { FeaturedCardData } from '@types';
+import styles from './SearchResults.module.scss';
 
 const SearchResults: React.FC = () => {
-  const { results, searchTerm } = useSearchContext();
+  const { results } = useSearchContext();
   const cardInfo = processRecipeForCard(results);
 
-  // Check if the results array has data in it
+  // Check if the results array has searched recipes in it
   if (results && results.length > 0) {
     // If there are results, render the SearchResults component
     return (
       <div className="container">
         <div className="row mt-30">
           <h2 className="text-center color-gray-300 wow animate__animated animate__fadeInUp">
-            {searchTerm}
+            {/* {searchTerm} */}
+            test
           </h2>
           <div className={styles.cardContainer}>
             {/* Map over the results and render them */}

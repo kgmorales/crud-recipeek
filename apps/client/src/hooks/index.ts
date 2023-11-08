@@ -1,4 +1,4 @@
-export { useDebounce } from './useDebounce';
-export { useHome } from './useHome';
-export { useSearch } from './useSearch';
-export { useUpdateRecipeCache } from './useUpdateRecipeCache';
+export { useDebounce } from './useDebounce.hook';
+export { useHome } from './useHome.hook';
+export { useSearch } from './useSearch.hook';
+export { useUpdateRecipeCache } from './useUpdateRecipeCache.hook';

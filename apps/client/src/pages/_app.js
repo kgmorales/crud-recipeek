@@ -1,10 +1,9 @@
+import { useEffect } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import '../styles/scss/style.scss';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useEffect } from 'react';
-import { ThemeProvider } from '../contexts/Theme.context';
-import { SearchProvider } from '@contexts/Search.context';
+import { ThemeProvider, SearchProvider } from '@contexts';
 
 const queryClient = new QueryClient();
 

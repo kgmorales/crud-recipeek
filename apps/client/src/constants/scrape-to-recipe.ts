@@ -1,3 +1,8 @@
+/**
+ * This constant contains the mapping of the keys from the scraped recipe to the keys in the Paprika recipe.
+ * The properties are the scraped recipe properties, and the values on the right are the Paprika recipe properties.
+ * Commented out is already matched.
+ */
 export const matchPaprikaKeys: Record<string, string> = {
   // author: 'author',
   canonical_url: 'source_url',

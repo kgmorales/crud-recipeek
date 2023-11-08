@@ -1,9 +1,9 @@
 import React, { useState, FC } from 'react';
-import Footer from '../layout/Footer'; // Adjust the import path as necessary
-import Header from './Header'; // Adjust the import path as necessary
-import MobileMenu from './MobileMenu'; // Adjust the import path as necessary
+import Footer from '../layout/Footer';
+import Header from './Header';
+import MobileMenu from './MobileMenu';
 import SearchResults from '@components/sections/search-results/SearchResults'; // Adjust the import path as necessary
-import { useSearchContext } from '@contexts/Search.context'; // Adjust the import path as necessary
+import { useSearchContext } from '@contexts'; // Adjust the import path as necessary
 
 interface LayoutProps {
   children?: React.ReactNode;

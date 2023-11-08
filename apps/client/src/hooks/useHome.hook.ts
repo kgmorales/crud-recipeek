@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import { Home } from '../types/pages/home.types';
 
 export const useHome = () => {
-  const updateRecipeCache = useUpdateRecipeCache();
+  const { updateRecipeCache } = useUpdateRecipeCache();
 
   const { data: categories, ...categoriesQueryInfo } = useQuery(
     ['categories'],
