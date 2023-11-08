@@ -29,7 +29,7 @@
     "paths": {
       "@api/*": ["apps/client/src/pages/api/*"],
       "@components/*": ["apps/client/src/components/*"],
-      "@constants/*": ["apps/client/src/constants/*"],
+      "@constants": ["apps/client/src/constants"],
       "@contexts": ["apps/client/src/contexts"],
       "@enums/*": ["apps/client/src/enums/*"],
       "@hooks": ["apps/client/src/hooks"],

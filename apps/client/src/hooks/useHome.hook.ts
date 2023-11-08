@@ -1,56 +1,60 @@
-import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCategories } from '@api/recipes/categories.routes';
 import { fetchHome } from '@api/pages/home.routes';
 import { addCategoryToRecipe } from '@clientUtils/addCategoryToRecipe';
-import { Home } from '@types';
+import { useMemo } from 'react';
+import { Home } from '../types/pages/home.types';
+import { useUpdateRecipeCache } from '@hooks';
 
 export const useHome = () => {
-  // Fetch categories with React Query's useQuery hook
+  // Use the custom hook to get the update cache function
+  const { updateRecipeCache } = useUpdateRecipeCache();
+
+  // Query for categories
   const categoriesQuery = useQuery({
     queryKey: ['categories'],
     queryFn: fetchCategories,
   });
 
   // Destructure data and other query info from the categories query
-  const { data: categories, ...categoriesQueryInfo } = categoriesQuery;
+  const { data: categories } = categoriesQuery;
 
   // Memoize the query key for the home data
   const homeQueryKey = useMemo(
-    () => ['home', categories ? { categories } : {}],
+    () => ['home', categories ? { categories } : undefined],
     [categories],
   );
 
   // Memoize the select function to transform the data
-  const selectFunction = useMemo(() => {
+  const addCategoryMutation = useMemo(() => {
     return categories
-      ? (homeData: Home) => {
-          if (!homeData) return undefined; // Guard clause for undefined homeData
+      ? (data: Home) => {
           return {
-            favorites: addCategoryToRecipe(homeData.favorites, categories),
-            recents: addCategoryToRecipe(homeData.recents, categories),
+            favorites: addCategoryToRecipe(data.favorites, categories),
+            recents: addCategoryToRecipe(data.recents, categories),
           };
         }
       : undefined;
   }, [categories]);
 
-  // Fetch home data with React Query's useQuery hook
+  // Query for home data
   const homeQuery = useQuery({
     queryKey: homeQueryKey,
     queryFn: fetchHome,
-    enabled: !!categories && !!selectFunction,
-    select: selectFunction,
+    select: addCategoryMutation,
   });
 
-  // Destructure data and other query info from the home query
-  const { data: home, ...homeQueryInfo } = homeQuery;
+  if (homeQuery.data) {
+    const { favorites, recents } = homeQuery.data;
+    updateRecipeCache([...favorites, ...recents]);
+  }
 
   // Return the data and query information
   return {
-    categories,
-    home,
-    ...categoriesQueryInfo,
-    ...homeQueryInfo,
+    categories: categoriesQuery.data,
+    home: homeQuery.data,
+    ...homeQuery,
+    ...categoriesQuery,
   };
 };
 

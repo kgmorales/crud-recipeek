@@ -6,7 +6,6 @@ const plugins = [withNx];
 const nextConfig = {
   nx: { svgr: true },
   reactStrictMode: false,
-  revalidate: 0,
   sassOptions: {
     includePaths: [path.join(__dirname, '../client/src/styles/scss/base')],
   },

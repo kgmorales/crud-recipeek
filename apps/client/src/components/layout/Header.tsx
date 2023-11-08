@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import SwitchButton from '../elements/SwitchButton';
 import Image from 'next/image';
-import Search from '@components/elements/search/Search';
+// import Search from '@components/elements/search/Search';
 
 interface HeaderProps {
   handleOpen: () => void;
@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({
               </div>
             </div>
             <div className="header-right text-end">
-              <Search />
+              {/* <Search /> */}
               <SwitchButton />
               <Link
                 className="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow"

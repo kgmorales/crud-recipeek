@@ -2,8 +2,8 @@ import React, { useState, FC } from 'react';
 import Footer from '../layout/Footer';
 import Header from './Header';
 import MobileMenu from './MobileMenu';
-import SearchResults from '@components/sections/search-results/SearchResults'; // Adjust the import path as necessary
-import { useSearchContext } from '@contexts'; // Adjust the import path as necessary
+// import SearchResults from '@components/sections/search-results/SearchResults'; // Adjust the import path as necessary
+// import { useSearchContext } from '@contexts'; // Adjust the import path as necessary
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -11,7 +11,7 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   const [openClass, setOpenClass] = useState<string>('');
-  const { results } = useSearchContext(); // Use the search context to get the results
+  // const { results } = useSearchContext(); // Use the search context to get the results
 
   // Function to handle opening the mobile menu
   const handleOpen = () => {
@@ -43,7 +43,8 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 
       <main className="main">
         {/* Conditional rendering based on search results */}
-        {results && results.length > 0 ? <SearchResults /> : children}
+        {/* {results && results.length > 0 ? <SearchResults /> : children} */}
+        {children}
       </main>
 
       <Footer />
