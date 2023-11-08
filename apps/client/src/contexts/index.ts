@@ -1,2 +1,2 @@
-export { SearchContext, useSearchContext } from './Search.context';
-export { ThemeContext, useThemeContext } from './Theme.context';
+export { SearchContext, useSearchContext } from './Search';
+export { ThemeContext, useThemeContext } from './Theme';

@@ -3,7 +3,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import '../styles/scss/style.scss';
-import { ThemeProvider, SearchProvider } from '@contexts';
+import { SearchProvider } from '../contexts/Search';
+import { ThemeProvider } from '../contexts/Theme';
 
 const queryClient = new QueryClient();
 
