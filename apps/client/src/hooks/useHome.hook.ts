@@ -46,7 +46,8 @@ export const useHome = () => {
 
   if (homeQuery.data) {
     const { favorites, recents } = homeQuery.data;
-    updateRecipeCache([...favorites, ...recents]);
+    const newRecipes = [...favorites, ...recents];
+    updateRecipeCache(newRecipes);
   }
 
   // Return the data and query information

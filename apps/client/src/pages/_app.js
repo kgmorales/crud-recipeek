@@ -1,12 +1,11 @@
 import 'swiper/css';
 import 'swiper/css/navigation';
 import '../styles/scss/style.scss';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from '@clientUtils/queryClient';
 import { useEffect } from 'react';
 import { ThemeProvider } from '../contexts/Theme';
 import { SearchProvider } from '../contexts/Search';
-
-const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }) {
   // useEffect to initialize the WOW.js library when the component mounts
@@ -34,7 +33,7 @@ function MyApp({ Component, pageProps }) {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <SearchProvider>
-        <Component {...pageProps} />
+          <Component {...pageProps} />
         </SearchProvider>
       </ThemeProvider>
     </QueryClientProvider>

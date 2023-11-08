@@ -8,7 +8,7 @@ export async function fetchHome(): Promise<Home> {
     }
 
     const home: Home = await response.json();
-    console.log({ home });
+
     return home;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
