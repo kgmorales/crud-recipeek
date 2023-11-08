@@ -1,16 +1,17 @@
 import { useState, useEffect, useMemo, useContext } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchSearchResults } from '../pages/api/search/search.routes'; // Adjust the import path as necessary
-import { masterRecipesKey } from '@constants/master-recipe-key'; // Adjust the import path as necessary
 import { Recipe } from '@prisma/client';
-import { useUpdateRecipeCache } from './useUpdateRecipeCache'; // Adjust the import path as necessary
-import { SearchContext } from '@contexts/Search.context'; // Adjust the import path as necessary
+import { fetchSearchResults } from '../pages/api/search/search.routes';
+import { masterRecipesKey } from '@constants/master-recipe-key';
+import { useUpdateRecipeCache } from './useUpdateRecipeCache';
+import { SearchContext } from '@contexts';
 
-const useSearch = (searchTerm: string) => {
+export const useSearch = (searchTerm: string) => {
   const queryClient = useQueryClient();
   const updateRecipeCache = useUpdateRecipeCache();
   const { setResults } = useContext(SearchContext);
 
+  //* Get cached Recipes that have been saved into React Query.
   const allCachedRecipes = useMemo(() => {
     return queryClient.getQueryData<Recipe[]>([masterRecipesKey]) || [];
   }, [queryClient]);
@@ -60,5 +61,3 @@ const useSearch = (searchTerm: string) => {
 
   return { results: combinedResults, isLoading, isError, error };
 };
-
-export default useSearch;

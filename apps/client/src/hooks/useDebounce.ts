@@ -4,7 +4,7 @@ import { useRef, useEffect, useCallback } from 'react';
 type TimeoutRef = ReturnType<typeof setTimeout> | null;
 
 // Define a generic type for the debounced function with specific argument types
-function useDebounce<F extends (...args: string[]) => unknown>() {
+export function useDebounce<F extends (...args: string[]) => unknown>() {
   const timeoutRef = useRef<TimeoutRef>(null);
 
   // The debounce function now uses a generic type F
@@ -27,5 +27,3 @@ function useDebounce<F extends (...args: string[]) => unknown>() {
 
   return debounce;
 }
-
-export default useDebounce;

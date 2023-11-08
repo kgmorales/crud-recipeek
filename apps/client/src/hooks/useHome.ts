@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchCategories } from '@api/recipes/categories.routes';
 import { fetchHome } from '@api/pages/home.routes';
 import { addCategoryToRecipe } from '@clientUtils/addCategoryToRecipe';
-import { useUpdateRecipeCache } from '@hooks/useUpdateRecipeCache';
+import { useUpdateRecipeCache } from '@hooks';
 import { useMemo } from 'react';
 import { Home } from '../types/pages/home.types';
 

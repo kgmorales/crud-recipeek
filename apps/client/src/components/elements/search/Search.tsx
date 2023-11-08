@@ -1,21 +1,20 @@
-// Search.tsx
 import React, { useState, useEffect } from 'react';
-import useSearch from '@hooks/useSearch'; // Make sure this path is correct
-import { useSearchContext } from '@contexts/Search.context'; // Make sure this path is correct
-import useDebounce from '@hooks/useDebounce'; // Make sure this path is correct
+
+import { useSearchContext } from '@contexts';
+import { useSearch, useDebounce } from '@hooks';
 
 const Search: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { setResults } = useSearchContext(); // Get setResults from context
-  const { results } = useSearch(searchTerm); // Get results from useSearch hook
-  const debounce = useDebounce(); // Make sure to define the debounced function correctly
+  const { setResults } = useSearchContext();
+  const { results } = useSearch(searchTerm);
+  const debounce = useDebounce();
 
-  // Update the context whenever the+ results change
+  //* Update the context whenever the results change
   useEffect(() => {
-    setResults(results); // This will update the context with the new results
+    setResults(results);
   }, [results, setResults]);
 
-  // Create a debounced function to update the search term
+  //* Create a debounced function to update the search term
   const debouncedSetSearchTerm = debounce((newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);
   }, 800);
