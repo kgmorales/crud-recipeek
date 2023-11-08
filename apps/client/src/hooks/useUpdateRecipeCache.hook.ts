@@ -1,7 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { Recipe } from '@prisma/client';
 import { masterRecipesKey } from '@constants/master-recipe-key';
-import { Home } from '../types/pages';
 
 export const useUpdateRecipeCache = () => {
   const queryClient = useQueryClient();
@@ -37,12 +36,6 @@ export const useUpdateRecipeCache = () => {
     if (typeof window === 'undefined') {
       return;
     }
-
-    // Retrieve 'home' data to get categories
-    const homeData = queryClient.getQueryData<Home>('home'); // Replace 'any' with the correct type for your 'home' data
-
-    // Check if 'home' data has 'categories' and use it
-    const categories = homeData?.categories ?? []; // Fallback to an empty array if categories are not found
 
     // Retrieve existing recipes from local storage
     const existingRecipes = getRecipesFromLocalStorage();

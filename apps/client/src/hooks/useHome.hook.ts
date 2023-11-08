@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { fetchCategories } from '@api/recipes/categories.routes';
 import { fetchHome } from '@api/pages/home.routes';
 import { addCategoryToRecipe } from '@clientUtils/addCategoryToRecipe';
@@ -7,7 +7,6 @@ import { useMemo } from 'react';
 import { Home } from '../types/pages/home.types';
 
 export const useHome = () => {
-  const queryClient = useQueryClient();
   const { updateRecipeCache } = useUpdateRecipeCache();
 
   const { data: categories, ...categoriesQueryInfo } = useQuery(
