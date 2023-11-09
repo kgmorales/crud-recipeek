@@ -158,6 +158,7 @@ model Status {
   menus              Int
   menuitems          Int
   pantry             Int
+  pantrylocations    Int
   photos             Int
   recipes            Int
   uid                Int      @id
@@ -193,6 +194,9 @@ model PaprikaStatus {
   groceryingredients Int
   meals              Int
   mealtypes          Int
+  bookmarks          Int
+  pantry             Int
+  pantrylocations    Int
   menus              Int
   menuitems          Int
   createdAt          DateTime @default(now()) @db.Timestamptz(6)

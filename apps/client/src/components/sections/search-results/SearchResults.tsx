@@ -9,9 +9,10 @@ import styles from './SearchResults.module.scss';
 const SearchResults: React.FC = () => {
   const { results } = useSearchContext();
   const cardInfo = processRecipeForCard(results);
+  console.log({ results, cardInfo });
 
   // Check if the results array has searched recipes in it
-  if (results && results.length > 0) {
+  if (cardInfo?.length) {
     // If there are results, render the SearchResults component
     return (
       <div className="container">

@@ -17,53 +17,53 @@ export class SearchRecipesService {
     searchTerm: string,
     excludeUids: string[],
   ): Promise<Recipe[]> {
-    const cacheKey = `search-recipes-${searchTerm}-${excludeUids.join(',')}`;
+    // const cacheKey = `search-recipes-${searchTerm}-${excludeUids.join(',')}`;
 
-    // Wait if there's a lock on this cacheKey
-    await this.waitForLock(cacheKey);
+    // // Wait if there's a lock on this cacheKey
+    // await this.waitForLock(cacheKey);
 
-    // Lock the cacheKey before proceeding
-    this.lockMap.set(cacheKey, true);
+    // // Lock the cacheKey before proceeding
+    // this.lockMap.set(cacheKey, true);
 
-    let recipes: Recipe[]; // Declare recipes as an array of Recipe, not allowing null
+    // let recipes: Recipe[]; // Declare recipes as an array of Recipe, not allowing null
 
-    try {
-      // Attempt to retrieve cached recipes
-      const cachedRecipes = await this.cacheManager.get<Recipe[]>(cacheKey);
-      if (cachedRecipes) {
-        // If cached data exists, use it
-        recipes = cachedRecipes;
-      } else {
-        // If no cached data, fetch from the database
-        recipes = await this.prisma.client.recipe.findMany({
-          where: {
-            AND: [
+    // try {
+    //   // Attempt to retrieve cached recipes
+    //   const cachedRecipes = await this.cacheManager.get<Recipe[]>(cacheKey);
+    //   if (cachedRecipes) {
+    //     // If cached data exists, use it
+    //     recipes = cachedRecipes;
+    //   } else {
+    // If no cached data, fetch from the database
+    const recipes = await this.prisma.client.recipe.findMany({
+      where: {
+        AND: [
+          {
+            uid: {
+              notIn: excludeUids,
+            },
+          },
+          {
+            OR: [
               {
-                uid: {
-                  notIn: excludeUids,
+                name: {
+                  contains: searchTerm,
+                  mode: 'insensitive',
                 },
-              },
-              {
-                OR: [
-                  {
-                    name: {
-                      contains: searchTerm,
-                      mode: 'insensitive',
-                    },
-                  },
-                ],
               },
             ],
           },
-        });
+        ],
+      },
+    });
 
-        // Cache the fetched data with a TTL
-        await this.cacheManager.set(cacheKey, recipes, 300);
-      }
-    } finally {
-      // Release the lock regardless of the outcome
-      this.lockMap.delete(cacheKey);
-    }
+    //     // Cache the fetched data with a TTL
+    //     await this.cacheManager.set(cacheKey, recipes, 300);
+    //   }
+    // } finally {
+    //   // Release the lock regardless of the outcome
+    //   this.lockMap.delete(cacheKey);
+    // }
 
     // Return the recipes array, which will be empty if no data was found
     return recipes;

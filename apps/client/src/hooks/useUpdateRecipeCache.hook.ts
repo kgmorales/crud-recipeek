@@ -13,7 +13,7 @@ export const useUpdateRecipeCache = () => {
 
     // Create a new map with all existing recipes
     const recipeMap = new Map(
-      existingRecipes?.map((recipe) => [recipe.id, recipe]),
+      existingRecipes?.map((recipe) => [recipe.uid, recipe]),
     );
 
     // Add new recipes to the map, which will replace any existing ones with the same ID
@@ -26,6 +26,8 @@ export const useUpdateRecipeCache = () => {
 
     // Update the cache with the new array
     queryClient.setQueryData<Recipe[]>([masterRecipesKey], updatedRecipes);
+
+    console.log({ updatedRecipes });
   };
 
   return { updateRecipeCache };
