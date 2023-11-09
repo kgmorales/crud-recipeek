@@ -1,6 +1,6 @@
 // SearchResults.tsx
 import React from 'react';
-import { useSearchContext } from '@contexts/Search.context'; // Adjust the import path as necessary
+import { useSearchContext } from '../../../contexts/Search.context'; // Adjust the import path as necessary
 import styles from './SearchResults.module.scss'; // Adjust the import path as necessary
 import { processRecipeForCard } from '../utils/Home.utils';
 import FeaturedCard from '@components/elements/featured-card/FeaturedCard';

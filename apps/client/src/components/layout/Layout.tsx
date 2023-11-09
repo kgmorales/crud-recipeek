@@ -3,7 +3,7 @@ import Footer from '../layout/Footer'; // Adjust the import path as necessary
 import Header from './Header'; // Adjust the import path as necessary
 import MobileMenu from './MobileMenu'; // Adjust the import path as necessary
 import SearchResults from '@components/sections/search-results/SearchResults'; // Adjust the import path as necessary
-import { useSearchContext } from '@contexts/Search.context'; // Adjust the import path as necessary
+import { useSearchContext } from '../../contexts/Search.context'; // Adjust the import path as necessary
 
 interface LayoutProps {
   children?: React.ReactNode;
