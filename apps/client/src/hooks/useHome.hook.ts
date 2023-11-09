@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchCategories } from '@api/recipes/categories.routes';
 import { fetchHome } from '@api/pages/home.routes';
 import { addCategoryToRecipe } from '@clientUtils/addCategoryToRecipe';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Home } from '../types/pages/home.types';
 import { useUpdateRecipeCache } from '@hooks';
 
@@ -45,11 +45,14 @@ export const useHome = () => {
     select: addCategoryMutation,
   });
 
-  if (homeQuery.data) {
-    const { favorites, recents } = homeQuery.data;
-    const newRecipes = [...favorites, ...recents];
-    updateRecipeCache(newRecipes);
-  }
+  // Use effect to update cache after home data is fetched
+  useEffect(() => {
+    if (homeQuery.data) {
+      const { favorites, recents } = homeQuery.data;
+      const newRecipes = [...favorites, ...recents];
+      updateRecipeCache(newRecipes);
+    }
+  }, [homeQuery.data, updateRecipeCache]); // Only run when homeQuery.data changes
 
   // Return the data and query information
   return {

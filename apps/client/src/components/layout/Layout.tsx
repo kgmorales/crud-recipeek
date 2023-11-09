@@ -43,8 +43,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 
       <main className="main">
         {/* Conditional rendering based on search results */}
-        {results && results?.length ? <SearchResults /> : children}
-        {/* {children} */}
+        {results && results.length > 0 ? <SearchResults /> : children}
       </main>
 
       <Footer />

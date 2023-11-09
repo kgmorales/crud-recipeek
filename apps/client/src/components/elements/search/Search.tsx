@@ -13,7 +13,7 @@ const Search = () => {
   const debouncedSetSearchTerm = useCallback(
     debounce((newTerm: string) => {
       setSearchTerm(newTerm);
-    }, 500),
+    }, 800),
     [], // Dependencies array is empty, meaning the debounced function will be created once per component instance
   );
 

@@ -15,9 +15,9 @@ const SearchResults: React.FC = () => {
   if (cardInfo?.length) {
     // If there are results, render the SearchResults component
     return (
-      <div className="container">
+      <div className="container wow animate__animated animate__fadeIn">
         <div className="row mt-30">
-          <h2 className="text-center color-gray-300 wow animate__animated animate__fadeInUp">
+          <h2 className="text-center color-gray-300 wow animate__animated animate__fadeIn">
             {/* {searchTerm} */}
             test
           </h2>

@@ -14,7 +14,7 @@ const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
   return (
     <div className={`${styles.container}`}>
       <div
-        className={`${styles.card} hover-up hover-neon wow animate__ animate__fadeInUp animated`}
+        className={`${styles.card} hover-up hover-neon wow animate__ animate__fadeIn animated`}
         style={{
           backgroundImage: `url(${cardInfo.image_url})`,
           backgroundSize: 'cover',
