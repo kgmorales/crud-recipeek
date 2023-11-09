@@ -1,30 +1,22 @@
-import React, { useState, useEffect } from 'react';
+// Search.tsx
+import React, { useState } from 'react';
+import { useSearch } from '@hooks'; // Update with the correct path
+import debounce from '@clientUtils/debounce'; // Ensure this is the correct path to your debounce function
 
-import { useSearchContext } from '@contexts';
-import { useSearch, useDebounce } from '@hooks';
-
-export const Search: React.FC = () => {
+const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { setResults } = useSearchContext();
   const { results } = useSearch(searchTerm);
-  const debounce = useDebounce();
 
-  //* Update the context whenever the results change
-  useEffect(() => {
-    setResults(results);
-  }, [results, setResults]);
-
-  //* Create a debounced function to update the search term
-  const debouncedSetSearchTerm = debounce((newSearchTerm: string) => {
+  // Debounce the search term input to limit the number of API calls
+  const debouncedSearch = debounce((newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);
-  }, 800);
+  }, 500); // Adjust the debounce time as needed
 
-  // Event handler that invokes the debounced function
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    debouncedSetSearchTerm(event.target.value);
+    const newSearchTerm = event.target.value;
+    debouncedSearch(newSearchTerm);
   };
-
-  // Render the search input
+  console.log({ searchTerm, results });
   return (
     <div>
       <input
@@ -35,3 +27,5 @@ export const Search: React.FC = () => {
     </div>
   );
 };
+
+export default Search;

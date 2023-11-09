@@ -6,13 +6,11 @@ export const useUpdateRecipeCache = () => {
   const queryClient = useQueryClient();
 
   const updateRecipeCache = (newRecipes: Recipe[]) => {
-    console.log({ newRecipes });
     // Retrieve existing recipes from the cache
     const existingRecipes = queryClient.getQueryData<Recipe[]>([
       masterRecipesKey,
     ]);
 
-    console.log(existingRecipes);
     // Create a new map with all existing recipes
     const recipeMap = new Map(
       existingRecipes?.map((recipe) => [recipe.id, recipe]),
