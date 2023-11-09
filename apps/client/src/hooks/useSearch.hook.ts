@@ -1,48 +1,75 @@
-import { useEffect } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useCallback } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { Recipe } from '@prisma/client';
-import { fetchSearchResults } from '@api/search/search.routes'; // Adjust the import path as needed
-import { useSearchContext } from '@contexts'; // Adjust the import path as needed
+import { fetchSearchResults } from '@api/search/search.routes';
+import { useSearchContext } from '@contexts';
 import { masterRecipesKey } from '../constants/master-recipe-key';
 
 export const useSearch = (searchTerm: string) => {
   const queryClient = useQueryClient();
   const { setResults } = useSearchContext();
 
-  // Define the function to fetch search results, excluding cached ones
-  const fetchExcludingCached = async () => {
-    // Retrieve excluded IDs from the cache
-    const allRecipes =
-      queryClient.getQueryData<Recipe[]>([masterRecipesKey]) || [];
-    const excludedIds = allRecipes.map((recipe) => recipe.uid);
-    // Fetch new search results excluding the cached IDs
-    return fetchSearchResults(searchTerm, excludedIds);
-  };
+  // Memoize fetchNewSearchResults to prevent it from being recreated on every render
+  const fetchNewSearchResults = useCallback(
+    async (term: string) => {
+      const allCachedRecipes =
+        queryClient.getQueryData<Recipe[]>([masterRecipesKey]) || [];
+      const excludedIds = allCachedRecipes
+        .filter((recipe) =>
+          recipe.name.toLowerCase().includes(term.toLowerCase()),
+        )
+        .map((recipe) => recipe.uid);
 
-  // Use the useQuery hook with queryKey and queryFn
-  const { data, isLoading, isError, error } = useQuery<Recipe[], Error>({
-    queryKey: ['searchResults', searchTerm],
-    queryFn: fetchExcludingCached,
-    enabled: searchTerm.trim() !== '', // Only run the query if the search term is not empty
-  });
+      return fetchSearchResults(term, excludedIds);
+    },
+    [queryClient],
+  ); // searchTerm is a dependency now
 
-  // Update the search context when data changes
   useEffect(() => {
-    if (data) {
-      // Filter the fetched data with the search term to avoid adding unrelated recipes
-      const filteredData = data.filter((recipe) =>
-        recipe.name.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-      // Update the search context with the filtered results
-      setResults(filteredData);
+    if (!searchTerm.trim()) {
+      setResults([]);
+      return;
     }
-  }, [data, searchTerm, setResults]);
+
+    const updateResults = async () => {
+      const serverRecipes = await fetchNewSearchResults(searchTerm);
+      const allCachedRecipes =
+        queryClient.getQueryData<Recipe[]>([masterRecipesKey]) || [];
+      const cachedRecipesMatchingSearchTerm = allCachedRecipes.filter(
+        (recipe) =>
+          recipe.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+
+      const combinedResults = [
+        ...cachedRecipesMatchingSearchTerm,
+        ...serverRecipes,
+      ];
+      setResults(combinedResults);
+
+      if (serverRecipes.length > 0) {
+        queryClient.setQueryData<Recipe[]>(
+          [masterRecipesKey],
+          (oldData = []) => {
+            const recipesMap = new Map(
+              [...oldData, ...serverRecipes].map((recipe) => [
+                recipe.uid,
+                recipe,
+              ]),
+            );
+            return Array.from(recipesMap.values());
+          },
+        );
+      }
+    };
+
+    updateResults();
+  }, [searchTerm, setResults, queryClient, fetchNewSearchResults]); // Include fetchNewSearchResults here
 
   return {
-    results: data || [],
-    isLoading,
-    isError,
-    error,
+    results: queryClient.getQueryData<Recipe[]>([masterRecipesKey]) || [],
+    isLoading: false, // You can manage loading state as per your logic
+    isError: false, // You can manage error state as per your logic
+    error: null, // You can manage error state as per your logic
   };
 };
 

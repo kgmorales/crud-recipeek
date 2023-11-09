@@ -14,6 +14,7 @@ export const useHome = () => {
   const categoriesQuery = useQuery({
     queryKey: ['categories'],
     queryFn: fetchCategories,
+    staleTime: Infinity,
   });
 
   // Destructure data and other query info from the categories query

@@ -65,6 +65,8 @@ export class SearchRecipesService {
     //   this.lockMap.delete(cacheKey);
     // }
 
+    console.log({ 'SERVER RECIPES': recipes });
+
     // Return the recipes array, which will be empty if no data was found
     return recipes;
   }
