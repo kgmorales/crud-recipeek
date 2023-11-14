@@ -19,7 +19,6 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({
   // The value to pass to the provider includes both the state and the updater function
   const value = { results, setResults };
 
-  console.log({ value });
   return (
     <SearchContext.Provider value={value}>{children}</SearchContext.Provider>
   );

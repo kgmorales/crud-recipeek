@@ -9,7 +9,6 @@ import styles from './SearchResults.module.scss';
 const SearchResults: React.FC = () => {
   const { results } = useSearchContext();
   const cardInfo = processRecipeForCard(results);
-  console.log({ results, cardInfo });
 
   // Check if the results array has searched recipes in it
   if (cardInfo?.length) {

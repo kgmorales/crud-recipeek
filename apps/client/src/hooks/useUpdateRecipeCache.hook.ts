@@ -26,8 +26,6 @@ export const useUpdateRecipeCache = () => {
 
     // Update the cache with the new array
     queryClient.setQueryData<Recipe[]>([masterRecipesKey], updatedRecipes);
-
-    console.log({ updatedRecipes });
   };
 
   return { updateRecipeCache };
