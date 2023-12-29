@@ -1,65 +1,44 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchCategories } from '@api/recipes/categories.routes';
 import { fetchHome } from '@api/pages/home.routes';
 import { addCategoryToRecipe } from '@clientUtils/addCategoryToRecipe';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { Home } from '../types/pages/home.types';
 import { useUpdateRecipeCache } from '@hooks';
 
 export const useHome = () => {
-  // Use the custom hook to get the update cache function
   const { updateRecipeCache } = useUpdateRecipeCache();
 
-  // Query for categories
-  const categoriesQuery = useQuery({
-    queryKey: ['categories'],
-    queryFn: fetchCategories,
-    staleTime: Infinity,
-  });
-
-  // Destructure data and other query info from the categories query
-  const { data: categories } = categoriesQuery;
-
-  // Memoize the query key for the home data
-  const homeQueryKey = useMemo(
-    () => ['home', categories ? { categories } : undefined],
-    [categories],
-  );
-
-  // Memoize the select function to transform the data
-  const addCategoryMutation = useMemo(() => {
-    return categories
-      ? (data: Home) => {
-          return {
-            favorites: addCategoryToRecipe(data.favorites, categories),
-            recents: addCategoryToRecipe(data.recents, categories),
-          };
-        }
-      : undefined;
-  }, [categories]);
-
-  // Query for home data
+  // Fetch home data, which includes categories
   const homeQuery = useQuery({
-    queryKey: homeQueryKey,
+    queryKey: ['home'],
     queryFn: fetchHome,
-    select: addCategoryMutation,
+    select: (data: Home) => {
+      // Extract categories from the fetched data
+      const categories = data.categories;
+
+      // Transform the favorites and recents by adding categories to each recipe
+      const transformedData = {
+        favorites: addCategoryToRecipe(data.favorites, categories),
+        recents: addCategoryToRecipe(data.recents, categories),
+      };
+
+      return transformedData;
+    },
   });
 
-  // Use effect to update cache after home data is fetched
+  // Effect to update the recipe cache when new home data is fetched
   useEffect(() => {
     if (homeQuery.data) {
       const { favorites, recents } = homeQuery.data;
       const newRecipes = [...favorites, ...recents];
       updateRecipeCache(newRecipes);
     }
-  }, [homeQuery.data, updateRecipeCache]); // Only run when homeQuery.data changes
+  }, [homeQuery.data, updateRecipeCache]);
 
-  // Return the data and query information
+  // Returning only the transformed favorites and recents data
   return {
-    categories: categoriesQuery.data,
     home: homeQuery.data,
     ...homeQuery,
-    ...categoriesQuery,
   };
 };
 

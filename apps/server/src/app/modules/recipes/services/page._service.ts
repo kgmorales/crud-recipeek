@@ -32,6 +32,7 @@ export class PageService {
       take: 6,
     });
 
+
     return {
       categories,
       favorites: reduceRecipeData(favorites),

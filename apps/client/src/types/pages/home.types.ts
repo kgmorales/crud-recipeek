@@ -1,4 +1,4 @@
-import { Recipe } from '@prisma/client';
+import { Category, Recipe } from '@prisma/client';
 
 export type RecipeCard = {
   categories?: Recipe['categories'];
@@ -11,6 +11,7 @@ export type RecipeCard = {
   recipeLink?: string;
 };
 export type Home = {
+  categories: Category[];
   favorites: RecipeCard[];
   recents: RecipeCard[];
 };

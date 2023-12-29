@@ -8,7 +8,6 @@ import { useHome } from '@hooks';
 
 const Home: React.FC = (props) => {
   const { home } = useHome();
-  console.log({ home });
 
   return (
     <>
