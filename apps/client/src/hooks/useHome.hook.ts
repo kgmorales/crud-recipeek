@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchHome } from '@api/pages/home.routes';
 import { addCategoryToRecipe } from '@clientUtils/addCategoryToRecipe';
 import { useEffect } from 'react';
@@ -6,6 +6,7 @@ import { Home } from '../types/pages/home.types';
 import { useUpdateRecipeCache } from '@hooks';
 
 export const useHome = () => {
+  const queryClient = useQueryClient();
   const { updateRecipeCache } = useUpdateRecipeCache();
 
   // Fetch home data, which includes categories
@@ -14,12 +15,12 @@ export const useHome = () => {
     queryFn: fetchHome,
     select: (data: Home) => {
       // Extract categories from the fetched data
-      const categories = data.categories;
-
+      const { categories, favorites, recents } = data;
+      queryClient.setQueryData(['categories'], categories);
       // Transform the favorites and recents by adding categories to each recipe
       const transformedData = {
-        favorites: addCategoryToRecipe(data.favorites, categories),
-        recents: addCategoryToRecipe(data.recents, categories),
+        favorites: addCategoryToRecipe(favorites, categories),
+        recents: addCategoryToRecipe(recents, categories),
       };
 
       return transformedData;
@@ -37,8 +38,8 @@ export const useHome = () => {
 
   // Returning only the transformed favorites and recents data
   return {
-    home: homeQuery.data,
     ...homeQuery,
+    home: homeQuery.data,
   };
 };
 
