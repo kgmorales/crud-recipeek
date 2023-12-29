@@ -1,10 +1,11 @@
 import { Recipe } from '@prisma/client';
+import { RecipeCard } from '@types';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 interface RecentCardBigProps {
-  recipe: Recipe;
+  recipe: RecipeCard;
 }
 
 const RecentCardBig: React.FC<RecentCardBigProps> = ({ recipe }) => {

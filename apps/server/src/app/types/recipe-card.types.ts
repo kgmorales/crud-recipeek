@@ -1,6 +1,7 @@
 import { Recipe } from '@prisma/client';
 
 export type RecipeCard = {
+  categories?: Recipe['categories'];
   description?: Recipe['description'];
   uid?: Recipe['uid'];
   image_url?: Recipe['image_url'];

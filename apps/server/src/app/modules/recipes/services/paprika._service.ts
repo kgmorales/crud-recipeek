@@ -23,7 +23,7 @@ export class PaprikaService {
     const recipeUids: string[] = recipeItems.map((item) => item.uid);
     //* 2.
     const recipePromises: Promise<Recipe>[] = recipeUids.map((uid) =>
-      this.paprikaApiService.recipe(uid)
+      this.paprikaApiService.recipe(uid),
     );
     const recipes: Recipe[] = await Promise.all(recipePromises).catch((err) => {
       console.error(err);
@@ -53,7 +53,7 @@ export class PaprikaService {
       await this.paprikaApiService.recipe(uid);
 
     const recipes = await Promise.all(
-      uids.split(',').map((uid) => getRecipe(uid))
+      uids.split(',').map((uid) => getRecipe(uid)),
     );
 
     return recipes || [];

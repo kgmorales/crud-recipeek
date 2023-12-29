@@ -1,6 +1,6 @@
-import { Recipe } from '@prisma/client';
+import { RecipeCard } from '@types';
 
-async function fetchAllRecipes(): Promise<Recipe[]> {
+async function fetchAllRecipes(): Promise<RecipeCard[]> {
   try {
     const response = await fetch(
       'http://localhost:8080/api/recipes/allRecipes',
@@ -8,7 +8,7 @@ async function fetchAllRecipes(): Promise<Recipe[]> {
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
     }
-    const data: Recipe[] = await response.json();
+    const data: RecipeCard[] = await response.json();
     return data;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {

@@ -1,6 +1,6 @@
-import { Recipe } from "@prisma/client";
+import { RecipeCard } from "@types";
 
-export async function fetchPaginatedRecipes(page: number, limit: number): Promise<Recipe[]> {
+export async function fetchPaginatedRecipes(page: number, limit: number): Promise<RecipeCard[]> {
   try {
     const response = await fetch(`http://localhost:8080/api/recipes/paginatedRecipes?page=${page}&limit=${limit}`);
     if (!response.ok) {

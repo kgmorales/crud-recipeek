@@ -6,8 +6,9 @@ import Hero from '@components/sections/Hero';
 import FeaturedRecipes from '@components/sections/featured-recipes/FeaturedRecipes';
 import { useHome } from '@hooks';
 
-const Home: React.FC = () => {
+const Home: React.FC = (props) => {
   const { home } = useHome();
+  console.log({ home });
 
   return (
     <>

@@ -24,14 +24,14 @@ const RecentRecipes: React.FC<RecentProps> = ({ recents }) => {
             <div className="row">
               <div className="col-lg-7">
                 {recentBig?.map((recipe, i) => (
-                  <RecentCardBig recipe={recipe} key={recipe.id} />
+                  <RecentCardBig recipe={recipe} key={recipe.uid} />
                 ))}
               </div>
               <div className="col-lg-5">
                 <div className="row">
                   {recentSmall?.map((recipe, i) => (
                     <div className="col-lg-12" key={i}>
-                      <RecentCardSmall recipe={recipe} key={recipe.id} />
+                      <RecentCardSmall recipe={recipe} key={recipe.uid} />
                     </div>
                   ))}
                 </div>

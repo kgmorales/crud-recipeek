@@ -16,11 +16,12 @@ export const useSearch = (searchTerm: string) => {
       const allCachedRecipes =
         queryClient.getQueryData<RecipeCard[]>([masterRecipesKey]) || [];
 
-      const excludedIds = allCachedRecipes
-        .filter((recipe) =>
-          recipe.name.toLowerCase().includes(term.toLowerCase()),
-        )
-        .map((recipeCard) => recipeCard.uid);
+      const excludedIds = allCachedRecipes.reduce((acc, curr) => {
+        if (curr.uid && curr.name?.toLowerCase().includes(term.toLowerCase())) {
+          return [...acc, curr.uid];
+        }
+        return acc;
+      }, [] as string[]);
 
       return fetchSearchResults(term, excludedIds);
     },
@@ -37,10 +38,10 @@ export const useSearch = (searchTerm: string) => {
     const updateResults = async () => {
       const serverRecipes = await fetchNewSearchResults(searchTerm);
       const allCachedRecipes =
-        queryClient.getQueryData<Recipe[]>([masterRecipesKey]) || [];
+        queryClient.getQueryData<RecipeCard[]>([masterRecipesKey]) || [];
       const cachedRecipesMatchingSearchTerm = allCachedRecipes.filter(
         (recipe) =>
-          recipe.name.toLowerCase().includes(searchTerm.toLowerCase()),
+          recipe.name?.toLowerCase().includes(searchTerm.toLowerCase()),
       );
 
       const combinedResults = [
@@ -50,7 +51,7 @@ export const useSearch = (searchTerm: string) => {
       setResults(combinedResults);
 
       if (serverRecipes.length > 0) {
-        queryClient.setQueryData<Recipe[]>(
+        queryClient.setQueryData<RecipeCard[]>(
           [masterRecipesKey],
           (oldData = []) => {
             const recipesMap = new Map(

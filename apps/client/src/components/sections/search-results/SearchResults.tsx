@@ -1,17 +1,15 @@
 // SearchResults.tsx
 import React from 'react';
 import { useSearchContext } from '@contexts';
-import { processRecipeForCard } from '../utils/Home.utils';
 import FeaturedCard from '@components/elements/featured-card/FeaturedCard';
 import { RecipeCard } from '@types';
 import styles from './SearchResults.module.scss';
 
 const SearchResults: React.FC = () => {
   const { results } = useSearchContext();
-  const cardInfo = processRecipeForCard(results);
 
   // Check if the results array has searched recipes in it
-  if (cardInfo?.length) {
+  if (results?.length) {
     // If there are results, render the SearchResults component
     return (
       <div className="container wow animate__animated animate__fadeIn">
@@ -22,7 +20,7 @@ const SearchResults: React.FC = () => {
           </h2>
           <div className={styles.cardContainer}>
             {/* Map over the results and render them */}
-            {cardInfo?.map((recipe: RecipeCard, i) => (
+            {results?.map((recipe: RecipeCard, i) => (
               <div key={recipe.uid}>
                 <FeaturedCard cardInfo={recipe} />
               </div>

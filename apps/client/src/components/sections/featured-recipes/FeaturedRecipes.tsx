@@ -2,21 +2,18 @@ import Link from 'next/link';
 
 import FeaturedCard from '@components/elements/featured-card/FeaturedCard';
 import styles from './FeaturedRecipes.module.scss';
-import { processRecipeForCard } from '../utils/Home.utils';
-import { RecipeCard, Home } from '@types';
+import { Home } from '@types';
 
 interface FeaturedRecipesProps {
   featured?: Home['favorites'];
 }
 
 const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
-  const cardInfo = processRecipeForCard(featured);
-
   return (
     <>
       <div className="row mt-30">
         <div className={styles.cardContainer}>
-          {cardInfo?.map((recipe: RecipeCard) => (
+          {featured?.map((recipe) => (
             <div key={recipe.uid}>
               <FeaturedCard cardInfo={recipe} />
             </div>

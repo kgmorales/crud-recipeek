@@ -1,10 +1,10 @@
 import React, { createContext, useState, useContext } from 'react';
-import { Recipe } from '@prisma/client';
+import { RecipeCard } from '../types/pages';
 
 // Define the context type for TypeScript
 interface SearchContextType {
-  results: Recipe[];
-  setResults: (results: Recipe[]) => void;
+  results: RecipeCard[];
+  setResults: (results: RecipeCard[]) => void;
 }
 
 // Create a context with a default value
@@ -14,7 +14,7 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined);
 export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [results, setResults] = useState<Recipe[]>([]);
+  const [results, setResults] = useState<RecipeCard[]>([]);
 
   // The value to pass to the provider includes both the state and the updater function
   const value = { results, setResults };

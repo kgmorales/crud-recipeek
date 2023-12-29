@@ -10,6 +10,7 @@ const buildRecipeLink = (name: Recipe['name']) =>
 export function reduceRecipeData(recipes: Recipe[]): RecipeCard[] {
   return recipes.map((recipe) => {
     return {
+      categories: recipe.categories,
       description: recipe.description,
       uid: recipe.uid,
       image_url: recipe.image_url,

@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { Category, Recipe } from '@prisma/client';
+import { Category } from '@prisma/client';
 import { PrismaService } from '../../shared/services/prisma._service';
-// import { Recipe } from '@prisma/client';
+import { RecipeCard } from '@server/types/recipe-card.types';
+import { reduceRecipeData } from '@serverUtils/reduce-recipe.util';
 
 interface Home {
   categories: Category[];
-  favorites: Recipe[];
-  recents: Recipe[];
+  favorites: RecipeCard[];
+  recents: RecipeCard[];
 }
 
 @Injectable()
@@ -31,6 +32,10 @@ export class PageService {
       take: 6,
     });
 
-    return { categories, favorites, recents };
+    return {
+      categories,
+      favorites: reduceRecipeData(favorites),
+      recents: reduceRecipeData(recents),
+    };
   }
 }
