@@ -2,6 +2,8 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { PrismaService } from '../../shared/services/prisma._service';
+import { reduceRecipeData } from '@serverUtils/reduce-recipe.util';
+import { RecipeCard } from '@server/types/recipe-card.types';
 import { Recipe } from '@prisma/client';
 
 @Injectable()
@@ -16,7 +18,7 @@ export class SearchRecipesService {
   async searchRecipes(
     searchTerm: string,
     excludeUids: string[],
-  ): Promise<Recipe[]> {
+  ): Promise<RecipeCard[]> {
     // const cacheKey = `search-recipes-${searchTerm}-${excludeUids.join(',')}`;
 
     // // Wait if there's a lock on this cacheKey
@@ -35,7 +37,7 @@ export class SearchRecipesService {
     //     recipes = cachedRecipes;
     //   } else {
     // If no cached data, fetch from the database
-    const recipes = await this.prisma.client.recipe.findMany({
+    const recipes: Recipe[] = await this.prisma.client.recipe.findMany({
       where: {
         AND: [
           {
@@ -66,13 +68,13 @@ export class SearchRecipesService {
     // }
 
     // Return the recipes array, which will be empty if no data was found
-    return recipes;
+    return reduceRecipeData(recipes);
   }
 
-  private async waitForLock(cacheKey: string): Promise<void> {
-    while (this.lockMap.get(cacheKey)) {
-      // Wait for 100ms before checking the lock status again
-      await new Promise((resolve) => setTimeout(resolve, 100));
-    }
-  }
+  // private async waitForLock(cacheKey: string): Promise<void> {
+  //   while (this.lockMap.get(cacheKey)) {
+  //     // Wait for 100ms before checking the lock status again
+  //     await new Promise((resolve) => setTimeout(resolve, 100));
+  //   }
+  // }
 }

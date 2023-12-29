@@ -66,7 +66,7 @@ export class PaprikaAuthService implements OnModuleInit {
     bodyData.append('email', user);
     bodyData.append('password', password);
 
-    const response = await fetch(`${baseURL}/account/login`, {
+    const login = await fetch(`${baseURL}/account/login`, {
       method: 'POST',
       headers: {
         ...paprikaBaseHeaders,
@@ -75,13 +75,13 @@ export class PaprikaAuthService implements OnModuleInit {
       body: bodyData.toString(),
     });
 
-    if (!response.ok) {
-      const errorMessage = await response.text();
+    if (!login.ok) {
+      const errorMessage = await login.text();
       this.logger.error(getErrorMessage(new Error(errorMessage)));
       throw toErrorWithMessage(`Failed to refresh token: ${errorMessage}`);
     }
 
-    const data = await response.json();
+    const data = await login.json();
     const newToken = data.result.token;
 
     if (!newToken) {

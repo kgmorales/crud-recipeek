@@ -4,6 +4,7 @@ import { Recipe } from '@prisma/client';
 import { fetchSearchResults } from '@api/search/search.routes';
 import { useSearchContext } from '@contexts';
 import { masterRecipesKey } from '../constants/master-recipe-key';
+import { RecipeCard } from '../types/pages';
 
 export const useSearch = (searchTerm: string) => {
   const queryClient = useQueryClient();
@@ -13,15 +14,17 @@ export const useSearch = (searchTerm: string) => {
   const fetchNewSearchResults = useCallback(
     async (term: string) => {
       const allCachedRecipes =
-        queryClient.getQueryData<Recipe[]>([masterRecipesKey]) || [];
+        queryClient.getQueryData<RecipeCard[]>([masterRecipesKey]) || [];
+
       const excludedIds = allCachedRecipes
         .filter((recipe) =>
           recipe.name.toLowerCase().includes(term.toLowerCase()),
         )
-        .map((recipe) => recipe.uid);
+        .map((recipeCard) => recipeCard.uid);
 
       return fetchSearchResults(term, excludedIds);
     },
+
     [queryClient],
   ); // searchTerm is a dependency now
 

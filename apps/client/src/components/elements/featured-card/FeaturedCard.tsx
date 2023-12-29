@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './FeaturedCard.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FeaturedCardData } from '@types';
+import { RecipeCard } from '@types';
 
 const iconPATH = '/assets/icons';
 
 interface FeaturedCardProps {
-  cardInfo: FeaturedCardData;
+  cardInfo: RecipeCard;
 }
 
 const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {

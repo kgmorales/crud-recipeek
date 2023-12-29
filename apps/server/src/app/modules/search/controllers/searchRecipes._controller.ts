@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { SearchRecipesService } from '../services/searchRecipes._service';
-import { Recipe } from '@prisma/client';
+import { RecipeCard } from '@server/types/recipe-card.types';
 
 @Controller('search')
 export class SearchRecipesController {
@@ -10,7 +10,7 @@ export class SearchRecipesController {
   async search(
     @Query('query') query: string,
     @Query('exclude') exclude: string,
-  ): Promise<Recipe[] | []> {
+  ): Promise<RecipeCard[] | []> {
     // Split the exclude query parameter into an array of UIDs, if provided
     const excludeUids = exclude ? exclude.split(',') : [];
     const results = await this.searchRecipesService.searchRecipes(

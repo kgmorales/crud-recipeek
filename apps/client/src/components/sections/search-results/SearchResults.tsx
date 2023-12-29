@@ -3,7 +3,7 @@ import React from 'react';
 import { useSearchContext } from '@contexts';
 import { processRecipeForCard } from '../utils/Home.utils';
 import FeaturedCard from '@components/elements/featured-card/FeaturedCard';
-import { FeaturedCardData } from '@types';
+import { RecipeCard } from '@types';
 import styles from './SearchResults.module.scss';
 
 const SearchResults: React.FC = () => {
@@ -22,7 +22,7 @@ const SearchResults: React.FC = () => {
           </h2>
           <div className={styles.cardContainer}>
             {/* Map over the results and render them */}
-            {cardInfo?.map((recipe: FeaturedCardData, i) => (
+            {cardInfo?.map((recipe: RecipeCard, i) => (
               <div key={recipe.uid}>
                 <FeaturedCard cardInfo={recipe} />
               </div>

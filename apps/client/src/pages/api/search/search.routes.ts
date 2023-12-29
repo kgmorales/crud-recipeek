@@ -1,10 +1,10 @@
 // search.routes.ts
-import { Recipe } from '@prisma/client';
+import { RecipeCard } from '@types';
 
 export async function fetchSearchResults(
   searchTerm: string,
   excludeUids: string[],
-): Promise<Recipe[]> {
+): Promise<RecipeCard[]> {
   const queryParams = new URLSearchParams({
     query: searchTerm,
     exclude: excludeUids.join(','),
