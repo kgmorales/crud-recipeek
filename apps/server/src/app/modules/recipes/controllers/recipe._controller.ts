@@ -1,5 +1,13 @@
 //* NESTJS
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 
 //* Module
 import { RecipeDto } from '@recipes/dtos';
@@ -19,6 +27,15 @@ export class RecipesController {
   @Get('allRecipes')
   async getDBRecipes(): Promise<Recipe[]> {
     return await this.recipeService.allDBRecipes();
+  }
+
+  @Get('recipe/:uid')
+  async getRecipeByUid(@Param('uid') uid: string) {
+    const recipe = await this.recipeService.getRecipeByUID(uid);
+    if (!recipe) {
+      throw new NotFoundException(`Recipe with UID ${uid} not found`);
+    }
+    return recipe;
   }
 
   @Get('allRecipeCards')

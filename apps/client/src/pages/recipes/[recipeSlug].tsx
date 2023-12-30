@@ -3,8 +3,18 @@ import Link from 'next/link';
 import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Breadcrumb from '../../components/elements/Breadcrumb';
+// import { useRouter } from 'next/router';
+import { useRecipe } from '@hooks';
+import { useRecipeContext } from '../../contexts/Recipe';
+import Image from 'next/image';
 
-const RecipeDetails = (props) => {
+const RecipeDetails: React.FC = (props) => {
+  const { currentRecipe } = useRecipeContext();
+
+  const recipe = useRecipe(currentRecipe?.uid as string).data;
+
+  const title = recipe?.name;
+
   return (
     <>
       <Head>
@@ -18,12 +28,12 @@ const RecipeDetails = (props) => {
               <div className="col-xl-10 col-lg-12">
                 <div className="pt-30 border-bottom border-gray-800 pb-20">
                   <div className="box-breadcrumbs">
-                    <Breadcrumb title="Business Card Design" />
+                    <Breadcrumb title={title} />
                   </div>
                 </div>
                 <div className="row mt-50 align-items-end">
                   <div className="col-lg-8 m-auto text-center">
-                    <h2 className="color-linear">Business Card Design</h2>
+                    <h2 className="color-linear">{recipe?.name}</h2>
                   </div>
                 </div>
                 <div className="row mt-30 mb-50">
@@ -31,11 +41,15 @@ const RecipeDetails = (props) => {
                     <div className="swiper-wrapper wow animate__animated animate__fadeIn">
                       <div className="swiper-slide">
                         <div className="image-detail mb-30">
-                          <img
-                            className="bdrd16"
-                            src="assets/imgs/page/portfolio/portfolio-1.png"
-                            alt="Genz"
-                          />
+                          <div
+                            className={`hover-up hover-neon wow animate__ animate__fadeIn animated`}
+                            style={{
+                              backgroundImage: `url(${recipe?.image_url})`,
+                              backgroundSize: 'cover',
+                              backgroundPosition: 'center',
+                              backgroundRepeat: 'no-repeat',
+                            }}
+                          ></div>
                         </div>
                       </div>
                       <div className="swiper-slide">
@@ -76,16 +90,7 @@ const RecipeDetails = (props) => {
                         Project Details
                       </h3>
                       <p className="text-lg color-gray-500 wow animate__animated animate__fadeIn">
-                        Thirty there &amp; time wear across days, make inside on
-                        these you. Can young a really, roses blog small of song
-                        their dreamy life pretty? Because really duo living to
-                        noteworthy bloom bell. Transform clean daydreaming cute
-                        twenty process rooms cool. White white dreamy
-                        dramatically place everything although. Place out
-                        apartment afternoon whimsical kinder, little romantic
-                        joy we flowers handmade. Thirty she a studio of she
-                        whimsical projects, afternoon effect going an floated
-                        maybe.
+                        {recipe?.description}
                       </p>
                       <p className="text-lg color-gray-500 wow animate__animated animate__fadeIn">
                         Tortor placerat bibendum consequat sapien, facilisi
@@ -123,16 +128,7 @@ const RecipeDetails = (props) => {
                         Hire me
                       </h3>
                       <p className="text-lg color-gray-500 wow animate__animated animate__fadeIn">
-                        Thirty there &amp; time wear across days, make inside on
-                        these you. Can young a really, roses blog small of song
-                        their dreamy life pretty? Because really duo living to
-                        noteworthy bloom bell. Transform clean daydreaming cute
-                        twenty process rooms cool. White white dreamy
-                        dramatically place everything although. Place out
-                        apartment afternoon whimsical kinder, little romantic
-                        joy we flowers handmade. Thirty she a studio of she
-                        whimsical projects, afternoon effect going an floated
-                        maybe.
+                        {recipe?.directions}
                       </p>
                     </div>
                     <div className="box-tags wow animate__animated animate__fadeIn">

@@ -12,9 +12,9 @@ import { SearchProvider } from '../contexts/Search';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import '../styles/scss/style.scss';
+import { RecipeProvider } from '../contexts/Recipe';
 
 function MyApp({ Component, pageProps }) {
-
   // useEffect to initialize the WOW.js library when the component mounts
   useEffect(() => {
     // Import the WOW.js library
@@ -37,8 +37,10 @@ function MyApp({ Component, pageProps }) {
       {/* <HydrationBoundary state={pageProps.dehydratedState}> */}
       <ThemeProvider>
         <SearchProvider>
-          {/* Render the rest of the app component tree */}
-          <Component {...pageProps} />
+          <RecipeProvider>
+            {/* Render the rest of the app component tree */}
+            <Component {...pageProps} />
+          </RecipeProvider>
         </SearchProvider>
       </ThemeProvider>
       {/* </HydrationBoundary> */}

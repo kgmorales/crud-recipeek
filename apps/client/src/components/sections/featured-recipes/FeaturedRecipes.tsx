@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import FeaturedCard from '@components/elements/featured-card/FeaturedCard';
 import styles from './FeaturedRecipes.module.scss';
 import { Home } from '@types';
@@ -20,7 +18,7 @@ const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
           ))}
         </div>
 
-        <div className={styles.buttonContainer}>
+        {/* <div className={styles.buttonContainer}>
           <Link
             className="btn btn-linear btn-load-more wow animate__animated animate__zoomIn"
             href="#"
@@ -28,7 +26,7 @@ const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
             Show More Posts
             <i className="fi-rr-arrow-small-right" />
           </Link>
-        </div>
+        </div> */}
       </div>
     </>
   );

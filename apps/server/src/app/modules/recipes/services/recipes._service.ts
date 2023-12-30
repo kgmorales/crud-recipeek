@@ -27,6 +27,12 @@ export class RecipesService {
     return this.prisma.client.recipe.findMany();
   }
 
+  async getRecipeByUID(uid: Recipe['uid']): Promise<Recipe | null> {
+    return this.prisma.client.recipe.findUnique({
+      where: { uid },
+    });
+  }
+
   async allRecipeCards(): Promise<RecipeCard[]> {
     return reduceRecipeData(await this.allDBRecipes());
   }
