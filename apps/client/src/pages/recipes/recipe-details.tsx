@@ -4,7 +4,7 @@ import React from 'react';
 import Layout from '../../components/layout/Layout';
 import Breadcrumb from '../../components/elements/Breadcrumb';
 
-const RecipeDetails = () => {
+const RecipeDetails = (props) => {
   return (
     <>
       <Head>

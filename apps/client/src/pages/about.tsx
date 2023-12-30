@@ -7,7 +7,7 @@ import AccordionWrapper from '@components/elements/accordion-wrapper/AccordionWr
 import RecentPosts2 from '@components/sections/RecentPosts2';
 import RecentPosts3 from '@components/sections/RecentPosts3';
 import RecentPosts from '@components/sections/RecentPosts';
-import PortfolioFilter from '@components/elements/PortfolioFilter';
+import RecipeFilter from '@components/elements/RecipeFilter';
 
 const About: React.FC = (props) => {
   return (

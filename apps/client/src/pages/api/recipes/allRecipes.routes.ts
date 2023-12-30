@@ -1,15 +1,15 @@
 import { RecipeCard } from '@types';
 
-async function fetchAllRecipes(): Promise<RecipeCard[]> {
+export async function fetchRecipes(): Promise<RecipeCard[]> {
   try {
-    const response = await fetch(
-      'http://localhost:8080/api/recipes/allRecipes',
-    );
+    const response = await fetch('http://localhost:8080/api/page/allRecipes');
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
     }
-    const data: RecipeCard[] = await response.json();
-    return data;
+
+    const recipeCards: RecipeCard[] = await response.json();
+
+    return recipeCards;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('Error fetching all recipes:', error);
@@ -17,4 +17,4 @@ async function fetchAllRecipes(): Promise<RecipeCard[]> {
   }
 }
 
-export default fetchAllRecipes;
+export default fetchRecipes;

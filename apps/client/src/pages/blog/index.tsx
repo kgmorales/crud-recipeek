@@ -7,7 +7,7 @@ import PageHeader1 from '../../components/elements/PageHeader1';
 import data from '../../utils/blogData2';
 import Sidebar from '../../components/layout/Sidebar';
 import React from 'react';
-import Sidebar2 from '@components/layout/Sidebar2';
+
 
 const Blog: React.FC = (props) => {
   return (

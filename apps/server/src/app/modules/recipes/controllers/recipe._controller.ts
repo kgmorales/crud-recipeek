@@ -7,6 +7,7 @@ import { Recipe, Category } from '@prisma/client';
 import { RecipesService } from '../services/recipes._service';
 import { ScrapeService } from '../services/providers/scrape._provider';
 import { SuccessMessageDto } from '../dtos/success-message';
+import { RecipeCard } from '@server/types/recipe-card.types';
 
 @Controller('recipes')
 export class RecipesController {
@@ -20,6 +21,11 @@ export class RecipesController {
     return await this.recipeService.allDBRecipes();
   }
 
+  @Get('allRecipeCards')
+  async getRecipeCards(): Promise<RecipeCard[]> {
+    return await this.recipeService.allRecipeCards();
+  }
+
   @Get('categories')
   async getDBCategories(): Promise<Category[]> {
     return await this.recipeService.allDBCategories();
@@ -28,19 +34,6 @@ export class RecipesController {
   @Post('create')
   async createRecipe(@Body() recipeDto: RecipeDto): Promise<void> {
     return await this.recipeService.createRecipe(recipeDto);
-  }
-
-  @Get('paginatedRecipes')
-  async getPaginatedRecipes(
-    @Query()
-    query: {
-      page?: number;
-      limit?: number;
-      filter: Record<string, never>;
-    },
-  ) {
-    const { page, limit, filter } = query;
-    return this.recipeService.getPaginatedRecipes({ page, limit, filter });
   }
 
   @Get('refreshDB')
@@ -59,3 +52,16 @@ export class RecipesController {
     return await this.recipeService.updateRecipes();
   }
 }
+
+// @Get('paginatedRecipes')
+// async getPaginatedRecipes(
+//   @Query()
+//   query: {
+//     page?: number;
+//     limit?: number;
+//     filter: Record<string, never>;
+//   },
+// ) {
+//   const { page, limit, filter } = query;
+//   return this.recipeService.getPaginatedRecipes({ page, limit, filter });
+// }

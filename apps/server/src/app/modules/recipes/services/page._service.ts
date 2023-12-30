@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Category } from '@prisma/client';
 import { PrismaService } from '../../shared/services/prisma._service';
-import { RecipeCard } from '@server/types/recipe-card.types';
 import { reduceRecipeData } from '@serverUtils/reduce-recipe.util';
+import { RecipeCard } from '@server/types/recipe-card.types';
 
 interface Home {
   categories: Category[];
@@ -31,7 +31,6 @@ export class PageService {
       },
       take: 6,
     });
-
 
     return {
       categories,

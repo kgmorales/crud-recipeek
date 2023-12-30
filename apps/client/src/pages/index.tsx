@@ -5,9 +5,11 @@ import Layout from '@components/layout/Layout';
 import Hero from '@components/sections/Hero';
 import FeaturedRecipes from '@components/sections/featured-recipes/FeaturedRecipes';
 import { useHome } from '@hooks';
+import useRecipeCards from '../hooks/useRecipeCards.hook';
 
-const Home: React.FC = (props) => {
-  const { home } = useHome();
+const Home: React.FC = () => {
+  const { home, isHomeLoaded } = useHome();
+  useRecipeCards(isHomeLoaded);
 
   return (
     <>

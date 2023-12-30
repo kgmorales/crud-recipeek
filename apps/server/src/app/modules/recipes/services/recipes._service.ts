@@ -4,15 +4,17 @@ import { Recipe, Category } from '@prisma/client';
 
 import { RecipeDto } from '@recipes/dtos';
 import { PaprikaService } from './paprika._service';
+import { reduceRecipeData } from '@serverUtils/reduce-recipe.util';
+import { RecipeCard } from '@server/types/recipe-card.types';
 
-interface GetPaginatedRecipesParams {
-  page?: number;
-  limit?: number;
-  filter?: {
-    name?: string;
-    category?: string;
-  };
-}
+// interface GetPaginatedRecipesParams {
+//   page?: number;
+//   limit?: number;
+//   filter?: {
+//     name?: string;
+//     category?: string;
+//   };
+// }
 
 @Injectable()
 export class RecipesService {
@@ -23,6 +25,10 @@ export class RecipesService {
 
   async allDBRecipes(): Promise<Recipe[]> {
     return this.prisma.client.recipe.findMany();
+  }
+
+  async allRecipeCards(): Promise<RecipeCard[]> {
+    return reduceRecipeData(await this.allDBRecipes());
   }
 
   async allDBCategories(): Promise<Category[]> {
@@ -41,33 +47,33 @@ export class RecipesService {
     await this.prisma.client.status.deleteMany();
   }
 
-  async getPaginatedRecipes(
-    params: GetPaginatedRecipesParams,
-  ): Promise<{ recipes: Recipe[]; total: number }> {
-    try {
-      const { page = 1, limit = 10, filter = {} } = params;
+  // async getPaginatedRecipes(
+  //   params: GetPaginatedRecipesParams,
+  // ): Promise<{ recipes: RecipeCard[]; total: number }> {
+  //   try {
+  //     const { page = 1, limit = 10, filter = {} } = params;
 
-      const sanitizedLimit = Math.min(Math.max(limit, 1), 100); // Ensuring limit is between 1 and 100
-      const sanitizedPage = Math.max(page, 1); // Ensuring page is at least 1
+  //     const sanitizedLimit = Math.min(Math.max(limit, 1), 100); // Ensuring limit is between 1 and 100
+  //     const sanitizedPage = Math.max(page, 1); // Ensuring page is at least 1
 
-      const skippedItems = (sanitizedPage - 1) * sanitizedLimit;
+  //     const skippedItems = (sanitizedPage - 1) * sanitizedLimit;
 
-      const total = await this.prisma.client.recipe.count({
-        where: filter,
-      });
+  //     const total = await this.prisma.client.recipe.count({
+  //       where: filter,
+  //     });
 
-      const recipes = await this.prisma.client.recipe.findMany({
-        skip: skippedItems,
-        take: sanitizedLimit,
-        where: filter,
-      });
+  //     const recipes = await this.prisma.client.recipe.findMany({
+  //       skip: skippedItems,
+  //       take: sanitizedLimit,
+  //       where: filter,
+  //     });
 
-      return { recipes, total };
-    } catch (error) {
-      console.error('Error fetching paginated recipes:', error);
-      throw new Error('Error fetching paginated recipes');
-    }
-  }
+  //     return { recipes, total };
+  //   } catch (error) {
+  //     console.error('Error fetching paginated recipes:', error);
+  //     throw new Error('Error fetching paginated recipes');
+  //   }
+  // }
 
   async getRecipesByMostRecent(): Promise<Recipe[]> {
     return await this.prisma.client.recipe.findMany({

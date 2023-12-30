@@ -1,7 +1,7 @@
 import { useThemeContext } from '../../contexts/Theme';
 
-const ThemeSwitch = () => {
-  const { isDarkMode, setIsDarkMode } = useThemeContext(true);
+const ThemeSwitch: React.FC = () => {
+  const { isDarkMode, setIsDarkMode } = useThemeContext();
 
   // Function to toggle the theme
   const switchTheme = () => {
