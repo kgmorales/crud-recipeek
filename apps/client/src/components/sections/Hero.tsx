@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
             Morales Family Recipes
           </h6>
         </div>
-        <div className="d-flex flex-1 align-center mt-50">
+        <div className="align-center mt-50">
           <ul className="list-tags-col-5 mb-50 text-center">
             {categoryVm.map((category) => (
               <li key={category.key}>

@@ -7,7 +7,7 @@ import FeaturedRecipes from '@components/sections/featured-recipes/FeaturedRecip
 import { useHome } from '@hooks';
 import useRecipeCards from '../hooks/useRecipeCards.hook';
 
-const Home: React.FC = () => {
+const Home: React.FC = (props) => {
   const { home, isHomeLoaded } = useHome();
   useRecipeCards(isHomeLoaded);
 
@@ -19,27 +19,24 @@ const Home: React.FC = () => {
       <Layout>
         <div className="cover-home1">
           <div className="container">
-            <div className="row">
-              <div className="col-xl-1" />
-              <div className="col-xl-10 col-lg-12 text-center">
-                <Hero />
-                <h2 className="color-gray-300 wow animate__animated animate__fadeInUp">
-                  Family Favorites
-                </h2>
-                <p className="text-lg color-gray-400 wow animate__animated animate__fadeInUp">
-                  Discover our most popular recipes.
-                </p>
-                <FeaturedRecipes featured={home?.favorites} />
-                <div className="row mt-70">
-                  <div className="col-lg-12 text-center">
-                    <h2 className="color-gray-300  wow animate__animated animate__fadeInUp">
-                      Recent Recipes
-                    </h2>
-                    <p className="text-lg color-gray-400 wow animate__animated animate__fadeInUp">
-                      Discover our most popular recipes.
-                    </p>
-                    <FeaturedRecipes featured={home?.recents} />
-                  </div>
+            <div className="col-xl-12 col-lg-12 text-center">
+              <Hero />
+              <h2 className="color-gray-300 wow animate__animated animate__fadeInUp">
+                Family Favorites
+              </h2>
+              <p className="text-lg color-gray-400 wow animate__animated animate__fadeInUp">
+                Discover our most popular recipes.
+              </p>
+              <FeaturedRecipes featured={home?.favorites} />
+              <div className="row mt-70">
+                <div className="col-lg-12 text-center">
+                  <h2 className="color-gray-300  wow animate__animated animate__fadeInUp">
+                    Recent Recipes
+                  </h2>
+                  <p className="text-lg color-gray-400 wow animate__animated animate__fadeInUp">
+                    Discover our most popular recipes.
+                  </p>
+                  <FeaturedRecipes featured={home?.recents} />
                 </div>
               </div>
             </div>

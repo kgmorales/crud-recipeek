@@ -1,12 +1,10 @@
 .header {
   padding: 10px 0px;
   margin-top: 15px;
-  float: left;
   width: 100%;
   position: relative;
   .main-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     position: relative;
     // width: 100%;
@@ -14,7 +12,7 @@
     .header-logo {
       max-width: 150px;
       width: 100%;
-      a {
+      margin-right:auto a {
         display: block;
         img {
           min-height: 37px;
@@ -22,7 +20,7 @@
       }
     }
     .header-nav {
-      padding-left: 6.4rem;
+      padding-left: 11rem;
       // display: inline-block;
       // width: 65%;
       // text-align: center;
@@ -96,17 +94,20 @@
       }
     }
     .header-right {
-      max-width: 225px;
-      width: 100%;
+      // max-width: 225px;
+      // width: 100%;
+      display: inline-flex;
+      justify-content: flex-end;
+      align-items: center;
       .block-signin {
         text-align: right;
       }
     }
   }
   .nav-main-menu {
-    width: auto;
-    padding: 0px;
-    float: none;
+    // width: auto;
+    // padding: 0px;
+    // float: none;
   }
   .burger-icon {
     display: none;
@@ -158,7 +159,7 @@
         position: relative;
         &:hover,
         &.active {
-          color: #9E2570;
+          color: #9e2570;
           i {
             opacity: 1;
             transition: 0.2s;

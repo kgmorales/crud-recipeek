@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import debounce from '@clientUtils/debounce'; // Adjust the import path to where your debounce utility is located
-import { useSearch } from '@hooks'; // Update with the correct path
+import { useSearch } from '@hooks';
+import styles from './Search.module.scss';
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,15 +26,33 @@ const Search = () => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search recipes..."
-        onChange={handleSearchChange}
-        value={value} // Controlled input using value state
-      />
-      {/* Render UI based on search input */}
-    </div>
+    <>
+      <div className={`${styles.search}`}>
+        <input
+          className={`${styles.search__input}`}
+          type="search"
+          id="searchInput"
+          placeholder="Search recipes..."
+          onChange={handleSearchChange}
+          value={value}
+        />
+
+        <div className={`${styles.search__iconContainer}`}>
+          <label
+            htmlFor="searchInput"
+            className={`${styles.search__label}`}
+            aria-label="Search"
+          >
+            <svg viewBox="0 0 1000 1000">
+              <path
+                fill="currentColor"
+                d="M408 745a337 337 0 1 0 0-674 337 337 0 0 0 0 674zm239-19a396 396 0 0 1-239 80 398 398 0 1 1 319-159l247 248a56 56 0 0 1 0 79 56 56 0 0 1-79 0L647 726z"
+              />
+            </svg>
+          </label>
+        </div>
+      </div>
+    </>
   );
 };
 
