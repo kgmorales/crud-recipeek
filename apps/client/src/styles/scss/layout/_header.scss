@@ -554,52 +554,7 @@
     }
   }
 }
-.box-breadcrumbs {
-  display: inline-block;
-  .breadcrumb {
-    margin-bottom: 0px;
-    li {
-      position: relative;
-      padding: 0px 30px 0px 0px;
-      &::before {
-        content: '';
-        position: absolute;
-        top: 9px;
-        right: 10px;
-        height: 15px;
-        width: 15px;
-        background: url(../../../../public/assets/imgs/template/icons/right-arrow.svg)
-          no-repeat top right;
-      }
-      &:last-child {
-        padding-right: 0px;
-        &::before {
-          display: none;
-        }
-      }
-      a {
-        display: inline-block;
-        color: $color-gray;
-        font-size: 14px;
-        line-height: 19px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        &:hover {
-          color: $color-brand-1;
-        }
-        &.home {
-          background: url(../../../../public/assets/imgs/template/icons/home.svg)
-            no-repeat left center;
-          padding-left: 30px;
-        }
-      }
-      span {
-        display: inline-block;
-        padding: 5px 0;
-      }
-    }
-  }
-}
+
 .form-search {
   position: absolute;
   top: 100%;

@@ -1,0 +1,23 @@
+@import 'variables';
+
+.breadcrumb {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.5rem;
+  li {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5rem;
+
+    &:last-child > img {
+      display: none;
+    }
+  }
+
+  .link {
+    padding-right: 0.5rem;
+  }
+}

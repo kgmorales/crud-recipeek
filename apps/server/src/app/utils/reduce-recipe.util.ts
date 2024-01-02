@@ -13,7 +13,7 @@ export function reduceRecipeData(recipes: Recipe[]): RecipeCard[] {
       categories: recipe.categories,
       description: recipe.description,
       uid: recipe.uid,
-      image_url: recipe.image_url,
+      image_url: recipe.photo_url,
       ingredientsCount: ingredientsCount(recipe.ingredients),
       name: recipe.name,
       prep_time: recipe.prep_time,

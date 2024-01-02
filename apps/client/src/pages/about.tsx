@@ -5,9 +5,6 @@ import React from 'react';
 import ImageSlider from '@components/elements/ImageSlider';
 import AccordionWrapper from '@components/elements/accordion-wrapper/AccordionWrapper';
 import RecentPosts2 from '@components/sections/RecentPosts2';
-import RecentPosts3 from '@components/sections/RecentPosts3';
-import RecentPosts from '@components/sections/RecentPosts';
-import RecipeFilter from '@components/elements/RecipeFilter';
 
 const About: React.FC = (props) => {
   return (

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/layout/Layout';
-import Breadcrumb from '../../components/elements/Breadcrumb';
+import Breadcrumb from '../../components/elements/breadcrumb/Breadcrumb';
 import data from '../../utils/blogData';
 
 const BlogDetails = () => {
@@ -726,10 +726,7 @@ const BlogDetails = () => {
                           <div className="box-sidebar bg-gray-850 border-gray-800">
                             <div className="head-sidebar">
                               <Link href="/">
-                                <img
-                                  src="assets/lamora-logo.svg"
-                                  alt="Genz"
-                                />
+                                <img src="assets/lamora-logo.svg" alt="Genz" />
                               </Link>
                               <h6 className="color-gray-700">
                                 Follow us on instagram

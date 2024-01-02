@@ -9,7 +9,7 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, '../client/src/styles/scss/base')],
   },
-  images: { domains: ['http://uploads.paprikaapp.com.s3.amazonaws.com/'] },
+  images: { domains: ['s3.amazonaws.com'] },
 
   //* Warning: This allows production builds to successfully complete even if
   eslint: { ignoreDuringBuilds: true },
