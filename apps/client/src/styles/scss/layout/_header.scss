@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .header {
   padding: 10px 0px;
   margin-top: 15px;
@@ -18,12 +20,23 @@
           min-height: 37px;
         }
       }
+      h6 {
+        display:flex;
+        justify-content:center;
+        align-items:flex-end;
+        @include media('<=laptop') {
+          display: none;
+        }
+      }
     }
     .header-nav {
       padding-left: 11rem;
       // display: inline-block;
       // width: 65%;
       // text-align: center;
+      @include media('<=laptop') {
+        padding-left: 0;
+      }
     }
     .header-search {
       width: 35%;

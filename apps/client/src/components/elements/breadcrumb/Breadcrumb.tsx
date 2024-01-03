@@ -1,31 +1,21 @@
 // /components/NextBreadcrumb.tsx
 'use client';
 
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import styles from './Breadcrumb.module.scss';
 import Image from 'next/image';
 
-type TBreadCrumbProps = {
-  homeElement: ReactNode;
-  separator: ReactNode;
-  containerClasses?: string;
-  listClasses?: string;
-  activeClasses?: string;
-  capitalizeLinks?: boolean;
-};
-
 const iconPATH = '/assets/imgs/template/icons';
 
-const Breadcrumb = ({
-  homeElement,
-  separator,
-  capitalizeLinks,
-}: TBreadCrumbProps) => {
+const Breadcrumb = () => {
   const paths = usePathname();
-  const pathNames = paths?.split('/').filter((path) => path);
+  const pathNames = paths
+    ?.split('/')
+    .filter((path) => path)
+    .map((name) => name.replaceAll('-', ' '));
 
   return (
     <>
@@ -41,12 +31,11 @@ const Breadcrumb = ({
             height={12}
           />
         </li>
-        {pathNames?.length > 0 && separator}
+        {pathNames?.length > 0}
         {pathNames?.map((link, index) => {
           const href = `/${pathNames.slice(0, index + 1).join('/')}`;
-          const itemLink = capitalizeLinks
-            ? link[0].toUpperCase() + link.slice(1, link.length)
-            : link;
+          console.log({ href });
+          const itemLink = link[0].toUpperCase() + link.slice(1, link.length);
           return (
             <React.Fragment key={index}>
               <li>
@@ -60,7 +49,7 @@ const Breadcrumb = ({
                   height={12}
                 />
               </li>
-              {pathNames.length !== index + 1 && separator}
+              {pathNames.length !== index + 1}
             </React.Fragment>
           );
         })}

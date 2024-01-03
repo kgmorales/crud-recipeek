@@ -14,8 +14,7 @@ const Recipes: React.FC = (props) => {
         <div className="cover-home1">
           <div className="container">
             <div className="row">
-              <div className="col-xl-1" />
-              <div className="col-xl-10 col-lg-12">
+              <div className="col-xl-12">
                 <div className="text-center mt-70 mb-50">
                   <h2 className="color-gray-300 d-inline-block mb-20 wow animate__animated animate__fadeInUp">
                     Recipes

@@ -29,7 +29,7 @@ const Search = () => {
     <>
       <div className={`${styles.search}`}>
         <input
-          className={`${styles.search__input}`}
+          className={`${styles.search__input} color-gray-300`}
           type="search"
           id="searchInput"
           placeholder="Search recipes..."
@@ -37,7 +37,7 @@ const Search = () => {
           value={value}
         />
 
-        <div className={`${styles.search__iconContainer}`}>
+        <div className={`${styles.search__iconContainer} color-gray-300`}>
           <label
             htmlFor="searchInput"
             className={`${styles.search__label}`}

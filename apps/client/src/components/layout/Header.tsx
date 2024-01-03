@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({
             : 'header sticky-bar bg-gray-900'
         }
       >
-        <div className="main-header">
+        <div className="main-header container">
           <div className="header-logo">
             <Link className="d-flex justify-center align-items-center" href="/">
               <Image
@@ -70,9 +70,7 @@ const Header: React.FC<HeaderProps> = ({
                 width={50}
                 height={50}
               />
-              <h6 className="color-gray-300 d-flex justify-center align-items-bottom">
-                laMora
-              </h6>
+              <h6 className="header-logo-text color-gray-300">laMora</h6>
             </Link>
           </div>
           <div className="header-nav">

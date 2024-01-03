@@ -1,7 +1,15 @@
+@import 'variables';
+
+.theme-day .search__input {
+  &::placeholder {
+    color: $color-gray-300-day;
+  }
+}
+
 .search {
   --easing: cubic-bezier(0.4, 0, 0.2, 1);
   --font-size: 1rem;
-  // --color-highlight: white;
+  --color-highlight: white;
   --transition-time-icon: 0.2s;
   --transition-time-input: 0.3s 0.25s;
 
@@ -19,7 +27,7 @@
   border-radius: 999px;
   border: 2px solid transparent;
   display: flex;
-  margin-right: 3rem;
+  margin-right: 2.4rem;
   transition:
     border-color var(--transition-time-icon) linear,
     padding var(--transition-time-input) var(--easing);
@@ -27,14 +35,14 @@
   &__input {
     background: transparent;
     border: none;
-    color: var(--color-highlight);
+    color: $color-gray-300;
     font-size: var(--font-size);
     opacity: 0;
     outline: none;
     padding: 0;
 
     &::placeholder {
-      // color: var(--color);
+      color: $color-gray-300;
       opacity: 0.75;
     }
   }
@@ -47,7 +55,7 @@
 
   &__label,
   &__submit {
-    // color: var(--color);
+    color: var(--color);
     cursor: pointer;
     display: block;
     height: 100%;
@@ -58,7 +66,7 @@
     &:hover,
     &:focus,
     &:active {
-      // color: var(--color-highlight);
+      color: $color-gray-300;
     }
   }
 
@@ -89,7 +97,7 @@
   }
 
   &:focus-within {
-    // border-color: var(--color);
+    border-color: var(--color);
 
     #{$root} {
       &__input {
