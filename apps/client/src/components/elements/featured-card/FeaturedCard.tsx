@@ -25,7 +25,7 @@ const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
         style={{
           backgroundImage: `url(${cardInfo.image_url})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: 'bottom',
           backgroundRepeat: 'no-repeat',
         }}
       >
