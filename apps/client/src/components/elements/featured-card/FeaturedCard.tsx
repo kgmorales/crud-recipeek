@@ -55,6 +55,7 @@ const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
                 width={25}
                 height={25}
               />
+              {/* TODO: change to cook time */}
               <div className={styles.numberContainer}>{cardInfo.prep_time}</div>
             </li>
             <li>

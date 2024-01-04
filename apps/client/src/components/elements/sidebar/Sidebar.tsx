@@ -42,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ recipe }) => {
               <h6 className="color-gray-200 mb-10 text-uppercase">
                 Project date
               </h6>
-              <p className="color-gray-200">01 November, 2023</p>
+              <p className="color-gray-200">{recipe?.cook_time}</p>
             </div>
             <div
               className={`${styles.item_comment} wow animate__animated animate__fadeIn`}

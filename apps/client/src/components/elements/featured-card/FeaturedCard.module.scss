@@ -16,6 +16,8 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
 .card:hover:before {
   filter: blur(5px);
 }
+
+//TODO: There is a space with gap on content that adds to much padding to the bottom of a un-hovered card.
 .card {
   width: 100%;
   position: relative;
@@ -65,18 +67,17 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 30%;
   border-radius: 16px;
   transition: transform $duration $easing;
   z-index: 1;
-  gap: 1rem;
   padding: 1rem;
   border: 1px solid;
+  gap: 1rem;
 }
 
 .title {
-  font-size: 1.4rem;
-  height: 60px;
+  font-size: 1.1rem;
   width: 100%;
   line-height: 1.2;
   background: #2b2448;
@@ -85,6 +86,7 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   border-radius: 16px;
   align-items: center;
   padding: 1rem;
+  height: 50px;
 }
 
 .notes {
@@ -116,7 +118,8 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   }
   //TODO: FIX THIS: IT SHOULD NOT HAVE A BORDER; SET BACKGROUND AFTER TRANSITION. BEFORE IS OPAQUE.
   .content {
-    transform: translateY(calc(100% - 4.5rem));
+    transform: translateY(calc(100% - 5.3rem));
+
     > *:not(.title) {
       opacity: 0;
       transform: translateY(1rem);
@@ -158,6 +161,7 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
 
     .content {
       transform: translateY(0);
+      height: 100%;
       background: #29245b;
       > *:not(.title) {
         opacity: 1;

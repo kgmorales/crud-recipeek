@@ -17,27 +17,25 @@ const Home: React.FC = (props) => {
         <title>laMora | Recipes</title>
       </Head>
       <Layout>
-        <div className="cover-home1">
-          <div className="container">
-            <div className="col-xl-12 col-lg-12 text-center">
-              <Hero />
-              <h2 className="color-gray-300 wow animate__animated animate__fadeInUp">
-                Family Favorites
-              </h2>
-              <p className="text-lg color-gray-400 wow animate__animated animate__fadeInUp">
-                Discover our most popular recipes.
-              </p>
-              <FeaturedRecipes featured={home?.favorites} />
-              <div className="row mt-70">
-                <div className="col-lg-12 text-center">
-                  <h2 className="color-gray-300  wow animate__animated animate__fadeInUp">
-                    Recent Recipes
-                  </h2>
-                  <p className="text-lg color-gray-400 wow animate__animated animate__fadeInUp">
-                    Discover our most popular recipes.
-                  </p>
-                  <FeaturedRecipes featured={home?.recents} />
-                </div>
+        <div className="container">
+          <div className="col-xl-12 col-lg-12 text-center">
+            <Hero />
+            <h2 className="color-gray-300 wow animate__animated animate__fadeInUp">
+              Family Favorites
+            </h2>
+            <p className="text-lg color-gray-400 wow animate__animated animate__fadeInUp">
+              Discover our most popular recipes.
+            </p>
+            <FeaturedRecipes featured={home?.favorites} />
+            <div className="row mt-70">
+              <div className="col-lg-12 text-center">
+                <h2 className="color-gray-300  wow animate__animated animate__fadeInUp">
+                  Recent Recipes
+                </h2>
+                <p className="text-lg color-gray-400 wow animate__animated animate__fadeInUp">
+                  Discover our most popular recipes.
+                </p>
+                <FeaturedRecipes featured={home?.recents} />
               </div>
             </div>
           </div>

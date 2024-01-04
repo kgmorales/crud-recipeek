@@ -68,7 +68,7 @@ const RecipeDetails: React.FC = (props) => {
                   {recipe?.directions}
                 </p>
               </div>
-              {/* <div className="box-tags wow animate__animated animate__fadeIn">
+              <div className="box-tags wow animate__animated animate__fadeIn">
                 <Link
                   className="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up"
                   href="blog-archive"
@@ -93,7 +93,7 @@ const RecipeDetails: React.FC = (props) => {
                 >
                   #House
                 </Link>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
