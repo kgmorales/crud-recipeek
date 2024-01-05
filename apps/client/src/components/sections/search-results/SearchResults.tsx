@@ -14,8 +14,8 @@ const SearchResults: React.FC = () => {
     return (
       <div className="container wow animate__animated animate__fadeIn">
         <div className="row mt-30">
-          <h2 className="text-center color-gray-300 wow animate__animated animate__fadeIn">
-            Searched: {searchTerm}
+          <h2 className="text-center color-gray-300 wow animate__animated animate__fadeIn capitalize">
+            search results: {searchTerm}
           </h2>
           <div className={styles.cardContainer}>
             {/* Map over the results and render them */}

@@ -1,80 +1,43 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { Recipe } from '@prisma/client';
-import { fetchSearchResults } from '@api/search/search.routes';
 import { useSearchContext } from '@contexts';
-import { masterRecipesKey } from '../constants/master-recipe-key';
 import { RecipeCard } from '../types/pages';
+import { useHome } from './useHome.hook'; // Import useHome hook
 
 export const useSearch = (searchTerm: string) => {
   const queryClient = useQueryClient();
   const { setResults } = useSearchContext();
-  // Memoize fetchNewSearchResults to prevent it from being recreated on every render
-  const fetchNewSearchResults = useCallback(
-    async (term: string) => {
-      const allCachedRecipes =
-        queryClient.getQueryData<RecipeCard[]>([masterRecipesKey]) || [];
-
-      const excludedIds = allCachedRecipes.reduce((acc, curr) => {
-        if (curr.uid && curr.name?.toLowerCase().includes(term.toLowerCase())) {
-          return [...acc, curr.uid];
-        }
-        return acc;
-      }, [] as string[]);
-
-      return fetchSearchResults(term, excludedIds);
-    },
-
-    [queryClient],
-  ); // searchTerm is a dependency now
+  const { home } = useHome(); // Get home data including categories
 
   useEffect(() => {
+    const allRecipes =
+      queryClient.getQueryData<RecipeCard[]>(['recipeCards']) || [];
+    const categories = home?.categories || [];
+
     if (!searchTerm.trim()) {
       setResults([]);
       return;
     }
 
-    const updateResults = async () => {
-      const serverRecipes = await fetchNewSearchResults(searchTerm);
-      const allCachedRecipes =
-        queryClient.getQueryData<RecipeCard[]>([masterRecipesKey]) || [];
-      const cachedRecipesMatchingSearchTerm = allCachedRecipes.filter(
-        (recipe) =>
-          recipe.name?.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
+    const searchTermLower = searchTerm.trim().toLowerCase();
+    const filteredResults = allRecipes.filter((recipe) => {
+      // Check if recipe name includes the search term
+      const nameMatch = recipe.name?.toLowerCase().includes(searchTermLower);
 
-      const combinedResults = [
-        ...cachedRecipesMatchingSearchTerm,
-        ...serverRecipes,
-      ];
-      console.log({ combinedResults });
-      setResults(combinedResults);
-
-      if (serverRecipes.length > 0) {
-        queryClient.setQueryData<RecipeCard[]>(
-          [masterRecipesKey],
-          (oldData = []) => {
-            const recipesMap = new Map(
-              [...oldData, ...serverRecipes].map((recipe) => [
-                recipe.uid,
-                recipe,
-              ]),
-            );
-            return Array.from(recipesMap.values());
-          },
+      // Check if any category UID in the recipe matches a category from home.categories
+      const categoryMatch = recipe.categories?.some((categoryUID) => {
+        return categories.some(
+          (homeCategory) =>
+            homeCategory.uid === categoryUID &&
+            homeCategory.name.toLowerCase().includes(searchTermLower),
         );
-      }
-    };
+      });
 
-    updateResults();
-  }, [searchTerm, setResults, queryClient, fetchNewSearchResults]); // Include fetchNewSearchResults here
+      return nameMatch || categoryMatch;
+    });
 
-  return {
-    results: queryClient.getQueryData<Recipe[]>([masterRecipesKey]) || [],
-    isLoading: false, // You can manage loading state as per your logic
-    isError: false, // You can manage error state as per your logic
-    error: null, // You can manage error state as per your logic
-  };
+    setResults(filteredResults);
+  }, [searchTerm, queryClient, setResults, home]);
 };
 
 export default useSearch;
