@@ -6,7 +6,7 @@ import { RecipeCard } from '@types';
 import styles from './SearchResults.module.scss';
 
 const SearchResults: React.FC = () => {
-  const { results } = useSearchContext();
+  const { results, searchTerm } = useSearchContext();
 
   // Check if the results array has searched recipes in it
   if (results?.length) {
@@ -15,7 +15,7 @@ const SearchResults: React.FC = () => {
       <div className="container wow animate__animated animate__fadeIn">
         <div className="row mt-30">
           <h2 className="text-center color-gray-300 wow animate__animated animate__fadeIn">
-            Search Recipes
+            Searched: {searchTerm}
           </h2>
           <div className={styles.cardContainer}>
             {/* Map over the results and render them */}

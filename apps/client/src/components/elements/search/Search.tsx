@@ -1,14 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import debounce from '@clientUtils/debounce'; // Adjust the import path to where your debounce utility is located
-import { useSearch } from '@hooks';
 import styles from './Search.module.scss';
+import { useSearchContext } from '@contexts';
+import { useSearch } from '@hooks';
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const { searchTerm, setSearchTerm } = useSearchContext();
   const [value, setValue] = useState(''); // This state will keep the input value
-
-  // Call useSearch hook with the debounced search term
-  useSearch(searchTerm);
 
   // Debounce setSearchTerm function
   const debouncedSetSearchTerm = useCallback(
@@ -16,8 +14,10 @@ const Search = () => {
       setSearchTerm(newTerm);
       window.scrollTo(0, 0);
     }, 800),
-    [], // Dependencies array is empty, meaning the debounced function will be created once per component instance
+    [],
   );
+
+  useSearch(searchTerm);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // Update value state as user types

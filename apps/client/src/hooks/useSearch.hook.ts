@@ -9,7 +9,6 @@ import { RecipeCard } from '../types/pages';
 export const useSearch = (searchTerm: string) => {
   const queryClient = useQueryClient();
   const { setResults } = useSearchContext();
-
   // Memoize fetchNewSearchResults to prevent it from being recreated on every render
   const fetchNewSearchResults = useCallback(
     async (term: string) => {
@@ -48,6 +47,7 @@ export const useSearch = (searchTerm: string) => {
         ...cachedRecipesMatchingSearchTerm,
         ...serverRecipes,
       ];
+      console.log({ combinedResults });
       setResults(combinedResults);
 
       if (serverRecipes.length > 0) {
