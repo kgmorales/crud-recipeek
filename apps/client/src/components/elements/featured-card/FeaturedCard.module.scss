@@ -74,6 +74,9 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   padding: 1rem;
   border: 1px solid;
   gap: 1rem;
+  -webkit-box-shadow: inset 0px 3px 37px -14px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 0px 3px 37px -14px rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0px 3px 37px -14px rgba(0, 0, 0, 0.5);
 }
 
 .title {

@@ -14,6 +14,7 @@ const Search = () => {
   const debouncedSetSearchTerm = useCallback(
     debounce((newTerm: string) => {
       setSearchTerm(newTerm);
+      window.scrollTo(0, 0);
     }, 800),
     [], // Dependencies array is empty, meaning the debounced function will be created once per component instance
   );
