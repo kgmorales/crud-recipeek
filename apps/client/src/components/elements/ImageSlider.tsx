@@ -54,7 +54,7 @@ const ImageSlider: React.FC = () => {
             spaceBetween: 30,
           },
         }}
-        className="swiper-wrapper"
+        className="swiper-wrapper wow animate__animated animate__fadeInUp"
       >
         {imgs.map((item, i) => (
           <SwiperSlide className="swiper-slide" key={i}>

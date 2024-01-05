@@ -16,10 +16,10 @@ const Recipes: React.FC = (props) => {
             <div className="row">
               <div className="col-xl-12">
                 <div className="text-center mt-70 mb-50">
-                  <h2 className="color-gray-300 d-inline-block mb-20 wow animate__animated animate__fadeInUp">
+                  <h2 className="color-gray-300 d-inline-block mb-20 wow animate__animated animate__fadeIn">
                     Recipes
                   </h2>
-                  <p className="text-lg color-gray-300 wow animate__animated animate__fadeInUp">
+                  <p className="text-lg color-gray-300 wow animate__animated animate__fadeIn">
                     These Recipes keep the Morales Family running
                   </p>
                 </div>

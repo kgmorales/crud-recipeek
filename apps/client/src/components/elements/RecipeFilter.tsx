@@ -40,7 +40,7 @@ const RecipeFilter: React.FC = () => {
           {/* "All" button */}
           <li>
             <div
-              className={`wow animate__animated animate__fadeInUp card-style-2 btn hover-up hover-neon hover-shadow justify-center ${
+              className={`wow animate__animated animate__fadeIn card-style-2 btn hover-up hover-neon hover-shadow justify-content-center ${
                 filter === 'all' ? 'active btn-linear d-flex' : ''
               }`}
               onClick={() => setFilter('all')}
@@ -55,7 +55,7 @@ const RecipeFilter: React.FC = () => {
             categories.map((category) => (
               <li key={category.uid}>
                 <div
-                  className={`wow animate__animated animate__fadeInUp card-style-2 hover-neon btn hover-up hover-shadow justify-center ${
+                  className={`wow animate__animated animate__fadeIn card-style-2 hover-neon btn hover-up hover-shadow justify-content-center ${
                     filter === category.uid ? 'active btn-linear d-flex' : ''
                   }`}
                   onClick={() => setFilter(category.uid)}

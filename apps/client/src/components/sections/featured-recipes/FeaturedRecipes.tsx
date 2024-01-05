@@ -10,7 +10,7 @@ const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
   return (
     <>
       <div className="row mt-30">
-        <div className={styles.cardContainer}>
+        <div className={`${styles.cardContainer}`}>
           {featured?.map((recipe) => (
             <div key={recipe.uid}>
               <FeaturedCard cardInfo={recipe} />

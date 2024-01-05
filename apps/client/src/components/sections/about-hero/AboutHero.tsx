@@ -6,7 +6,9 @@ import SpotifyNowPlaying from '@components/elements/spotify/SpotifyNowPlaying';
 
 export default function Hero() {
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} wow animate__animated animate__fadeIn`}
+    >
       <Image
         className={styles.image}
         src={portraitImage}

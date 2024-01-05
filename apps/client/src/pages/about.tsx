@@ -13,14 +13,12 @@ const About: React.FC = (props) => {
         <title>Genz - About me</title>
       </Head>
       <Layout>
-        <div className="cover-home1">
-          <div className="container">
-            <div className="row">
-              <AboutHero />
-              <ImageSlider />
-              <RecentPosts2 />
-              <AccordionWrapper />
-            </div>
+        <div className="container">
+          <div className="row">
+            <AboutHero />
+            <ImageSlider />
+            <RecentPosts2 />
+            <AccordionWrapper />
           </div>
         </div>
       </Layout>
