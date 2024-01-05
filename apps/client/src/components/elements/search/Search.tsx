@@ -1,12 +1,14 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import debounce from '@clientUtils/debounce'; // Adjust the import path to where your debounce utility is located
 import styles from './Search.module.scss';
 import { useSearchContext } from '@contexts';
 import { useSearch } from '@hooks';
+import { useRouter } from 'next/router';
 
 const Search = () => {
   const { searchTerm, setSearchTerm } = useSearchContext();
   const [value, setValue] = useState(''); // This state will keep the input value
+  const router = useRouter();
 
   // Debounce setSearchTerm function
   const debouncedSetSearchTerm = useCallback(
@@ -25,6 +27,11 @@ const Search = () => {
     // Call the debounced function with the new value
     debouncedSetSearchTerm(event.target.value);
   };
+
+  useEffect(() => {
+    setSearchTerm('');
+    setValue('');
+  }, [router.asPath, setSearchTerm]);
 
   return (
     <>

@@ -1,9 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  // HydrationBoundary,
-  // QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@clientUtils/queryClient';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from '../contexts/Theme';
@@ -17,18 +13,19 @@ import { RecipeProvider } from '../contexts/Recipe';
 function MyApp({ Component, pageProps }) {
   // useEffect to initialize the WOW.js library when the component mounts
   useEffect(() => {
-    // Import the WOW.js library
-    const WOW = require('wowjs');
+    // Ensure this code runs only on the client side
+    if (typeof window !== 'undefined') {
+      // Dynamically import the WOW.js library
+      import('wowjs').then((WOW) => {
+        // Create an instance of the WOW.js library with live set to false
+        const wowInstance = new WOW.WOW({
+          live: false,
+        });
 
-    // Create an instance of the WOW.js library with live set to false
-    const wowInstance = new WOW.WOW({
-      live: false,
-    });
-
-    // Initialize the WOW.js library to animate elements
-    wowInstance.init();
-
-    // No cleanup required here for WOW.js as mentioned
+        // Initialize the WOW.js library to animate elements
+        wowInstance.init();
+      });
+    }
   }, []);
 
   return (
