@@ -23,7 +23,7 @@ const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
       <div
         className={`${styles.card} hover-up hover-neon wow animate__ animate__fadeIn animated`}
         style={{
-          backgroundImage: `url(${cardInfo.image_url})`,
+          backgroundImage: `url(${cardInfo.imageURL})`,
           backgroundSize: 'cover',
           backgroundPosition: 'bottom',
           backgroundRepeat: 'no-repeat',
@@ -56,7 +56,7 @@ const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
                 height={25}
               />
               {/* TODO: change to cook time */}
-              <div className={styles.numberContainer}>{cardInfo.prep_time}</div>
+              <div className={styles.numberContainer}>{cardInfo.prepTime}</div>
             </li>
             <li>
               <Image

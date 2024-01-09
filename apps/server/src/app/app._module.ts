@@ -6,7 +6,7 @@ import { PrismaClient } from '@prisma/client';
 // * Modules
 // import { BlogModule } from '@modules/blog/blog._module';
 import { RecipesModule } from '@modules/recipes/recipes._module';
-import { SearchModule } from '@modules/search/search._module';
+// import { SearchModule } from '@modules/search/search._module';
 import { SharedModule } from '@modules/shared/shared._module';
 
 //? Config
@@ -36,7 +36,7 @@ import { PassportModule } from '@nestjs/passport';
       },
     }),
     RecipesModule,
-    SearchModule,
+    // SearchModule,
     SharedModule,
   ],
   providers: [

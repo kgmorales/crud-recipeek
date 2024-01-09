@@ -1,4 +1,4 @@
-import { Recipe } from '@prisma/client';
+import { Category, Recipe } from '@prisma/client';
 import { RecipeCard } from '@server/types/recipe-card.types';
 
 const ingredientsCount = (ingredients: Recipe['ingredients']): number =>
@@ -7,17 +7,37 @@ const ingredientsCount = (ingredients: Recipe['ingredients']): number =>
 const buildRecipeLink = (name: Recipe['name']) =>
   `/recipes/${name.split(' ').join('-')}`;
 
-export function reduceRecipeData(recipes: Recipe[]): RecipeCard[] {
+const addCategoryToRecipe = (
+  recipeCategories: string[],
+  categories: Category[],
+) => {
+  const categoryMap = new Map(categories.map((cat) => [cat.uid, cat.name]));
+
+  return recipeCategories.map((catUID) => {
+    return categoryMap.get(catUID) || '';
+  });
+};
+
+export function reduceRecipeData(
+  recipes: Recipe[],
+  categories: Category[],
+): RecipeCard[] {
   return recipes.map((recipe) => {
     return {
-      categories: recipe.categories,
+      categories: addCategoryToRecipe(recipe.categories, categories),
+      cookTime: recipe.cook_time,
+      created: recipe.created,
       description: recipe.description,
-      uid: recipe.uid,
-      image_url: recipe.photo_url,
+      directions: recipe.directions,
       ingredientsCount: ingredientsCount(recipe.ingredients),
+      ingredients: recipe.ingredients,
+      imageURL: recipe.photo_url,
+      isFavorite: recipe.on_favorites,
       name: recipe.name,
-      prep_time: recipe.prep_time,
+      notes: recipe.notes,
+      prepTime: recipe.prep_time,
       recipeLink: buildRecipeLink(recipe.name),
+      uid: recipe.uid,
     };
   });
 }

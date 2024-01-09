@@ -1,13 +1,13 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { masterRecipesKey } from '@constants';
-import { RecipeCard } from '../types/pages';
+import { RecipeCard as Recipe } from '../types/pages';
 
 export const useUpdateRecipeCache = () => {
   const queryClient = useQueryClient();
 
-  const updateRecipeCache = (newRecipes: RecipeCard[]) => {
+  const updateRecipeCache = (newRecipes: Recipe[]) => {
     // Retrieve existing recipes from the cache
-    const existingRecipes = queryClient.getQueryData<RecipeCard[]>([
+    const existingRecipes = queryClient.getQueryData<Recipe[]>([
       masterRecipesKey,
     ]);
 
@@ -25,7 +25,7 @@ export const useUpdateRecipeCache = () => {
     const updatedRecipes = Array.from(recipeMap.values());
 
     // Update the cache with the new array
-    queryClient.setQueryData<RecipeCard[]>([masterRecipesKey], updatedRecipes);
+    queryClient.setQueryData<Recipe[]>([masterRecipesKey], updatedRecipes);
   };
 
   return { updateRecipeCache };

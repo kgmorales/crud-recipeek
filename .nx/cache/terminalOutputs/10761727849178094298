@@ -1,0 +1,100 @@
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 87.7 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m37:18[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 35 |[39m     [36mreturn[39m {[0m
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m [90m    |[39m                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m38:16[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m [90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m    |[39m                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+  [0m [90m 41 |[39m }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/search/controllers/controllers._module.ts:[32m[1m6:32[22m[39m[1m[39m[22m
+[90mTS2306: [39mFile '/Users/d34th_sh0t/Desktop/dev/lamora/apps/server/src/app/modules/search/services/services._module.ts' is not a module.
+  [0m [90m 4 |[39m[0m
+  [0m [90m 5 |[39m [90m//* Modules[39m[0m
+  [0m[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mServicesModule[39m } [36mfrom[39m [32m'../services/services._module'[39m[33m;[39m[0m
+  [0m [90m   |[39m                                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 7 |[39m[0m
+  [0m [90m 8 |[39m [36mconst[39m controllers [33m=[39m [[33mSearchRecipesController[39m][33m;[39m[0m
+  [0m [90m 9 |[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/search/controllers/searchRecipes._controller.ts:[32m[1m2:38[22m[39m[1m[39m[22m
+[90mTS2306: [39mFile '/Users/d34th_sh0t/Desktop/dev/lamora/apps/server/src/app/modules/search/services/searchRecipes._service.ts' is not a module.
+  [0m [90m 1 |[39m [36mimport[39m { [33mController[39m[33m,[39m [33mGet[39m[33m,[39m [33mQuery[39m } [36mfrom[39m [32m'@nestjs/common'[39m[33m;[39m[0m
+  [0m[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { [33mSearchRecipesService[39m } [36mfrom[39m [32m'../services/searchRecipes._service'[39m[33m;[39m[0m
+  [0m [90m   |[39m                                      [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 3 |[39m [36mimport[39m { [33mRecipeCard[39m } [36mfrom[39m [32m'@server/types/recipe-card.types'[39m[33m;[39m[0m
+  [0m [90m 4 |[39m[0m
+  [0m [90m 5 |[39m [33m@[39m[33mController[39m([32m'search'[39m)[0m
+
+webpack compiled with [1m[31m4 errors[39m[22m (99e57bfbfd943222)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 87.7 KiB [1m[33m[entry][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m37:18[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 35 |[39m     [36mreturn[39m {[0m
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m [90m    |[39m                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m38:16[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m [90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m    |[39m                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+  [0m [90m 41 |[39m }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/search/controllers/searchRecipes._controller.ts:[32m[1m2:38[22m[39m[1m[39m[22m
+[90mTS2306: [39mFile '/Users/d34th_sh0t/Desktop/dev/lamora/apps/server/src/app/modules/search/services/searchRecipes._service.ts' is not a module.
+  [0m [90m 1 |[39m [36mimport[39m { [33mController[39m[33m,[39m [33mGet[39m[33m,[39m [33mQuery[39m } [36mfrom[39m [32m'@nestjs/common'[39m[33m;[39m[0m
+  [0m[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { [33mSearchRecipesService[39m } [36mfrom[39m [32m'../services/searchRecipes._service'[39m[33m;[39m[0m
+  [0m [90m   |[39m                                      [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 3 |[39m [36mimport[39m { [33mRecipeCard[39m } [36mfrom[39m [32m'@server/types/recipe-card.types'[39m[33m;[39m[0m
+  [0m [90m 4 |[39m[0m
+  [0m [90m 5 |[39m [33m@[39m[33mController[39m([32m'search'[39m)[0m
+
+webpack compiled with [1m[31m3 errors[39m[22m (99e57bfbfd943222)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 87.7 KiB [1m[33m[entry][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m37:18[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 35 |[39m     [36mreturn[39m {[0m
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m [90m    |[39m                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m38:16[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m [90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m    |[39m                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+  [0m [90m 41 |[39m }[0m
+
+webpack compiled with [1m[31m2 errors[39m[22m (99e57bfbfd943222)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m

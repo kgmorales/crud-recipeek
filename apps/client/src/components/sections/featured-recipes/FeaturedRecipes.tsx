@@ -1,15 +1,15 @@
 import FeaturedCard from '@components/elements/featured-card/FeaturedCard';
 import styles from './FeaturedRecipes.module.scss';
-import { Home } from '@types';
+import { RecipeCard } from '@types';
 
 interface FeaturedRecipesProps {
-  featured?: Home['favorites'];
+  featured?: RecipeCard[] | undefined;
 }
 
 const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
   return (
     <>
-      <div className="row mt-30">
+      <div className="row">
         <div className={`${styles.cardContainer}`}>
           {featured?.map((recipe) => (
             <div key={recipe.uid}>

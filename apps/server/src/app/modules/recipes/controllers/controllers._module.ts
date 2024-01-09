@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { PageController } from './page._controller';
+// import { PageController } from './page._controller';
 import { PaprikaController } from './paprika._controller';
 import { RecipesController } from './recipe._controller';
 import { SyncController } from './sync._controller';
@@ -9,7 +9,7 @@ import { SyncController } from './sync._controller';
 import { ServicesModule } from '../services/services._module';
 
 const controllers = [
-  PageController,
+  // PageController,
   PaprikaController,
   RecipesController,
   SyncController,

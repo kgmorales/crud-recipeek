@@ -11,6 +11,7 @@ const Search = () => {
   const router = useRouter();
 
   // Debounce setSearchTerm function
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSetSearchTerm = useCallback(
     debounce((newTerm: string) => {
       setSearchTerm(newTerm);

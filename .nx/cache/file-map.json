@@ -159,7 +159,7 @@
       },
       {
         "file": "apps/server/src/app/app._module.ts",
-        "hash": "15877067508115212402"
+        "hash": "327246841419686370"
       },
       {
         "file": "apps/server/src/app/config/config.ts",
@@ -231,11 +231,11 @@
       },
       {
         "file": "apps/server/src/app/modules/recipes/controllers/controllers._module.ts",
-        "hash": "9705168681764602846"
+        "hash": "4402339654124642472"
       },
       {
         "file": "apps/server/src/app/modules/recipes/controllers/page._controller.ts",
-        "hash": "16291647291565443310"
+        "hash": "17362533592564892263"
       },
       {
         "file": "apps/server/src/app/modules/recipes/controllers/paprika._controller.ts",
@@ -295,7 +295,7 @@
       },
       {
         "file": "apps/server/src/app/modules/recipes/services/page._service.ts",
-        "hash": "14390618983263996267"
+        "hash": "8220900396618172327"
       },
       {
         "file": "apps/server/src/app/modules/recipes/services/paprika._service.ts",
@@ -323,31 +323,31 @@
       },
       {
         "file": "apps/server/src/app/modules/recipes/services/recipes._service.ts",
-        "hash": "8898632227578555349"
+        "hash": "5590545267814984795"
       },
       {
         "file": "apps/server/src/app/modules/recipes/services/services._module.ts",
-        "hash": "14817217901757997018"
+        "hash": "2798416123598770862"
       },
       {
         "file": "apps/server/src/app/modules/search/controllers/controllers._module.ts",
-        "hash": "7751192062393266568"
+        "hash": "14608404099227936070"
       },
       {
         "file": "apps/server/src/app/modules/search/controllers/searchRecipes._controller.ts",
-        "hash": "11532998874194766795"
+        "hash": "14162460294472720887"
       },
       {
         "file": "apps/server/src/app/modules/search/search._module.ts",
-        "hash": "214424198386844531"
+        "hash": "2553032817425436392"
       },
       {
         "file": "apps/server/src/app/modules/search/services/searchRecipes._service.ts",
-        "hash": "9949245002787626101"
+        "hash": "12053802266114193418"
       },
       {
         "file": "apps/server/src/app/modules/search/services/services._module.ts",
-        "hash": "8676736811830749214"
+        "hash": "4360480751860915042"
       },
       {
         "file": "apps/server/src/app/modules/shared/services/prisma._service.ts",
@@ -391,7 +391,7 @@
       },
       {
         "file": "apps/server/src/app/types/recipe-card.types.ts",
-        "hash": "1624533581132031871"
+        "hash": "3806200577329167696"
       },
       {
         "file": "apps/server/src/app/utils/error.ts",
@@ -411,7 +411,7 @@
       },
       {
         "file": "apps/server/src/app/utils/reduce-recipe.util.ts",
-        "hash": "7270376652110355306"
+        "hash": "5981223410034494361"
       },
       {
         "file": "apps/server/src/app/utils/requirements.txt",
@@ -2101,7 +2101,7 @@
       },
       {
         "file": "apps/client/src/components/elements/RecipeFilter.tsx",
-        "hash": "10840791083198824807"
+        "hash": "14791367208978682572"
       },
       {
         "file": "apps/client/src/components/elements/SwitchButton.tsx",
@@ -2121,7 +2121,7 @@
       },
       {
         "file": "apps/client/src/components/elements/breadcrumb/Breadcrumb.tsx",
-        "hash": "11587129620946920728"
+        "hash": "16991481105118924589"
       },
       {
         "file": "apps/client/src/components/elements/featured-card/FeaturedCard.module.scss",
@@ -2129,7 +2129,7 @@
       },
       {
         "file": "apps/client/src/components/elements/featured-card/FeaturedCard.tsx",
-        "hash": "14733100531775969625"
+        "hash": "14752192380352582723"
       },
       {
         "file": "apps/client/src/components/elements/index.ts",
@@ -2149,7 +2149,7 @@
       },
       {
         "file": "apps/client/src/components/elements/search/Search.tsx",
-        "hash": "8639307642344201163"
+        "hash": "18432461364022863542"
       },
       {
         "file": "apps/client/src/components/elements/sidebar/Sidebar.module.scss",
@@ -2157,7 +2157,7 @@
       },
       {
         "file": "apps/client/src/components/elements/sidebar/Sidebar.tsx",
-        "hash": "11793512510280044965"
+        "hash": "16112393586511418045"
       },
       {
         "file": "apps/client/src/components/elements/spotify/SpotifyNowPlaying.module.scss",
@@ -2253,7 +2253,7 @@
       },
       {
         "file": "apps/client/src/components/sections/featured-recipes/FeaturedRecipes.tsx",
-        "hash": "5881775544265908511"
+        "hash": "13167913839282502566"
       },
       {
         "file": "apps/client/src/components/sections/recent-recipes/RecentRecipes.module.scss",
@@ -2345,27 +2345,27 @@
       },
       {
         "file": "apps/client/src/hooks/useHome.hook.ts",
-        "hash": "5117186964913319310"
+        "hash": "15607418502592528393"
       },
       {
         "file": "apps/client/src/hooks/useRecipe.hook.ts",
-        "hash": "6829327821513239510"
+        "hash": "16364209872833844124"
       },
       {
         "file": "apps/client/src/hooks/useRecipeCards.hook.ts",
-        "hash": "492641451460463785"
+        "hash": "6676364953288325660"
       },
       {
         "file": "apps/client/src/hooks/useSearch.hook.ts",
-        "hash": "16603852455875408974"
+        "hash": "10795946863407755246"
       },
       {
         "file": "apps/client/src/hooks/useUpdateRecipeCache.hook.ts",
-        "hash": "7892796725543350566"
+        "hash": "12959115270918650944"
       },
       {
         "file": "apps/client/src/pages/_app.js",
-        "hash": "10967156887536116064"
+        "hash": "10922059923922173078"
       },
       {
         "file": "apps/client/src/pages/_document.js",
@@ -2445,11 +2445,11 @@
       },
       {
         "file": "apps/client/src/pages/index.tsx",
-        "hash": "17527402303045531863"
+        "hash": "6819094018667357245"
       },
       {
         "file": "apps/client/src/pages/recipes/[recipeSlug].tsx",
-        "hash": "14514096372131887564"
+        "hash": "345058241447559412"
       },
       {
         "file": "apps/client/src/pages/recipes/index.tsx",
@@ -2577,7 +2577,7 @@
       },
       {
         "file": "apps/client/src/styles/scss/pages/_homepage2.scss",
-        "hash": "10332600300539050971"
+        "hash": "6906462456136310448"
       },
       {
         "file": "apps/client/src/styles/scss/pages/_homepage3.scss",
@@ -2673,7 +2673,7 @@
       },
       {
         "file": "apps/client/src/types/pages/home.types.ts",
-        "hash": "5717313333092714863"
+        "hash": "6607470579391461345"
       },
       {
         "file": "apps/client/src/types/pages/index.ts",

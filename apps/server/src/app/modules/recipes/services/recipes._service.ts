@@ -34,7 +34,7 @@ export class RecipesService {
   }
 
   async allRecipeCards(): Promise<RecipeCard[]> {
-    return reduceRecipeData(await this.allDBRecipes());
+    return reduceRecipeData(await this.allDBRecipes(), await this.allDBCategories());
   }
 
   async allDBCategories(): Promise<Category[]> {

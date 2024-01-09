@@ -1,37 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { useHome, useRecipeCards } from '@hooks';
+import { useRecipeCards } from '@hooks';
 import { RecipeCard } from '@types';
 import FeaturedRecipes from '@components/sections/featured-recipes/FeaturedRecipes';
 
 const RecipeFilter: React.FC = () => {
-  const { allRecipeCards } = useRecipeCards(true); // Fetch all recipes
-  const { home } = useHome(); // Fetch all categories
-
-  const categories = home?.categories.sort((a, b) =>
-    a.name.localeCompare(b.name),
-  );
+  const { recipes } = useRecipeCards(); // Fetch all recipes
 
   const [filter, setFilter] = useState<string>('all');
   const [filteredRecipes, setFilteredRecipes] = useState<RecipeCard[]>([]);
 
   useEffect(() => {
-    if (allRecipeCards) {
-      setFilteredRecipes(allRecipeCards);
+    if (recipes) {
+      setFilteredRecipes(recipes);
     }
-  }, [allRecipeCards]);
+  }, [recipes]);
 
   useEffect(() => {
-    if (!allRecipeCards) return;
+    if (!recipes) return;
 
     const filtered =
       filter === 'all'
-        ? allRecipeCards
-        : allRecipeCards.filter(
-            (recipe) => recipe.categories?.includes(filter),
-          );
+        ? recipes
+        : recipes.filter((recipe) => recipe.categories?.includes(filter));
 
     setFilteredRecipes(filtered);
-  }, [filter, allRecipeCards]);
+  }, [filter, recipes]);
 
   return (
     <>
@@ -51,7 +44,7 @@ const RecipeFilter: React.FC = () => {
             </div>
           </li>
           {/* Category buttons */}
-          {categories &&
+          {/* {categories &&
             categories.map((category) => (
               <li key={category.uid}>
                 <div
@@ -65,7 +58,7 @@ const RecipeFilter: React.FC = () => {
                   </div>
                 </div>
               </li>
-            ))}
+            ))} */}
         </ul>
       </div>
 

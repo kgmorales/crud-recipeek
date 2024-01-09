@@ -10,12 +10,13 @@ import Sidebar from '@components/elements/sidebar/Sidebar';
 const RecipeDetails: React.FC = (props) => {
   const { currentRecipe } = useRecipeContext();
 
-  const recipe = useRecipe(currentRecipe?.uid as string).data;
+  const recipe = useRecipe(currentRecipe?.uid as string);
 
+  console.log(recipe);
   return (
     <>
       <Head>
-        <title>Genz - Portfolio Details</title>
+        <title>LaMora | {recipe?.name}</title>
       </Head>
       <Layout>
         <div className="container">
@@ -27,18 +28,18 @@ const RecipeDetails: React.FC = (props) => {
                 </div>
               </div>
               <div className="col-xl-12 p-2">
-                <h1 className="color-gray-300 d-flex align-items-center">
+                <h2 className="color-gray-300 d-flex align-items-center">
                   {recipe?.name}
-                </h1>
+                </h2>
               </div>
               <div className="row p-4 pl-0">
                 <div className="col-xl-8">
                   <div className="img-container">
-                    {recipe?.photo_url && (
+                    {recipe?.imageURL && (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         className="card-image"
-                        src={recipe.photo_url}
+                        src={recipe.imageURL}
                         alt="recipe image"
                         // width={800}
                         // height={400}

@@ -1,17 +1,18 @@
-import { Category, Recipe } from '@prisma/client';
+import { Recipe } from '@prisma/client';
 
 export type RecipeCard = {
   categories?: Recipe['categories'];
+  cookTime?: Recipe['cook_time'];
+  created?: Recipe['created'];
   description?: Recipe['description'];
-  uid?: Recipe['uid'];
-  image_url?: Recipe['image_url'];
+  directions?: Recipe['directions'];
+  ingredients: Recipe['ingredients'];
   ingredientsCount?: number;
+  imageURL?: Recipe['image_url'];
+  isFavorite?: Recipe['on_favorites'];
   name?: Recipe['name'];
-  prep_time?: Recipe['prep_time'];
+  notes?: Recipe['notes'];
+  prepTime?: Recipe['prep_time'];
   recipeLink?: string;
-};
-export type Home = {
-  categories: Category[];
-  favorites: RecipeCard[];
-  recents: RecipeCard[];
+  uid?: Recipe['uid'];
 };

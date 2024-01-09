@@ -34,7 +34,7 @@ const Breadcrumb = () => {
         {pathNames?.length > 0}
         {pathNames?.map((link, index) => {
           const href = `/${pathNames.slice(0, index + 1).join('/')}`;
-          console.log({ href });
+
           const itemLink = link[0].toUpperCase() + link.slice(1, link.length);
           return (
             <React.Fragment key={index}>

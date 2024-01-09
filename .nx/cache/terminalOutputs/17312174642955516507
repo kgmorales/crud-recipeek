@@ -1,0 +1,218 @@
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 99.4 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m37:18[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 35 |[39m     [36mreturn[39m {[0m
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m [90m    |[39m                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m38:16[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m [90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m    |[39m                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+  [0m [90m 41 |[39m }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/search/services/searchRecipes._service.ts:[32m[1m71:12[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 69 |[39m[0m
+  [0m [90m 70 |[39m     [90m// Return the recipes array, which will be empty if no data was found[39m[0m
+  [0m[31m[1m>[22m[39m[90m 71 |[39m     [36mreturn[39m reduceRecipeData(recipes)[33m;[39m[0m
+  [0m [90m    |[39m            [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 72 |[39m   }[0m
+  [0m [90m 73 |[39m[0m
+  [0m [90m 74 |[39m   [90m// private async waitForLock(cacheKey: string): Promise<void> {[39m[0m
+
+webpack compiled with [1m[31m3 errors[39m[22m (4fcf024ace650245)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 99.4 KiB [1m[33m[entry][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m37:18[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 35 |[39m     [36mreturn[39m {[0m
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m [90m    |[39m                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m38:16[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m [90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m    |[39m                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+  [0m [90m 41 |[39m }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/search/services/searchRecipes._service.ts:[32m[1m71:12[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 69 |[39m[0m
+  [0m [90m 70 |[39m     [90m// Return the recipes array, which will be empty if no data was found[39m[0m
+  [0m[31m[1m>[22m[39m[90m 71 |[39m     [36mreturn[39m reduceRecipeData(recipes)[33m;[39m[0m
+  [0m [90m    |[39m            [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 72 |[39m   }[0m
+  [0m [90m 73 |[39m[0m
+  [0m [90m 74 |[39m   [90m// private async waitForLock(cacheKey: string): Promise<void> {[39m[0m
+
+webpack compiled with [1m[31m3 errors[39m[22m (4fcf024ace650245)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 99.4 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m37:18[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 35 |[39m     [36mreturn[39m {[0m
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m [90m    |[39m                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m38:16[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m [90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m    |[39m                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+  [0m [90m 41 |[39m }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/search/services/searchRecipes._service.ts:[32m[1m71:12[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 69 |[39m[0m
+  [0m [90m 70 |[39m     [90m// Return the recipes array, which will be empty if no data was found[39m[0m
+  [0m[31m[1m>[22m[39m[90m 71 |[39m     [36mreturn[39m reduceRecipeData(recipes)[33m;[39m[0m
+  [0m [90m    |[39m            [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 72 |[39m   }[0m
+  [0m [90m 73 |[39m[0m
+  [0m [90m 74 |[39m   [90m// private async waitForLock(cacheKey: string): Promise<void> {[39m[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/utils/reduce-recipe.util.ts:[32m[1m25:3[22m[39m[1m[39m[22m
+[90mTS2322: [39mType '{ categories: (string | undefined)[]; created: string; description: string | null; ingredientsCount: number; ingredients: string; image_url: string | null; isFavorite: boolean; name: string; prep_time: string | null; recipeLink: string; uid: string; }[]' is not assignable to type 'RecipeCard[]'.
+  Type '{ categories: (string | undefined)[]; created: string; description: string | null; ingredientsCount: number; ingredients: string; image_url: string | null; isFavorite: boolean; name: string; prep_time: string | null; recipeLink: string; uid: string; }' is not assignable to type 'RecipeCard'.
+    Types of property 'categories' are incompatible.
+      Type '(string | undefined)[]' is not assignable to type 'string[]'.
+        Type 'string | undefined' is not assignable to type 'string'.
+          Type 'undefined' is not assignable to type 'string'.
+  [0m [90m 23 |[39m   categories[33m:[39m [33mCategory[39m[][33m,[39m[0m
+  [0m [90m 24 |[39m )[33m:[39m [33mRecipeCard[39m[] {[0m
+  [0m[31m[1m>[22m[39m[90m 25 |[39m   [36mreturn[39m recipes[33m.[39mmap((recipe) [33m=>[39m {[0m
+  [0m [90m    |[39m   [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 26 |[39m     [36mreturn[39m {[0m
+  [0m [90m 27 |[39m       categories[33m:[39m addCategoryToRecipe(recipe[33m.[39mcategories[33m,[39m categories)[33m,[39m[0m
+  [0m [90m 28 |[39m       created[33m:[39m recipe[33m.[39mcreated[33m,[39m[0m
+
+webpack compiled with [1m[31m4 errors[39m[22m (951a8e110a0380c4)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 99.4 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m37:18[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 35 |[39m     [36mreturn[39m {[0m
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m [90m    |[39m                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m38:16[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m [90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m    |[39m                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+  [0m [90m 41 |[39m }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/search/services/searchRecipes._service.ts:[32m[1m71:12[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 69 |[39m[0m
+  [0m [90m 70 |[39m     [90m// Return the recipes array, which will be empty if no data was found[39m[0m
+  [0m[31m[1m>[22m[39m[90m 71 |[39m     [36mreturn[39m reduceRecipeData(recipes)[33m;[39m[0m
+  [0m [90m    |[39m            [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 72 |[39m   }[0m
+  [0m [90m 73 |[39m[0m
+  [0m [90m 74 |[39m   [90m// private async waitForLock(cacheKey: string): Promise<void> {[39m[0m
+
+webpack compiled with [1m[31m3 errors[39m[22m (715cba0948ced11f)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 99.4 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m37:18[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 35 |[39m     [36mreturn[39m {[0m
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m [90m    |[39m                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m38:16[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m [90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m    |[39m                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+  [0m [90m 41 |[39m }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/search/services/searchRecipes._service.ts:[32m[1m71:12[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 69 |[39m[0m
+  [0m [90m 70 |[39m     [90m// Return the recipes array, which will be empty if no data was found[39m[0m
+  [0m[31m[1m>[22m[39m[90m 71 |[39m     [36mreturn[39m reduceRecipeData(recipes)[33m;[39m[0m
+  [0m [90m    |[39m            [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 72 |[39m   }[0m
+  [0m [90m 73 |[39m[0m
+  [0m [90m 74 |[39m   [90m// private async waitForLock(cacheKey: string): Promise<void> {[39m[0m
+
+webpack compiled with [1m[31m3 errors[39m[22m (7af6c6190dc2951d)
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 99.4 KiB [1m[33m[entry][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m37:18[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 35 |[39m     [36mreturn[39m {[0m
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m [90m    |[39m                  [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/recipes/services/page._service.ts:[32m[1m38:16[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 36 |[39m       categories[33m,[39m[0m
+  [0m [90m 37 |[39m       favorites[33m:[39m reduceRecipeData(favorites)[33m,[39m[0m
+  [0m[31m[1m>[22m[39m[90m 38 |[39m       recents[33m:[39m reduceRecipeData(recents)[33m,[39m[0m
+  [0m [90m    |[39m                [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 39 |[39m     }[33m;[39m[0m
+  [0m [90m 40 |[39m   }[0m
+  [0m [90m 41 |[39m }[0m
+
+[1m[31mERROR[39m[22m in [1m./apps/server/src/app/modules/search/services/searchRecipes._service.ts:[32m[1m71:12[22m[39m[1m[39m[22m
+[90mTS2554: [39mExpected 2 arguments, but got 1.
+  [0m [90m 69 |[39m[0m
+  [0m [90m 70 |[39m     [90m// Return the recipes array, which will be empty if no data was found[39m[0m
+  [0m[31m[1m>[22m[39m[90m 71 |[39m     [36mreturn[39m reduceRecipeData(recipes)[33m;[39m[0m
+  [0m [90m    |[39m            [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 72 |[39m   }[0m
+  [0m [90m 73 |[39m[0m
+  [0m [90m 74 |[39m   [90m// private async waitForLock(cacheKey: string): Promise<void> {[39m[0m
+
+webpack compiled with [1m[31m3 errors[39m[22m (7af6c6190dc2951d)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m
