@@ -11,9 +11,9 @@
   border: 1px solid;
   padding: 2rem;
   border-radius: 16px;
-  margin: 2rem 0;
-  @include media('<=laptop') {
-    padding-top: 0;
+
+  @include media('<desktop') {
+    flex-direction: column;
   }
 }
 
@@ -44,7 +44,18 @@
     line-height: normal;
     padding: 0.2rem 0;
   }
-  .box-socials {
+  .boxSocials {
     padding-top: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    > * {
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    @include media('<=laptop') {
+      display: inline;
+    }
   }
 }

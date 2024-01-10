@@ -1,20 +1,20 @@
-import { IsString, IsOptional, IsInt } from 'class-validator';
+// import { IsString, IsOptional, IsInt } from 'class-validator';
 
-export class CreateBlogDTO {
-  @IsString()
-  title: string;
+// export class CreateBlogDTO {
+//   @IsString()
+//   title: string;
 
-  @IsString()
-  content: string;
+//   @IsString()
+//   content: string;
 
-  @IsString()
-  slug: string;
+//   @IsString()
+//   slug: string;
 
-  @IsOptional()
-  @IsInt()
-  categoryId?: number;
+//   @IsOptional()
+//   @IsInt()
+//   categoryId?: number;
 
-  @IsOptional()
-  @IsString()
-  recipeUID?: string;
-}
+//   @IsOptional()
+//   @IsString()
+//   recipeUID?: string;
+// }

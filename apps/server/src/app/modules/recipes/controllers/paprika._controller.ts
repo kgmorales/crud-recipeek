@@ -1,9 +1,9 @@
 //* NESTJS
-import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 
 //* Module
-import { Category, Recipe, RecipeItem } from '@prisma/client';
+import { Recipe } from '@prisma/client';
 import { PaprikaService } from '../services/paprika._service';
 
 @Controller('paprika')
@@ -17,19 +17,19 @@ export class PaprikaController {
     return await this.paprikaService.allRecipes();
   }
 
-  @UseInterceptors(CacheInterceptor)
-  @Get('categories')
-  async allCategories(): Promise<Category[]> {
-    return await this.paprikaService.categories();
-  }
+  // @Get('recipeIds')
+  // async recipeIds(): Promise<RecipeItem[]> {
+  //   return await this.paprikaService.recipeIds();
+  // }
 
-  @Get('recipeIds')
-  async recipeIds(): Promise<RecipeItem[]> {
-    return await this.paprikaService.recipeIds();
-  }
+  // @UseInterceptors(CacheInterceptor)
+  // @Get('categories')
+  // async allCategories(): Promise<Category[]> {
+  //   return await this.paprikaService.categories();
+  // }
 
-  @Get('recipesByUID')
-  async recipesByUID(@Query('uids') uids: string): Promise<Recipe[]> {
-    return await this.paprikaService.findByUID(uids);
-  }
+  // @Get('recipesByUID')
+  // async recipesByUID(@Query('uids') uids: string): Promise<Recipe[]> {
+  //   return await this.paprikaService.findByUID(uids);
+  // }
 }

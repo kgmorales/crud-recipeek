@@ -30,15 +30,15 @@ const ImageSlider: React.FC = () => {
         modules={[Autoplay]}
         breakpoints={{
           320: {
-            slidesPerView: 1,
+            slidesPerView: 2,
             spaceBetween: 30,
           },
           575: {
-            slidesPerView: 1,
+            slidesPerView: 2,
             spaceBetween: 30,
           },
           767: {
-            slidesPerView: 1,
+            slidesPerView: 2,
             spaceBetween: 30,
           },
           991: {

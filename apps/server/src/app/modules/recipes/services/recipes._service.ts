@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../shared/services/prisma._service';
 import { Recipe, Category } from '@prisma/client';
 
-import { RecipeDto } from '@recipes/dtos';
+// import { RecipeDto } from '@recipes/dtos';
 import { PaprikaService } from './paprika._service';
 import { reduceRecipeData } from '@serverUtils/reduce-recipe.util';
 import { RecipeCard } from '@server/types/recipe-card.types';
@@ -33,16 +33,15 @@ export class RecipesService {
     });
   }
 
-  async allRecipeCards(): Promise<RecipeCard[]> {
-    return reduceRecipeData(await this.allDBRecipes(), await this.allDBCategories());
-  }
-
   async allDBCategories(): Promise<Category[]> {
     return this.prisma.client.category.findMany();
   }
 
-  async createRecipe(recipeDto: RecipeDto): Promise<void> {
-    await this.prisma.client.recipe.create({ data: recipeDto });
+  async allRecipeCards(): Promise<RecipeCard[]> {
+    return reduceRecipeData(
+      await this.allDBRecipes(),
+      await this.allDBCategories(),
+    );
   }
 
   private async deleteAll(): Promise<void> {
@@ -52,6 +51,10 @@ export class RecipesService {
     await this.prisma.client.paprikaToken.deleteMany();
     await this.prisma.client.status.deleteMany();
   }
+
+  // async createRecipe(recipeDto: RecipeDto): Promise<void> {
+  //   await this.prisma.client.recipe.create({ data: recipeDto });
+  // }
 
   // async getPaginatedRecipes(
   //   params: GetPaginatedRecipesParams,
@@ -81,14 +84,14 @@ export class RecipesService {
   //   }
   // }
 
-  async getRecipesByMostRecent(): Promise<Recipe[]> {
-    return await this.prisma.client.recipe.findMany({
-      orderBy: {
-        created: 'desc',
-      },
-      take: 5,
-    });
-  }
+  // async getRecipesByMostRecent(): Promise<Recipe[]> {
+  //   return await this.prisma.client.recipe.findMany({
+  //     orderBy: {
+  //       created: 'desc',
+  //     },
+  //     take: 5,
+  //   });
+  // }
 
   async refreshDB(): Promise<void> {
     await this.deleteAll();

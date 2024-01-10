@@ -1,5 +1,10 @@
 .footer {
   // New Agon
+  .box-socials {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
   .icon-socials {
     color: $color-gray-100;
     display: inline-block;
@@ -104,7 +109,7 @@
   }
 }
 .copyright {
-  color: #9E2570;
+  color: #9e2570;
   &:hover {
     color: $color-brand-1;
   }

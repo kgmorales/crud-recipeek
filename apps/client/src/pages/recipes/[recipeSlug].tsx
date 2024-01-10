@@ -11,6 +11,7 @@ const RecipeDetails: React.FC = (props) => {
   const { currentRecipe } = useRecipeContext();
 
   const recipe = useRecipe(currentRecipe?.uid as string);
+  const directions = recipe?.directions?.split('\n');
 
   console.log(recipe);
   return (
@@ -20,82 +21,81 @@ const RecipeDetails: React.FC = (props) => {
       </Head>
       <Layout>
         <div className="container">
-          <div className="row">
-            <div className="col-xl-12 m-auto">
-              <div className="row">
-                <div className="col-xl-12 pt-30 border-bottom border-gray-800 pb-20">
-                  <Breadcrumb />
-                </div>
-              </div>
-              <div className="col-xl-12 p-2">
-                <h2 className="color-gray-300 d-flex align-items-center">
-                  {recipe?.name}
-                </h2>
-              </div>
-              <div className="row p-4 pl-0">
-                <div className="col-xl-8">
-                  <div className="img-container">
-                    {recipe?.imageURL && (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        className="card-image"
-                        src={recipe.imageURL}
-                        alt="recipe image"
-                        // width={800}
-                        // height={400}
-                      />
-                    )}
-                  </div>
-                </div>
-                <div className="col-xl-4">
-                  <Sidebar recipe={recipe} />
-                </div>
-              </div>
-            </div>
+          <div className="col-xl-12 pt-30 border-bottom border-gray-800 pb-20">
+            <Breadcrumb />
+          </div>
+          <div className="col-xl-12 p-2">
+            <h2 className="color-gray-300 d-flex align-items-center">
+              {recipe?.name}
+            </h2>
           </div>
           <div className="row">
-            <div className="col-lg-12">
-              <div className="content-detail border-gray-800">
-                <h3 className="color-gray-300 mb-30 wow animate__animated animate__fadeIn">
-                  Recipe Details
-                </h3>
-                <p className="text-lg color-gray-300 wow animate__animated animate__fadeIn">
-                  {recipe?.description}
-                </p>
-                <h3 className="color-gray-300 mt-50 mb-30 wow animate__animated animate__fadeIn">
-                  Directions
-                </h3>
-                <p className="text-lg color-gray-300 wow animate__animated animate__fadeIn">
-                  {recipe?.directions}
-                </p>
-              </div>
-              <div className="box-tags wow animate__animated animate__fadeIn">
-                <Link
-                  className="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up"
-                  href="blog-archive"
-                >
-                  #Nature
-                </Link>
-                <Link
-                  className="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up"
-                  href="blog-archive"
-                >
-                  #Beauty
-                </Link>
-                <Link
-                  className="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up"
-                  href="blog-archive"
-                >
-                  #Travel Tips
-                </Link>
-                <Link
-                  className="btn btn-tags bg-gray-850 border-gray-800 hover-up"
-                  href="blog-archive"
-                >
-                  #House
-                </Link>
+            <div className="col-xl-8">
+              <div className="img-container">
+                {recipe?.imageURL && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    className="card-image"
+                    src={recipe.imageURL}
+                    alt="recipe image"
+                    // width={800}
+                    // height={400}
+                  />
+                )}
               </div>
             </div>
+            <div className="col-xl-4">
+              <Sidebar recipe={recipe} />
+            </div>
+          </div>
+        </div>
+        <div className="container">
+          <div className="content-detail border-gray-800">
+            <h4 className="color-gray-300 mb-10 wow animate__animated animate__fadeIn">
+              Description
+            </h4>
+            <p className="text-lg color-gray-300 wow animate__animated animate__fadeIn">
+              {recipe?.description}
+            </p>
+            <h4 className="color-gray-300 mt-50 mb-10 wow animate__animated animate__fadeIn">
+              Directions
+            </h4>
+            <ul>
+              {directions?.map((direction, i) => (
+                <ol
+                  key={i}
+                  className="text-lg color-gray-300 wow animate__animated animate__fadeIn"
+                >
+                  {direction}
+                </ol>
+              ))}
+            </ul>
+          </div>
+          <div className="box-tags wow animate__animated animate__fadeIn">
+            <Link
+              className="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up"
+              href="blog-archive"
+            >
+              #Nature
+            </Link>
+            <Link
+              className="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up"
+              href="blog-archive"
+            >
+              #Beauty
+            </Link>
+            <Link
+              className="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up"
+              href="blog-archive"
+            >
+              #Travel Tips
+            </Link>
+            <Link
+              className="btn btn-tags bg-gray-850 border-gray-800 hover-up"
+              href="blog-archive"
+            >
+              #House
+            </Link>
           </div>
         </div>
       </Layout>

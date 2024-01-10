@@ -89,25 +89,21 @@ const Header: React.FC<HeaderProps> = ({
           <div className="header-right">
             <Search />
             <SwitchButton />
-            {/* <Link
-              className="btn btn-linear d-none d-sm-inline-block hover-up hover-shadow"
-              href="/page-login"
-            >
-              Subscribe
-            </Link> */}{' '}
-          </div>
-          <div
-            className={`burger-icon burger-icon-white ${
-              openClass ? 'burger-close' : ''
-            }`}
-            onClick={() => {
-              handleOpen();
-              handleRemove();
-            }}
-          >
-            <span className="burger-icon-top" />
-            <span className="burger-icon-mid" />
-            <span className="burger-icon-bottom" />
+            <div className="d-flex">
+              <div
+                className={`burger-icon burger-icon-white ${
+                  openClass ? 'burger-close' : ''
+                }`}
+                onClick={() => {
+                  handleOpen();
+                  handleRemove();
+                }}
+              >
+                <span className="burger-icon-top" />
+                <span className="burger-icon-mid" />
+                <span className="burger-icon-bottom" />
+              </div>
+            </div>
           </div>
         </div>
       </header>

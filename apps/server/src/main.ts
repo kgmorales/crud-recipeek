@@ -4,11 +4,11 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { Logger } from '@nestjs/common';
-import {
-  SwaggerModule,
-  DocumentBuilder,
-  SwaggerDocumentOptions,
-} from '@nestjs/swagger';
+// import {
+//   SwaggerModule,
+//   DocumentBuilder,
+//   SwaggerDocumentOptions,
+// } from '@nestjs/swagger';
 
 import { AppModule } from './app/app._module';
 
@@ -37,20 +37,20 @@ async function bootstrap() {
     });
 
   //? SWAGGER
-  const config = new DocumentBuilder()
-    .setTitle('lamora')
-    .setDescription('a documentation for recipes')
-    .setVersion('1.0')
-    .addTag('Recipes')
-    .build();
+  // const config = new DocumentBuilder()
+  //   .setTitle('lamora')
+  //   .setDescription('a documentation for recipes')
+  //   .setVersion('1.0')
+  //   .addTag('Recipes')
+  //   .build();
 
-  const options: SwaggerDocumentOptions = {
-    operationIdFactory: (controllerKey: string, methodKey: string) => methodKey,
-  };
+  // const options: SwaggerDocumentOptions = {
+  //   operationIdFactory: (controllerKey: string, methodKey: string) => methodKey,
+  // };
 
-  const appDocument = SwaggerModule.createDocument(app, config, options);
+  // const appDocument = SwaggerModule.createDocument(app, config, options);
 
-  SwaggerModule.setup('api', app, appDocument);
+  // SwaggerModule.setup('api', app, appDocument);
 
   //? SERVER GO
 

@@ -33,7 +33,7 @@ export default function Hero() {
           and keep the tradition of cooking alive. Each dish is a chapter in our
           family&apos;s story, and we&apos;re thrilled to share it with you.
         </p>
-        <div className="box-socials mt-3">
+        <div className={`${styles.boxSocials}`}>
           <Link
             className="icon-socials icon-twitter"
             href="https://twitter.com"
