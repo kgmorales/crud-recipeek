@@ -49,6 +49,9 @@ Thumbs.db
 .next
 
 #nx/cache
+/.nx
+.nx
 .nx/cache
-daemon.log
-.nx/cache/d/daemon.log
+/.nx-cache
+.nx/cache/d
+/.nx-cache
