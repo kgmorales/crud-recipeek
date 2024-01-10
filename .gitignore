@@ -55,3 +55,7 @@ Thumbs.db
 /.nx-cache
 .nx/cache/d
 /.nx-cache
+file-map.json
+project-graph.json
+daemon.log
+server-process.json
