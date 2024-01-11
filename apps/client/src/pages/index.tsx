@@ -17,16 +17,16 @@ const getMostRecentRecipes = (recipes: Recipe[] | undefined): Recipe[] => {
     .slice(0, 6);
 };
 
-const Home: React.FC = () => {
+const Home: React.FC = (props) => {
   const { recipes } = useRecipeCards();
 
-  const favorites = recipes?.filter((recipe) => recipe.isFavorite);
+  const favorites = recipes?.filter((recipe) => recipe.isFavorite).slice(0, 6);
   const recents = getMostRecentRecipes(recipes as Recipe[]);
 
   return (
     <>
       <Head>
-        <title>laMora | Recipes</title>
+        <title>laMora | home</title>
       </Head>
       <Layout>
         <div className="container">

@@ -11,7 +11,7 @@ const About: React.FC = (props) => {
   return (
     <>
       <Head>
-        <title>Genz - About me</title>
+        <title>lamora | about</title>
       </Head>
       <Layout>
         <div className={`${styles.container} container`}>

@@ -17,7 +17,7 @@ const RecipeDetails: React.FC = (props) => {
   return (
     <>
       <Head>
-        <title>LaMora | {recipe?.name}</title>
+        <title>lamora | {recipe?.name}</title>
       </Head>
       <Layout>
         <div className="container">

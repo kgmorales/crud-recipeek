@@ -34,8 +34,8 @@
       // display: inline-block;
       // width: 65%;
       // text-align: center;
-      @include media('<=laptop') {
-        padding-left: 0;
+      @include media('<=desktop') {
+        padding-left: 8rem;
       }
     }
     .header-search {

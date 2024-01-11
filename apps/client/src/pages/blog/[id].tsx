@@ -7,7 +7,7 @@ import data from '../../utils/blogData';
 
 const BlogDetails = () => {
   // Import the useRouter hook from 'next/router' module
-  let Router = useRouter();
+  const Router = useRouter();
 
   // Define a state variable 'blogPost' and a function 'setBlogPost' to update the state
   const [blogPost, setBlogPost] = useState(null);

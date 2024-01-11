@@ -8,7 +8,7 @@ const Recipes: React.FC = (props) => {
   return (
     <>
       <Head>
-        <title>Recipes</title>
+        <title>lamora | recipes</title>
       </Head>
       <Layout>
         <div className="cover-home1">

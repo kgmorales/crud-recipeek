@@ -22,7 +22,6 @@ const navLinks: Link[] = [
   { href: '/about', label: 'About', className: 'color-gray-300', key: 2 },
   { href: '/blog', label: 'Blog', className: 'color-gray-300', key: 3 },
   { href: '/recipes', label: 'Recipes', className: 'color-gray-300', key: 4 },
-  // { href: '/contact', label: 'Contact', className: 'color-gray-300', key: 5 },
 ];
 
 const Header: React.FC<HeaderProps> = ({
@@ -74,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
           </div>
           <div className="header-nav">
-            <nav className="nav-main-menu d-none d-xl-block">
+            <nav className="nav-main-menu d-none d-lg-block">
               <ul className="main-menu">
                 {navLinks.map((link) => (
                   <li key={link.key}>
