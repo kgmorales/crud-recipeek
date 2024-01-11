@@ -13,8 +13,6 @@ const RecipeFilter: React.FC = () => {
     return Array.from(new Set(recipes?.flatMap((recipe) => recipe.categories)));
   }, [recipes]);
 
-  console.log(categories);
-
   useEffect(() => {
     if (recipes) {
       setFilteredRecipes(recipes);

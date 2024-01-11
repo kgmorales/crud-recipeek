@@ -47,38 +47,15 @@
     border-top-width: 1px;
     border-top-style: solid;
     font-size: $font-sm;
+    padding: 1rem;
+    padding-top: 2rem;
     a {
       text-decoration: none;
     }
   }
   // End new Agon
 }
-#scrollUp {
-  width: 54px;
-  height: 54px;
-  color: $color-white;
-  right: 30px;
-  bottom: 30px;
-  border-radius: 100%;
-  text-align: center;
-  overflow: hidden;
-  z-index: 999 !important;
-  border: 0;
-  // background-color: #fff;
-  background: url(../../../../public/assets/imgs/template/bg-top.png) no-repeat;
-  transition-duration: 0.2s;
-  background-color: $color-gray-900;
-  i {
-    display: block;
-    line-height: 59px !important;
-    font-size: 20px;
-    color: #fff;
-  }
-  &:hover {
-    transform: translateY(-3px);
-    transition-duration: 0.2s;
-  }
-}
+
 .menu-bottom {
   li {
     display: inline-block;
@@ -96,6 +73,7 @@
 .footer-1 {
   margin: 2rem 0;
   padding: 2rem;
+  padding-bottom: 1rem;
   border-radius: 16px;
   border-width: 1px;
   border-style: solid;

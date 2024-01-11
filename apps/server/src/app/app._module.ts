@@ -12,11 +12,11 @@ import { SharedModule } from '@modules/shared/shared._module';
 //? Config
 import configuration from './config/config';
 import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
+// import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
-    PassportModule,
+    // PassportModule,
     CacheModule.register({ isGlobal: true, ttl: 60 * 60 }),
     ConfigModule.forRoot({
       load: [configuration],

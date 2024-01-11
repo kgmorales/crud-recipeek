@@ -4,11 +4,6 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { Logger } from '@nestjs/common';
-// import {
-//   SwaggerModule,
-//   DocumentBuilder,
-//   SwaggerDocumentOptions,
-// } from '@nestjs/swagger';
 
 import { AppModule } from './app/app._module';
 

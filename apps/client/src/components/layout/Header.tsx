@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import SwitchButton from '@components/elements/SwitchButton';
 import Image from 'next/image';
 import Search from '@components/elements/search/Search';
+import { useRouter } from 'next/router';
 
 interface HeaderProps {
   handleOpen: () => void;
@@ -29,6 +30,7 @@ const Header: React.FC<HeaderProps> = ({
   handleRemove,
   openClass,
 }) => {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -77,7 +79,12 @@ const Header: React.FC<HeaderProps> = ({
               <ul className="main-menu">
                 {navLinks.map((link) => (
                   <li key={link.key}>
-                    <Link href={link.href} className={link.className}>
+                    <Link
+                      href={link.href}
+                      className={`${
+                        router.pathname === link.href ? 'active' : ''
+                      } color-gray-300`}
+                    >
                       {link.label}
                     </Link>
                   </li>
