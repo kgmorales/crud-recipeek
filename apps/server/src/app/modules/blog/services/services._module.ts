@@ -1,19 +1,11 @@
-// import { Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
-// import { BlogService } from './blog._service';
-// // import { PageService } from './page._service';
-// // import { RecipesService } from './recipes._service';
+import { BlogService } from './blog._service';
 
-// // import { ProvidersModule } from './providers/providers._module';
+const services = [BlogService];
 
-// // const imports = [ProvidersModule];
-
-// // const services = [PageService, PaprikaService, RecipesService];
-// const services = [BlogService];
-
-// @Module({
-//   // imports: imports,
-//   providers: services,
-//   // exports: [ProvidersModule, ...services],
-// })
-// export class ServicesModule {}
+@Module({
+  providers: services,
+  exports: services,
+})
+export class ServicesModule {}

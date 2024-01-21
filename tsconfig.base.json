@@ -18,30 +18,68 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "lib": ["ES2022", "dom"],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
     "module": "ES2022",
     "moduleResolution": "node",
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noPropertyAccessFromIndexSignature": false,
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "paths": {
-      "@api/*": ["apps/client/src/pages/api/*"],
-      "@components/*": ["apps/client/src/components/*"],
-      "@constants": ["apps/client/src/constants"],
-      "@contexts": ["apps/client/src/contexts"],
-      "@enums/*": ["apps/client/src/enums/*"],
-      "@hooks": ["apps/client/src/hooks"],
-      "@pages/*": ["apps/client/src/pages/*"],
-      "@public/*": ["apps/client/public/*"],
-      "@styles/*": ["apps/client/src/styles/scss/*"],
-      "@types": ["apps/client/src/types"],
-      "@clientUtils/*": ["apps/client/src/utils/*"],
-      "@serverUtils/*": ["apps/server/src/app/utils/*"],
-      "@modules/*": ["apps/server/src/app/modules/*"],
-      "@recipes/*": ["apps/server/src/app/modules/recipes/*"],
-      "@server/*": ["apps/server/src/app/*"]
+      "@api/*": [
+        "apps/client/src/pages/api/*"
+      ],
+      "@clientUtils/*": [
+        "apps/client/src/utils/*"
+      ],
+      "@components/*": [
+        "apps/client/src/components/*"
+      ],
+      "@constants": [
+        "apps/client/src/constants"
+      ],
+      "@contexts": [
+        "apps/client/src/contexts"
+      ],
+      "@enums/*": [
+        "apps/client/src/enums/*"
+      ],
+      "@hooks": [
+        "apps/client/src/hooks"
+      ],
+      "@lamora/markdown-parser": [
+        "libs/markdown-parser/src/index.ts"
+      ],
+      "@modules/*": [
+        "apps/server/src/app/modules/*"
+      ],
+      "@pages/*": [
+        "apps/client/src/pages/*"
+      ],
+      "@public/*": [
+        "apps/client/public/*"
+      ],
+      "@recipes/*": [
+        "apps/server/src/app/modules/recipes/*"
+      ],
+      "@server/*": [
+        "apps/server/src/app/*"
+      ],
+      "@serverUtils/*": [
+        "apps/server/src/app/utils/*"
+      ],
+      "@styles/*": [
+        "apps/client/src/styles/scss/*"
+      ],
+      "@types": [
+        "apps/client/src/types"
+      ]
     },
     "rootDir": ".",
     "sourceMap": true,
@@ -52,5 +90,8 @@
     "target": "ES2022",
     "useDefineForClassFields": false
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

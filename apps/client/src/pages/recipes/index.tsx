@@ -24,10 +24,6 @@ const Recipes: React.FC = (props) => {
                   </p>
                 </div>
                 <RecipeFilter />
-                {/* <Pagination /> */}
-                {/* <MyServices />
-                <Testimonial />
-                <PartnersLogs /> */}
               </div>
             </div>
           </div>

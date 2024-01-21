@@ -13,7 +13,6 @@ const RecipeDetails: React.FC = (props) => {
   const recipe = useRecipe(currentRecipe?.uid as string);
   const directions = recipe?.directions?.split('\n');
 
-  console.log(recipe);
   return (
     <>
       <Head>

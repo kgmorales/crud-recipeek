@@ -1,22 +1,17 @@
-// import { Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
-// // import { PageController } from './page._controller';
-// // import { PaprikaController } from './paprika._controller';
-// // import { RecipesController } from './recipe._controller';
-// // import { SyncController } from './sync._controller';
+import { BlogController } from './blog._controller';
 
-// // //* Modules
-// // import { ServicesModule } from '../services/services._module';
+// //* Modules
+import { ServicesModule } from '../services/services._module';
 
-// // const controllers = [
-// //   PageController,
-// //   PaprikaController,
-// //   RecipesController,
-// //   SyncController,
-// // ];
+const controllers = [
+  BlogController,
 
-// @Module({
-//   // imports: [ServicesModule],
-//   // controllers,
-// })
-// export class ControllersModule {}
+];
+
+@Module({
+  imports: [ServicesModule],
+  controllers,
+})
+export class ControllersModule {}

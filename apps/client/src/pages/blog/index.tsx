@@ -2,10 +2,15 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Layout from '../../components/layout/Layout';
 import Breadcrumb from '../../components/elements/breadcrumb/Breadcrumb';
-import data from '../../utils/blogData2';
 import React from 'react';
+import usePosts from '../../hooks/usePosts.hook';
 
-const Blog: React.FC = (props) => {
+const Blog: React.FC = () => {
+  const posts = usePosts();
+
+  //TODO: MAKE CONTEXT LIKE RECIPE TO PASS TO [blogSlug].
+
+  console.log(posts);
   return (
     <>
       <Head>
@@ -30,7 +35,7 @@ const Blog: React.FC = (props) => {
                 <div className="row">
                   <div className="col-lg-8 m-auto">
                     <div className="box-list-posts mt-30">
-                      {data.slice(0, 5).map((item, i) => (
+                      {posts?.map((post, i) => (
                         <div
                           key={i}
                           className="card-list-posts card-list-posts-small border-bottom border-gray-800 pb-30 mb-30 wow animate__animated animate__fadeIn"
@@ -44,7 +49,7 @@ const Blog: React.FC = (props) => {
                               <div className="author-info">
                                 <h6 className="color-gray-300">Joseph</h6>
                                 <span className="color-gray-300 text-sm">
-                                  25 April 2023
+                                  {post.createdAt}
                                 </span>
                               </div>
                             </div>
@@ -52,16 +57,16 @@ const Blog: React.FC = (props) => {
                               className="btn btn-tag bg-gray-800 hover-up"
                               href="/blog-archive"
                             >
-                              {item.category}
+                              {post.category}
                             </Link>
                           </div>
                           <div className="card-info">
-                            <Link href={`/blog/${item.id}`}>
+                            <Link href={`/blog/${post.slug}`}>
                               <h3 className="mb-20 color-gray-300">
-                                {item.title}
+                                {post.title}
                               </h3>
                             </Link>
-                            <p className="color-gray-300">{item.excerpt}</p>
+                            <p className="color-gray-300">{post.excerpt}</p>
                             <div className="row mt-20">
                               <div className="col-7">
                                 <Link

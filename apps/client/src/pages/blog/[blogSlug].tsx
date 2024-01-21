@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import Breadcrumb from '../../components/elements/breadcrumb/Breadcrumb';
-import data from '../../utils/blogData';
 
 const BlogDetails = () => {
   // Import the useRouter hook from 'next/router' module
@@ -13,7 +12,8 @@ const BlogDetails = () => {
   const [blogPost, setBlogPost] = useState(null);
 
   // Destructure the 'id' from the 'query' object provided by the useRouter hook
-  const { id } = Router.query;
+  const { slug } = Router.pathname;
+  console.log({ slug });
 
   // useEffect hook is used to fetch the blog post data based on the 'id' when it changes
   useEffect(() => {
