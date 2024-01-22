@@ -3,10 +3,10 @@ import Head from 'next/head';
 import Layout from '../../components/layout/Layout';
 import Breadcrumb from '../../components/elements/breadcrumb/Breadcrumb';
 import React from 'react';
-import usePosts from '../../hooks/usePosts.hook';
+import useBlogPosts from '../../hooks/useBlogPosts.hook';
 
-const Blog: React.FC = () => {
-  const posts = usePosts();
+const Blog: React.FC = (props) => {
+  const posts = useBlogPosts();
 
   //TODO: MAKE CONTEXT LIKE RECIPE TO PASS TO [blogSlug].
 

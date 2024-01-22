@@ -7,7 +7,7 @@ interface RecipeContextType {
   setCurrentRecipe: (recipe: RecipeCard) => void;
 }
 
-const RecipeContext = createContext<RecipeContextType | undefined>(undefined);
+export const RecipeContext = createContext<RecipeContextType | undefined>(undefined);
 
 export const useRecipeContext = () => {
   const context = useContext(RecipeContext);

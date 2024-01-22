@@ -3,36 +3,18 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import Breadcrumb from '../../components/elements/breadcrumb/Breadcrumb';
+import { useBlogPostContext } from '../../contexts/Post';
+import { usePost } from '../../hooks/usePost.hook';
 
-const BlogDetails = () => {
-  // Import the useRouter hook from 'next/router' module
-  const Router = useRouter();
+const BlogDetails = (props) => {
+  const { currentPost } = useBlogPostContext();
 
-  // Define a state variable 'blogPost' and a function 'setBlogPost' to update the state
-  const [blogPost, setBlogPost] = useState(null);
-
-  // Destructure the 'id' from the 'query' object provided by the useRouter hook
-  const { slug } = Router.pathname;
-  console.log({ slug });
-
-  // useEffect hook is used to fetch the blog post data based on the 'id' when it changes
-  useEffect(() => {
-    // Use the 'data' array (assuming it is available) and find the blog post with matching 'id'
-    // The find method returns the first element in the array that satisfies the provided testing function
-    // It looks for an object in the 'data' array where the 'id' property matches the current 'id' from the Router query
-    const foundBlogPost = data.find((data) => data.id == id);
-
-    // Update the 'blogPost' state with the found blog post or set it to null if no match is found
-    setBlogPost(foundBlogPost);
-
-    // The useEffect hook has a dependency array with 'id'
-    // This means that the effect will be triggered whenever the 'id' changes, and the blog post data will be updated accordingly
-  }, [id]);
+  const post = usePost(currentPost?.id as string);
 
   return (
     <>
       <Layout>
-        {blogPost && (
+        {post && (
           <>
             <div className="cover-home3">
               <div className="container">
@@ -41,13 +23,13 @@ const BlogDetails = () => {
                   <div className="col-xl-10 col-lg-12">
                     <div className="pt-30 border-bottom border-gray-800 pb-20">
                       <div className="box-breadcrumbs">
-                        <Breadcrumb title={blogPost.title} />
+                        <Breadcrumb />
                       </div>
                     </div>
                     <div className="row mt-50 align-items-end">
                       <div className="col-lg-9 col-md-8">
                         <h2 className="color-linear mb-30">
-                          {blogPost.title}{' '}
+                          {post.title}{' '}
                         </h2>
                         <div className="box-author mb-20">
                           <img
