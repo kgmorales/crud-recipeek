@@ -1,5 +1,6 @@
 // import { IsString, IsOptional, IsInt } from 'class-validator';
 
+import { ContentSection } from '@server/types/post.types';
 import { IsOptional, IsString } from 'class-validator';
 
 export class Post {
@@ -28,7 +29,7 @@ export class Post {
 
   @IsString()
   @IsOptional()
-  content?: string[];
+  contentSections?: ContentSection[];
 
   @IsString()
   @IsOptional()

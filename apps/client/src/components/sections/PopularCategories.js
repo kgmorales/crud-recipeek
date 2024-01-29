@@ -2,6 +2,7 @@ import Link from 'next/link';
 import categories from '../../utils/categoriesData';
 
 const PopularCategories = () => {
+
   return (
     <>
       <div className="mt-30">
@@ -18,14 +19,6 @@ const PopularCategories = () => {
                 className="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn"
                 data-wow-delay={`${i / 10}s`}
               >
-                <div className="card-image">
-                  <Link href="/blog-archive">
-                    <img
-                      src={`assets/imgs/page/homepage1/${item.img}`}
-                      alt="Genz"
-                    />
-                  </Link>
-                </div>
                 <div className="card-info">
                   <Link
                     className="color-gray-200 hover-neon"

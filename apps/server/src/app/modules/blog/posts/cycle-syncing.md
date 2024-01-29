@@ -3,8 +3,10 @@ title: 'Cycle Syncing'
 slug: 'cycle-syncing'
 createdAt: '2023-04-25T12:00:00Z'
 updatedAt: '2023-04-26T12:00:00Z'
+img: '/assets/imgs/posts/cycle-syncing.png'
 category: 'Health'
-recipeUID: '83B57A78-D6F0-4232-A7C1-D7CF68557268-19881-0000073F9BD5A470'
+excerpt: 'An understanding of menstrual phases and diet.'
+recipeUIDs: ['83B57A78-D6F0-4232-A7C1-D7CF68557268-19881-0000073F9BD5A470']
 ---
 
 # Cycle Syncing
@@ -12,13 +14,6 @@ recipeUID: '83B57A78-D6F0-4232-A7C1-D7CF68557268-19881-0000073F9BD5A470'
 "Cycle Syncing” is an important topic that is starting to get more attention. As a young girl, you aren’t really taught how to understand and nourish your body throughout your monthly cycle when the reality is you have different movement and nutritional needs at different phases.
 
 The framework of cycle syncing can easily be thought of as the seasons.
-
-| Phase      | Days  | Season |
-| ---------- | ----- | ------ |
-| Menstrual  | 1-5   | Winter |
-| Follicular | 6-14  | Spring |
-| Ovulatory  | 15-17 | Summer |
-| Luteal     | 18-28 | Fall   |
 
 ## Menstrual phase
 

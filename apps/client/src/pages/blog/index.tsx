@@ -4,13 +4,14 @@ import Layout from '../../components/layout/Layout';
 import Breadcrumb from '../../components/elements/breadcrumb/Breadcrumb';
 import React from 'react';
 import useBlogPosts from '../../hooks/useBlogPosts.hook';
+import Image from 'next/image';
 
 const Blog: React.FC = (props) => {
   const posts = useBlogPosts();
 
-  //TODO: MAKE CONTEXT LIKE RECIPE TO PASS TO [blogSlug].
+  const getDate = (date?: string) =>
+    new Intl.DateTimeFormat('en-US').format(new Date(date || ''));
 
-  console.log(posts);
   return (
     <>
       <Head>
@@ -42,14 +43,16 @@ const Blog: React.FC = (props) => {
                         >
                           <div className="card-image hover-up">
                             <div className="box-author mb-20">
-                              <img
-                                src="assets/imgs/page/healthy/author.png"
-                                alt="Genz"
+                              <Image
+                                src="/assets/imgs/nicole_avatar.png"
+                                alt="nicole avatar"
+                                width={250}
+                                height={250}
                               />
                               <div className="author-info">
-                                <h6 className="color-gray-300">Joseph</h6>
+                                <h6 className="color-gray-300">Nicole</h6>
                                 <span className="color-gray-300 text-sm">
-                                  {post.createdAt}
+                                  {getDate(post?.createdAt)}
                                 </span>
                               </div>
                             </div>
@@ -67,27 +70,6 @@ const Blog: React.FC = (props) => {
                               </h3>
                             </Link>
                             <p className="color-gray-300">{post.excerpt}</p>
-                            <div className="row mt-20">
-                              <div className="col-7">
-                                <Link
-                                  className="color-gray-700 text-sm mr-15"
-                                  href="/blog-archive"
-                                >
-                                  # Travel
-                                </Link>
-                                <Link
-                                  className="color-gray-700 text-sm"
-                                  href="/blog-archive"
-                                >
-                                  # Lifestyle
-                                </Link>
-                              </div>
-                              <div className="col-5 text-end">
-                                <span className="color-gray-700 text-sm timeread">
-                                  3 mins read
-                                </span>
-                              </div>
-                            </div>
                           </div>
                         </div>
                       ))}

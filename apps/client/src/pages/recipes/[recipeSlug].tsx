@@ -5,7 +5,7 @@ import Layout from '../../components/layout/Layout';
 import Breadcrumb from '../../components/elements/breadcrumb/Breadcrumb';
 import { useRecipe } from '@hooks';
 import { useRecipeContext } from '../../contexts/Recipe';
-import Sidebar from '@components/elements/sidebar/Sidebar';
+import Sidebar from '@components/elements/sidebar/SidebarRecipe';
 
 const RecipeDetails: React.FC = (props) => {
   const { currentRecipe } = useRecipeContext();
