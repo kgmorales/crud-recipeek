@@ -14,5 +14,10 @@ export default () => ({
     password: process.env.PAPRIKA_PASS,
     user: process.env.PAPRIKA_USER,
   },
+  spotify: {
+    clientID: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectURI: process.env.SPOTIFY_REDIRECT_URI,
+  },
   port: process.env.PORT || 8080,
 });
