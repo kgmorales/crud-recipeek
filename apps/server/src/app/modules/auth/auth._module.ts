@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth._service';
 import { AuthController } from './auth._controller';
-import { SpotifyOauthStrategy } from './strategies/spotify-oauth.strategy';
+import { SpotifyStrategy } from './strategies/spotify-oauth.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
@@ -22,7 +22,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       inject: [ConfigService],
     }),
   ],
-  providers: [AuthService, JwtStrategy, SpotifyOauthStrategy],
+  providers: [AuthService, JwtStrategy, SpotifyStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

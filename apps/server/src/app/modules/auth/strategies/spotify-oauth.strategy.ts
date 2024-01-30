@@ -1,27 +1,24 @@
+// spotify.strategy.ts
+import { Strategy } from 'passport-spotify';
 import { PassportStrategy } from '@nestjs/passport';
-import { Profile, Strategy, VerifyCallback } from 'passport-spotify';
+import { Injectable } from '@nestjs/common';
 
-export class SpotifyOauthStrategy extends PassportStrategy(
-  Strategy,
-  'spotify',
-) {
+@Injectable()
+export class SpotifyStrategy extends PassportStrategy(Strategy, 'spotify') {
   constructor() {
-    super(
-      {
-        clientID: process.env.SPOTIFY_CLIENT_ID,
-        clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-        callbackURL: process.env.CALLBACK_URL,
-        scope: 'user-read-currently-playing',
-      },
-      (
-        accessToken: string,
-        refreshToken: string,
-        expires_in: number,
-        profile: Profile,
-        done: VerifyCallback,
-      ): void => {
-        return done(null, profile, { accessToken, refreshToken, expires_in });
-      },
-    );
+    super({
+      clientID: process.env.SPOTIFY_CLIENT_ID,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      callbackURL: 'http://localhost:3000/auth/spotify/callback',
+      scope: ['user-read-currently-playing', 'user-read-playback-state'],
+    });
+  }
+
+  async validate(
+    accessToken: string,
+    refreshToken: string,
+    profile: any,
+  ): Promise<any> {
+    return { accessToken, profile };
   }
 }

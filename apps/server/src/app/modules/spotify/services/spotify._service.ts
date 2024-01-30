@@ -1,45 +1,81 @@
-// spotify.service.ts
 import { Injectable } from '@nestjs/common';
-import { SpotifyArtist, SpotifyNowPlaying } from '@server/types/spotify.types';
+import { ConfigService } from '@nestjs/config';
+
+const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
+const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token?`;
 
 @Injectable()
 export class SpotifyService {
-  async getNowPlaying(
-    spotifyAccessToken: string,
-  ): Promise<Partial<SpotifyNowPlaying>> {
-    const url = 'https://api.spotify.com/v1/me/player/currently-playing';
+  constructor(private configService: ConfigService) {}
 
-    try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${spotifyAccessToken}` },
+  getAccessToken = async () => {
+    const CLIENT_ID = this.configService.get('SPOTIFY_CLIENT_ID') as string;
+    const CLIENT_SECRET = this.configService.get(
+      'SPOTIFY_CLIENT_SECRET',
+    ) as string;
+    const REFRESH_TOKEN = this.configService.get(
+      'SPOTIFY_REFRESH_TOKEN',
+    ) as string;
+    const BASIC = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString(
+      'base64',
+    );
+
+    const TOKEN_URL =
+      TOKEN_ENDPOINT +
+      new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: REFRESH_TOKEN,
       });
+    const response = await fetch(TOKEN_URL, {
+      headers: {
+        Authorization: `Basic ${BASIC}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      method: 'POST',
+    });
 
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch Now Playing data: ${response.statusText}`,
-        );
-      }
+    return response.json();
+  };
 
-      const data = await response.json();
+  async getCurrentlyPlaying() {
+    const { access_token } = await this.getAccessToken();
 
-      if (!data.is_playing || !data.item) {
-        return { isPlaying: false };
-      }
+    return fetch(NOW_PLAYING_ENDPOINT, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+  }
 
-      return {
-        isPlaying: data.is_playing,
-        title: data.item.name,
-        artist: data.item.artists
-          .map((artist: SpotifyArtist) => artist.name)
-          .join(', '),
-        album: data.item.album.name,
-        albumImgUrl: data.item.album.images[0]?.url,
-        songUrl: data.item.external_urls.spotify,
-      };
-    } catch (error) {
-      console.error('Error fetching Now Playing from Spotify:', error);
-      throw new Error('Failed to fetch Now Playing data');
-    }
+  async buildNowPlaying() {
+    const response = await this.getCurrentlyPlaying();
+
+    const track = await response.json();
+
+    const album = {
+      name: track.item.album.name,
+      href: track.item.album.external_urls.spotify,
+      image: {
+        height: track.item.album.images[0].height,
+        href: track.item.album.images[0].url,
+        width: track.item.album.images[0].width,
+      },
+    };
+    const artists = track.item.artists.map((artist: any) => ({
+      name: artist.name,
+      href: artist.external_urls.spotify,
+      id: artist.id,
+    }));
+    const href = track.item.external_urls.spotify;
+    const isPlaying = track.is_playing;
+    const title = track.item.name;
+
+    return JSON.stringify({
+      album,
+      artists,
+      href,
+      isPlaying,
+      title,
+    });
   }
 }

@@ -1,5 +1,4 @@
 import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
-import { Response } from 'express';
 import { AuthService } from './auth._service';
 import { SpotifyOauthGuard } from './guards/spotify-oauth.guard';
 import { Profile } from 'passport-spotify';
@@ -18,7 +17,7 @@ export class AuthController {
   @Get('redirect')
   async spotifyAuthRedirect(
     @Req() req: any,
-    @Res() res: Response,
+    @Res() res: any,
   ): Promise<Response> {
     const {
       user,

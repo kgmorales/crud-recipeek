@@ -1,7 +1,6 @@
 import { Recipe } from '@prisma/client';
 
 export async function fetchRecipe(uid: Recipe['uid']): Promise<Recipe> {
-  console.log({ uid });
   try {
     const response = await fetch(
       `http://localhost:8080/api/recipes/recipe/${uid}`,
