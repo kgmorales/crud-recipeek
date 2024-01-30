@@ -1,6 +1,6 @@
 import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth._service';
 import { SpotifyOauthGuard } from './guards/spotify-oauth.guard';
 import { Profile } from 'passport-spotify';
 
@@ -34,7 +34,6 @@ export class AuthController {
 
     if (!user) {
       res.redirect('/');
-      return;
     }
 
     req.user = undefined;
