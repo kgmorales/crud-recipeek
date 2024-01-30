@@ -1,19 +1,22 @@
-import { Controller, Get, Res } from '@nestjs/common';
+// spotify.controller.ts
+import { Controller, Get, UseGuards, Req } from '@nestjs/common';
 import { SpotifyService } from '../services/spotify._service';
-import { Response } from 'express';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { Request } from 'request';
+
+interface CustomRequest extends Request {
+  user: {
+    spotifyAccessToken: string;
+  };
+}
 
 @Controller('spotify')
 export class SpotifyController {
-  constructor(private readonly spotifyService: SpotifyService) {}
+  constructor(private spotifyService: SpotifyService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get('now-playing')
-  async getNowPlaying(@Res() res: Response) {
-    try {
-      const nowPlaying = await this.spotifyService.getNowPlaying();
-      res.json(nowPlaying);
-    } catch (error) {
-      console.error('Error fetching Now Playing data:', error);
-      res.status(500).json({ message: 'Failed to fetch Now Playing data' });
-    }
+  async getNowPlaying(@Req() req: CustomRequest) {
+    return await this.spotifyService.getNowPlaying(req.user.spotifyAccessToken);
   }
 }

@@ -1,28 +1,45 @@
+// spotify.service.ts
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { SpotifyArtist, SpotifyNowPlaying } from '@server/types/spotify.types';
 
 @Injectable()
 export class SpotifyService {
-  constructor(private configService: ConfigService) {}
+  async getNowPlaying(
+    spotifyAccessToken: string,
+  ): Promise<Partial<SpotifyNowPlaying>> {
+    const url = 'https://api.spotify.com/v1/me/player/currently-playing';
 
-  async getNowPlaying(): Promise<any> {
-    return {
-      //     album: {
-      //       name: data.item.album.name,
-      //       href: data.item.album.external_urls.spotify,
-      //       image: data.item.album.images[0], // Assuming you want the first image (highest resolution)
-      //     },
-      //     artists: data.item.artists.map(
-      //       (artist: { name: any; external_urls: { spotify: any }; id: any }) => ({
-      //         name: artist.name,
-      //         href: artist.external_urls.spotify,
-      //         id: artist.id,
-      //       }),
-      //     ),
-      //     href: data.item.external_urls.spotify,
-      //     isPlaying: data.is_playing,
-      //     title: data.item.name,
-      //   };
-    };
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${spotifyAccessToken}` },
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch Now Playing data: ${response.statusText}`,
+        );
+      }
+
+      const data = await response.json();
+
+      if (!data.is_playing || !data.item) {
+        return { isPlaying: false };
+      }
+
+      return {
+        isPlaying: data.is_playing,
+        title: data.item.name,
+        artist: data.item.artists
+          .map((artist: SpotifyArtist) => artist.name)
+          .join(', '),
+        album: data.item.album.name,
+        albumImgUrl: data.item.album.images[0]?.url,
+        songUrl: data.item.external_urls.spotify,
+      };
+    } catch (error) {
+      console.error('Error fetching Now Playing from Spotify:', error);
+      throw new Error('Failed to fetch Now Playing data');
+    }
   }
 }

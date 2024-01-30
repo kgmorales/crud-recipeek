@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import gallery from '../../../utils/instagramData';
 import styles from './Sidebar.module.scss';
-import PopularCategories from '@components/sections/PopularCategories';
 import Image from 'next/image';
 
 const SidebarBlog = () => {

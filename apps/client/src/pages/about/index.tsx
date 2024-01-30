@@ -11,6 +11,8 @@ import useSpotify from '../../hooks/useSpotify.hook';
 const About: React.FC = (props) => {
   const spotify = useSpotify();
 
+  console.log(spotify);
+
   return (
     <>
       <Head>
