@@ -1,23 +1,28 @@
-// import { Module } from '@nestjs/common';
-// import { AuthService } from './auth._service';
-// import { UsersModule } from '../users/users._module';
-// import { PassportModule } from '@nestjs/passport';
-// import { LocalStrategy } from './local.strategy';
-// import { JwtStrategy } from './jwt.strategy';
-// import { JwtModule } from '@nestjs/jwt';
-// import { jwtConstants } from './constants';
-// import { AuthController } from './auth._controller';
-// @Module({
-//   imports: [
-//     UsersModule,
-//     PassportModule,
-//     JwtModule.register({
-//       secret: jwtConstants.secret,
-//       signOptions: { expiresIn: '60s' },
-//     }),
-//   ],
-//   providers: [AuthService, LocalStrategy, JwtStrategy],
-//   exports: [AuthService],
-//   controllers: [AuthController],
-// })
-// export class AuthModule {}
+import { Module } from '@nestjs/common';
+import { AuthService } from './auth._service';
+import { AuthController } from './auth._controller';
+import { SpotifyOauthStrategy } from './strategies/spotify-oauth.strategy';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { JwtStrategy } from './strategies/jwt.strategy';
+
+@Module({
+  imports: [
+    PassportModule,
+    JwtModule.registerAsync({
+      useFactory: async () => {
+        return {
+          secret: process.env.JWT_SECRET,
+          signOptions: {
+            expiresIn: '3600s',
+          },
+        };
+      },
+      inject: [ConfigService],
+    }),
+  ],
+  providers: [AuthService, JwtStrategy, SpotifyOauthStrategy],
+  controllers: [AuthController],
+})
+export class AuthModule {}

@@ -3,7 +3,8 @@ import { Injectable } from '@nestjs/common';
 
 //* Module
 import { Recipe, RecipeItem, Category } from '@prisma/client';
-//TODO: fix why this blows up if you only load from '@recipes/services'.
+
+//* Providers
 import { PaprikaApiService } from './providers/paprika-api._provider';
 
 @Injectable()

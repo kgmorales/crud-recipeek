@@ -1,36 +1,66 @@
-import { Injectable, Inject,} from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Cache } from 'cache-manager';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
+  const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
+  const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token?`;
 
 @Injectable()
 export class SpotifyService {
-  constructor(
-    private configService: ConfigService,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
-  ) {}
 
-  private async getAccessToken(): Promise<string> {
-    let token = await this.cacheManager.get<string>('spotifyAccessToken');
-    const expiry = await this.cacheManager.get<number>('spotifyTokenExpiry');
-    const refreshToken = await this.cacheManager.get<string>(
-      'spotifyRefreshToken',
-    );
 
-    if (!token || !expiry || Date.now() >= expiry) {
-      if (!refreshToken) {
-        throw new Error(
-          'Spotify refresh token is missing. Please authenticate again.',
-        );
-      }
-      token = await this.refreshAccessToken(refreshToken);
+  constructor(private configService: ConfigService){}
+
+  async buildAuthConfig() {
+    return {
+      clientID: this.configService.get<string>('SPOTIFY_CLIENT_ID') as string,
+      clientSecret: this.configService.get<string>('SPOTIFY_CLIENT_SECRET') as string,
+      refreshToken: 
+    }
+    const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+    const SPOTIFY_REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN;
+
+    if (
+      !SPOTIFY_CLIENT_ID ||
+      !SPOTIFY_CLIENT_SECRET ||
+      !SPOTIFY_REFRESH_TOKEN
+    ) {
+      throw new Error('Missing Spotify environment variables');
     }
 
-    return token;
+    const BASIC = Buffer.from(
+      `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`,
+    ).toString('base64');
+    const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
+    const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token?`;
   }
 
-  private async refreshAccessToken(refreshToken: string): Promise<string> {
+  BASIC = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString(
+    'base64',
+  );
+  NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
+  TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token?`;
+
+  getAccessToken = async () => {
+    const TOKEN_URL =
+      this.TOKEN_ENDPOINT +
+      new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: SPOTIFY_REFRESH_TOKEN,
+      });
+    const response = await fetch(TOKEN_URL, {
+      headers: {
+        Authorization: `Basic ${BASIC}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      method: 'POST',
+    });
+
+    return response.json();
+  };
+
+  private async refreshAccessToken(refreshToken: string): Promise<any> {
     const response = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
       headers: {
@@ -48,17 +78,10 @@ export class SpotifyService {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to refresh Spotify access token');
+      throw new Error('Failed to refresh Spotify access token.');
     }
 
-    const { access_token, expires_in } = await response.json();
-    await this.cacheManager.set('spotifyAccessToken', access_token, expires_in);
-    await this.cacheManager.set(
-      'spotifyTokenExpiry',
-      Date.now() + expires_in * 1000,
-    );
-
-    return access_token;
+    return await response.json();
   }
 
   public async getNowPlaying(): Promise<any> {
@@ -77,6 +100,28 @@ export class SpotifyService {
       throw new Error('Failed to fetch currently playing track from Spotify');
     }
 
-    return await response.json();
+    const data = await response.json();
+
+    if (!data.item) {
+      return { isPlaying: false };
+    }
+
+    return {
+      album: {
+        name: data.item.album.name,
+        href: data.item.album.external_urls.spotify,
+        image: data.item.album.images[0], // Assuming you want the first image (highest resolution)
+      },
+      artists: data.item.artists.map(
+        (artist: { name: any; external_urls: { spotify: any }; id: any }) => ({
+          name: artist.name,
+          href: artist.external_urls.spotify,
+          id: artist.id,
+        }),
+      ),
+      href: data.item.external_urls.spotify,
+      isPlaying: data.is_playing,
+      title: data.item.name,
+    };
   }
 }

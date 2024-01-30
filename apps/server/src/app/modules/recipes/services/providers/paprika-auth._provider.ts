@@ -22,7 +22,9 @@ export class PaprikaAuthService implements OnModuleInit {
   }
 
   async buildAuthConfig(): Promise<PaprikaConfig> {
-    const user = this.configService.get<string>('PAPRIKA_USER') as string;
+    const user = this.configService.getOrThrow<string>(
+      'PAPRIKA_USER',
+    ) as string;
     const password = this.configService.getOrThrow<string>(
       'PAPRIKA_PASS',
     ) as string;
