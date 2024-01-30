@@ -7,7 +7,7 @@ export const useSpotify = () => {
     queryFn: fetchSpotify,
   });
 
-  return spotifyQuery;
+  return { spotify: spotifyQuery.data };
 };
 
 export default useSpotify;

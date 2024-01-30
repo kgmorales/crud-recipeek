@@ -1,12 +1,12 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Res } from '@nestjs/common';
 import { SpotifyService } from '../services/spotify._service';
 
 @Controller('spotify')
 export class SpotifyController {
-  constructor(private readonly spotifyService: SpotifyService) {}
+  constructor(private spotifyService: SpotifyService) {}
 
   @Get('now-playing')
-  async nowPlaying() {
-    return await this.spotifyService.buildNowPlaying();
+  async getNowPlaying() {
+    return this.spotifyService.getNowPlaying();
   }
 }

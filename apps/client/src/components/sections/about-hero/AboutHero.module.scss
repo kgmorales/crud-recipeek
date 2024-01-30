@@ -31,6 +31,9 @@
     0 4px 4px rgba(0, 0, 0, 0.1),
     0 8px 8px rgba(0, 0, 0, 0.1),
     0 16px 16px rgba(0, 0, 0, 0.1);
+  @include media('<=tablet') {
+    width: 60%;
+  }
 }
 
 .textContainer {
