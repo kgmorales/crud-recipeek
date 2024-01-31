@@ -11,7 +11,7 @@ import { SharedModule } from '@modules/shared/shared._module';
 //? Config
 import configuration from './config/config';
 import { JwtModule } from '@nestjs/jwt';
-import { SpotifyModule } from '@modules/spotify/spotify._module';
+import { SocialModule } from '@modules/social/social._module';
 import { AuthModule } from '@modules/auth/auth._module';
 
 @Module({
@@ -37,7 +37,7 @@ import { AuthModule } from '@modules/auth/auth._module';
     }),
     BlogModule,
     RecipesModule,
-    SpotifyModule,
+    SocialModule,
     SharedModule,
   ],
   providers: [

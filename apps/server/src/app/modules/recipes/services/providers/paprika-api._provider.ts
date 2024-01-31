@@ -41,7 +41,7 @@ export class PaprikaApiService implements OnModuleInit {
     const headers = {
       ...paprikaBaseHeaders,
       Authorization: `Basic ${Buffer.from(
-        `${this.paprikaConfig.user}:${this.paprikaConfig.password}`,
+        `${this.paprikaConfig?.user}:${this.paprikaConfig?.password}`,
       ).toString('base64')}`,
     };
 

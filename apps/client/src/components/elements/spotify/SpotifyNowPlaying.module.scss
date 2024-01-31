@@ -58,7 +58,7 @@
 .song {
   display: flex;
   align-items: center;
-  width: 300px;
+  -webkit-line-clamp: 3;
 }
 .albumArt {
   // background-image: url('https://i.scdn.co/image/ab67616d0000b2738181d8122c4f608df8ef5a4f');

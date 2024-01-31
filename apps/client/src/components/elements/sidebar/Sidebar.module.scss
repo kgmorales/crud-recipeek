@@ -4,6 +4,7 @@
 .sidebar {
   height: 100%;
   width: 100%;
+  border: 1px solid transparent;
 }
 
 .head_sidebar {
@@ -31,9 +32,9 @@
   border-width: 1px;
   border-radius: 16px;
   padding: 25px 25px 0px 25px;
-  & > div:not(last-child) {
-    padding-bottom: 1rem;
-  }
+  // & > div:not(last-child) {
+  //   padding-bottom: 1rem;
+  // }
 }
 .list_posts {
   .item_post {

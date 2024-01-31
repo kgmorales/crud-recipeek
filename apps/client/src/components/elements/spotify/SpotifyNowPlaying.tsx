@@ -25,12 +25,17 @@ const SpotifyNowPlaying: React.FC = () => {
             height={50}
           />
         </div>
-        <div className={styles.musicinfo}>
-          <p className={`${styles.title} color-gray-300`}>{spotify?.title}</p>
-          <p className={`${styles.artist} color-gray-400`}>
-            {spotify?.artists[0]?.name}
-          </p>
-        </div>
+        {/** TODO: this should display if isPlaying, else recently played state.  */}
+        {spotify?.isPlaying ? (
+          <div className={`${styles.musicinfo}`}>
+            <p className={`${styles.title} color-gray-300`}>{spotify?.title}</p>
+            <p className={`${styles.artist} color-gray-400`}>
+              {spotify?.artists[0]?.name}
+            </p>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
       {spotify?.isPlaying ? (
         <div className={styles.nowPlayingContainer}>

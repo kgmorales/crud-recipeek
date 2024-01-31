@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 
+import { InstagramService } from './instagram._service';
 import { SpotifyService } from './spotify._service';
 
-const services = [SpotifyService];
+const services = [InstagramService, SpotifyService];
 
 @Module({
   providers: services,

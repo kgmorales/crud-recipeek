@@ -26,9 +26,6 @@ const FeaturedBlogDetail: React.FC = () => {
 
   const postRecipes = filterPostRecipes();
 
-  console.log({ currentPost });
-  console.log({ recipes });
-  console.log(postRecipes);
 
   return (
     <>

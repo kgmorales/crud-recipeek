@@ -12,4 +12,4 @@ const imports = [ControllersModule, SharedModule, ServicesModule];
 @Module({
   imports,
 })
-export class SpotifyModule {}
+export class SocialModule {}

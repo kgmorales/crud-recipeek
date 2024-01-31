@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import fetchSpotify from '@api/spotify/now-playing.routes';
+import fetchSpotify from '@api/social/now-playing.routes';
 
 export const useSpotify = () => {
   const spotifyQuery = useQuery({

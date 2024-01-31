@@ -79,11 +79,7 @@ export class SpotifyService implements OnModuleInit {
     // Check if the response is JSON before parsing
     const contentType = response.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
-      console.error('Received non-JSON response from Spotify API');
-      throw new HttpException(
-        'Non-JSON response received from Spotify API',
-        HttpStatus.BAD_GATEWAY,
-      );
+      return { isPlaying: false };
     }
 
     const track = await response.json();
@@ -101,6 +97,7 @@ export class SpotifyService implements OnModuleInit {
         width: track.item.album.images[0].width,
       },
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const artists = track.item.artists.map((artist: any) => ({
       name: artist.name,
       href: artist.external_urls.spotify,
