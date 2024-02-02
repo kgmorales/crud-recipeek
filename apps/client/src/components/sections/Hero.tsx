@@ -33,10 +33,7 @@ const Hero: React.FC = () => {
           <ul className="list-tags-col-5 mb-50 text-center">
             {categoryVm.map((category) => (
               <li key={category.key}>
-                <div
-                  className="card-style-2 hover-up hover-neon wow animate__animated animate__fadeInUp"
-                  data-wow-delay={`${category.key / 10}s`}
-                >
+                <div className="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn">
                   <div className="card-image">
                     <Link href="/blog-archive">
                       <Image

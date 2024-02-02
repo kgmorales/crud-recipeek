@@ -15,7 +15,7 @@ const InstaFeed: React.FC = () => {
     <>
       <div className="head-sidebar">
         <div className="header-logo">
-          <Link className="d-flex justify-center align-items-center" href="/">
+          <Link className="d-flex justify-content-center align-items-center text-center" href="/">
             <Image
               className="logo-night"
               alt="lamora logo"
@@ -30,9 +30,11 @@ const InstaFeed: React.FC = () => {
               width={50}
               height={50}
             />
-            <h6 className="header-logo-text color-gray-300">laMora</h6>
           </Link>
         </div>
+        <Link href="https://www.instagram.com/lamora_recipes">
+          <h6 className="header-logo-text color-gray-300">@laMora_recipes</h6>
+        </Link>
       </div>
       <div className="content-sidebar">
         <div className="row mt-30 mb-10">

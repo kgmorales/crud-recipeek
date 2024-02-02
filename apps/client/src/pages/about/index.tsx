@@ -6,10 +6,8 @@ import ImageSlider from '@components/elements/ImageSlider';
 import AccordionWrapper from '@components/elements/accordion-wrapper/AccordionWrapper';
 // import RecentPosts2 from '@components/sections/RecentPosts2';
 import styles from './about.module.scss';
-import useSpotify from '../../hooks/useSpotify.hook';
 
 const About: React.FC = (props) => {
-  const spotify = useSpotify();
 
   return (
     <>
@@ -21,7 +19,7 @@ const About: React.FC = (props) => {
           <AboutHero />
           <ImageSlider />
           {/* <RecentPosts2 /> */}
-          <AccordionWrapper />
+          {/* <AccordionWrapper /> */}
         </div>
       </Layout>
     </>

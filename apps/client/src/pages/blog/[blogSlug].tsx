@@ -24,7 +24,7 @@ const BlogDetails: React.FC = (props) => {
                   </div>
                   <div className="row mt-50">
                     <div className="col-lg-8">
-                      <h2 className="color-gray-300 mb-30">{post?.title}</h2>
+                      <h1 className="color-gray-300 mb-30">{post?.title}</h1>
                       <FeaturedBlogDetail />
                     </div>
                     <div className="col-lg-4">

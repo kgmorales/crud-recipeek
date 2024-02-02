@@ -1,7 +1,7 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-const INSTAGRAM_ENDPOINT = `https://graph.instagram.com/me/media?fields=id,caption,media_url,media_type,permalink&access_token=`;
+const INSTAGRAM_ENDPOINT = `https://graph.instagram.com/me/media?fields=id,caption,profile_picture_url,media_url,media_type,permalink&access_token=`;
 
 @Injectable()
 export class InstagramService implements OnModuleInit {

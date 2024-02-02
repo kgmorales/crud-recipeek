@@ -23,7 +23,7 @@ const Blog: React.FC = (props) => {
             <Breadcrumb />
           </div>
           <div className="d-flex flex-column justify-content-center align-items-center p-2 text-center">
-            <h2 className="color-gray-300">Blog</h2>
+            <h1 className="color-gray-300">Blog</h1>
             <p className="color-gray-300 text-base mt-20 wow animate__animated animate__fadeIn">
               Follow the Morales Family as we navigate raising two toddlers and
               providing them with healthy meals.
@@ -39,7 +39,7 @@ const Blog: React.FC = (props) => {
                       {posts?.map((post, i) => (
                         <div
                           key={i}
-                          className="card-list-posts card-list-posts-small border-bottom border-gray-800 pb-30 mb-30 wow animate__animated animate__fadeIn"
+                          className="card-list-posts card-list-posts-small align-items-center border-bottom border-gray-800 pb-30 mb-30 wow animate__animated animate__fadeIn"
                         >
                           <div className="card-image hover-up">
                             <div className="box-author mb-20">
@@ -56,12 +56,6 @@ const Blog: React.FC = (props) => {
                                 </span>
                               </div>
                             </div>
-                            <Link
-                              className="btn btn-tag bg-gray-800 hover-up"
-                              href="/blog-archive"
-                            >
-                              {post.category}
-                            </Link>
                           </div>
                           <div className="card-info">
                             <Link href={`/blog/${post.slug}`}>
@@ -70,6 +64,12 @@ const Blog: React.FC = (props) => {
                               </h3>
                             </Link>
                             <p className="color-gray-300">{post.excerpt}</p>
+                            <Link
+                              className="btn btn-tag bg-gray-800 hover-up mt-3"
+                              href="/blog-archive"
+                            >
+                              {post.category}
+                            </Link>
                           </div>
                         </div>
                       ))}
