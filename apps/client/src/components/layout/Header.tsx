@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import SwitchButton from '@components/elements/SwitchButton';
+import SwitchButton from '@components/elements/ThemeSwitchButton';
 import Image from 'next/image';
 import Search from '@components/elements/search/Search';
 import { useRouter } from 'next/router';
