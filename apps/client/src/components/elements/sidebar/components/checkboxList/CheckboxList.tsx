@@ -20,20 +20,14 @@ const CheckboxList: React.FC<CheckboxListProps> = ({ items = [] }) => {
       }));
       setListItems(newItems);
     }
-  }, [items]); // Dependency array ensures this effect runs whenever `items` changes
-
+  }, [items]);
   // Handle change for checkboxes and label click
   const handleToggle = (index: number) => {
-    setListItems(
-      (
-        currentListItems, // Use functional update form
-      ) =>
-        currentListItems.map(
-          (
-            item,
-            idx, // Map over the items
-          ) => (idx === index ? { ...item, checked: !item.checked } : item), // Toggle checked state for the clicked item
-        ),
+    setListItems((currentListItems) =>
+      currentListItems.map(
+        (item, idx) =>
+          idx === index ? { ...item, checked: !item.checked } : item, // Toggle checked state for the clicked item
+      ),
     );
   };
 
@@ -41,8 +35,6 @@ const CheckboxList: React.FC<CheckboxListProps> = ({ items = [] }) => {
     <div>
       {listItems.map((item, index) => (
         <div key={item.label}>
-          {' '}
-          {/* Use item.label as a key if they are unique */}
           <input
             type="checkbox"
             checked={item.checked}

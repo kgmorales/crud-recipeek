@@ -7,6 +7,7 @@ import { useInstagram } from '@hooks';
 
 const InstaFeed: React.FC = () => {
   const { instafeed } = useInstagram();
+  console.log({ instafeed });
 
   return (
     <>
