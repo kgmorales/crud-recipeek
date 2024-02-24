@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({
                         router.pathname === link.href ? 'active' : ''
                       } color-gray-300`}
                     >
-                      {link.label}
+                      <h5 className="color-gray-300">{link.label}</h5>
                     </Link>
                   </li>
                 ))}

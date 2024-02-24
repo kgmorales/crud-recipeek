@@ -1,0 +1,210 @@
+@import 'variables';
+@import 'mixins';
+
+// Mixins
+@mixin transitionMix(
+  $property: all,
+  $duration: 0.2s,
+  $timing: linear,
+  $delay: 0s
+) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+  transition-delay: $delay;
+}
+
+@mixin positionAbsolute($top: null, $left: null, $right: null, $bottom: null) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+}
+
+// Variables
+$themeFontColor: #2c2c2c;
+$themeAccentColor: #119da4;
+$panelsBgColor: rgba(0, 0, 0, 0.15);
+$tabsPadding: 15px;
+
+.btn {
+  @include transitionMix;
+
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #fff;
+  border: 1px solid $themeFontColor;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover,
+  &.jsActive {
+    color: #fff;
+    background-color: $themeFontColor;
+  }
+}
+
+// Header styles
+.header {
+  max-width: 500px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.headerTitle {
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+// Content styles
+// .content {
+//   max-width: 700px;
+//   margin: auto;
+// }
+
+.contentTitle {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.contentInner {
+  width: 100%;
+  margin: auto;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+// Tabs styles
+.tabs {
+  position: relative;
+  padding: $tabsPadding;
+  height: 100%;
+  overflow: hidden;
+}
+
+// Tabs navigation styles
+.tabsNav {
+  position: relative;
+}
+
+.tabsNavDecoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transition:
+    width 0.2s linear,
+    transform 0.2s ease-out;
+  background-color: $themeAccentColor;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.tabsNavList {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  z-index: 5;
+}
+
+.tabsNavItem {
+  @include transitionMix($delay: 0s);
+  padding: 15px;
+  cursor: pointer;
+
+  &.jsActive {
+    @include transitionMix($delay: 0.05s);
+    color: #fff;
+  }
+}
+
+// Tabs panels styles
+.tabsPanels {
+  position: relative;
+  margin-top: 30px;
+}
+
+.tabsPanel {
+  @include positionAbsolute($top: 0, $left: 0);
+  transition: none;
+  transform: scale(0.8);
+  width: 100%;
+  opacity: 0;
+
+  &.jsActive {
+    transition: all 0.25s linear;
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tabsPanelCard {
+  display: flex;
+  margin-bottom: 30px;
+  padding: 15px;
+  box-shadow:
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12),
+    0 1px 5px 0 rgba(0, 0, 0, 0.2);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &.spacedBetween {
+    justify-content: space-between;
+  }
+}
+
+.tabsPanelAvatar {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: $panelsBgColor;
+}
+
+.tabsPanelImg {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  background-color: $panelsBgColor;
+}
+
+.tabsPanelContent {
+  width: 100%;
+  margin-left: 30px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:not(:last-child) {
+    margin-right: 30px;
+  }
+
+  &:before,
+  &:after {
+    display: block;
+    width: 100%;
+    height: 20px;
+    content: '';
+    background-color: $panelsBgColor;
+  }
+
+  &:before {
+    margin-bottom: 15px;
+  }
+}

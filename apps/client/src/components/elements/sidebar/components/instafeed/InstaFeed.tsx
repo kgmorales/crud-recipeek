@@ -1,8 +1,5 @@
 import React from 'react';
-import styles from './InstaFeed.module';
 import Image from 'next/image';
-import gallery from '../../../../utils/instagramData';
-
 import Link from 'next/link';
 import { useInstagram } from '@hooks';
 
@@ -15,7 +12,10 @@ const InstaFeed: React.FC = () => {
     <>
       <div className="head-sidebar">
         <div className="header-logo">
-          <Link className="d-flex justify-content-center align-items-center text-center" href="/">
+          <Link
+            className="d-flex justify-content-center align-items-center text-center"
+            href="/"
+          >
             <Image
               className="logo-night"
               alt="lamora logo"

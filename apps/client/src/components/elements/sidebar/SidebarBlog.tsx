@@ -1,6 +1,6 @@
 import styles from './Sidebar.module.scss';
 import Image from 'next/image';
-import InstaFeed from './components/InstaFeed';
+import InstaFeed from './components/instafeed/InstaFeed';
 import SpotifyNowPlaying from '../spotify/SpotifyNowPlaying';
 
 const SidebarBlog = () => {
