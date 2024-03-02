@@ -1,20 +1,12 @@
+@import 'variables';
+
 .Input {
   label {
     font-size: 1.5em;
   }
 
   input[type='checkbox']:checked + label {
-    color: red;
+    color: $color-brand-2;
     text-decoration: line-through;
   } /*This is the MDN spec for doing this*/
-
-  /* #cbox3 {
-  color:blue;
-  text-decoration: line-through;
-} */
-
-  #cbox3:checked + label {
-    color: blue;
-    text-decoration: line-through;
-  }
 }
