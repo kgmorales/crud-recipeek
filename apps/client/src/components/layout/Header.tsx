@@ -75,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
           </div>
           <div className="header-nav">
-            <nav className="nav-main-menu d-none d-lg-block">
+            <nav className="nav-main-menu d-none d-xl-block">
               <ul className="main-menu">
                 {navLinks.map((link) => (
                   <li key={link.key}>

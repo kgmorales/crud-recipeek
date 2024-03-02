@@ -23,13 +23,13 @@ const RecipeDetails: React.FC = (props) => {
           <div className="col-xl-12 pt-30 border-bottom border-gray-800 pb-20">
             <Breadcrumb />
           </div>
-          <div className="col-xl-12 p-2">
+          <div className="col-xl-8 p-2">
             <h2 className="color-gray-300 d-flex align-items-center">
               {recipe?.name}
             </h2>
           </div>
           <div className="row">
-            <div className="col-xl-8">
+            <div className="col-xl-6">
               <div className="img-container">
                 {recipe?.imageURL && (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -43,7 +43,7 @@ const RecipeDetails: React.FC = (props) => {
                 )}
               </div>
             </div>
-            <div className="col-xl-4">
+            <div className="col-xl-6">
               <Sidebar recipe={recipe} />
             </div>
           </div>

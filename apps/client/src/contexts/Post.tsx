@@ -6,7 +6,9 @@ interface BlogPostContextType {
   setCurrentPost: (recipe: Post) => void;
 }
 
-export const BlogPostContext = createContext<BlogPostContextType | undefined>(undefined);
+export const BlogPostContext = createContext<BlogPostContextType | undefined>(
+  undefined,
+);
 
 export const useBlogPostContext = () => {
   const context = useContext(BlogPostContext);

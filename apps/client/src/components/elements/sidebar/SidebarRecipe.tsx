@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from './Sidebar.module.scss';
 import { RecipeCard } from '@types';
 import CheckboxList from './components/checkboxList/CheckboxList';
@@ -8,7 +8,10 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ recipe }) => {
-  const ingredients = recipe?.ingredients.split('\n');
+  const ingredients = useMemo(
+    () => recipe?.ingredients?.split('\n') || [],
+    [recipe?.ingredients],
+  );
 
   return (
     <div className={`${styles.sidebar}`}>
