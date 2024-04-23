@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Tabs.module.scss'; // Make sure to create this CSS module file
+import { RecipeCard } from '@types';
 
-const Tabs: React.FC = () => {
+interface TabsProps {
+  recipe: RecipeCard | undefined;
+}
+
+const Tabs: React.FC<TabsProps> = ({ recipe }) => {
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
   const tabsRef = useRef<HTMLDivElement>(null);
   const decorationRef = useRef<HTMLDivElement>(null);
 
-  const tabs: string[] = ['Ingredients', 'Directions', 'Description'];
+  const tabs: string[] = ['Info', 'Ingredients', 'Tips'];
 
   useEffect(() => {
     if (decorationRef.current && tabsRef.current) {
@@ -57,7 +62,7 @@ const Tabs: React.FC = () => {
                 >
                   {/* Content for each tab panel */}
                   <div className={styles.tabsPanelCard}>
-                    <div className={styles.tabsPanelContent}>3</div>
+                    <div className={styles.tabsPanelContent}>HELLO</div>
                   </div>
                 </div>
               ))}

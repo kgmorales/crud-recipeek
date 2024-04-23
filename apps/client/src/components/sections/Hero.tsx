@@ -2,10 +2,17 @@ import Link from 'next/link';
 import React from 'react';
 import { categoryVm } from './constants/Hero';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const iconPATH = '/assets/icons';
 
 const Hero: React.FC = () => {
+  const router = useRouter();
+
+  const handleCategoryClick = (categoryTitle: string) => {
+    router.push(`/recipes?category=${categoryTitle}`);
+  };
+
   return (
     <>
       <div className="banner banner-home2">
@@ -32,28 +39,29 @@ const Hero: React.FC = () => {
         <div className="align-center mt-50">
           <ul className="list-tags-col-5 mb-50 text-center">
             {categoryVm.map((category) => (
-              <li key={category.key}>
-                <div className="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn">
+              <li
+                key={category.key}
+                onClick={() => handleCategoryClick(category.title)}
+              >
+                <div className="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn pointer">
                   <div className="card-image">
-                    <Link href="/blog-archive">
-                      <Image
-                        className="d-none logo-day"
-                        src={`${iconPATH}/${category.icon}-day.svg`}
-                        alt="icon"
-                        width={200}
-                        height={200}
-                      />
-                      <Image
-                        className="logo-night"
-                        src={`${iconPATH}/${category.icon}.svg`}
-                        alt="icon"
-                        width={200}
-                        height={200}
-                      />
-                    </Link>
+                    <Image
+                      className="d-none logo-day"
+                      src={`${iconPATH}/${category.icon}-day.svg`}
+                      alt="icon"
+                      width={200}
+                      height={200}
+                    />
+                    <Image
+                      className="logo-night"
+                      src={`${iconPATH}/${category.icon}.svg`}
+                      alt="icon"
+                      width={200}
+                      height={200}
+                    />
                   </div>
                   <div className="card-info">
-                    <Link href="/blog-archive">{category.title}</Link>
+                    <p className="color-gray-300-only">{category.title}</p>
                   </div>
                 </div>
               </li>

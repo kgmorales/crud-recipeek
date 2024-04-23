@@ -2,9 +2,13 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useRecipeCards } from '@hooks';
 import { RecipeCard } from '@types';
 import FeaturedRecipes from '@components/sections/featured-recipes/FeaturedRecipes';
+import { useRouter } from 'next/router';
 
 const RecipeFilter: React.FC = () => {
   const { recipes } = useRecipeCards(); // Fetch all recipes
+  const router = useRouter();
+
+  const { category } = router.query as { category?: string };
 
   const [filter, setFilter] = useState<string>('all');
   const [filteredRecipes, setFilteredRecipes] = useState<RecipeCard[]>([]);
@@ -14,10 +18,19 @@ const RecipeFilter: React.FC = () => {
   }, [recipes]);
 
   useEffect(() => {
-    if (recipes) {
+    if (category) {
+      setFilter(category);
+    } else if (recipes) {
       setFilteredRecipes(recipes);
     }
-  }, [recipes]);
+  }, [category, recipes]);
+
+  // Update the filter based on the query parameter
+  useEffect(() => {
+    if (category) {
+      setFilter(category);
+    }
+  }, [category]);
 
   useEffect(() => {
     if (!recipes) return;
@@ -43,7 +56,7 @@ const RecipeFilter: React.FC = () => {
               onClick={() => setFilter('all')}
             >
               <div className="text-center">
-                <h6 className="color-gray-300">All</h6>
+                <h6 className="color-gray-300-only">All</h6>
               </div>
             </div>
           </li>
@@ -52,13 +65,13 @@ const RecipeFilter: React.FC = () => {
             categories.map((category, i) => (
               <li key={i}>
                 <div
-                  className={`wow animate__animated animate__fadeIn card-style-2 hover-neon btn hover-up hover-shadow justify-content-center ${
+                  className={`wow animate__animated animate__fadeIn test card-style-2 hover-neon btn hover-up hover-shadow justify-content-center ${
                     filter === category ? 'active btn-linear d-flex' : ''
                   }`}
                   onClick={() => setFilter(category ?? 'all')}
                 >
                   <div className="text-center">
-                    <h6 className="color-gray-300">{category}</h6>
+                    <h6 className="color-gray-300-only">{category}</h6>
                   </div>
                 </div>
               </li>

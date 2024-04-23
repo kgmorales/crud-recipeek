@@ -64,6 +64,7 @@
     "@tanstack/eslint-plugin-query": "^4.34.1",
     "@testing-library/react": "14.0.0",
     "@types/jest": "^29.4.0",
+    "@types/next": "^9.0.0",
     "@types/node": "~20.6.0",
     "@types/passport-jwt": "^4.0.1",
     "@types/passport-local": "^1.0.38",

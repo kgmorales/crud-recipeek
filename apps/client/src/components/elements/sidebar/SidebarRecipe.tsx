@@ -1,24 +1,21 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styles from './Sidebar.module.scss';
 import { RecipeCard } from '@types';
-import CheckboxList from './components/checkboxList/CheckboxList';
+// import CheckboxList from './components/checkboxList/CheckboxList';
+import Tabs from '../tabs/Tabs';
 
 interface SidebarProps {
   recipe: RecipeCard | undefined;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ recipe }) => {
-  const ingredients = useMemo(
-    () => recipe?.ingredients?.split('\n') || [],
-    [recipe?.ingredients],
-  );
 
   return (
     <div className={`${styles.sidebar}`}>
       <div className={`${styles.box_sidebar} hover-neon-2`}>
         <div className={`${styles.content_sidebar}`}>
           <div className={`${styles.list_comments}`}>
-            {/* <div
+            <div
               className={`${styles.item_comment} wow animate__animated animate__fadeIn`}
             >
               <h6 className="color-gray-200 mb-10 text-uppercase">Time</h6>
@@ -40,14 +37,15 @@ const Sidebar: React.FC<SidebarProps> = ({ recipe }) => {
                   {category}
                 </p>
               ))}
-            </div> */}
+            </div>
             <div
               className={`${styles.item_comment} wow animate__animated animate__fadeIn`}
             >
               <h6 className="color-gray-200 mb-10 text-uppercase">
                 Ingredients
               </h6>
-              <CheckboxList items={ingredients} />
+              <Tabs recipe={recipe} />
+              {/* <CheckboxList items={ingredients} /> */}
             </div>
             {/* <div
               className={`${styles.item_comment} wow animate__animated animate__fadeIn`}
