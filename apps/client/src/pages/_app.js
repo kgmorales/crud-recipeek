@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }) {
         </SearchProvider>
       </ThemeProvider>
       {/* </HydrationBoundary> */}
-      <ReactQueryDevtools />
+      {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>
   );
 }

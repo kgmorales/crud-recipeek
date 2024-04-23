@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
 
   return (
     <>
-      <div className="banner banner-home2">
+      <div className="banner d-flex flex-column align-items-center">
         <div className=" logo-container color-gray-900-day text-center d-flex flex-column align-items-center">
           <Image
             className="logo-night"
@@ -30,11 +30,23 @@ const Hero: React.FC = () => {
             width={250}
             height={250}
           />
-          <h1 className="color-gray-300 d-flex align-items-center">laMora</h1>
-          <h6 className="color-gray-400 d-flex align-items-center">
-            Morales Family Recipes
-          </h6>
         </div>
+        <Image
+          className="logo-night"
+          alt="lamora word"
+          src="/assets/imgs/lamora-word-night.svg"
+          width={400}
+          height={150}
+        />
+        <Image
+          className="d-none logo-day"
+          alt="lamora word"
+          src="/assets/imgs/lamora-word.svg"
+          width={400}
+          height={150}
+        />
+        <h6 className="color-gray-400">Morales Family Recipes</h6>
+
         <div className="align-center mt-50">
           <ul className="list-tags-col-5 mb-50 text-center">
             {categoryVm.map((category) => (
