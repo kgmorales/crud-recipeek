@@ -3,7 +3,7 @@ import { Category } from '@prisma/client';
 export async function fetchCategories(): Promise<Category[]> {
   try {
     const response = await fetch(
-      'http://localhost:8080/api/recipes/categories',
+      'http://192.168.172.156:8080/api/recipes/categories',
     );
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);

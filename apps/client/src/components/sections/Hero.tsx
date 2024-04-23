@@ -31,7 +31,7 @@ const Hero: React.FC = () => {
             height={250}
           />
           <h1 className="color-gray-300 d-flex align-items-center">laMora</h1>
-          <h6 className="color-gray-300 d-flex align-items-center">
+          <h6 className="color-gray-400 d-flex align-items-center">
             Morales Family Recipes
           </h6>
         </div>

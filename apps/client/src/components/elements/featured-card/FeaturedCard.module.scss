@@ -102,6 +102,9 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
 .notes {
   font-size: 1rem;
   line-height: 1.1;
+  width: 100%;
+  transition: transform calc($duration * 1.5) $easing;
+  opacity: 0;
 }
 
 .meta {
@@ -126,9 +129,13 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   .card:after {
     transform: translateY (0);
   }
+
+  .notes {
+    opacity: 1;
+  }
   //TODO: FIX THIS: IT SHOULD NOT HAVE A BORDER; SET BACKGROUND AFTER TRANSITION. BEFORE IS OPAQUE.
   .content {
-    transform: translateY(calc(100% - 5.3rem));
+    transform: translateY(calc(100% - 10rem));
 
     > *:not(.title) {
       opacity: 0;
@@ -189,4 +196,28 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
       transition-duration: 0s;
     }
   }
+}
+
+.card.hover:before,
+.card:hover:before,
+.card:focus-within:before {
+  filter: blur(5px);
+}
+
+.content.show-content,
+.card:hover .content,
+.card:focus-within .content {
+  transform: translateY(0);
+  height: 100%;
+  background: #29245b;
+  /* Ensure other properties transition as expected */
+}
+
+/* Add necessary transitions */
+.content.show-content > *,
+.card:hover .content > *,
+.card:focus-within .content > * {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: calc($duration / 8);
 }

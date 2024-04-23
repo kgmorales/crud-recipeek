@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { categoryNames } from '@components/sections/constants/Hero';
+import { useRouter } from 'next/router';
 
 const length = Math.ceil(categoryNames.length / 2);
 const firstHalf = categoryNames.slice(0, length);
@@ -9,6 +10,12 @@ const secondHalf = categoryNames.slice(length);
 const copyrightYear = new Date().getFullYear();
 
 const Footer: React.FC = () => {
+  const router = useRouter();
+
+  const handleCategoryClick = (categoryTitle: string) => {
+    router.push(`/recipes?category=${categoryTitle}`);
+  };
+
   return (
     <>
       <footer className="footer">
@@ -43,7 +50,7 @@ const Footer: React.FC = () => {
                 </p>
               </div>
               <div className="col-lg-4 mb-30">
-                <h6 className="text-lg mb-30 color-gray-400 wow animate__animated animate__fadeInUp">
+                <h6 className="text-lg mb-30 color-gray-300 wow animate__animated animate__fadeInUp">
                   Categories
                 </h6>
                 <div className="row">
@@ -53,8 +60,9 @@ const Footer: React.FC = () => {
                         <li
                           key={category.key}
                           className="wow animate__animated animate__fadeInUp"
+                          onClick={() => handleCategoryClick(category.name)}
                         >
-                          <Link href="/blog-archive">{category.name}</Link>
+                          <p className="color-gray-300">{category.name}</p>
                         </li>
                       ))}
                     </ul>
@@ -65,8 +73,9 @@ const Footer: React.FC = () => {
                         <li
                           key={category.key}
                           className="wow animate__animated animate__fadeInUp"
+                          onClick={() => handleCategoryClick(category.name)}
                         >
-                          <Link href="/blog-archive">{category.name}</Link>
+                          <p className="color-gray-300">{category.name}</p>
                         </li>
                       ))}
                     </ul>

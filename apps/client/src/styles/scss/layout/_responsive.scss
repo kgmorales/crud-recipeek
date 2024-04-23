@@ -750,10 +750,10 @@
   //max-width: 575.98px
   // New Agon
   .header {
-    padding: 0px 0;
+    padding: 0px 10px;
 
     &.stick {
-      padding: 0px 0;
+      padding: 0px 10px;
     }
   }
 
@@ -867,7 +867,7 @@
     display: none;
   }
   .header .main-header .header-right {
-      padding-right: 25px;
+    padding-right: 25px;
   }
   .swiper-button-prev-style-1,
   .swiper-button-next-style-1 {

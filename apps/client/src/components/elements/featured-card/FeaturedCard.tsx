@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './FeaturedCard.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,10 +13,12 @@ interface FeaturedCardProps {
 
 const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
   const { setCurrentRecipe } = useRecipeContext();
+  const [isHovered, setIsHovered] = useState(false);
   const createSlug = (name: string) => name.toLowerCase().replace(/ /g, '-');
 
   const handleClick = () => {
     setCurrentRecipe(cardInfo);
+    setIsHovered(!isHovered);
   };
   return (
     <div className={`${styles.container}`}>
@@ -30,7 +32,9 @@ const CardComponent: React.FC<FeaturedCardProps> = ({ cardInfo }) => {
         }}
       >
         <div
-          className={`${styles.content} bg-gray-900 hover-up hover-neon wow animate__ animate__fadeInUp animated`}
+          className={`${styles.content} ${
+            isHovered ? 'show-content' : ''
+          } bg-gray-900 hover-up hover-neon wow animate__ animate__fadeInUp animated`}
         >
           <h2 className={`${styles.title} color-gray-100 hover-neon`}>
             {cardInfo.name}
