@@ -9,6 +9,7 @@
     display: flex;
     justify-content: space-between;
     position: relative;
+    align-items: center;
     // width: 100%;
     padding: 5px 0px;
     .header-logo {
@@ -30,13 +31,7 @@
       }
     }
     .header-nav {
-      padding-left: 11rem;
-      // display: inline-block;
-      // width: 65%;
-      // text-align: center;
-      @include media('<=desktop') {
-        padding-left: 8rem;
-      }
+      margin-right: 5rem;
     }
     .header-search {
       width: 35%;
@@ -116,11 +111,6 @@
         text-align: right;
       }
     }
-  }
-  .nav-main-menu {
-    // width: auto;
-    // padding: 0px;
-    // float: none;
   }
   .burger-icon {
     display: none;
@@ -405,6 +395,14 @@
     .container {
       max-width: 1360px;
     }
+  }
+}
+
+.header-absolute {
+  position: absolute;
+  right: 4rem;
+  @include media('<=laptop') {
+    right: 6rem;
   }
 }
 

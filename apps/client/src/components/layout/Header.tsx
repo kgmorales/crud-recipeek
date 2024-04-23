@@ -75,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
           </div>
           <div className="header-nav">
-            <nav className="nav-main-menu d-none d-xl-block">
+            <nav className="nav-main-menu d-none d-lg-block">
               <ul className="main-menu">
                 {navLinks.map((link) => (
                   <li key={link.key}>
@@ -93,7 +93,9 @@ const Header: React.FC<HeaderProps> = ({
             </nav>
           </div>
           <div className="header-right">
-            <Search />
+            <div className="header-absolute">
+              <Search />
+            </div>
             <SwitchButton />
             <div className="d-flex">
               <div

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 import { categoryVm } from './constants/Hero';
 import Image from 'next/image';
@@ -42,6 +41,7 @@ const Hero: React.FC = () => {
               <li
                 key={category.key}
                 onClick={() => handleCategoryClick(category.title)}
+                role="button"
               >
                 <div className="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn pointer">
                   <div className="card-image">
