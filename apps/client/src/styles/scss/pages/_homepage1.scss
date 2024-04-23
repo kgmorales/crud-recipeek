@@ -1,5 +1,11 @@
+@import 'variables';
+@import 'mixins';
+
 .banner {
   padding-top: 50px;
+  @include media('<=laptop') {
+    padding-top: 0;
+  }
 }
 
 .banner-img {

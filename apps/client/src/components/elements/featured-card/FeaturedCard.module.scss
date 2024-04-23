@@ -62,7 +62,7 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
     height: 250%;
     pointer-events: none;
 
-    transform: translateY(-50%);
+    // transform: translateY(-50%);
     transition: transform calc($duration * 2) $easing;
   }
 }
@@ -131,11 +131,11 @@ $easing: cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .notes {
-    opacity: 1;
+    opacity: 0;
   }
   //TODO: FIX THIS: IT SHOULD NOT HAVE A BORDER; SET BACKGROUND AFTER TRANSITION. BEFORE IS OPAQUE.
   .content {
-    transform: translateY(calc(100% - 10rem));
+    transform: translateY(calc(100% - 5rem));
 
     > *:not(.title) {
       opacity: 0;

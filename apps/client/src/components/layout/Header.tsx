@@ -96,7 +96,9 @@ const Header: React.FC<HeaderProps> = ({
             <div className="header-absolute">
               <Search />
             </div>
-            <SwitchButton />
+            <div className="switch-container">
+              <SwitchButton />
+            </div>
             <div className="d-flex">
               <div
                 className={`burger-icon burger-icon-white ${

@@ -8,7 +8,7 @@
 
 .search {
   --easing: cubic-bezier(0.4, 0, 0.2, 1);
-  --font-size: 1rem;
+  --font-size: 1.2rem;
   --color-highlight: white;
   --transition-time-icon: 0.2s;
   --transition-time-input: 0.3s 0.25s;
@@ -27,7 +27,7 @@
   border-radius: 16px;
   border: 2px solid transparent;
   display: flex;
-  margin-right: 2.4rem;
+  margin-right: 1.4rem;
   transition:
     border-color var(--transition-time-icon) linear,
     padding var(--transition-time-input) var(--easing);
@@ -48,9 +48,9 @@
   }
 
   &__iconContainer {
-    height: calc(var(--font-size) + 1.4rem);
+    height: calc(var(--font-size) + 1rem);
     position: relative;
-    width: calc(var(--font-size) + 1.4rem);
+    width: calc(var(--font-size) + 1rem);
   }
 
   &__label,

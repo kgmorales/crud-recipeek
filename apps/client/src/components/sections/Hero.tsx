@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
   return (
     <>
       <div className="banner banner-home2">
-        <div className="color-gray-900-day text-center d-flex flex-column align-items-center">
+        <div className=" logo-container color-gray-900-day text-center d-flex flex-column align-items-center">
           <Image
             className="logo-night"
             alt="lamora logo"

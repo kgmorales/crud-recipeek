@@ -2,17 +2,21 @@
 
 .container {
   display: flex;
+  padding-top: 50px;
+  border: 1px solid;
+  padding: 1rem;
+  border-radius: 16px;
+  flex-direction: column;
+}
+.imageContainer {
   justify-content: space-between;
   align-items: center;
-  flex-direction: row;
-  padding-top: 50px;
-  flex: 2 1 0;
+  display: flex;
   gap: 3rem;
-  border: 1px solid;
-  padding: 2rem;
-  border-radius: 16px;
+  padding: 1rem;
 
-  @include media('<desktop') {
+  flex-direction: row;
+  @include media('<=laptop') {
     flex-direction: column;
   }
 }
@@ -20,6 +24,10 @@
 .heading {
   display: inline;
   color: white;
+  padding: 1rem;
+  @include media('<=laptop') {
+    text-align: center;
+  }
 }
 
 .image {
@@ -31,6 +39,7 @@
     0 4px 4px rgba(0, 0, 0, 0.1),
     0 8px 8px rgba(0, 0, 0, 0.1),
     0 16px 16px rgba(0, 0, 0, 0.1);
+  height: auto;
   @include media('>=laptop') {
     width: 60%;
   }

@@ -400,9 +400,15 @@
 
 .header-absolute {
   position: absolute;
-  right: 4rem;
+  right: 6rem;
   @include media('<=laptop') {
-    right: 6rem;
+    right: 1.5rem;
+  }
+}
+
+.switch-container {
+  @include media('<=laptop') {
+    display: none;
   }
 }
 
