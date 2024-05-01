@@ -12,7 +12,7 @@ export async function fetchSearchResults(
 
   try {
     const response = await fetch(
-      `http://192.168.172.156:8080/api/search/recipes?${queryParams}`,
+      `http://192.168.172.117:8080/api/search/recipes?${queryParams}`,
     );
 
     if (!response.ok) {

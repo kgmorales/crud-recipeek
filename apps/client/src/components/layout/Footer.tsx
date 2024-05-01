@@ -84,7 +84,7 @@ const Footer: React.FC = () => {
               </div>
             </div>
             <div className="footer-bottom border-gray-800">
-              <p className="text-base color-gray-300 wow animate__animated animate__fadeIn">
+              <small className="text-small color-gray-300 wow animate__animated animate__fadeIn">
                 © {copyrightYear} created by
                 <Link
                   className="copyright"
@@ -94,39 +94,15 @@ const Footer: React.FC = () => {
                   {' '}
                   kevinmoral.es
                 </Link>
-              </p>
+              </small>
               <div className="box-socials">
-                <div
-                  className=" wow animate__animated animate__fadeIn"
-                  data-wow-delay=".0s"
-                >
-                  <Link
-                    className="icon-socials icon-twitter"
-                    href="https://twitter.com"
-                  >
-                    <Image
-                      className="logo-night"
-                      alt="lamora logo"
-                      src="/assets/icons/tw.svg"
-                      width={40}
-                      height={40}
-                    />
-                    <Image
-                      className="d-none logo-day"
-                      alt="lamora logo"
-                      src="/assets/icons/tw-day.svg"
-                      width={40}
-                      height={40}
-                    />
-                  </Link>
-                </div>
                 <div
                   className=" wow animate__animated animate__fadeIn"
                   data-wow-delay=".4s"
                 >
                   <Link
-                    className="icon-socials icon-twitter"
-                    href="https://instagram.com"
+                    className="icon-socials icon-insta"
+                    href="https://www.instagram.com/lamora_recipes"
                   >
                     <Image
                       className="logo-night"

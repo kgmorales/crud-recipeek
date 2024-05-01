@@ -8,10 +8,10 @@ export type RecipeCard = {
   directions?: Recipe['directions'];
   ingredients: Recipe['ingredients'];
   ingredientsCount?: number;
-  imageURL?: Recipe['image_url'];
   isFavorite?: Recipe['on_favorites'];
   name?: Recipe['name'];
   notes?: Recipe['notes'];
+  photoURL?: Recipe['photo_url'];
   prepTime?: Recipe['prep_time'];
   recipeLink?: string;
   uid?: Recipe['uid'];

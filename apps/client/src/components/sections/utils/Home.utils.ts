@@ -11,7 +11,7 @@ export function processRecipeForCard(recipes?: Recipe[]) {
     return {
       description: recipe.description,
       uid: recipe.uid,
-      image_url: recipe.image_url,
+      photo_url: recipe.photo_url,
       ingredientsCount: ingredientsCount(recipe.ingredients),
       name: recipe.name,
       prep_time: recipe.prep_time,

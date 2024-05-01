@@ -1,3 +1,4 @@
+import ThemeSwitch from '@components/elements/ThemeSwitchButton';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -35,20 +36,7 @@ const MobileMenu = ({ openClass }) => {
           <div className="mobile-header-content-area">
             <div className="mobile-logo">
               <Link className="d-flex" href="/">
-                <Image
-                  className="logo-night"
-                  alt="lamora logo night"
-                  src="/assets/imgs/lamora-logo-night.svg"
-                  width={50}
-                  height={50}
-                />
-                <Image
-                  className="d-none logo-day"
-                  alt="lamora logo day"
-                  src="/assets/imgs/lamora-logo.svg"
-                  width={50}
-                  height={50}
-                />
+                <ThemeSwitch />
               </Link>
             </div>
             <div className="perfect-scroll">

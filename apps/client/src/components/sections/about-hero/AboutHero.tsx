@@ -10,9 +10,6 @@ export default function Hero() {
       <div
         className={`${styles.container} wow animate__animated animate__fadeIn`}
       >
-        <h1 className={`${styles.heading} color-gray-300`}>
-          The Morales Family
-        </h1>
         <div className={`${styles.imageContainer}`}>
           <Image
             className={styles.image}
@@ -22,6 +19,9 @@ export default function Hero() {
             height={400}
           />
           <div className={`${styles.textContainer}`}>
+            <h3 className={`${styles.heading} color-gray-300`}>
+              The Morales Family
+            </h3>
             <p className="color-gray-300">
               Welcome to our family recipe collection. As a working mom with two
               eager toddler sous-chefs by my side, our kitchen is always buzzing
@@ -39,7 +39,7 @@ export default function Hero() {
             <div className={`${styles.boxSocials}`}>
               <Link
                 className="icon-socials icon-twitter"
-                href="https://instagram.com"
+                href="https://www.instagram.com/lamora_recipes"
               >
                 <Image
                   className="logo-night"

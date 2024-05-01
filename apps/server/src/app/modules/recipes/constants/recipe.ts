@@ -15,6 +15,7 @@ export const emptyRecipe = {
   on_favorites: 0,
   photo: null,
   photo_hash: null,
+  photo_url: '',
   prep_time: '',
   rating: 0,
   servings: '',

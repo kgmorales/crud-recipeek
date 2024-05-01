@@ -1,7 +1,7 @@
 export async function fetchInstagram(): Promise<any> {
   try {
     const response = await fetch(
-      'http://192.168.172.156:8080/api/social/instafeed',
+      'http://192.168.172.117:8080/api/social/instafeed',
     );
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
