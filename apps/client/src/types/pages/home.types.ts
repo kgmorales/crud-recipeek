@@ -6,6 +6,7 @@ export type RecipeCard = {
   created?: Recipe['created'];
   description?: Recipe['description'];
   directions?: Recipe['directions'];
+  imageURL?: Recipe['image_url'];
   ingredients: Recipe['ingredients'];
   ingredientsCount?: number;
   isFavorite?: Recipe['on_favorites'];

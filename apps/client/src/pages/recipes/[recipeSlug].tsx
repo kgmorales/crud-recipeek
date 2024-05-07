@@ -13,6 +13,8 @@ const RecipeDetails: React.FC = (props) => {
   const recipe = useRecipe(currentRecipe?.uid as string);
   const directions = recipe?.directions?.split('\n');
 
+  console.log(recipe);
+
   return (
     <>
       <Head>
@@ -30,6 +32,9 @@ const RecipeDetails: React.FC = (props) => {
           </div>
           <div className="row">
             <div className="col-xl-6">
+              <Sidebar recipe={recipe} />
+            </div>
+            <div className="col-xl-6">
               <div className="img-container">
                 {recipe?.imageURL && (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -37,14 +42,9 @@ const RecipeDetails: React.FC = (props) => {
                     className="card-image"
                     src={recipe.imageURL}
                     alt="recipe image"
-                    // width={800}
-                    // height={400}
                   />
                 )}
               </div>
-            </div>
-            <div className="col-xl-6">
-              <Sidebar recipe={recipe} />
             </div>
           </div>
         </div>

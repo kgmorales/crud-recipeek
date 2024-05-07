@@ -2,7 +2,6 @@ import FeaturedRecipes from '@components/sections/featured-recipes/FeaturedRecip
 import { useBlogPostContext } from '@contexts';
 import { useRecipeCards } from '@hooks';
 import { usePost } from 'apps/client/src/hooks/usePost.hook';
-import Link from 'next/link';
 import React from 'react';
 
 const FeaturedBlogDetail: React.FC = () => {

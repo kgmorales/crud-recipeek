@@ -4,8 +4,8 @@
   y="0px" viewBox="0 0 359.3 429.7" style="enable-background:new 0 0 359.3 429.7;" xml:space="preserve">
   <style type="text/css">
     .st0 {
-      fill: #040F1E;
-      stroke: #000000;
+      fill: #060607;
+      stroke: #e7e4ff;
       stroke-width: 20;
       stroke-linecap: round;
       stroke-linejoin: round;
@@ -13,9 +13,10 @@
     }
 
     .st1 {
-      fill: #090F09;
+      fill: #060607;
     }
 
+    /** stem **/
     .st2 {
       fill: url(#SVGID_1_);
       stroke: #060607;

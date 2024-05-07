@@ -31,20 +31,22 @@ const Hero: React.FC = () => {
             height={250}
           />
         </div>
-        <Image
-          className="logo-night"
-          alt="lamora word"
-          src="/assets/imgs/lamora-word-night.svg"
-          width={400}
-          height={150}
-        />
-        <Image
-          className="d-none logo-day"
-          alt="lamora word"
-          src="/assets/imgs/lamora-word.svg"
-          width={400}
-          height={150}
-        />
+        <div className="mr-0">
+          <Image
+            className="logo-night"
+            alt="lamora word"
+            src="/assets/imgs/lamora-word-night.svg"
+            width={400}
+            height={150}
+          />
+          <Image
+            className="d-none logo-day"
+            alt="lamora word"
+            src="/assets/imgs/lamora-word.svg"
+            width={400}
+            height={150}
+          />
+        </div>
         <h6 className="color-gray-400">Morales Family Recipes</h6>
 
         <div className="align-center mt-50">

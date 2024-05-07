@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@clientUtils/queryClient';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { ThemeProvider } from '../contexts/Theme';
 import { SearchProvider } from '../contexts/Search';
