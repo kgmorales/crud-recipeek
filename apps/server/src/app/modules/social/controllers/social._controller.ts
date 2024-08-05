@@ -5,7 +5,7 @@ import { InstagramService } from '../services/instagram._service';
 @Controller('social')
 export class SocialController {
   constructor(
-    private instagramService: InstagramService,
+    // private instagramService: InstagramService,
     private spotifyService: SpotifyService,
   ) {}
 
@@ -14,8 +14,8 @@ export class SocialController {
     return this.spotifyService.getNowPlaying();
   }
 
-  @Get('instafeed')
-  async getInstaFeed() {
-    return this.instagramService.getInstaFeed();
-  }
+  // @Get('instafeed')
+  // async getInstaFeed() {
+  //   return this.instagramService.getInstaFeed();
+  // }
 }

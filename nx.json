@@ -90,5 +90,6 @@
   },
   "affected": {
     "defaultBase": "master"
-  }
+  },
+  "defaultBase": "master"
 }

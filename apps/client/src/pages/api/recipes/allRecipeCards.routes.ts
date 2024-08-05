@@ -3,7 +3,7 @@ import { RecipeCard } from '@types';
 export async function fetchAllRecipeCards(): Promise<RecipeCard[]> {
   try {
     const response = await fetch(
-      'http://192.168.172.117:8080/api/recipes/allRecipeCards',
+      'http://localhost:8080/api/recipes/allRecipeCards',
     );
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);

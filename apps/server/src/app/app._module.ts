@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CacheModule } from '@nestjs/cache-manager';
 import { PrismaClient } from '@prisma/client';
-
+import { HttpModule } from '@nestjs/axios';
 // * Modules
 import { BlogModule } from '@modules/blog/blog._module';
 import { RecipesModule } from '@modules/recipes/recipes._module';
@@ -23,6 +23,7 @@ import { AuthModule } from '@modules/auth/auth._module';
       isGlobal: true,
       cache: true,
     }),
+    HttpModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {

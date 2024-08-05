@@ -1,9 +1,9 @@
 import FeaturedCard from '@components/elements/featured-card/FeaturedCard';
 import styles from './FeaturedRecipes.module.scss';
-import { RecipeCard } from '@types';
+import { Home } from '@types';
 
 interface FeaturedRecipesProps {
-  featured?: RecipeCard[] | undefined;
+  featured?: Home['favorites'];
 }
 
 const FeaturedRecipes: React.FC<FeaturedRecipesProps> = ({ featured }) => {
