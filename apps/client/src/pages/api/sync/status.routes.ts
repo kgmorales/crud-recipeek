@@ -2,7 +2,7 @@ import { Status } from '@prisma/client';
 
 export async function fetchHome(): Promise<Status> {
   try {
-    const response = await fetch('localhost:8080/api/page/home');
+    const response = await fetch('https://localhost:8080/api/page/home');
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
     }

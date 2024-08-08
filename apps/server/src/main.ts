@@ -4,14 +4,21 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { Logger } from '@nestjs/common';
+import * as fs from 'fs';
+import * as path from 'path';
 
 import { AppModule } from './app/app._module';
 
 async function bootstrap() {
-  const logger = new Logger('HTTP');
+  const httpsOptions = {
+    key: fs.readFileSync('./apps/server/.secrets/key.pem'),
+    cert: fs.readFileSync('./apps/server/.secrets/cert.pem'),
+  };
+  const logger = new Logger('HTTPS');
+
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter({ https: httpsOptions }),
     { cors: true },
   );
 

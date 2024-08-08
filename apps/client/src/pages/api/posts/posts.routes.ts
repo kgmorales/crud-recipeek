@@ -2,7 +2,7 @@ import { Post } from '@types';
 
 export async function fetchPosts(): Promise<Post[]> {
   try {
-    const response = await fetch('http://localhost:8080/api/blog/posts');
+    const response = await fetch('https://localhost:8080/api/blog/posts');
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
     }

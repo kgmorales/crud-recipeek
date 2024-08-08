@@ -10,7 +10,13 @@ const nextConfig = {
     includePaths: [path.join(__dirname, '../client/src/styles/scss/base')],
   },
   images: {
-    domains: ['http://uploads.paprikaapp.com.s3.amazonaws.com'],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 's3.amazonaws.com/uploads.paprikaapp.com/',
+        pathname: '**',
+      },
+    ],
   },
 
   //* Warning: This allows production builds to successfully complete even if

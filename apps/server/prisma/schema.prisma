@@ -227,3 +227,11 @@ model BlogCategory {
 
   @@schema("lamora")
 }
+
+model InstagramLongTermToken {
+  id          Int      @id @default(autoincrement())
+  accessToken String
+  createdAt   DateTime @default(now())
+
+  @@schema("lamora")
+}

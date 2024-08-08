@@ -59,7 +59,10 @@ file-map.json
 project-graph.json
 daemon.log
 server-process.json
-
-
-
 .nx/workspace-data
+
+#secrets
+/.secrets
+.secrets
+cert.pem
+key.pem

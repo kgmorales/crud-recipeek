@@ -12,7 +12,7 @@ export async function fetchSearchResults(
 
   try {
     const response = await fetch(
-      `localhost:8080/api/search/recipes?${queryParams}`,
+      `https://localhost:8080/api/search/recipes?${queryParams}`,
     );
 
     if (!response.ok) {

@@ -3,7 +3,7 @@ import { Recipe } from '@prisma/client';
 export async function fetchRecipe(uid: Recipe['uid']): Promise<Recipe> {
   try {
     const response = await fetch(
-      `localhost:8080/api/recipes/recipe/${uid}`,
+      `https://localhost:8080/api/recipes/recipe/${uid}`,
     );
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);

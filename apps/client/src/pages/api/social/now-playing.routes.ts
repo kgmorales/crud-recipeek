@@ -1,7 +1,7 @@
 export async function fetchSpotify(): Promise<any> {
   try {
     const response = await fetch(
-      'localhost:8080/api/social/now-playing',
+      'https://localhost:8080/api/social/now-playing',
     );
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);

@@ -2,17 +2,17 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CacheModule } from '@nestjs/cache-manager';
 import { PrismaClient } from '@prisma/client';
-import { HttpModule } from '@nestjs/axios';
-// * Modules
-import { BlogModule } from '@modules/blog/blog._module';
-import { RecipesModule } from '@modules/recipes/recipes._module';
-import { SharedModule } from '@modules/shared/shared._module';
 
 //? Config
 import configuration from './config/config';
 import { JwtModule } from '@nestjs/jwt';
-import { SocialModule } from '@modules/social/social._module';
+
+// * Modules
 import { AuthModule } from '@modules/auth/auth._module';
+import { BlogModule } from '@modules/blog/blog._module';
+import { RecipesModule } from '@modules/recipes/recipes._module';
+import { SharedModule } from '@modules/shared/shared._module';
+import { SocialModule } from '@modules/social/social._module';
 
 @Module({
   imports: [
@@ -23,7 +23,6 @@ import { AuthModule } from '@modules/auth/auth._module';
       isGlobal: true,
       cache: true,
     }),
-    HttpModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
