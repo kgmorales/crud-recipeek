@@ -186,9 +186,12 @@ export class InstagramService implements OnModuleInit {
       );
     }
   }
+
+  //** CRON JOB */
   @Cron('0 0 */50 * *') // This cron expression runs every 50 days at midnight
   async refreshLongTermTokenCron() {
     this.logger.debug('Running cron job to refresh Instagram long-term token');
+
     await this.refreshLongTermToken();
   }
 
