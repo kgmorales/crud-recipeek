@@ -3,19 +3,24 @@ import {
   HttpException,
   HttpStatus,
   OnModuleInit,
+  Logger,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { URLSearchParams } from 'url';
 import { PrismaService } from '../../shared/services/prisma._service';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 const INSTAGRAM_SHORT_TERM_TOKEN_ENDPOINT =
   'https://api.instagram.com/oauth/access_token';
 const INSTAGRAM_LONG_TERM_TOKEN_ENDPOINT =
   'https://graph.instagram.com/access_token';
 const INSTAGRAM_MEDIA_ENDPOINT = 'https://graph.instagram.com/me/media';
+const INSTAGRAM_REFRESH_TOKEN_ENDPOINT =
+  'https://graph.instagram.com/refresh_access_token';
 
 @Injectable()
 export class InstagramService implements OnModuleInit {
+  private readonly logger = new Logger(InstagramService.name);
   private config: {
     client_id: string;
     client_secret: string;
@@ -130,7 +135,7 @@ export class InstagramService implements OnModuleInit {
     }
   }
 
-  async storeToken(accessToken: string) {
+  async storeToken(accessToken: string): Promise<void> {
     try {
       await this.prisma.client.instagramLongTermToken.create({
         data: {
@@ -172,11 +177,71 @@ export class InstagramService implements OnModuleInit {
         );
       }
 
-      const feed = await response.json();
-      return feed;
+      const instafeed = await response.json();
+      return instafeed;
     } catch (error: any) {
       throw new HttpException(
         `Failed to get user media: ${error.message}`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+  @Cron('0 0 */50 * *') // This cron expression runs every 50 days at midnight
+  async refreshLongTermTokenCron() {
+    this.logger.debug('Running cron job to refresh Instagram long-term token');
+    await this.refreshLongTermToken();
+  }
+
+  async refreshLongTermToken(): Promise<string> {
+    const token = await this.prisma.client.instagramLongTermToken.findFirst({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    if (!token) {
+      throw new HttpException(
+        'No access token found to refresh',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const body = new URLSearchParams({
+      grant_type: 'ig_refresh_token',
+      access_token: token.accessToken,
+    });
+
+    try {
+      const response = await fetch(
+        `${INSTAGRAM_REFRESH_TOKEN_ENDPOINT}?${body.toString()}`,
+        {
+          method: 'GET',
+        },
+      );
+
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        throw new HttpException(
+          `Failed to refresh long-term token: ${errorResponse.error.message}`,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+
+      const data = await response.json();
+
+      await this.prisma.client.instagramLongTermToken.update({
+        where: { id: token.id },
+        data: {
+          accessToken: data.access_token,
+          lastRefreshedAt: new Date(),
+        },
+      });
+
+      this.logger.debug('Instagram long-term token refreshed successfully');
+      return data.access_token;
+    } catch (error: any) {
+      throw new HttpException(
+        `Failed to refresh long-term token: ${error.message}`,
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

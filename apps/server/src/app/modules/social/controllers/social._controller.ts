@@ -25,7 +25,7 @@ export class SocialController {
     return nowPlaying;
   }
 
-  //* INSTAGRAM
+  //******** INSTAGRAM ********//
 
   @Get('authorize')
   @Redirect()
@@ -66,6 +66,7 @@ export class SocialController {
   async getMedia() {
     try {
       const media = await this.instagramService.getUserMedia();
+
       return media;
     } catch (error: any) {
       throw new BadRequestException(error.message);
