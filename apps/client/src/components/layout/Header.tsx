@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import SwitchButton from '@components/elements/ThemeSwitchButton';
 import Image from 'next/image';
 import Search from '@components/elements/search/Search';
@@ -25,7 +25,7 @@ const navLinks: Link[] = [
   { href: '/recipes', label: 'Recipes', className: 'color-gray-300', key: 4 },
 ];
 
-const Header: React.FC<HeaderProps> = ({
+const Header: FC<HeaderProps> = ({
   handleOpen,
   handleRemove,
   openClass,

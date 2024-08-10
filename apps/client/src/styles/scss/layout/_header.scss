@@ -313,27 +313,6 @@
   }
 }
 
-.user-account {
-  display: flex;
-  align-items: center;
-  img {
-    max-width: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  .user-name {
-    margin-bottom: 0;
-    font-weight: 600;
-    font-size: 14px;
-  }
-}
-
-.perfect-scroll {
-  height: 100vh;
-  width: 100%;
-  position: relative;
-}
-
 .body-overlay-1 {
   background: transparent;
   height: 100%;
@@ -578,7 +557,7 @@
 }
 
 .logo-title {
-  padding-left:3.4rem;
+  padding-left: 3.4rem;
 }
 
 .form-search {
