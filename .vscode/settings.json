@@ -37,6 +37,7 @@
     "recipes": "Examples",
     "schemas": "meta",
     "search": "review",
+    "social": "global",
     "users": "Guard"
   },
   "material-icon-theme.files.associations": {

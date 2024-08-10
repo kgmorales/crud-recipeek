@@ -6,26 +6,13 @@ import {
   Redirect,
   Logger,
 } from '@nestjs/common';
-import { SpotifyService } from '../services/spotify._service';
 import { InstagramService } from '../services/instagram._service';
 
-@Controller('social')
-export class SocialController {
-  private readonly logger = new Logger(SocialController.name);
+@Controller('social/instagram')
+export class InstagramController {
+  private readonly logger = new Logger(InstagramController.name);
 
-  constructor(
-    private readonly instagramService: InstagramService,
-    private readonly spotifyService: SpotifyService,
-  ) {}
-
-  @Get('now-playing')
-  async getNowPlaying() {
-    const nowPlaying = await this.spotifyService.getNowPlaying();
-    console.log(nowPlaying);
-    return nowPlaying;
-  }
-
-  //******** INSTAGRAM ********//
+  constructor(private readonly instagramService: InstagramService) {}
 
   @Get('authorize')
   @Redirect()
@@ -62,7 +49,7 @@ export class SocialController {
     }
   }
 
-  @Get('instafeed')
+  @Get('feed')
   async getMedia() {
     try {
       const media = await this.instagramService.getUserMedia();

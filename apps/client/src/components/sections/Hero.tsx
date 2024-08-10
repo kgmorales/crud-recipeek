@@ -31,7 +31,7 @@ const Hero: React.FC = () => {
             height={250}
           />
         </div>
-        <div className="mr-0">
+        <div className="mr-0  padding-left-3-4 logo-title">
           <Image
             className="logo-night"
             alt="lamora word"
@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
                 onClick={() => handleCategoryClick(category.title)}
                 role="button"
               >
-                <div className="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn pointer">
+                <div className="card-style-2 hover-up hover-neon wow animate__animated animate__fadeIn pointer ">
                   <div className="card-image">
                     <Image
                       className="d-none logo-day"

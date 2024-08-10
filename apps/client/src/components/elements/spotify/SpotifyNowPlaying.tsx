@@ -5,6 +5,7 @@ import { useSpotify } from '@hooks';
 
 const SpotifyNowPlaying: React.FC = () => {
   const { spotify } = useSpotify();
+  console.log(spotify);
 
   return (
     <div className={`${styles.musicContainer} bg-gray-900`}>

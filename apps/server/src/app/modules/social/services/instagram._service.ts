@@ -8,7 +8,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { URLSearchParams } from 'url';
 import { PrismaService } from '../../shared/services/prisma._service';
-import { Cron, CronExpression } from '@nestjs/schedule';
+import { Cron } from '@nestjs/schedule';
 
 const INSTAGRAM_SHORT_TERM_TOKEN_ENDPOINT =
   'https://api.instagram.com/oauth/access_token';

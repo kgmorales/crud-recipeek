@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 
-import { SocialController } from './social._controller';
+import { InstagramController } from './instagram._controller';
+import { SpotifyController } from './spotify._controller';
 
-// //* Modules
+//* Modules
 import { ServicesModule } from '../services/services._module';
 
-const controllers = [SocialController];
+const controllers = [InstagramController, SpotifyController];
 
 @Module({
   imports: [ServicesModule],
